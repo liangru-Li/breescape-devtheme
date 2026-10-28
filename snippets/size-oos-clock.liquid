@@ -1,0 +1,56 @@
+{%- comment -%}
+  当前已选的其他规格 + 这个尺码，对应变体库存为 0 时输出闹钟角标。
+  @param product
+  @param option  尺码这一项
+  @param value   当前尺码值
+{%- endcomment -%}
+{%- liquid
+  assign size_pos = option.position
+  assign value_name = value.name | default: value | strip
+  assign is_oos = false
+  for variant in product.variants
+    assign matched = true
+    for opt in product.options_with_values
+      assign idx = forloop.index0
+      assign variant_value = variant.options[idx] | strip
+      if opt.position == size_pos
+        if variant_value != value_name
+          assign matched = false
+        endif
+      else
+        assign selected_name = opt.selected_value | strip
+        if variant_value != selected_name
+          assign matched = false
+        endif
+      endif
+    endfor
+    if matched
+      if variant.inventory_management == 'shopify' and variant.inventory_quantity <= 0
+        assign is_oos = true
+      endif
+      break
+    endif
+  endfor
+
+  assign rule_color = ''
+  for opt in product.options_with_values
+    capture _is_color_opt
+      render 'color-option-match', option_name: opt.name
+    endcapture
+    if _is_color_opt contains 'true'
+      assign rule_color = opt.selected_value | strip
+      break
+    endif
+  endfor
+  capture rule_hit
+    render 'oos-clock-rules', section: section, mode: 'match', match_color: rule_color, match_size: value_name
+  endcapture
+  if rule_hit contains 'rules'
+    unless rule_hit contains 'true'
+      assign is_oos = false
+    endunless
+  endif
+-%}
+<span class="stock-clock-badge" aria-hidden="true"{% unless is_oos %} hidden{% endunless %}>
+  <img src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Group_1046.svg?v=1790065041" alt="" width="20" height="20" loading="lazy">
+</span>

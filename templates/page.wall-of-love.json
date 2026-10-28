@@ -1,0 +1,190 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-sm",
+        "heading_alignment": "text-center",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
+    "rich_text_nQQMhK": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_NKE98f": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Cooling Magic Everyone's Raving About",
+            "heading_size": "title-md",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_VANHqC": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tested and loved by 1,000+ hot sleepers. Now, it's your turn to experience AND share the bliss of all-night cooling.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_NKE98f",
+        "text_VANHqC"
+      ],
+      "custom_css": [
+        "h1 {font-family: \"GillSans\" !important; letter-spacing: -1px !important;}"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 16,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "custom_liquid_JFFYAF": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "liquid": "<style>\n  #vw_channel .vw_channel_header {\n    display: none !important;\n  }\n\n  #vw_channel .vw_channel_header_category_wrapper .vw_categories_wrapper {\n    width: 100% !important;\n  }\n</style>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "1749540577053dc6f4": {
+      "type": "apps",
+      "blocks": {
+        "videowise_video_commerce_videowise_page_widgets_XEB63r": {
+          "type": "shopify://apps/videowise-video-commerce/blocks/videowise-page-widgets/b48d6c0c-3e3f-4791-a9ab-a5ab7ec82f4d",
+          "settings": {
+            "videowise_embed": "<script src=\"https://assets.videowise.com/videowise-channel-embed.js\" crossorigin=\"anonymous\" fetchpriority=\"high\" type=\"module\"> \n</script>\n<div id=\"videowise_channel_686e2cd0957969005671c133\" style=\"min-height:100vh;display:block;\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "videowise_video_commerce_videowise_page_widgets_XEB63r"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".vw_channel_header {display: none !important;}"
+      ],
+      "settings": {
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_EJa7dC": {
+      "type": "custom-liquid",
+      "settings": {
+        "liquid": "<div class=\"p-8\">\n    <div class=\"sticky\">\n        <div class=\"mb-8 flex space-x-2 py-4 md:justify-center\" style=\"overflow-x: auto;\">\n            <div class=\"flex relative gap-2\">\n                <button class=\"tab-btn px-4 py-2 bg-gray-200 rounded shawn__btn\" data-tab=\"all\">ALL</button>\n                <button class=\"tab-btn px-4 py-2 bg-gray-200 rounded shawn__btn\" data-tab=\"first-look\">First Look: Breescape</button>\n                <button class=\"tab-btn px-4 py-2 bg-gray-200 rounded shawn__btn\" data-tab=\"verdict\">The Verdict: 5 Stars</button>\n                <button class=\"tab-btn px-4 py-2 bg-gray-200 rounded shawn__btn\" data-tab=\"cooling\">Cooling Comfort for All</button>\n            </div>\n        </div>\n    </div>\n    <div class=\"flex gap-4\">\n        <div id=\"shawn__column1\" class=\"shawn__w-1/4 space-y-4\"></div>\n        <div id=\"shawn__column2\" class=\"shawn__w-1/4 space-y-4\"></div>\n        <div id=\"shawn__column3\" class=\"shawn__w-1/4 space-y-4\"></div>\n        <div id=\"shawn__column4\" class=\"shawn__w-1/4 space-y-4\"></div>\n    </div>\n    <div id=\"loading\" class=\"text-center py-4 hidden\">Loading...</div>\n    <div class=\"text-center py-4\">\n        <button id=\"load-more-btn\" class=\"px-4 py-4 bg-blue-500 text-white rounded hover:bg-blue-600 shawn__btn\" >Load More</button>\n    </div>\n</div>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 32,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_qWTMYt": {
+      "type": "custom-liquid",
+      "settings": {
+        "liquid": "{% render 'wall-of-love' %}",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "rich_text_nQQMhK",
+    "custom_liquid_JFFYAF",
+    "1749540577053dc6f4",
+    "custom_liquid_EJa7dC",
+    "custom_liquid_qWTMYt"
+  ]
+}

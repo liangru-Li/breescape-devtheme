@@ -1,0 +1,75 @@
+{% if is_first %}
+<style>
+  .ygseo-article-product-card {
+    width: 94%;
+    max-width: 314px;
+    margin: 0 auto;
+  }
+  .ygseo-article-product-card p {
+    margin-bottom: 0;
+  }
+  .ygseo-article-product-card a.media {
+    background: none !important;
+  }
+  .ygseo-article-product-card img{
+    margin: 0;
+  }
+  .ygseo-article-product-card .product-card__pricing a {
+    background: unset;
+  }
+  .ygseo-article-product-card a.color-swatch {
+    background: unset;
+    background-color: var(--swatch-background);
+    transition: outline-color var(--animation-fast);
+  }
+  .ygseo-article-product-card .product-card__content {
+    padding: 0;
+  }
+  .ygseo-article-product-card ul.swatches {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .ygseo-article-product-card ul.swatches ::marker {
+    display: none;
+  }
+  .ygseo-article-product-card .product-card {
+    {% comment %} flex-direction: row; {% endcomment %}
+  }
+  .ygseo-article-product-card .product-card__content {
+
+  }
+</style>
+{% endif %}
+
+<div class="ygseo-article-product-card">
+{%- render 'product-card',
+  product: product,
+  product_id: product.id,
+  section_id: section.id,
+  lazy_load: false,
+  image_ratio: settings.product_image_ratio,
+  image_fill: settings.product_image_fill,
+  show_secondary_image: settings.product_secondary_image,
+  show_multiple_images: settings.product_multiple_images,
+  show_vendor: settings.product_vendor,
+  title_truncation: settings.product_title_truncation,
+  title_line_limit: settings.product_title_line_limit,
+  show_rating: settings.product_rating,
+  show_color_swatches: settings.product_color_swatches,
+  show_countdown: settings.product_countdown,
+  show_quick_add: settings.product_quick_add,
+  show_quick_view: settings.product_quick_view,
+  vertical_badges: settings.product_vertical_badges,
+  show_sold_out: settings.product_sold_out,
+  product_promotion: product.metafields.custom.promotion_tips,
+  product_custom_badge: product.metafields.custom.custom_badge_image,
+  product_certification_badge: product.metafields.custom.certification_badge,
+  shawn_product_price: product.metafields.custom.shawn_product_price,
+  reviews_count: product.metafields.yotpo.reviews_count,
+  reviews_average: product.metafields.yotpo.reviews_average,
+  show_save_amount: settings.product_save_amount,
+  save_type: settings.product_save_type,
+  show_icon_list: settings.product_icon_list
+-%}
+</div>

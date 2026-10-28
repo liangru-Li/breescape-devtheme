@@ -1,0 +1,505 @@
+<style>
+  #shopify-section-{{section.id}} {
+      --section-padding-top: {{section.settings.padding_top}}px;
+      --section-padding-bottom: {{section.settings.padding_bottom}}px;
+      --media-height: {{section.settings.image_height }};
+  }
+
+  #shopify-section-{{section.id}} .media-panel img,
+  #shopify-section-{{section.id}} .media-panel video {
+      width: 100%;
+      height: var(--media-height);
+      object-fit: cover;
+      border-radius: 8px;
+  }
+
+  #shopify-section-{{section.id}} .shawn-tab__item {
+      /**background: linear-gradient(135deg, #f6f6f8, #e9e9ed);**/
+      border-radius: 8px 8px 0 0;
+      padding: 1rem 1.5rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+      opacity: .3;
+  }
+
+  /**#shopify-section-{{section.id}} .shawn-tab__item:hover {
+      background: linear-gradient(135deg, #e9e9ed, #d9d9e2);
+      transform: translateY(-2px);
+  }**/
+
+  #shopify-section-{{section.id}} .toggle-icon {
+      font-size: 0.875rem;
+      transition: transform 0.3s ease;
+  }
+
+  #shopify-section-{{section.id}} .shawn-tab__item[aria-expanded="true"] {
+      opacity: 1;
+  }
+
+  #shopify-section-{{section.id}} .shawn-tab__content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, opacity 0.3s ease;
+      opacity: 0;
+  }
+
+  #shopify-section-{{section.id}} .shawn-tab__content:not(.hidden) {
+      max-height: 1000px;
+      opacity: 1;
+      padding: .5rem 0 ;
+  }
+
+  #shopify-section-{{section.id}} .shawn-tab__item:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 2px;
+      background: rgba(103, 210, 223, 1);
+      transition: all .2sease-out;
+  }
+
+   #shopify-section-{{section.id}} .shawn-tab__item[aria-expanded="true"]:after {
+      opacity: 1;
+  }
+
+  #shopify-section-{{section.id}} .shawn-display__wg {
+    margin-inline: auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-row-gap: 3.75rem;
+    row-gap: 3.75rem;
+    grid-column-gap: 5rem;
+    column-gap: 5rem;
+    border-radius: 10px;
+}
+
+  @media (max-width: 768px) {
+    #shopify-section-{{section.id}} .shawn-display__wg {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 0;
+    }
+
+   #shopify-section-{{section.id}} .shawn-tab__item {
+      padding: .5rem 1.5rem;
+
+  }
+}
+</style>
+
+<div class="section section--padding relative">
+  <div class="page-width relative">
+    
+    {%- if section.blocks.size > 0 -%}
+      <div class="h-full grid shawn-display__wg">
+         <header>
+          {%- render 'section-heading', section: section -%}
+          {{- section.settings.liquid -}}
+        </header>
+        <div class="shawn-display__tx col-start-2 row-start-2 list-none p-0 m-0">
+          <ul class="flex flex-col p-0 m-0 list-none" style="min-height: var(--min-height, 0);">
+            {%- for block in section.blocks -%}
+              <li class="overflow-hidden">
+                <button
+                  class="relative shawn-tab__item flex justify-between w-full p-4 border rounded-t-lg flex-col transition-colors cursor-pointer"
+                  type="button"
+                  data-index="{{ forloop.index0 }}"
+                  aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                  {% if forloop.first %}
+                    data-active="true"
+                  {% endif %}
+                >
+                  <h3 class="text-xl font-medium text-left">{{ block.settings.title }}</h3>
+                  {% comment %} <span class="toggle-icon text-blue-500 transform rotate-0 transition-transform"> {%- render 'icon', icon: 'chevron-right', size: 'lg' -%}</span>{% endcomment %}
+               
+                <div
+                  class="shawn-tab__content p-4 border border-t-0 rounded-b-lg shadow-md {% unless forloop.first %} hidden{% endunless %}"
+                  id="ContentPanel-{{ forloop.index0 }}"
+                >
+                  <div class="rte leading-normal body subtext-md text-left">
+                    {{ block.settings.liquid }}
+                  </div>
+                </div>
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+
+        <div class="relative text-center shawn-display__md">
+          <ul>
+            {%- for block in section.blocks -%}
+              <li
+                class="media-panel {% unless forloop.first %} hidden{% endunless %}"
+                id="MediaPanel-{{ forloop.index0 }}"
+              >
+                {%- if block.settings.video != blank -%}
+                  {%- capture sizes -%}(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw / 2 - 40px), (max-width: 1535px) calc(min(100vw, {{ settings.page_width }}px) / 3 - 40px), calc(min(100vw, {{ settings.page_width }}px) / 3 - 80px){%- endcapture -%}
+                  <a
+                    class="block media media--{{ block.settings.image_ratio }} media--transparent relative overflow-hidden"
+                    {% if block.settings.button_link != blank %}
+                      href="{{ block.settings.button_link }}"
+                      {%- if block.settings.button_external %} target="_blank" rel="noopener"{% endif -%}
+                    {% else %}
+                      role="link" aria-disabled="true"
+                    {% endif %}
+                    aria-label="{{ block.settings.heading | escape }}"
+                  >
+                    {%- liquid
+                      assign video_alt = block.settings.video.alt | default: block.settings.image.alt
+                      assign alt = 'general.accessibility.load_video' | t: description: video_alt | escape
+                      assign preview_image = block.settings.video.preview_image | default: block.settings.image
+
+                      capture poster
+                        if preview_image != blank
+                          echo preview_image | image_url: width: preview_image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080,1600', sizes: sizes, is: 'lazy-image', class: 'inline-block', alt: alt
+                        else
+                          echo 'lifestyle-1' | placeholder_svg_tag: 'placeholder'
+                        endif
+                      endcapture
+                    -%}
+                    <video-media class="block" style="--aspect-ratio: {{ block.settings.video.aspect_ratio }}" autoplay>
+                      {{- poster -}}
+                      <template>
+                        {{-
+                          block.settings.video
+                          | video_tag:
+                            playsinline: true,
+                            muted: true,
+                            autoplay: true,
+                            loop: true,
+                            controls: false,
+                            preload: 'metadata', 
+                            image_size: sizes,
+                            loading: 'lazy'
+                        -}}
+                      </template>
+                    </video-media>
+                  </a>
+                {%- elsif block.settings.image != blank -%}
+                  {%- capture sizes -%}(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw / 2 - 40px), (max-width: 1535px) calc(min(100vw, {{ settings.page_width }}px) / 3 - 40px), calc(min(100vw, {{ settings.page_width }}px) / 3 - 80px){%- endcapture -%}
+                  <a
+                    class="block media media--{{ block.settings.image_ratio }} media--transparent relative overflow-hidden"
+                    {% if block.settings.button_link != blank %}
+                      href="{{ block.settings.button_link }}"
+                      {%- if block.settings.button_external %} target="_blank" rel="noopener"{% endif -%}
+                    {% else %}
+                      role="link" aria-disabled="true"
+                    {% endif %}
+                    aria-label="{{ block.settings.heading | escape }}"
+                  >
+                    {{-
+                      block.settings.image
+                      | image_url: width: block.settings.image.width
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '180,360,540,720,900,1080,1600',
+                        sizes: sizes,
+                        is: 'lazy-image',
+                        class: 'inline-block'
+                    -}}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    {%- endif -%}
+    <div class="mt-2 text-sm md:text-right text-left py-2" style="font-style:italic;">
+    *Tested by SGS, a global leader in product certification, for proven cooling effectiveness.
+    </div>
+    
+  </div>
+</div>
+
+<script>
+  function toggleContent(index) {
+    const buttons = document.querySelectorAll('.shawn-tab__item');
+    const contentPanels = document.querySelectorAll('.shawn-tab__content');
+    const mediaPanels = document.querySelectorAll('.media-panel');
+
+    buttons.forEach((button, btnIndex) => {
+      const isActive = btnIndex === parseInt(index);
+      button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      button.classList.toggle('active', isActive);
+
+      // 更新箭头图标
+      const icon = button.querySelector('.toggle-icon');
+      if (icon) {
+        icon.classList.toggle('rotate-90', isActive);
+      }
+    });
+
+    contentPanels.forEach((panel, panelIndex) => {
+      panel.classList.toggle('hidden', panelIndex !== parseInt(index));
+    });
+
+    mediaPanels.forEach((panel, panelIndex) => {
+      panel.classList.toggle('hidden', panelIndex !== parseInt(index));
+    });
+  }
+
+  // 初始化第一个面板
+  document.addEventListener('DOMContentLoaded', () => {
+    const firstButton = document.querySelector('.shawn-tab__item[data-index="0"]');
+    if (firstButton) {
+      firstButton.setAttribute('aria-expanded', 'true');
+      const icon = firstButton.querySelector('.toggle-icon');
+      if (icon) {
+        icon.classList.add('rotate-90');
+      }
+    }
+
+    // 添加点击事件监听器
+    document.querySelectorAll('.shawn-tab__item').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const index = button.getAttribute('data-index');
+        toggleContent(index);
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Sheets BlendTek",
+  "class": "shawn__product-sheets__blendtek",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "Multicolumn"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-center md:items-center"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label"
+    },
+    {
+      "type": "liquid",
+      "id": "liquid",
+      "label": "Tab Liquid"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.global.settings.button_label.label",
+      "info": "t:sections.global.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.global.settings.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_external",
+      "label": "t:sections.global.settings.button_external.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "button_icon",
+      "label": "t:sections.global.settings.button_icon.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media",
+      "name": "Media",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.global.settings.image.label"
+        },
+        {
+          "type": "select",
+          "id": "image_ratio",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.global.settings.image_ratio.label"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "t:sections.video.settings.video.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "media",
+          "label": "Select Image or Video"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab Title"
+        },
+        {
+          "type": "liquid",
+          "id": "liquid",
+          "label": "Tab Liquid"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheets BlendTek",
+      "blocks": [
+        {
+          "type": "media"
+        },
+        {
+          "type": "media"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

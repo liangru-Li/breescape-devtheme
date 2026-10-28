@@ -1,0 +1,334 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-xl",
+        "heading_alignment": "text-left",
+        "heading_tag": "h1",
+        "text_size": "text-lg md:text-2xl",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "images_with_text_nJqiaA": {
+      "type": "images-with-text",
+      "blocks": {
+        "heading_xdBEjA": {
+          "type": "heading",
+          "settings": {
+            "heading": "Work with Us",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_XhFNpr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We’re currently recruiting content creators to review our products for their online communities and help us spread awareness.<br/><br/>The Perks:<br/><br/>First access to new products<br/>Participate in future product development<br/>Commission on sales<br/>Exclusive discount codes</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_Hnj3Hz": {
+          "type": "button",
+          "settings": {
+            "button_label": "Apply Now",
+            "button_link": "",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_xdBEjA",
+        "text_XhFNpr",
+        "button_Hnj3Hz"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/1_fb3bacec-c63f-4679-9ca7-86d9c8f9d3ee.jpg",
+        "image_ratio": "square",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true
+      }
+    },
+    "empty-space": {
+      "type": "empty-space",
+      "settings": {
+        "desktop_height": 32,
+        "mobile_height": 32,
+        "color_background": "",
+        "gradient_background": ""
+      }
+    },
+    "contact_form_RrFLcL": {
+      "type": "contact-form",
+      "blocks": {
+        "custom_field_8Dx7yA": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "Instagram",
+            "required": false,
+            "full_width": true,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_dmiFHr": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "YouTube",
+            "required": false,
+            "full_width": true,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_beHqmN": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "Blog/Website",
+            "required": false,
+            "full_width": true,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_Btyzi9": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "Complete Address",
+            "required": true,
+            "full_width": true,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_Nt96CK": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "City",
+            "required": true,
+            "full_width": false,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_HzAtEP": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "State",
+            "required": false,
+            "full_width": false,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_Bz8y9R": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "PostalCode",
+            "required": true,
+            "full_width": false,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_VYfqfU": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "Phone",
+            "required": true,
+            "full_width": false,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_JfTwFi": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "PayPal Address",
+            "required": true,
+            "full_width": true,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "contact_teac98": {
+          "type": "contact",
+          "settings": {
+            "heading": "",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "custom_field_8Dx7yA",
+        "custom_field_dmiFHr",
+        "custom_field_beHqmN",
+        "custom_field_Btyzi9",
+        "custom_field_Nt96CK",
+        "custom_field_HzAtEP",
+        "custom_field_Bz8y9R",
+        "custom_field_VYfqfU",
+        "custom_field_JfTwFi",
+        "contact_teac98"
+      ],
+      "settings": {
+        "heading": "Influencer Collaboration",
+        "heading_size": "title-sm",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 32,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "faq_WYfKbi": {
+      "type": "faq",
+      "blocks": {
+        "question_wYFL8j": {
+          "type": "question",
+          "settings": {
+            "title": "What’s the best way to contact Breescape Customer service?",
+            "text": "<p>You can email, call, or start a Live Chat — 24 hours a day, 7 days a week (so you get the best customer service!).</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_pVfNpN": {
+          "type": "question",
+          "settings": {
+            "title": "How can I email Breescape customer support?",
+            "text": "<p>Fill out the email form on our Contact Us page, and we’ll get back to you ASAP!</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "question_wYFL8j",
+        "question_pVfNpN"
+      ],
+      "disabled": true,
+      "settings": {
+        "style": "with-border",
+        "heading": "FAQs",
+        "heading_size": "title-sm",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "rgba(0,0,0,0)",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "rgba(0,0,0,0)",
+        "color_button_background": "rgba(0,0,0,0)",
+        "color_button_gradient": "",
+        "color_overlay": "#f6f6f6",
+        "overlay_opacity": 0,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": true,
+        "narrow": true,
+        "rounded": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "images_with_text_nJqiaA",
+    "empty-space",
+    "contact_form_RrFLcL",
+    "faq_WYfKbi"
+  ]
+}

@@ -1,0 +1,274 @@
+{%- doc -%}
+  Renders individual product media items with variant-aware visibility, zoom controls, and responsive layouts.
+
+  Displays a single media element (image, video, or 3D model) with support for variant-specific grouping, multi-language ALT tag connections, and adaptive aspect ratios. Handles complex media visibility rules based on selected variants and gang media configurations.
+
+  @param {object} product - Shopify product object
+  @param {object} product_variant - Currently selected variant
+  @param {object} media - Media object to render
+  @param {object} featured_media - Product's featured media
+  @param {object} variant_images - Array of variant image sources
+  @param {boolean} [hide_variants] - Hide variant-attached media
+  @param {string} [image_ratio] - Desktop aspect ratio
+  @param {string} [image_ratio_mobile] - Mobile aspect ratio
+  @param {boolean} [image_fill] - Crop to fill (vs contain)
+  @param {string} [gallery_layout] - Parent gallery layout
+  @param {string} [image_zoom] - Zoom interaction type
+  @param {string} section_id - Section identifier
+  @param {string} product_id - Product identifier  
+  @param {string} sizes - Responsive image sizes attribute
+  @param {boolean} [preload] - Preload media resources
+  @param {boolean} [autoplay] - Auto-play videos
+  @param {boolean} [loop] - Loop video playback
+
+  @example
+  {% render 'product-media',
+    product: product,
+    product_variant: product.selected_or_first_available_variant,
+    media: media,
+    featured_media: product.featured_media,
+    variant_images: variant_images,
+    section_id: section.id,
+    product_id: product.id
+  %}
+{%- enddoc -%}
+
+{%- liquid
+  assign show_product_media = true
+
+  unless product.has_only_default_variant
+    if product_variant.metafields.theme.gang_media.value != blank and product_variant.metafields.theme.gang_media.list?
+      assign show_product_media = false
+      for gang_media in product_variant.metafields.theme.gang_media.value
+        if gang_media.id == media.id
+          assign show_product_media = true
+          break
+        endif
+      endfor
+    else
+      assign gang_media_active = false
+      assign gang_connect_alt = ''
+      if media.alt contains '#' and hide_variants == false
+        assign gang_connect_alt = media.alt | split: '#' | last
+        assign gang_connect_list = gang_connect_alt | split: ','
+        for gang_connect_value in gang_connect_list
+          assign gang_exist = false
+          assign gang_connect = ''
+          assign gang_option_name = ''
+          assign gang_connect_item = gang_connect_value
+
+          if gang_connect_item contains ':' and localization.language.iso_code != blank
+            assign gang_split_param = localization.language.iso_code | append: ':'
+            assign gang_connect_item = gang_connect_item | split: gang_split_param | last
+          endif
+          
+          if gang_connect_item contains '_'
+            assign gang_option_name = gang_connect_item | split: '_' | first | handleize
+
+            for option_name in product.options
+              assign option_name_handlized = option_name | handleize | replace: '_', '-'
+              if option_name_handlized == gang_option_name
+                assign gang_exist = true
+                assign gang_connect = gang_connect_item
+                
+                assign option_key = 'option' | append: forloop.index
+                assign current_option_value = product_variant[option_key] | handleize
+                assign current_connect = option_name_handlized | append: '_' | append: current_option_value
+                if gang_connect == current_connect
+                  assign gang_media_active = true
+                endif
+                break
+              endif
+            endfor
+
+            if gang_exist == true
+              break
+            endif
+          endif
+        endfor
+      endif
+    endif
+  endunless
+
+  if gang_exist == true
+    assign media_alt = media.alt | split: '#' | first
+  else
+    assign media_alt = media.alt
+  endif
+
+  assign media_alt = media_alt | default: product.title
+-%}
+
+{%- if show_product_media -%}
+  <div class="product__media card media media--{{ image_ratio }} mobile:media--{{ image_ratio_mobile }}{% unless image_fill %} media--contain{% endunless %} flex w-full shrink-0 relative overflow-hidden
+    {%- if gallery_layout == 'scroll' and media.id == featured_media.id %} xl:hidden{% endif -%}
+    {%- if hide_variants and variant_images contains media.src %} product__media--variant{% endif -%}"
+    data-media-type="{{ media.media_type }}"
+    data-media-id="{{ media.id }}"
+    {%- if gang_exist == true %} data-gang-option="{{ gang_option_name }}" data-gang-connect="{{ gang_connect }}"{% if gang_media_active == false %} hidden{% endif %}{% else %} data-gang-default{% endif -%}
+    {%- if image_ratio == 'adapt' or image_ratio_mobile == 'adapt' %} style="--aspect-ratio: {{ media.aspect_ratio }};"{% endif -%}
+  >
+    {%- render 'media', section_id: section_id, product_id: product_id, media: media, media_alt: media_alt, sizes: sizes, preload: preload, autoplay: autoplay, loop: loop -%}
+
+    {%- comment -%} Product Badges {%- endcomment -%}
+
+    {%- assign image_src = media.image.src | downcase -%}
+    {%- assign show_badge = false -%}
+    {%- assign show_bundle_badge = false -%}
+    {%- assign show_new_badge = false -%}
+    {%- assign show_pre_order = false -%}
+
+    {%- if image_src contains 'with-badge' -%}
+      {%- assign show_badge = true -%}
+    {%- endif -%}
+    {%- if image_src contains 'with-badge-bundle' -%}
+      {%- assign show_bundle_badge = true -%}
+    {%- endif -%}
+    {%- if image_src contains 'with-badge-new' -%}
+      {%- assign show_new_badge = true -%}
+    {%- endif -%}
+    {%- if image_src contains 'with-pre-order' -%}
+      {%- assign show_pre_order = true -%}
+    {%- endif -%}
+
+    {%- comment -%}
+      自定义 badge：从产品 metafield 读取，支持两套 namespace
+        1) theme.label / theme.label_color  ← 主题预置
+        2) custom.label / custom.label_color ← 用户自定义
+      产品级角标（Best Seller / Bundle & Save）加 js-corner-badge，
+      由 product-media-gallery 的 CSS 限制为「仅第一张可见主图」显示，
+      兼容捆绑款 gang media 把 featured_media 隐藏的情况。
+    {%- endcomment -%}
+    {%- assign _label_text = '' -%}
+    {%- assign _label_bg = '#0059FF' -%}
+    {%- assign _is_product_label = false -%}
+    {%- if product.metafields.theme.label.value != blank -%}
+      {%- assign _label_text = product.metafields.theme.label.value | join: ', ' | strip -%}
+      {%- if product.metafields.theme.label_color.value != blank -%}
+        {%- assign _label_bg = product.metafields.theme.label_color.value -%}
+      {%- endif -%}
+      {%- assign show_new_badge = true -%}
+      {%- assign _is_product_label = true -%}
+    {%- elsif product.metafields.custom.label != blank -%}
+      {%- assign _label_text = product.metafields.custom.label | strip -%}
+      {%- if product.metafields.custom.label_color != blank -%}
+        {%- assign _label_bg = product.metafields.custom.label_color | strip -%}
+      {%- endif -%}
+      {%- assign show_new_badge = true -%}
+      {%- assign _is_product_label = true -%}
+    {%- elsif show_new_badge -%}
+      {%- assign _label_text = 'New Arrivals' -%}
+    {%- endif -%}
+
+    {%- if show_bundle_badge and show_badge -%}
+      <div class="flex shawn-product--badge__save js-corner-badge">
+        <div class="badges z-2 absolute grid gap-3 pointer-events-none">
+          <span class="badge flex absolute items-center gap-1d5 font-medium leading-none rounded-full"
+            >Bundle & Save</span
+          >
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if show_new_badge or show_pre_order -%}
+      <div class="flex shawn-product--badge__new{% if _is_product_label %} js-corner-badge{% endif %}">
+        <div class="badges z-2 absolute flex gap-3 pointer-events-none">
+          {%- if show_new_badge and _label_text != blank -%}
+            <span
+              class="badge flex items-center gap-1d5 font-medium leading-none rounded-full px-3 py-1"
+              style="background-color: {{ _label_bg }} !important; color: #0F374B !important;"
+            >
+              {{ _label_text }}
+            </span>
+          {%- endif -%}
+
+          {%- if show_pre_order -%}
+            <span
+              class="badge flex items-center gap-1d5 font-medium leading-none rounded-full text-white px-3 py-1"
+              style="background-color:#0f374b!important;"
+            >
+              Pre-order
+            </span>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if show_badge -%}
+      {%- if product.metafields.custom.badge_image.value -%}
+        <div class="flex flex-row flex-row-reverse shawn-product--media__image-certificates-badge items-end justify-center">
+          {%- for image in product.metafields.custom.badge_image.value -%}
+            <picture class="flex" data-id="{{ forloop.index0 }}">
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ image | image_url: width: 72 }} 1x, {{ image | image_url: width: 144 }} 2x, {{ image | image_url: width: 216 }} 3x"
+                type="image/webp"
+                class="object-contain"
+                width="72"
+                height="72"
+                alt="{{ product.title | escape }} {{ image.alt | escape }}"
+                loading="lazy"
+              >
+              <img
+                src="{{ image | image_url: width: 100 }}"
+                srcset="{{ image | image_url: width: 100 }} 1x, {{ image | image_url: width: 200 }} 2x, {{ image | image_url: width: 300 }} 3x"
+                class="object-contain"
+                width="100"
+                height="100"
+                alt="{{ product.title | escape }} {{ image.alt | escape }}"
+                loading="lazy"
+              >
+            </picture>
+          {%- endfor -%}
+
+          <div class="hidden">
+            {%- for image in product.metafields.custom.badge_image.value -%}
+              <noscript>
+                <img
+                  class="lazyloaded"
+                  src="{{ image | image_url: width: 240 }}"
+                  alt="{{ product.title | escape }} {{ image.alt | escape }}"
+                >
+              </noscript>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+     {%- comment -%}
+      {%- if product.metafields.custom.certification_badge.value -%}
+        <picture class="shawn-product--media__image-certificates">
+          <source
+            media="(max-width: 767px)"
+            srcset="{{ product.metafields.custom.certification_badge | image_url: width: 1390, height: 278 }}"
+            class="max-h-5 object-contain"
+            alt="{{ product.title | escape }} Certification"
+            width="1390"
+            height="278"
+            loading="lazy"
+          >
+          <img
+            src="{{ product.metafields.custom.certification_badge | image_url: width: 1390, height: 278 }}"
+            class="max-h-5 object-contain"
+            alt="{{ product.title | escape }} Certification"
+            width="1390"
+            height="278"
+            loading="lazy"
+          >
+        </picture>
+      {%- endif -%}
+    {%- endcomment -%}
+    {%- endif -%}
+
+    {%- comment -%} Product Badges {%- endcomment -%}
+
+
+
+
+    {%- if image_zoom != 'none' and media.media_type == 'image' -%}
+      <button type="button" class="absolute top-0 left-0 w-full h-full flex items-center justify-center" is="media-{{ image_zoom }}-button" aria-label="{{ 'products.media.open_media' | t: index: media.position | escape }}" tabindex="-1">
+        {%- render 'icon', icon: 'zoom', size: 'xs', class: 'lg:hidden' -%}
+      </button>
+    {%- endif -%}
+  </div>
+{%- endif -%}

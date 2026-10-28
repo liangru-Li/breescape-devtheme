@@ -1,0 +1,313 @@
+{%- comment -%}
+  赠品进度。顶部文案按购物车最终成交价计算还差多少，下方整块为上传图片。
+  @param block
+{%- endcomment -%}
+{%- liquid
+  assign gid = 'xy-gp-' | append: block.id
+  assign cart_total = cart.total_price | default: 0
+
+  assign raw1 = block.settings.tier1_amount | default: 0 | plus: 0
+  assign raw2 = block.settings.tier2_amount | default: 0 | plus: 0
+  assign cents1 = raw1 | times: 100.0 | round
+  assign cents2 = raw2 | times: 100.0 | round
+
+  assign progress_text = block.settings.progress_text | default: 'Add [amount] more to unlock FREE gifts'
+  assign complete_text = block.settings.complete_text | default: "You've unlocked all FREE gifts"
+  assign suffix_text = block.settings.suffix_text | default: 'Auto added'
+  assign image = block.settings.image
+
+  assign next = 0
+  if cents1 > 0 and cart_total < cents1
+    assign next = cents1
+  endif
+  if cents2 > 0 and cart_total < cents2
+    if next == 0 or cents2 < next
+      assign next = cents2
+    endif
+  endif
+
+  if next == 0
+    assign message = complete_text
+  else
+    assign remain = next | minus: cart_total
+    assign remain_text = remain | money_without_trailing_zeros
+    assign message = progress_text | replace: '[amount]', remain_text
+  endif
+
+  assign has_tier = false
+  if cents1 > 0 or cents2 > 0
+    assign has_tier = true
+  endif
+
+  assign two_tiers = false
+  if cents1 > 0 and cents2 > 0
+    assign two_tiers = true
+  endif
+
+  assign goal = cents1
+  if goal <= 0
+    assign goal = cents2
+  endif
+
+  assign pct = 0
+  if two_tiers
+    if cart_total >= cents2
+      assign pct = 100
+    elsif cart_total >= cents1
+      assign span = cents2 | minus: cents1
+      if span > 0
+        assign into = cart_total | minus: cents1
+        assign pct = into | times: 50.0 | divided_by: span | round | plus: 50
+      else
+        assign pct = 100
+      endif
+    elsif cents1 > 0
+      assign pct = cart_total | times: 50.0 | divided_by: cents1 | round
+    endif
+  elsif goal > 0
+    assign pct = cart_total | times: 100.0 | divided_by: goal | round
+  endif
+  if pct > 100
+    assign pct = 100
+  endif
+  if pct < 0
+    assign pct = 0
+  endif
+
+  assign bar_max = cents2
+  if bar_max <= 0 or cents1 > bar_max
+    assign bar_max = cents1
+  endif
+-%}
+{%- if has_tier or image != blank -%}
+  <style>
+    #{{ gid }} {
+      box-sizing: border-box;
+      width: 100%;
+      margin: 4px 0 8px;
+      padding: 14px 12px 13px;
+      background: #e1f6f9;
+      border-radius: 18px;
+      color: #10374b;
+    }
+    #{{ gid }} * { box-sizing: border-box; }
+    #{{ gid }} .xy-gp__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 0;
+      color: #10374b;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+    }
+    #{{ gid }} .xy-gp__suffix {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 400;
+    }
+    #{{ gid }} .xy-gp__sep {
+      display: inline-block;
+      width: 1.3px;
+      height: 0.88em;
+      margin: 0 8px;
+      background: currentColor;
+      flex: 0 0 auto;
+    }
+    #{{ gid }} .xy-gp__bar {
+      position: relative;
+      height: 16px;
+      margin-top: 10px;
+    }
+    #{{ gid }} .xy-gp__track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 6px;
+      transform: translateY(-50%);
+      background: #ffffff;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    #{{ gid }} .xy-gp__fill {
+      display: block;
+      height: 100%;
+      background: #67d4e0;
+      border-radius: inherit;
+      transition: width 0.35s ease;
+    }
+    #{{ gid }} .xy-gp__dot {
+      position: absolute;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      margin: 0;
+      border-radius: 50%;
+      background: #67d4e0;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    #{{ gid }} .xy-gp__dot.is-end { transform: translate(-100%, -50%); }
+    #{{ gid }} .xy-gp__picture {
+      display: block;
+      margin: 12px 0 0;
+    }
+    #{{ gid }} .xy-gp__picture img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0;
+      border-radius: 16px;
+    }
+    @container (max-width: 430px) {
+      #{{ gid }} { padding: 12px 10px 10px; border-radius: 16px; }
+      #{{ gid }} .xy-gp__head { font-size: 13px; }
+    }
+    #{{ gid }} { container-type: inline-size; }
+  </style>
+
+  <div
+    id="{{ gid }}"
+    class="xy-gp"
+    data-gift-progress
+    data-total="{{ cart_total }}"
+    data-tier1="{{ cents1 }}"
+    data-tier2="{{ cents2 }}"
+    data-progress-text="{{ progress_text | escape }}"
+    data-complete-text="{{ complete_text | escape }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="xy-gp__head">
+      <span data-gp-message>{{ message }}</span>
+      {%- if suffix_text != blank -%}
+        <span class="xy-gp__suffix"><span class="xy-gp__sep" aria-hidden="true"></span>{{ suffix_text }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- if has_tier -%}
+      <div
+        class="xy-gp__bar"
+        data-gp-bar
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="{{ bar_max }}"
+        aria-valuenow="{{ cart_total }}"
+        aria-label="{{ message | escape }}"
+      >
+        <div class="xy-gp__track">
+          <span class="xy-gp__fill" data-gp-fill style="width: {{ pct }}%;"></span>
+        </div>
+        {%- if two_tiers -%}
+          <span class="xy-gp__dot" style="left: 50%;"></span>
+        {%- endif -%}
+        <span class="xy-gp__dot is-end" style="left: 100%;"></span>
+      </div>
+    {%- endif -%}
+
+    {%- if image != blank -%}
+      <div class="xy-gp__picture">
+        <img
+          src="{{ image | image_url: width: 1400 }}"
+          alt=""
+          width="{{ image.width }}"
+          height="{{ image.height }}"
+          loading="lazy"
+        >
+      </div>
+    {%- endif -%}
+  </div>
+
+  <script>
+    (function () {
+      function formatRemain(cents) {
+        var format = (window.theme && theme.settings && theme.settings.moneyFormat) || '${{amount}}';
+        var text = (window.theme && theme.Currency)
+          ? theme.Currency.formatMoney(cents, format)
+          : '$' + (cents / 100).toFixed(2);
+        return String(text).replace(/([.,]00)(?!\d)/, '');
+      }
+
+      function paint(root, total) {
+        var t1 = Number(root.getAttribute('data-tier1')) || 0;
+        var t2 = Number(root.getAttribute('data-tier2')) || 0;
+        var next = 0;
+        [t1, t2].forEach(function (amt) {
+          if (amt > 0 && total < amt && (next === 0 || amt < next)) next = amt;
+        });
+
+        var two = t1 > 0 && t2 > 0;
+        var pct = 0;
+        if (two) {
+          if (total >= t2) pct = 100;
+          else if (total >= t1) {
+            var span = t2 - t1;
+            pct = 50 + (span > 0 ? ((total - t1) / span) * 50 : 50);
+          } else if (t1 > 0) {
+            pct = (total / t1) * 50;
+          }
+        } else {
+          var goal = t1 > 0 ? t1 : t2;
+          if (goal > 0) pct = (total / goal) * 100;
+        }
+        pct = Math.max(0, Math.min(100, pct));
+        var fill = root.querySelector('[data-gp-fill]');
+        if (fill) fill.style.width = pct + '%';
+        var bar = root.querySelector('[data-gp-bar]');
+        if (bar) {
+          bar.setAttribute('aria-valuenow', String(total));
+          bar.setAttribute('aria-valuemax', String(Math.max(t1, t2)));
+        }
+
+        var messageEl = root.querySelector('[data-gp-message]');
+        var message = next === 0
+          ? (root.getAttribute('data-complete-text') || '')
+          : (root.getAttribute('data-progress-text') || '').replace('[amount]', formatRemain(next - total));
+        if (messageEl) messageEl.textContent = message;
+        root.setAttribute('data-total', String(total));
+      }
+
+      function paintAll(total) {
+        document.querySelectorAll('[data-gift-progress]').forEach(function (root) {
+          var value = typeof total === 'number' ? total : (Number(root.getAttribute('data-total')) || 0);
+          paint(root, value);
+        });
+      }
+
+      function fetchCart() {
+        var base = (window.theme && theme.routes && theme.routes.cart_url) || '/cart';
+        fetch(base + '.js', { credentials: 'same-origin', headers: { Accept: 'application/json' } })
+          .then(function (res) { return res.json(); })
+          .then(function (cart) {
+            if (cart && typeof cart.total_price === 'number') paintAll(cart.total_price);
+          })
+          .catch(function () {});
+      }
+
+      function start() {
+        if (!window.__xyGiftProgress) {
+          window.__xyGiftProgress = true;
+          if (window.theme && theme.pubsub && theme.pubsub.PUB_SUB_EVENTS) {
+            theme.pubsub.subscribe(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, function (data) {
+              if (data && data.cart && typeof data.cart.total_price === 'number') {
+                paintAll(data.cart.total_price);
+              } else {
+                fetchCart();
+              }
+            });
+          }
+          document.addEventListener('cart:refresh', fetchCart);
+          document.addEventListener('shopify:section:load', function () { paintAll(); });
+        }
+        paintAll();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+      } else {
+        start();
+      }
+    })();
+  </script>
+{%- endif -%}

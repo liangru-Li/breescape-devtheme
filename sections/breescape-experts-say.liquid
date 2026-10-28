@@ -1,0 +1,1433 @@
+<!-- ============================================================
+  Section: Breescape — Experts Say
+  - 顶部 Heading
+  - N 条 testimonial（每条一个 block）
+    PC 默认条:    [photo]            [quote + name + role]
+    PC 镜像条:    [quote + name + role]            [photo]
+    Mobile 默认: [photo + name + role]            [quote]
+    Mobile 镜像: [quote]            [photo + name + role]
+  - 所有视觉参数（圆角 / padding / 间距 / 字号档 / 字重 / 颜色）都可在主题编辑器调
+  - 字体 / 字号默认跟主题；字号可选 subtext-sm/md/lg/xl
+============================================================ -->
+
+{%- liquid
+  assign s = section.settings
+  assign blocks = section.blocks
+
+  assign quote_weight_style = ''
+  if s.quote_weight != blank
+    assign quote_weight_style = 'font-weight:' | append: s.quote_weight | append: ';'
+  endif
+  assign name_weight_style = ''
+  if s.name_weight != blank
+    assign name_weight_style = 'font-weight:' | append: s.name_weight | append: ';'
+  endif
+  assign role_weight_style = ''
+  if s.role_weight != blank
+    assign role_weight_style = 'font-weight:' | append: s.role_weight | append: ';'
+  endif
+-%}
+
+<section
+  class="be-es"
+  aria-label="{{ s.heading | escape }}"
+  style="
+    --be-es-bg:                  {{ s.background_color }};
+
+    --be-es-pad-top-pc:          {{ s.section_padding_top_pc }}px;
+    --be-es-pad-bottom-pc:       {{ s.section_padding_bottom_pc }}px;
+    --be-es-pad-x-pc:            {{ s.section_padding_x_pc }}px;
+    --be-es-pad-top-m:           {{ s.section_padding_top_mobile }}px;
+    --be-es-pad-bottom-m:        {{ s.section_padding_bottom_mobile }}px;
+    --be-es-pad-x-m:             {{ s.section_padding_x_mobile }}px;
+
+    --be-es-title-mb-pc:         {{ s.heading_margin_bottom_pc }}px;
+    --be-es-title-mb-m:          {{ s.heading_margin_bottom_mobile }}px;
+    --be-es-title-color:         {{ s.heading_color }};
+
+    --be-es-card-gap-pc:         {{ s.card_gap_pc }}px;
+    --be-es-card-gap-m:          {{ s.card_gap_mobile }}px;
+
+    --be-es-photo-radius-pc:     {{ s.photo_card_radius_pc }}px;
+    --be-es-photo-radius-m:      {{ s.photo_card_radius_mobile }}px;
+    --be-es-quote-radius-pc:     {{ s.quote_card_radius_pc }}px;
+    --be-es-quote-radius-m:      {{ s.quote_card_radius_mobile }}px;
+
+    --be-es-photo-bg:            {{ s.photo_card_bg }};
+    --be-es-quote-bg:            {{ s.quote_card_bg }};
+
+    --be-es-quote-pad-x-pc:      {{ s.quote_card_padding_x_pc }}px;
+    --be-es-quote-pad-y-pc:      {{ s.quote_card_padding_y_pc }}px;
+    --be-es-quote-pad-x-m:       {{ s.quote_card_padding_x_mobile }}px;
+    --be-es-quote-pad-y-m:       {{ s.quote_card_padding_y_mobile }}px;
+
+    --be-es-photo-aspect-pc:     {{ s.photo_aspect_pc }};
+    --be-es-photo-aspect-m:      {{ s.photo_aspect_mobile }};
+
+    --be-es-quote-name-mb-pc:    {{ s.quote_to_name_pc }}px;
+    --be-es-name-role-mb-pc:     {{ s.name_to_role_pc }}px;
+    --be-es-quote-name-mb-m:     {{ s.quote_to_name_mobile }}px;
+    --be-es-name-role-mb-m:      {{ s.name_to_role_mobile }}px;
+
+    --be-es-quote-color:         {{ s.quote_color }};
+    --be-es-name-color:          {{ s.name_color }};
+    --be-es-role-color:          {{ s.role_color }};
+
+    --be-es-quote-lh:            {{ s.quote_line_height }};
+    --be-es-name-lh:             {{ s.name_line_height }};
+    --be-es-role-lh:             {{ s.role_line_height }};
+
+    --be-es-pc-photo-cols:       {{ s.pc_photo_ratio }}fr;
+    --be-es-pc-quote-cols:       {{ s.pc_quote_ratio }}fr;
+    --be-es-m-photo-cols:        {{ s.mobile_photo_ratio }}fr;
+    --be-es-m-quote-cols:        {{ s.mobile_quote_ratio }}fr;
+
+    --be-es-max-width:           {{ s.max_width }}px;
+    --be-es-item-radius-pc:      {{ s.item_radius_pc }}px;
+    --be-es-item-radius-m:       {{ s.item_radius_mobile }}px;
+    --be-es-item-pad-x-pc:       {{ s.item_padding_x_pc }}px;
+    --be-es-item-pad-y-pc:       {{ s.item_padding_y_pc }}px;
+    --be-es-item-pad-x-m:        {{ s.item_padding_x_mobile }}px;
+    --be-es-item-pad-y-m:        {{ s.item_padding_y_mobile }}px;
+
+    --be-es-photo-inner-pad-pc:  {{ s.photo_inner_padding_pc }}px;
+    --be-es-photo-inner-pad-m:   {{ s.photo_inner_padding_mobile }}px;
+    --be-es-photo-img-radius-pc: {{ s.photo_image_radius_pc }}px;
+    --be-es-photo-img-radius-m:  {{ s.photo_image_radius_mobile }}px;
+    --be-es-photo-img-width-m:   {{ s.mobile_photo_image_width }}%;
+
+    --be-es-flip-back-bg:        {{ s.flip_back_bg }};
+    --be-es-flip-back-color:     {{ s.flip_back_color }};
+    --be-es-flip-back-pad-pc:    {{ s.flip_back_padding_pc }}px;
+    --be-es-flip-back-pad-m:     {{ s.flip_back_padding_mobile }}px;
+    --be-es-flip-back-fz-pc:     {{ s.flip_back_size_pc }}px;
+    --be-es-flip-back-fz-m:      {{ s.flip_back_size_mobile }}px;
+    --be-es-flip-back-lh:        {{ s.flip_back_line_height }};
+
+    --be-es-flip-btn-bg:         {{ s.flip_btn_bg }};
+    --be-es-flip-btn-color:      {{ s.flip_btn_color }};
+    --be-es-flip-btn-size-pc:    {{ s.flip_btn_size_pc }}px;
+    --be-es-flip-btn-size-m:     {{ s.flip_btn_size_mobile }}px;
+    --be-es-flip-btn-offset-pc:  {{ s.flip_btn_offset_pc }}px;
+    --be-es-flip-btn-offset-m:   {{ s.flip_btn_offset_mobile }}px;
+  "
+>
+  <div class="be-es__inner">
+    {% if s.heading != blank %}
+      <h2 class="be-es__title">{{ s.heading | escape }}</h2>
+    {% endif %}
+
+    {% if blocks.size > 0 %}
+      <div class="be-es__list">
+        {% for block in blocks %}
+          {%- liquid
+            assign img    = block.settings.image
+            assign img_alt = block.settings.alt | default: block.settings.name
+            assign quote  = block.settings.quote
+            assign name   = block.settings.name
+            assign role   = block.settings.role
+            assign layout = block.settings.layout
+            assign bg     = block.settings.bg_color
+            assign back_text = block.settings.back_text
+            assign has_flip = false
+            if back_text != blank
+              assign has_flip = true
+            endif
+          -%}
+          {%- capture item_style -%}
+            {%- if bg != blank -%}background-color: {{ bg }};{%- endif -%}
+            {%- if block.settings.image_width_pc > 0 -%}--bi-img-w-pc:{{ block.settings.image_width_pc }}%;{%- endif -%}
+            {%- if block.settings.image_width_mobile > 0 -%}--bi-img-w-m:{{ block.settings.image_width_mobile }}%;{%- endif -%}
+            {%- if block.settings.quote_size_pc_px > 0 -%}--bi-quote-fz-pc:{{ block.settings.quote_size_pc_px }}px;{%- endif -%}
+            {%- if block.settings.name_size_pc_px > 0 -%}--bi-name-fz-pc:{{ block.settings.name_size_pc_px }}px;{%- endif -%}
+            {%- if block.settings.role_size_pc_px > 0 -%}--bi-role-fz-pc:{{ block.settings.role_size_pc_px }}px;{%- endif -%}
+            {%- if block.settings.quote_size_mobile_px > 0 -%}--bi-quote-fz-m:{{ block.settings.quote_size_mobile_px }}px;{%- endif -%}
+            {%- if block.settings.name_size_mobile_px > 0 -%}--bi-name-fz-m:{{ block.settings.name_size_mobile_px }}px;{%- endif -%}
+            {%- if block.settings.role_size_mobile_px > 0 -%}--bi-role-fz-m:{{ block.settings.role_size_mobile_px }}px;{%- endif -%}
+            {%- if block.settings.meta_pad_top_m > 0 -%}--bi-meta-pt-m:{{ block.settings.meta_pad_top_m }}px;{%- endif -%}
+            {%- if block.settings.meta_pad_right_m > 0 -%}--bi-meta-pr-m:{{ block.settings.meta_pad_right_m }}px;{%- endif -%}
+            {%- if block.settings.meta_pad_bottom_m > 0 -%}--bi-meta-pb-m:{{ block.settings.meta_pad_bottom_m }}px;{%- endif -%}
+            {%- if block.settings.meta_pad_left_m > 0 -%}--bi-meta-pl-m:{{ block.settings.meta_pad_left_m }}px;{%- endif -%}
+            {%- if block.settings.back_size_pc_px > 0 -%}--bi-back-fz-pc:{{ block.settings.back_size_pc_px }}px;{%- endif -%}
+            {%- if block.settings.back_size_mobile_px > 0 -%}--bi-back-fz-m:{{ block.settings.back_size_mobile_px }}px;{%- endif -%}
+            {%- if block.settings.back_bg_color != blank -%}--bi-back-bg:{{ block.settings.back_bg_color }};{%- endif -%}
+            {%- if block.settings.back_color != blank -%}--bi-back-color:{{ block.settings.back_color }};{%- endif -%}
+          {%- endcapture -%}
+          <article
+            class="be-es__item be-es__item--{{ layout }}"
+            style="{{ item_style }}"
+            {{ block.shopify_attributes }}
+          >
+            <!-- 照片卡 -->
+            <div class="be-es__photo-card">
+              <div class="be-es__flip{% if has_flip %} has-flip{% endif %}" data-be-flip>
+                <div class="be-es__flip-inner">
+                  <div class="be-es__flip-front">
+                    {% if img != blank %}
+                      <img
+                        class="be-es__photo"
+                        src="{{ img | image_url: width: 800 }}"
+                        srcset="
+                          {{ img | image_url: width: 400 }} 400w,
+                          {{ img | image_url: width: 600 }} 600w,
+                          {{ img | image_url: width: 800 }} 800w,
+                          {{ img | image_url: width: 1200 }} 1200w
+                        "
+                        sizes="(max-width: 768px) 50vw, 40vw"
+                        width="{{ img.width }}"
+                        height="{{ img.height }}"
+                        alt="{{ img_alt | escape }}"
+                        loading="lazy"
+                      />
+                    {% else %}
+                      {{ 'lifestyle-1' | placeholder_svg_tag: 'be-es__photo placeholder' }}
+                    {% endif %}
+                  </div>
+                  {% if has_flip %}
+                    <div class="be-es__flip-back" aria-hidden="true">
+                      <p class="be-es__flip-back-text {{ s.quote_size }}"
+                         {% if quote_weight_style != '' %}style="{{ quote_weight_style }}"{% endif %}
+                      >{{ back_text | escape | newline_to_br }}</p>
+                    </div>
+                  {% endif %}
+                </div>
+                {% if has_flip %}
+                  <button type="button"
+                          class="be-es__flip-toggle"
+                          data-be-flip-toggle
+                          aria-label="{{ 'general.accessibility.toggle' | t | default: 'Toggle details' }}"
+                          aria-pressed="false"
+                  >
+                    <svg class="be-es__flip-icon be-es__flip-icon--plus" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                      <line x1="9" y1="3.5" x2="9" y2="14.5"/>
+                      <line x1="3.5" y1="9" x2="14.5" y2="9"/>
+                    </svg>
+                    <svg class="be-es__flip-icon be-es__flip-icon--minus" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                      <line x1="3.5" y1="9" x2="14.5" y2="9"/>
+                    </svg>
+                  </button>
+                {% endif %}
+              </div>
+
+              <!-- Mobile: 名字+介绍 紧贴照片下方 -->
+              {% if name != blank or role != blank %}
+                <div class="be-es__meta be-es__meta--mobile">
+                  {% if name != blank %}
+                    <p class="be-es__name {{ s.name_size }}"
+                       {% if name_weight_style != '' %}style="{{ name_weight_style }}"{% endif %}
+                    >{{ name | escape }}</p>
+                  {% endif %}
+                  {% if role != blank %}
+                    <p class="be-es__role {{ s.role_size }}"
+                       {% if role_weight_style != '' %}style="{{ role_weight_style }}"{% endif %}
+                    >{{ role | escape }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- 引文卡 -->
+            <div class="be-es__quote-card">
+              {% if quote != blank %}
+                <p class="be-es__quote {{ s.quote_size }}"
+                   {% if quote_weight_style != '' %}style="{{ quote_weight_style }}"{% endif %}
+                >{{ quote | escape | newline_to_br }}</p>
+              {% endif %}
+
+              <!-- PC: 名字+介绍 在引文下方 -->
+              {% if name != blank or role != blank %}
+                <div class="be-es__meta be-es__meta--desktop">
+                  {% if name != blank %}
+                    <p class="be-es__name {{ s.name_size }}"
+                       {% if name_weight_style != '' %}style="{{ name_weight_style }}"{% endif %}
+                    >{{ name | escape }}</p>
+                  {% endif %}
+                  {% if role != blank %}
+                    <p class="be-es__role {{ s.role_size }}"
+                       {% if role_weight_style != '' %}style="{{ role_weight_style }}"{% endif %}
+                    >{{ role | escape }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .be-es,
+  .be-es *,
+  .be-es *::before,
+  .be-es *::after { box-sizing: border-box; }
+
+  /* 整体宽度跟随父级 .page-width；字体跟主题 */
+  .be-es {
+    position: relative;
+    width: 100%;
+    padding-top: var(--be-es-pad-top-pc);
+    padding-bottom: var(--be-es-pad-bottom-pc);
+    padding-left: var(--be-es-pad-x-pc);
+    padding-right: var(--be-es-pad-x-pc);
+    background: var(--be-es-bg, transparent);
+  }
+
+  /* 内层容器宽度由用户调（默认 1516），不超过父级 .page-width */
+  .be-es__inner {
+    width: 100%;
+    max-width: var(--be-es-max-width);
+    margin: 0 auto;
+  }
+
+  /* 标题 —— 字体 / 字号都跟主题（H2 默认） */
+  .be-es .be-es__title {
+    margin: 0 auto var(--be-es-title-mb-pc);
+    text-align: center;
+    color: var(--be-es-title-color);
+  }
+
+  .be-es__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--be-es-card-gap-pc);
+  }
+
+  /* 每条：默认 [photo | quote]
+     有自己的背景色 + 圆角 + padding（外框），内层 photo / quote 卡片再各自带 radius */
+  .be-es__item {
+    display: grid;
+    grid-template-columns: var(--be-es-pc-photo-cols) var(--be-es-pc-quote-cols);
+    column-gap: 0;
+    align-items: stretch;
+    border-radius: var(--be-es-item-radius-pc);
+    padding: var(--be-es-item-pad-y-pc) var(--be-es-item-pad-x-pc);
+    overflow: hidden;
+  }
+
+  /* 镜像条：[quote | photo]，用 order 翻转视觉位置 */
+  .be-es__item--image_right {
+    grid-template-columns: var(--be-es-pc-quote-cols) var(--be-es-pc-photo-cols);
+  }
+  .be-es__item--image_right .be-es__photo-card { order: 2; }
+  .be-es__item--image_right .be-es__quote-card { order: 1; }
+
+  /* 照片卡（外层 — 含可调背景色 + 单侧圆角 + 内边距让图片缩进） */
+  .be-es__photo-card {
+    background: var(--be-es-photo-bg);
+    overflow: hidden;
+    aspect-ratio: var(--be-es-photo-aspect-pc);
+    border-radius: 0 var(--be-es-photo-radius-pc) var(--be-es-photo-radius-pc) 0;
+    padding: var(--be-es-photo-inner-pad-pc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* 镜像条：照片在右 → 仅左上 / 左下圆角 */
+  .be-es__item--image_right .be-es__photo-card {
+    border-radius: var(--be-es-photo-radius-pc) 0 0 var(--be-es-photo-radius-pc);
+  }
+  /* 图片本体（独立圆角，可比 card 小，居中） */
+  .be-es__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: var(--be-es-photo-img-radius-pc);
+  }
+
+  /* 引文卡：四角全圆角 */
+  .be-es__quote-card {
+    background: var(--be-es-quote-bg);
+    border-radius: var(--be-es-quote-radius-pc);
+    padding: var(--be-es-quote-pad-y-pc) var(--be-es-quote-pad-x-pc);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .be-es .be-es__quote {
+    margin: 0;
+    color: var(--be-es-quote-color);
+    line-height: var(--be-es-quote-lh);
+  }
+
+  .be-es .be-es__name {
+    margin: var(--be-es-quote-name-mb-pc) 0 0;
+    color: var(--be-es-name-color);
+    line-height: var(--be-es-name-lh);
+  }
+
+  .be-es .be-es__role {
+    margin: var(--be-es-name-role-mb-pc) 0 0;
+    color: var(--be-es-role-color);
+    line-height: var(--be-es-role-lh);
+  }
+
+  /* PC：默认显示 desktop meta，隐藏 mobile meta */
+  .be-es__meta--desktop { display: block; }
+  .be-es__meta--mobile  { display: none; }
+
+  /* ---------- 移动端 ---------- */
+  @media (max-width: 768px) {
+    .be-es {
+      padding-top: var(--be-es-pad-top-m);
+      padding-bottom: var(--be-es-pad-bottom-m);
+      padding-left: var(--be-es-pad-x-m);
+      padding-right: var(--be-es-pad-x-m);
+    }
+
+    .be-es .be-es__title {
+      margin-bottom: var(--be-es-title-mb-m);
+    }
+
+    .be-es__list {
+      gap: var(--be-es-card-gap-m);
+    }
+
+    /* Mobile 默认条：[photo + meta] | [quote] */
+    .be-es__item {
+      grid-template-columns: var(--be-es-m-photo-cols) var(--be-es-m-quote-cols);
+      border-radius: var(--be-es-item-radius-m);
+      padding: var(--be-es-item-pad-y-m) var(--be-es-item-pad-x-m);
+    }
+    /* Mobile 镜像条：[quote] | [photo + meta] */
+    .be-es__item--image_right {
+      grid-template-columns: var(--be-es-m-quote-cols) var(--be-es-m-photo-cols);
+    }
+
+    .be-es__photo-card {
+      /* 移动端取消强制 aspect-ratio：图片按宽度等比显示，卡的高度由图片+meta 自然撑开 */
+      aspect-ratio: auto;
+      border-radius: 0 var(--be-es-photo-radius-m) var(--be-es-photo-radius-m) 0;
+      padding: var(--be-es-photo-inner-pad-m);
+      display: flex;
+      flex-direction: column;
+      /* meta（名字+简介）默认占满宽度并靠左；图片自身用 margin:0 auto 单独居中 */
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+    .be-es__item--image_right .be-es__photo-card {
+      border-radius: var(--be-es-photo-radius-m) 0 0 var(--be-es-photo-radius-m);
+    }
+
+    /* 移动端图片：宽度由用户拖拽（%），高度按原图等比例自动；居中 */
+    .be-es__photo {
+      width: var(--be-es-photo-img-width-m, 100%);
+      max-width: 100%;
+      height: auto;
+      flex: 0 0 auto;
+      object-fit: contain;
+      margin: 0 auto;
+      border-radius: var(--be-es-photo-img-radius-m);
+    }
+
+    .be-es__quote-card {
+      border-radius: var(--be-es-quote-radius-m);
+      padding: var(--be-es-quote-pad-y-m) var(--be-es-quote-pad-x-m);
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .be-es .be-es__name {
+      margin-top: var(--be-es-quote-name-mb-m);
+    }
+    .be-es .be-es__role {
+      margin-top: var(--be-es-name-role-mb-m);
+    }
+
+    /* Mobile：显示 photo 卡里的 mobile meta，隐藏 quote 卡里的 desktop meta
+       —— 上下左右 padding 由每条 block 单独控制
+       —— 默认占满宽度、文字靠左 */
+    .be-es__meta--desktop { display: none; }
+    .be-es__meta--mobile  {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding:
+        var(--bi-meta-pt-m, 0)
+        var(--bi-meta-pr-m, 0)
+        var(--bi-meta-pb-m, 0)
+        var(--bi-meta-pl-m, 0);
+    }
+  }
+
+  /* ========== 单条 block 覆盖（仅当 block 设了 >0 才生效） ==========
+     用 [style*="--bi-xxx"] 检测 article 上是否有该自定义变量，从而精准覆盖。 */
+
+  /* PC 端：图片宽度（按原图等比） */
+  .be-es__item[style*="--bi-img-w-pc"] .be-es__photo-card {
+    aspect-ratio: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* 当 photo-card 取消 aspect-ratio 后，flip 不能再用 height:100%（父容器无固定高），
+     改成 front 流内决定高度、back 绝对覆盖 —— 与移动端同款方案 */
+  .be-es__item[style*="--bi-img-w-pc"] .be-es__flip,
+  .be-es__item[style*="--bi-img-w-pc"] .be-es__flip-inner {
+    height: auto;
+  }
+  .be-es__item[style*="--bi-img-w-pc"] .be-es__flip-front {
+    position: relative;
+    height: auto;
+  }
+  .be-es__item[style*="--bi-img-w-pc"] .be-es__flip-back {
+    position: absolute;
+    inset: 0;
+  }
+  .be-es__item[style*="--bi-img-w-pc"] .be-es__photo,
+  .be-es__item[style*="--bi-img-w-pc"] .be-es__flip-front .be-es__photo {
+    width: var(--bi-img-w-pc);
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+
+  /* PC 端：引文 / 名字 / 简介 字号覆盖（行高由 section 的整体行高 var 控制） */
+  .be-es__item[style*="--bi-quote-fz-pc"] .be-es__quote { font-size: var(--bi-quote-fz-pc); }
+  .be-es__item[style*="--bi-name-fz-pc"]  .be-es__name  { font-size: var(--bi-name-fz-pc);  }
+  .be-es__item[style*="--bi-role-fz-pc"]  .be-es__role  { font-size: var(--bi-role-fz-pc);  }
+
+  /* 移动端：单条 block 覆盖 */
+  @media (max-width: 768px) {
+    .be-es__item[style*="--bi-img-w-m"] .be-es__photo {
+      width: var(--bi-img-w-m);
+    }
+    .be-es__item[style*="--bi-quote-fz-m"] .be-es__quote { font-size: var(--bi-quote-fz-m); }
+    .be-es__item[style*="--bi-name-fz-m"]  .be-es__name  { font-size: var(--bi-name-fz-m);  }
+    .be-es__item[style*="--bi-role-fz-m"]  .be-es__role  { font-size: var(--bi-role-fz-m);  }
+  }
+
+  /* 单条 block 覆盖：翻转背面字号 / 背景 / 文字色（仅本条生效） */
+  .be-es .be-es__item[style*="--bi-back-fz-pc"] .be-es__flip-back-text {
+    font-size: var(--bi-back-fz-pc);
+  }
+  .be-es__item[style*="--bi-back-bg"] .be-es__flip-back {
+    background: var(--bi-back-bg);
+  }
+  .be-es__item[style*="--bi-back-color"] .be-es__flip-back {
+    color: var(--bi-back-color);
+  }
+  @media (max-width: 768px) {
+    .be-es .be-es__item[style*="--bi-back-fz-m"] .be-es__flip-back-text {
+      font-size: var(--bi-back-fz-m);
+    }
+  }
+
+  /* ============== 图片翻转效果 ============== */
+  .be-es__photo-card { position: relative; }
+
+  .be-es__flip {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    align-self: stretch;
+    perspective: 1500px;
+  }
+
+  .be-es__flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    border-radius: var(--be-es-photo-img-radius-pc);
+  }
+
+  .be-es__flip.is-flipped .be-es__flip-inner {
+    transform: rotateY(180deg);
+  }
+
+  .be-es__flip-front,
+  .be-es__flip-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  /* front 包裹 img：让 img 正常渲染 */
+  .be-es__flip-front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .be-es__flip-front .be-es__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  /* back 面：文字超出时在卡片内滚动；+/- 按钮绝对定位浮层，不占布局空间 */
+  .be-es__flip-back {
+    transform: rotateY(180deg);
+    background: var(--be-es-flip-back-bg, #9FE0E9);
+    color: var(--be-es-flip-back-color, #10374B);
+    padding: var(--be-es-flip-back-pad-pc, 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    text-align: left;
+    box-sizing: border-box;
+  }
+  .be-es .be-es__flip-back-text {
+    margin: 0;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    font-size: var(--be-es-flip-back-fz-pc, 16px);
+    line-height: var(--be-es-flip-back-lh, 1.5);
+    color: inherit;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, currentColor 40%, transparent) transparent;
+  }
+  .be-es .be-es__flip-back-text::-webkit-scrollbar {
+    width: 4px;
+  }
+  .be-es .be-es__flip-back-text::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, currentColor 40%, transparent);
+    border-radius: 4px;
+  }
+  .be-es .be-es__flip-back-text::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* 切换按钮：浮在 flip 容器上，不参与背面文字排版 */
+  .be-es__flip-toggle {
+    position: absolute;
+    right: var(--be-es-flip-btn-offset-pc, 16px);
+    bottom: var(--be-es-flip-btn-offset-pc, 16px);
+    width: var(--be-es-flip-btn-size-pc, 44px);
+    height: var(--be-es-flip-btn-size-pc, 44px);
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--be-es-flip-btn-bg, #FFFFFF);
+    color: var(--be-es-flip-btn-color, #10374B);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    pointer-events: auto;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .be-es__flip-toggle:hover {
+    transform: scale(1.06);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  .be-es__flip-toggle:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+  .be-es__flip-toggle .be-es__flip-icon { display: block; }
+  .be-es__flip-toggle .be-es__flip-icon--minus { display: none; }
+  .be-es__flip.is-flipped .be-es__flip-toggle .be-es__flip-icon--plus { display: none; }
+  .be-es__flip.is-flipped .be-es__flip-toggle .be-es__flip-icon--minus { display: block; }
+
+  /* 移动端：flip 高度由前面的图片决定，不写死 height: 100% */
+  @media (max-width: 768px) {
+    .be-es__flip {
+      height: auto;
+    }
+    .be-es__flip-inner {
+      height: auto;
+      border-radius: var(--be-es-photo-img-radius-m);
+    }
+    .be-es__flip-front {
+      position: relative;
+      height: auto;
+    }
+    .be-es__flip-front .be-es__photo {
+      width: var(--be-es-photo-img-width-m, 100%);
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+    .be-es__flip-back {
+      position: absolute;
+      inset: 0;
+      padding: var(--be-es-flip-back-pad-m, 16px);
+    }
+    .be-es .be-es__flip-back-text {
+      font-size: var(--be-es-flip-back-fz-m, 9px);
+    }
+    .be-es__flip-toggle {
+      right: var(--be-es-flip-btn-offset-m, 8px);
+      bottom: var(--be-es-flip-btn-offset-m, 8px);
+      width: var(--be-es-flip-btn-size-m, 32px);
+      height: var(--be-es-flip-btn-size-m, 32px);
+    }
+  }
+
+  /* 减少动效偏好 */
+  @media (prefers-reduced-motion: reduce) {
+    .be-es__flip-inner { transition: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    function bind(scope) {
+      (scope || document).querySelectorAll('[data-be-flip-toggle]').forEach(function (btn) {
+        if (btn.__beFlipBound) return;
+        btn.__beFlipBound = true;
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var flip = btn.closest('[data-be-flip]');
+          if (!flip) return;
+          var flipped = flip.classList.toggle('is-flipped');
+          btn.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+          var back = flip.querySelector('.be-es__flip-back');
+          if (back) back.setAttribute('aria-hidden', flipped ? 'false' : 'true');
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { bind(); });
+    } else {
+      bind();
+    }
+
+    /* Shopify theme editor: 重新加载/添加 block 后再绑 */
+    document.addEventListener('shopify:section:load', function (e) {
+      bind(e.target || document);
+    });
+    document.addEventListener('shopify:block:select', function (e) {
+      bind(e.target || document);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Experts Say",
+  "tag": "section",
+  "class": "be-es-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "header", "content": "整体设置" },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "整体背景色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "内容最大宽度",
+      "min": 800, "max": 1920, "step": 16, "default": 1520, "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题文本",
+      "default": "What Experts Say"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "标题颜色",
+      "default": "#10374B"
+    },
+
+    { "type": "header", "content": "PC端 - 间距" },
+    {
+      "type": "range",
+      "id": "section_padding_top_pc",
+      "label": "整体上间距",
+      "min": 0, "max": 200, "step": 2, "default": 80, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_pc",
+      "label": "整体下间距",
+      "min": 0, "max": 200, "step": 2, "default": 80, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x_pc",
+      "label": "整体外侧左右间距",
+      "info": "整个区块距离屏幕左右两侧的间距（最外层）。",
+      "min": 0, "max": 200, "step": 2, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom_pc",
+      "label": "标题与卡片间距",
+      "min": 0, "max": 120, "step": 2, "default": 48, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_gap_pc",
+      "label": "上下两条卡片间距",
+      "min": 0, "max": 100, "step": 1, "default": 49, "unit": "px"
+    },
+
+    { "type": "header", "content": "PC端 - 整体外框" },
+    {
+      "type": "range",
+      "id": "item_radius_pc",
+      "label": "整体外框圆角",
+      "min": 0, "max": 100, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_padding_x_pc",
+      "label": "整体外框 - 左右内边距",
+      "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_padding_y_pc",
+      "label": "整体外框 - 上下内边距",
+      "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+    },
+
+    { "type": "header", "content": "PC端 - 左侧（图片区）" },
+    {
+      "type": "range",
+      "id": "pc_photo_ratio",
+      "label": "图片区列宽比例",
+      "info": "和右侧内容区一起决定左右宽度比例。",
+      "min": 1, "max": 10, "step": 1, "default": 5
+    },
+    {
+      "type": "text",
+      "id": "photo_aspect_pc",
+      "label": "图片区高宽比",
+      "default": "479 / 575",
+      "info": "CSS aspect-ratio 写法，例如 479 / 575"
+    },
+    {
+      "type": "color",
+      "id": "photo_card_bg",
+      "label": "图片卡背景色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "photo_card_radius_pc",
+      "label": "图片卡圆角（外侧两角）",
+      "info": "贴近内容卡的那一侧不圆角。",
+      "min": 0, "max": 100, "step": 1, "default": 50, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "photo_inner_padding_pc",
+      "label": "图片卡内边距（值越大，图片越小）",
+      "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "photo_image_radius_pc",
+      "label": "图片本身的圆角",
+      "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+    },
+
+    { "type": "header", "content": "PC端 - 右侧（内容区）" },
+    {
+      "type": "range",
+      "id": "pc_quote_ratio",
+      "label": "内容区列宽比例",
+      "min": 1, "max": 12, "step": 1, "default": 7
+    },
+    {
+      "type": "color",
+      "id": "quote_card_bg",
+      "label": "内容卡背景色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "quote_card_radius_pc",
+      "label": "内容卡圆角",
+      "min": 0, "max": 100, "step": 1, "default": 50, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_card_padding_x_pc",
+      "label": "内容卡 - 左右内边距",
+      "min": 0, "max": 160, "step": 2, "default": 60, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_card_padding_y_pc",
+      "label": "内容卡 - 上下内边距",
+      "min": 0, "max": 160, "step": 2, "default": 60, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_to_name_pc",
+      "label": "引文 → 名字 的间距",
+      "min": 0, "max": 80, "step": 1, "default": 32, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "name_to_role_pc",
+      "label": "名字 → 简介 的间距",
+      "min": 0, "max": 40, "step": 1, "default": 4, "unit": "px"
+    },
+
+    { "type": "header", "content": "移动端 - 间距" },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "整体上间距",
+      "min": 0, "max": 120, "step": 2, "default": 40, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "整体下间距",
+      "min": 0, "max": 120, "step": 2, "default": 40, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x_mobile",
+      "label": "整体外侧左右间距",
+      "info": "整个区块距离屏幕左右两侧的间距（最外层）。",
+      "min": 0, "max": 80, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom_mobile",
+      "label": "标题与卡片间距",
+      "min": 0, "max": 80, "step": 2, "default": 24, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_gap_mobile",
+      "label": "上下两条卡片间距",
+      "min": 0, "max": 60, "step": 1, "default": 24, "unit": "px"
+    },
+
+    { "type": "header", "content": "移动端 - 整体外框" },
+    {
+      "type": "range",
+      "id": "item_radius_mobile",
+      "label": "整体外框圆角",
+      "min": 0, "max": 60, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_padding_x_mobile",
+      "label": "整体外框 - 左右内边距",
+      "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_padding_y_mobile",
+      "label": "整体外框 - 上下内边距",
+      "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+
+    { "type": "header", "content": "移动端 - 左侧（图片+名字+简介）" },
+    {
+      "type": "range",
+      "id": "mobile_photo_ratio",
+      "label": "左侧列宽比例",
+      "min": 1, "max": 10, "step": 1, "default": 4
+    },
+    {
+      "type": "range",
+      "id": "mobile_photo_image_width",
+      "label": "图片宽度（按原图等比缩放高度）",
+      "info": "拖动直接控制图片宽度，高度自动按图片本身比例显示。",
+      "min": 10, "max": 100, "step": 1, "default": 100, "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "photo_aspect_mobile",
+      "label": "图片区高宽比（已不再生效）",
+      "info": "移动端现在按上面的「图片宽度」等比显示，本项保留仅为兼容旧数据。",
+      "default": "1 / 1"
+    },
+    {
+      "type": "range",
+      "id": "photo_card_radius_mobile",
+      "label": "图片卡圆角（外侧两角）",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "photo_inner_padding_mobile",
+      "label": "图片卡内边距（值越大，图片越小）",
+      "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "photo_image_radius_mobile",
+      "label": "图片本身的圆角",
+      "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_to_name_mobile",
+      "label": "图片 → 名字 的间距",
+      "min": 0, "max": 40, "step": 1, "default": 12, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "name_to_role_mobile",
+      "label": "名字 → 简介 的间距",
+      "min": 0, "max": 24, "step": 1, "default": 4, "unit": "px"
+    },
+
+    { "type": "header", "content": "移动端 - 右侧（内容区）" },
+    {
+      "type": "range",
+      "id": "mobile_quote_ratio",
+      "label": "内容区列宽比例",
+      "min": 1, "max": 10, "step": 1, "default": 5
+    },
+    {
+      "type": "range",
+      "id": "quote_card_radius_mobile",
+      "label": "内容卡圆角",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_card_padding_x_mobile",
+      "label": "内容卡 - 左右内边距",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_card_padding_y_mobile",
+      "label": "内容卡 - 上下内边距",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+
+    { "type": "header", "content": "文字样式 - 引文" },
+    {
+      "type": "select",
+      "id": "quote_size",
+      "label": "字号",
+      "options": [
+        { "value": "",            "label": "跟随主题" },
+        { "value": "subtext-sm",  "label": "小" },
+        { "value": "subtext-md",  "label": "中" },
+        { "value": "subtext-lg",  "label": "大" },
+        { "value": "subtext-xl",  "label": "特大" }
+      ],
+      "default": "subtext-lg"
+    },
+    {
+      "type": "select",
+      "id": "quote_weight",
+      "label": "字重",
+      "options": [
+        { "value": "",    "label": "跟随主题" },
+        { "value": "300", "label": "细体 300" },
+        { "value": "400", "label": "常规 400" },
+        { "value": "500", "label": "中等 500" },
+        { "value": "600", "label": "半粗 600" },
+        { "value": "700", "label": "粗体 700" }
+      ],
+      "default": ""
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "quote_line_height",
+      "label": "行高",
+      "info": "无单位倍数（如 1.5 表示字号的 1.5 倍）。",
+      "min": 0.8, "max": 3, "step": 0.1, "default": 1.5
+    },
+
+    { "type": "header", "content": "文字样式 - 名字" },
+    {
+      "type": "select",
+      "id": "name_size",
+      "label": "字号",
+      "options": [
+        { "value": "",            "label": "跟随主题" },
+        { "value": "subtext-sm",  "label": "小" },
+        { "value": "subtext-md",  "label": "中" },
+        { "value": "subtext-lg",  "label": "大" },
+        { "value": "subtext-xl",  "label": "特大" }
+      ],
+      "default": "subtext-lg"
+    },
+    {
+      "type": "select",
+      "id": "name_weight",
+      "label": "字重",
+      "options": [
+        { "value": "",    "label": "跟随主题" },
+        { "value": "300", "label": "细体 300" },
+        { "value": "400", "label": "常规 400" },
+        { "value": "500", "label": "中等 500" },
+        { "value": "600", "label": "半粗 600" },
+        { "value": "700", "label": "粗体 700" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "name_line_height",
+      "label": "行高",
+      "info": "无单位倍数（如 1.3 表示字号的 1.3 倍）。",
+      "min": 0.8, "max": 3, "step": 0.1, "default": 1.3
+    },
+
+    { "type": "header", "content": "文字样式 - 简介" },
+    {
+      "type": "select",
+      "id": "role_size",
+      "label": "字号",
+      "options": [
+        { "value": "",            "label": "跟随主题" },
+        { "value": "subtext-sm",  "label": "小" },
+        { "value": "subtext-md",  "label": "中" },
+        { "value": "subtext-lg",  "label": "大" },
+        { "value": "subtext-xl",  "label": "特大" }
+      ],
+      "default": "subtext-sm"
+    },
+    {
+      "type": "select",
+      "id": "role_weight",
+      "label": "字重",
+      "options": [
+        { "value": "",    "label": "跟随主题" },
+        { "value": "300", "label": "细体 300" },
+        { "value": "400", "label": "常规 400" },
+        { "value": "500", "label": "中等 500" },
+        { "value": "600", "label": "半粗 600" },
+        { "value": "700", "label": "粗体 700" }
+      ],
+      "default": ""
+    },
+    {
+      "type": "color",
+      "id": "role_color",
+      "label": "颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "role_line_height",
+      "label": "行高",
+      "info": "无单位倍数（如 1.3 表示字号的 1.3 倍）。",
+      "min": 0.8, "max": 3, "step": 0.1, "default": 1.3
+    },
+
+    { "type": "header", "content": "翻转效果 - 背面" },
+    {
+      "type": "color",
+      "id": "flip_back_bg",
+      "label": "背面背景色",
+      "default": "#9FE0E9"
+    },
+    {
+      "type": "color",
+      "id": "flip_back_color",
+      "label": "背面文字颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "flip_back_padding_pc",
+      "label": "PC 背面内边距",
+      "min": 0, "max": 80, "step": 2, "default": 32, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "flip_back_padding_mobile",
+      "label": "移动端 背面内边距",
+      "min": 0, "max": 40, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "flip_back_size_pc",
+      "label": "PC 背面字号",
+      "min": 10, "max": 36, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "flip_back_size_mobile",
+      "label": "移动端 背面字号",
+      "min": 5, "max": 24, "step": 1, "default": 9, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "flip_back_line_height",
+      "label": "背面行高",
+      "info": "无单位倍数（如 1.5 表示字号的 1.5 倍）。",
+      "min": 0.8, "max": 3, "step": 0.1, "default": 1.5
+    },
+
+    { "type": "header", "content": "翻转效果 - 切换按钮" },
+    {
+      "type": "color",
+      "id": "flip_btn_bg",
+      "label": "按钮背景色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "flip_btn_color",
+      "label": "按钮图标颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "flip_btn_size_pc",
+      "label": "PC 按钮直径",
+      "min": 24, "max": 80, "step": 1, "default": 44, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "flip_btn_size_mobile",
+      "label": "移动端 按钮直径",
+      "min": 20, "max": 60, "step": 1, "default": 32, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "flip_btn_offset_pc",
+      "label": "PC 按钮距右下边距",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "flip_btn_offset_mobile",
+      "label": "移动端 按钮距右下边距",
+      "min": 0, "max": 30, "step": 1, "default": 8, "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "limit": 8,
+      "settings": [
+        { "type": "header", "content": "内容" },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "人物图片"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "图片 alt 文本"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "引文内容",
+          "default": "\"Many women don't realize that waking up hot or sweaty isn't just uncomfortable, it fragments their sleep architecture.\""
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "名字",
+          "default": "Kelly Murray"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "职业 / 简介",
+          "default": "Adult Sleep Coach"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "PC 端图片位置",
+          "options": [
+            { "value": "image_left",  "label": "图片在左" },
+            { "value": "image_right", "label": "图片在右" }
+          ],
+          "default": "image_left"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "整体外框背景色（仅本条）"
+        },
+
+        { "type": "header", "content": "翻转效果（点击图片右下角 + 显示）" },
+        {
+          "type": "textarea",
+          "id": "back_text",
+          "label": "图片背面显示的文字",
+          "info": "留空则不显示翻转按钮。"
+        },
+        {
+          "type": "color",
+          "id": "back_bg_color",
+          "label": "本条 - 背面背景色",
+          "info": "留空则跟随整体设置。",
+          "default": "#9FE0E9"
+        },
+        {
+          "type": "color",
+          "id": "back_color",
+          "label": "本条 - 背面文字颜色",
+          "info": "留空则跟随整体设置。",
+          "default": "#10374B"
+        },
+        {
+          "type": "range",
+          "id": "back_size_pc_px",
+          "label": "本条 - PC 背面字号",
+          "info": "0 = 跟随整体设置；最小可设 5px。",
+          "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "back_size_mobile_px",
+          "label": "本条 - 移动端背面字号",
+          "info": "0 = 跟随整体设置；最小可设 5px。",
+          "min": 0, "max": 40, "step": 1, "default": 9, "unit": "px"
+        },
+
+        { "type": "header", "content": "本条 - 图片大小" },
+        {
+          "type": "range",
+          "id": "image_width_pc",
+          "label": "PC 图片宽度（按原图等比缩放）",
+          "info": "0 = 跟随整体设置；>0 时本条图片按此宽度等比例显示。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "image_width_mobile",
+          "label": "移动端图片宽度（按原图等比缩放）",
+          "info": "0 = 跟随整体设置；>0 时本条图片按此宽度等比例显示。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "%"
+        },
+
+        { "type": "header", "content": "本条 - 文字大小（PC端）" },
+        {
+          "type": "range",
+          "id": "quote_size_pc_px",
+          "label": "引文字号",
+          "info": "0 = 跟随整体设置；最小可设 5px。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "name_size_pc_px",
+          "label": "名字字号",
+          "info": "0 = 跟随整体设置；最小可设 5px。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "role_size_pc_px",
+          "label": "简介字号",
+          "info": "0 = 跟随整体设置；最小可设 5px。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "px"
+        },
+
+        { "type": "header", "content": "本条 - 文字大小（移动端）" },
+        {
+          "type": "range",
+          "id": "quote_size_mobile_px",
+          "label": "引文字号",
+          "info": "0 = 跟随整体设置；最小可设 5px。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "name_size_mobile_px",
+          "label": "名字字号",
+          "info": "0 = 跟随整体设置；最小可设 5px。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "role_size_mobile_px",
+          "label": "简介字号",
+          "info": "0 = 跟随整体设置；最小可设 5px。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "px"
+        },
+
+        { "type": "header", "content": "本条 - 移动端 名字+简介 区块内边距" },
+        {
+          "type": "range",
+          "id": "meta_pad_top_m",
+          "label": "上内边距",
+          "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_pad_right_m",
+          "label": "右内边距",
+          "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_pad_bottom_m",
+          "label": "下内边距",
+          "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_pad_left_m",
+          "label": "左内边距",
+          "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Experts Say",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Kelly Murray",
+            "role": "Adult Sleep Coach",
+            "layout": "image_left"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Dr. Dusan Roncevic",
+            "role": "Neurologist",
+            "quote": "\"The necessary prerequisite for sleep is to allow the body to cool down to around 93°F.\"",
+            "layout": "image_right"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

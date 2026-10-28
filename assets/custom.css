@@ -1,0 +1,1842 @@
+.button,
+.shopify-challenge__button,
+button.shopify-payment-button__button--unbranded {
+  max-height: 3rem;
+
+}
+
+.xo--custom--rounded {
+  border-radius: var(--rounded-block);
+}
+
+@media screen and (min-width: 1280px) {
+  .indicators .button {
+    --buttons-width: var(--sp-12);
+  }
+}
+
+.mega-menu__nav ul a {
+    line-height: 24px!important;
+}
+
+/* ============================
+slideshow
+============================ */
+.xo_slideshow .banner {
+  max-width: 100% !important;
+  margin-inline-end: 0 !important;
+  border-radius: 0 !important;
+}
+
+.xo_slideshow .banner__overlay {
+  border-radius: 0 !important;
+
+}
+
+.js .section:not(.section--next-rounded) :is(.banner__overlay, .banner__map, .banner__media) {
+  height: 100% !important;
+}
+
+/* ============================
+Homepage Scrolling text
+============================ */
+.marquee.with-dot .scrolling-text__item:first-child:before,
+.scrolling-text__item.with-text+.scrolling-text__item.with-text:before {
+  content: "";
+  display: block;
+  width: .5px;
+  border: .5px solid currentColor;
+}
+
+/* ============================
+Custom Shawn
+============================ */
+.w-16 {
+  width: 4rem;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.h-10 {
+  height: 2.5rem;
+}
+
+.w-10 {
+  width: 2.5rem;
+}
+
+.py-5 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.space-x-8>*+* {
+  margin-left: 2rem;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-white\! {
+  color: #fff !important;
+}
+
+.bg-stone-200 {
+  background-color: rgb(231, 229, 228);
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.bottom-8 {
+  bottom: 32px;
+}
+
+.py-2 {
+  padding-top: var(--sp-2);
+  padding-bottom: var(--sp-2);
+}
+
+.py-4 {
+  padding-top: var(--sp-4);
+  padding-bottom: var(--sp-4);
+}
+
+.px-4 {
+  padding-left: var(--sp-4);
+  padding-right: var(--sp-4);
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: .5rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.bg-gray-100 {
+  background-color: #f6f6f8;
+}
+
+.border-gray-200 {
+  border-color: #eee;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
+.border-b {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.col-start-2 {
+  grid-column: 2;
+}
+
+.row-start-2 {
+  grid-row: 2;
+}
+
+@media screen and (min-width: 768px) {
+  .md\:p-3 {
+    padding: 0.75rem;
+  }
+}
+
+/* ============================
+Powered by BlendTek™
+============================ */
+
+.shawn-display__md {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  border-radius: .5rem;
+  contain: paint;
+}
+
+.shawn-display__wg header {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+@media (max-width: 768px) {
+  .shawn-display__wg header {
+    grid-column: unset;
+    grid-row: 1;
+  }
+
+  .shawn-display__md {
+    grid-column: unset;
+    grid-row: 2;
+    margin-bottom: 1rem;
+  }
+
+  .shawn-display__tx {
+    grid-column: unset;
+    grid-row: 3;
+  }
+}
+
+/* ============================
+Wall of Love
+============================ */
+.shawn__w-1\/4 {
+  width: 25%;
+}
+
+@media (max-width: 960px) {
+  .shawn__w-1\/4 {
+    width: 33.333%;
+  }
+
+  #shawn__column4 {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .shawn__w-1\/4 {
+    width: 50%;
+  }
+
+  #shawn__column3,
+  #shawn__column4 {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .shawn__w-1\/4 {
+    width: 100%;
+  }
+
+  #shawn__column2,
+  #shawn__column3,
+  #shawn__column4 {
+    display: none;
+  }
+}
+
+.shawn__modal-content {
+  position: relative;
+  width: 90%;
+  max-height: 90vh;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  overflow: hidden;
+}
+
+.shawn__media-container {
+  flex: 2;
+  position: relative;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shawn__nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.shawn__prev-btn {
+  left: 10px;
+}
+
+.shawn__next-btn {
+  right: 10px;
+}
+
+.shawn__media-preview {
+  cursor: pointer;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.shawn__card {
+  overflow: hidden;
+  position: relative;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, .05);
+  background-color: #fff;
+  isolation: isolate;
+  color: #000;
+  border-radius: .5rem;
+}
+
+.shawn__btn {
+  max-width: 14rem;
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 20rem;
+  pointer-events: auto;
+  white-space: nowrap;
+  background: rgba(0, 0, 0, .12);
+  color: #10425b;
+  transition: all .25s;
+}
+
+.shawn__tab-active {
+  background-color: #10425b;
+  color: white;
+}
+
+.shawn__comment {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.shawn__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  color: white;
+  opacity: .5;
+  font-size: 24px;
+}
+
+.shawn__play-btn.hidden {
+  display: none;
+}
+
+#shawn__modalCommentsContainer {
+  display: none;
+}
+
+.shawn__control-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shawn__thumbnail-container {
+  position: relative;
+}
+
+.shawn__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* ============================
+Yotpo Loyalty
+============================ */
+.yotpo-widget-loyalty-page *,
+.yotpo-widget-referral-share *,
+#yotpo-reviews-seo-page *,
+#yotpo-reviews-main-widget *,
+.yotpo-reviews-star-ratings-widget *,
+#yotpo-seo-reviews-container *,
+.yotpo-reviews-star-ratings-widget * {
+  font-family: var(--font-navigation-family) !important;
+}
+
+.ugc-storefront-widgets-tabs-container {
+  display: none !important;
+}
+
+/* ============================
+Yotpo Reviews
+============================ */
+#yotpo-reviews-main-widget .yotpo-base-layout {
+  width: 100% !important;
+}
+
+#yotpo-reviews-main-widget .yotpo-review-rating-title {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#yotpo-reviews-main-widget .yotpo-review-title {
+  margin-left: 0px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 12px 0 !important;
+}
+
+#yotpo-reviews-main-widget:not(.yotpo-display-s) .yotpo-review-left-panel {
+  align-self: flex-start;
+}
+
+#yotpo-reviews-main-widget .yotpo-review-left-panel {
+  width: 100%;
+  --tw-bg-opacity: 1;
+}
+
+#yotpo-reviews-container .yotpo-reviews-list .yotpo-review {
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+}
+
+#yotpo-reviews-main-widget .yotpo-reviewer-name {
+  font-size: 14px !important;
+  font-weight: 600;
+  padding-bottom: 24px;
+}
+
+#yotpo-reviews-main-widget .yotpo-sr-bottom-line-summary .yotpo-sr-bottom-line-text--right-panel {
+  padding-top: 0 !important;
+}
+
+#yotpo-reviews-main-widget .yotpo-display-s .yotpo-review .yotpo-review-center-panel .yotpo-review-star-rating {
+  margin-bottom: 8px !important;
+}
+
+#yotpo-reviews-main-widget .yotpo-review-star-rating .star-container {
+  width: 16px !important;
+}
+
+#modalDescription .yotpo-review-media-modal-body .yotpo-modal-body-review-date {
+  display: none !important;
+}
+
+@media (min-width: 992px) {
+  #yotpo-reviews-main-widget .yotpo-review-left-panel {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .yotpo-main-layout .yotpo-review-border-smooth {
+    border-bottom: 1px solid #c4c4c4;
+    background: transparent !important
+  }
+
+}
+
+#yotpo-reviews-container .yotpo-review-votes-wrapper {
+  margin-top: 0 !important;
+}
+
+.yotpo-review-votes-wrapper .yotpo-review-votes-text {
+  font-size: 12px !important;
+  color: var(--text-color)
+}
+
+.yotpo-review-votes-wrapper .yotpo-review-votes-number {
+  color: var(--text-color);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.yotpo-reviews-pagination-container .yotpo-pagination-number-container {
+  display: flex;
+  align-items: center;
+}
+
+.yotpo-reviews-star-ratings-widget .yotpo-sr-bottom-line-left-panel {
+  font-size: 12px !important;
+  line-height: 12px !important;
+  color: rgb(var(--color-foreground)) !important;
+  font-weight: 500 !important;
+}
+
+.yotpo-reviews-star-ratings-widget .yotpo-sr-bottom-line-text {
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  line-height: 12px !important;
+  padding-top: 0 !important;
+}
+
+.yotpo-review-customer-questions-container .yotpo-custom-questions-wrapper .yotpo-custom-questions-title {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--text-color) !important;
+}
+
+.yotpo-review-customer-questions-container .yotpo-custom-questions-wrapper .yotpo-custom-questions-value {
+  font-size: 12px !important;
+}
+
+.yotpo-review-customer-questions-container .yotpo-custom-questions-wrapper .yotpo-custom-questions-see-more-label {
+  font-size: 14px !important;
+}
+
+.yotpo-review:not(.yotpo-media-modal-review) .yotpo-review-left-panel .yotpo-review-customer-questions-container {
+  width: 100% !important;
+}
+
+.yotpo-widget-clear span svg {
+  width: 12px !important;
+}
+
+.modal-backdrop .yotpo-modal .modal-close-btn-wrapper .btn-close[data-v-58cfba58] {
+  width: 14px !important;
+}
+
+.yotpo-modal-body-right-side-top .yotpo-reviewer-image span svg {
+  width: 35px !important;
+}
+
+.yotpo-device-mobile .yotpo-review-media-modal-body .yotpo-modal-body-right-side {
+  margin-bottom: 30px !important;
+}
+
+.yotpo-search-filter #searchInput {
+  background: transparent !important;
+}
+
+/* ============================
+Yotpo Reviews SEO Page
+============================ */
+#yotpo-seo-reviews-container .yotpo-base-layout {
+  width: 100% !important;
+}
+
+#yotpo-reviews-seo-page .yotpo-seo-page-layout {
+  margin: auto 0px !important;
+}
+
+#yotpo-seo-reviews-container .yotpo-review-rating-title {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#yotpo-seo-reviews-container .yotpo-review-title {
+  margin-left: 0px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 12px 0 !important;
+}
+
+#yotpo-seo-reviews-container:not(.yotpo-display-s) .yotpo-review-left-panel {
+  align-self: flex-start;
+}
+
+#yotpo-seo-reviews-container .yotpo-review-left-panel {
+  width: 100%;
+  --tw-bg-opacity: 1;
+}
+
+#yotpo-seo-reviews-container .yotpo-reviews-list .yotpo-review {
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+}
+
+#yotpo-seo-reviews-container .yotpo-reviewer-name {
+  font-size: 14px !important;
+  font-weight: 600;
+  padding-bottom: 24px;
+}
+
+#yotpo-seo-reviews-container .yotpo-sr-bottom-line-summary .yotpo-sr-bottom-line-text--right-panel {
+  padding-top: 0 !important;
+}
+
+#yotpo-reviews-seo-page .yotpo-head,
+#yotpo-reviews-seo-page .yotpo-base-layout .ugc-storefront-widgets-tabs-container,
+#yotpo-reviews-seo-page .yotpo-base-layout .ugc-storefront-widgets-tabs-container button,
+#modalDescription .yotpo-review-media-modal-body .yotpo-modal-body-review-date,
+#modalDescription .yotpo-review-media-modal-body .yotpo-reviewer-image,
+#yotpo-reviews-main-widget .yotpo-reviewer-verified-buyer-text,
+#yotpo-seo-reviews-container .yotpo-reviewer-verified-buyer-text,
+#yotpo-reviews-star-ratings-widget .yotpo-sr-vertical-border {
+  display: none !important;
+}
+
+#yotpo-seo-reviews-container .yotpo-display-s .yotpo-review .yotpo-review-center-panel .yotpo-review-star-rating {
+  margin-bottom: 8px !important;
+}
+
+#yotpo-seo-reviews-container .yotpo-review-star-rating .star-container {
+  width: 16px !important;
+}
+
+@media (min-width: 992px) {
+  #yotpo-seo-reviews-container .yotpo-review-left-panel {
+    width: 20rem;
+  }
+}
+
+#yotpo-seo-reviews-container .yotpo-review-votes-wrapper {
+  margin-top: 0 !important;
+}
+
+#yotpo-seo-reviews-container .yotpo-review-content {
+  display: block;
+}
+
+.yotpo-simple-tooltip[data-v-3d71392b],
+.yotpo-reviewer-verified-buyer-text {
+  display: none !important;
+}
+
+/* Product-card */
+.swatch-item {
+  cursor: pointer;
+  position: relative;
+  padding: 1px;
+}
+
+.swatch-item.active {
+  border: 1px solid #000000;
+  border-radius: 50%;
+  padding: 1px;
+}
+
+.swatch-item .swatch {
+  display: block;
+  border-radius: 50%;
+}
+
+.swatch-item.active::after {
+  display: none;
+}
+
+
+
+
+
+
+.product-card__content .yotpo-reviews-star-ratings-widget {
+  margin: 5px 0 0 !important;
+}
+
+.yotpo-reviews-star-ratings-widget span {
+  height: 14px !important;
+}
+
+.yotpo-reviews-star-ratings-widget span svg {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+/* ============================
+   Yotpo 容器：去除可能的边框 / 阴影 / 内边距
+   （编辑器里看到的蓝色细框是 Shopify 编辑器的选中提示，
+   仅在编辑器中可见，线上看不到。这里仅做防御性清零。）
+============================ */
+.yotpo-widget-instance,
+.yotpo-reviews-star-ratings-widget,
+.yotpo-widget-instance .yotpo-base-layout {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* ============================
+   Yotpo Star color override
+   把所有 Yotpo 星星替换为品牌色
+============================ */
+.yotpo-reviews-star-ratings-widget svg,
+.yotpo-reviews-star-ratings-widget svg *,
+.yotpo-widget-instance svg,
+.yotpo-widget-instance svg *,
+#yotpo-reviews-main-widget svg,
+#yotpo-reviews-main-widget svg *,
+#yotpo-reviews-seo-page svg,
+#yotpo-reviews-seo-page svg *,
+#yotpo-seo-reviews-container svg,
+#yotpo-seo-reviews-container svg *,
+.yotpo-review-star-rating svg,
+.yotpo-review-star-rating svg *,
+.yotpo-sr-bottom-line svg,
+.yotpo-sr-bottom-line svg *,
+.star-container svg,
+.star-container svg * {
+  fill:   #67D2E0 !important;
+  stroke: #67D2E0 !important;
+  color:  #67D2E0 !important;
+}
+
+/* 图标类（部分版本用 font-icon / mask） */
+.yotpo-widget-instance .yotpo-icon-star,
+.yotpo-widget-instance .yotpo-icon-half-star,
+.yotpo-widget-instance .yotpo-icon-empty-star,
+.yotpo-widget-instance [class*="yotpo-icon"] {
+  color: #67D2E0 !important;
+  fill:  #67D2E0 !important;
+}
+.yotpo-reviews-star-ratings-widget .yotpo-sr-bottom-line-summary {
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+.yotpo-reviews-star-ratings-widget .yotpo-sr-bottom-line-summary>div {
+  align-items: center !important;
+}
+
+
+.yotpo-reviews-star-ratings-widget .yotpo-sr-bottom-line-summary .yotpo-sr-bottom-line-left-panel {
+  font-size: 14px !important;
+  color: rgb(var(--color-foreground)) !important;
+}
+
+
+.yotpo-reviews-star-ratings-widget .yotpo-sr-bottom-line-text {
+  font-size: 14px !important;
+  line-height: 1.1 !important;
+  color: rgb(var(--color-foreground)) !important;
+  font-weight: 400 !important;
+}
+
+@media screen and (min-width: 768px) {
+  .yotpo-reviews-star-ratings-widget {
+    padding: 4px 0 8px !important;
+  }
+
+  .yotpo-reviews-star-ratings-widget .yotpo-sr-bottom-line-text {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+  }
+
+  .yotpo-reviews-star-ratings-widget span {
+    height: 14px !important;
+  }
+
+  .yotpo-reviews-star-ratings-widget .yotpo-sr-bottom-line-summary .yotpo-sr-bottom-line-left-panel {
+    font-size: 14px !important;
+    line-height: 1 !important;
+  }
+
+}
+
+.yotpo-display-l .yotpo-seo-page-layout .yotpo-head[data-v-7eee2298],
+.yotpo-widget-instance .yotpo-reviewer-image {
+  display: none !important;
+}
+
+#yotpo-reviews-seo-page.yotpo-reviews-seo-page .yotpo-seo-page-layout .yotpo-horizontal-pagination {
+  display: flex !important;
+}
+
+#yotpo-reviews-seo-page.yotpo-reviews-seo-page .yotpo-seo-page-layout .yotpo-horizontal-pagination .selected {
+  background: none !important;
+  font-weight: bold !important;
+  color: var(--text-color);
+}
+
+.yotpo-horizontal-pagination .yotpo-pagination-number:hover {
+  background-color: none !important;
+}
+
+.yotpo-reviewer-details .yotpo-reviewer-name::after {
+  content: "\AVerified Buyer ✓";
+  margin-left: .35em;
+  font-weight: 500;
+  font-size: 10px;
+  color: #0F374B;
+  opacity: .85;
+}
+
+
+/* ============================
+Product-card-cus
+============================ */
+.shawn__product-card__reviews {
+  align-items: center;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.shawn__product-card__rating__icon {
+  width: auto;
+  height: 12px;
+  margin-right: 6px;
+}
+
+.shawn__product-card__rating__average {
+  margin-right: 4px;
+}
+
+/* ============================
+Subscription
+============================ */
+.shopify-email-marketing-confirmation__container {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+
+.shopify-email-marketing-confirmation__container h1 {
+  padding-bottom: 1rem;
+}
+
+/* ============================
+Product Page
+============================ */
+.product-card__icon {
+  min-width: 33.333% !important;
+}
+
+.aod_buy_now .aod_buy_button {
+  min-height: 3rem;
+  max-height: 3.75rem;
+}
+
+.price--on-sale .price__regular {
+  color: rgb(var(--color-price)) !important;
+}
+
+
+.price__sale::before {
+  transform: rotate(0deg);
+  border-block-end: 1px solid #7b7b7b;
+}
+
+.mega-menu__nav {
+  --header-nav-gap: clamp(var(--sp-5), 4.5vw, var(--sp-32));
+}
+
+[data-rounded-block=round] .product__accordion {
+  border-radius: var(--sp-2d5);
+}
+
+.product__accordion.with-border {
+  border-block: 1px solid transparent;
+}
+
+.product-card__bottom .color-swatch {
+  --swatch-size: var(--sp-5);
+}
+
+.shawn__product__StickyPrice .price__regular {
+  color: #fff !important;
+}
+
+@media screen and (max-width: 767px) {
+  .product-sticky-form__card {
+    padding: var(--sp-2) var(--sp-5) !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .product-sticky-form {
+    inset-inline-end: var(--sp-20) !important;
+  }
+}
+
+/*
+Product Size Guide
+*/
+.x-modal[aria-label="Size Guide"] .drawer__content table td {
+  font-size: 14px !important;
+  line-height: 1 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: var(--sp-2d5) !important;
+  height: 46px !important;
+}
+
+.x-modal[aria-label="Size Guide"] .drawer__content table th {
+  padding: var(--sp-4) var(--sp-2d5) !important;
+}
+
+
+@media screen and (min-width: 640px) {
+  .x-modal[aria-label="Size Guide"] .drawer__inner {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-height: 100vh;
+    margin-right: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    max-width: 36rem;
+  }
+
+  .x-modal[aria-label="Size Guide"] .drawer__title {
+    font-size: 24px !important;
+  }
+
+  .x-modal[aria-label="Size Guide"] .drawer__header {
+    align-items: center;
+  }
+}
+
+
+/* 
+Product Image
+*/
+@media screen and (max-width: 1023px) {
+  .product__thumbnail {
+    width: var(--sp-12);
+  }
+}
+
+.certificates-logos {
+  display: flex;
+  gap: 1rem;
+}
+
+.cert-logo {
+  height: 36px !important;
+  margin: 0 !important;
+}
+
+.shawn-product--media__image-certificates {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  z-index: 10;
+  width: 60%;
+  height: auto !important;
+  margin: 0 auto;
+  transform: translateX(-50%);
+  aspect-ratio: auto !important;
+}
+
+.shawn-product--media__image-certificates-badge {
+  position: absolute;
+  top: .25rem;
+  right: .25rem;
+  left: auto;
+  z-index: 10;
+  margin: 0 auto;
+  aspect-ratio: auto !important;
+}
+
+.shawn-product--media__image-certificates-badge-1 {
+  width: 140px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .shawn-product--media__image-certificates-badge-1 {
+    width: 100px;
+    height: auto;
+  }
+}
+
+/*
+Product Styles
+*/
+.featured-product .product__title {
+  margin: 0 0 4px;
+}
+
+.product__info>*+* {
+  margin-block-start: var(--sp-2);
+}
+
+.page-width .product--thumbnail {
+  padding-inline: 0 !important;
+}
+
+.product__price {
+  margin: 8px 0 12px !important;
+  font-size: 22px;
+}
+
+.product-form-wrapper {
+  margin-block-start: var(--sp-4);
+}
+
+.product-form__submit {
+  flex: 1 1 60%;
+}
+
+.product-form__buttons .buy-buttons .button .btn-text {
+  font-weight: bold !important;
+}
+
+
+@media screen and (min-width: 768px) {
+  .product-card__bottom .color-swatch {
+    --swatch-size: var(--sp-6);
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .product-form__submit {
+    min-height: 3rem;
+  }
+}
+
+/* ============================
+Collections Page
+============================ */
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ============================
+Mega Menu Styles
+============================ */
+.drawer__scrollable .drawer__menu-group {
+  /* border-bottom: 1px solid #f6f3f4; */
+}
+
+
+.mega-menu__nav.grid {
+  grid-template-rows: auto auto auto !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#HeaderNavMega-sections--17685015920718__header-4-start .mega-menu__nav.grid {
+  grid-template-rows: auto auto auto !important;
+  grid-template-rows: auto auto auto;
+}
+
+.header__menu .list-menu li:first-child .menu__item,
+.header__menu .menu__item--first,
+.drawer__menu-group .drawer__menu-item[data-name="Sale"] {
+  color: var(--nav-first-item-color, #AC4D3C);
+}
+
+.drawer__menu-group .drawer__menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.mega-menu__nav ul a:hover {
+  background-size: 100% 0px !important;
+  background-position-x: 0 !important;
+}
+
+.mega-menu__nav .reversed-link {
+  background: none !important;
+}
+
+/* Menu Search */
+.shawn-search-drawer-button {
+  border: .5px solid #1d1e20;
+  border-radius: 32px;
+  align-items: center;
+  justify-content: start;
+  padding: 5px 10px;
+  min-width: 100%;
+  position: relative;
+}
+
+
+.s__typingTextData {
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+#s__typingTextmb {
+  font-weight: 600;
+}
+
+#s__typingCursormb {
+  animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ============================
+Cart
+============================ */
+#CartDrawer .drawer__footer-bottom {
+  gap: var(--sp-2);
+  padding-bottom: 12px;
+}
+
+
+/* ============================
+Policy Page Styles
+============================ */
+.shopify-policy__title h1 {
+  font-size: var(--title-md) !important;
+}
+
+
+/* ============================
+Footer Custom Liquid Styles
+============================ */
+@media screen and (min-width: 768px) {
+  .footer__left {
+    gap: clamp(var(--sp-10), 4.2vw, var(--sp-20));
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .footer--inverted .footer__left {
+    padding-inline-start: clamp(var(--sp-10), 4.2vw, var(--sp-20));
+  }
+
+  .footer--inverted .footer__right {
+    padding-inline: clamp(var(--sp-10), 2.2vw, var(--sp-20));
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .shawn-footer__left {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .footer {
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  }
+
+  .footer__right {
+    padding-inline: clamp(var(--sp-5), 2.221vw, var(--sp-20));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    gap: 1rem;
+  }
+
+  .footer__right {
+    order: -1;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .shopify-section-group-footer-group .xl\:flex-row {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 1279px) {
+  .footer.footer--inverted {
+    gap: 2rem !important;
+  }
+}
+
+@media (max-width: 1279px) {
+  .footer .footer__right {
+    border-block-start: none !important;
+    border-block-end: 1px solid rgb(var(--color-foreground) / 0.115);
+    margin-block-start: var(--sp-0d5) !important;
+    padding-block-start: var(--sp-0d5) !important;
+    margin-block-end: var(--sp-10);
+    padding-block-end: var(--sp-14);
+  }
+}
+
+.footer--inverted .footer__right {
+  order: -1;
+  padding-inline-start: 0;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .md\:gap-4 {
+    gap: var(--sp-12);
+  }
+}
+
+
+
+
+/* ============================
+Size Guide
+============================ */
+.so__Size-Switch__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.so__Size-Switch__label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.so__Size-Switch__toggle {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.so__Size-Switch__toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.so__Size-Switch__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f6f6f8;
+  transition: 0.3s;
+  border-radius: 34px;
+}
+
+.so__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.so__Size-Switch__toggle {
+  position: relative;
+  width: 56px;
+  height: 32px;
+  border: 0;
+  padding: 0;
+  margin: 0 10px;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.so__Size-Switch__slider {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: #d1d5db;
+  position: relative;
+  transition: 0.2s;
+}
+
+.so__Size-Switch__slider::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fff;
+  transition: 0.2s;
+}
+
+.so__Size-Switch__toggle[aria-checked="true"] .so__Size-Switch__slider {
+  background: #22c55e;
+}
+
+.so__Size-Switch__toggle[aria-checked="true"] .so__Size-Switch__slider::after {
+  transform: translateX(24px);
+}
+
+.so__Size-Switch__toggle:focus-visible .so__Size-Switch__slider {
+  outline: 2px solid #111827;
+  outline-offset: 3px;
+}
+
+
+
+/*！ Color */
+.text-black { color: rgba(0, 0, 0, 1); }
+.text-white { color: rgba(255, 255, 255, 1); }
+
+.text-zinc-50 { color: rgba(250, 250, 250, 1); }
+.text-zinc-100 { color: rgba(244, 244, 245, 1); }
+.text-zinc-200 { color: rgba(228, 228, 231, 1); }
+.text-zinc-300 { color: rgba(212, 212, 216, 1); }
+.text-zinc-400 { color: rgba(161, 161, 170, 1); }
+.text-zinc-500 { color: rgba(113, 113, 122, 1); }
+.text-zinc-600 { color: rgba(82, 82, 91, 1); }
+.text-zinc-700 { color: rgba(63, 63, 70, 1); }
+.text-zinc-800 { color: rgba(39, 39, 42, 1); }
+.text-zinc-900 { color: rgba(24, 24, 27, 1); }
+.text-zinc-950 { color: rgba(9, 9, 11, 1); }
+
+.text-red-50 { color: rgba(254, 242, 242, 1); }
+.text-red-100 { color: rgba(254, 226, 226, 1); }
+.text-red-200 { color: rgba(254, 202, 202, 1); }
+.text-red-300 { color: rgba(252, 165, 165, 1); }
+.text-red-400 { color: rgba(248, 113, 113, 1); }
+.text-red-500 { color: rgba(239, 68, 68, 1); }
+.text-red-600 { color: rgba(220, 38, 38, 1); }
+.text-red-700 { color: rgba(185, 28, 28, 1); }
+.text-red-800 { color: rgba(153, 27, 27, 1); }
+.text-red-900 { color: rgba(127, 29, 29, 1); }
+.text-red-950 { color: rgba(69, 10, 10, 1); }
+
+/*! BG Color  */
+.bg-black { background-color: rgba(0, 0, 0, 1); }
+.bg-white { background-color: rgba(255, 255, 255, 1); }
+
+.bg-zinc-50 { background-color: rgba(250, 250, 250, 1); }
+.bg-zinc-100 { background-color: rgba(244, 244, 245, 1); }
+.bg-zinc-200 { background-color: rgba(228, 228, 231, 1); }
+.bg-zinc-300 { background-color: rgba(212, 212, 216, 1); }
+.bg-zinc-400 { background-color: rgba(161, 161, 170, 1); }
+.bg-zinc-500 { background-color: rgba(113, 113, 122, 1); }
+.bg-zinc-600 { background-color: rgba(82, 82, 91, 1); }
+.bg-zinc-700 { background-color: rgba(63, 63, 70, 1); }
+.bg-zinc-800 { background-color: rgba(39, 39, 42, 1); }
+.bg-zinc-900 { background-color: rgba(24, 24, 27, 1); }
+.bg-zinc-950 { background-color: rgba(9, 9, 11, 1); }
+
+.bg-red-50 { background-color: rgba(254, 242, 242, 1); }
+.bg-red-100 { background-color: rgba(254, 226, 226, 1); }
+.bg-red-200 { background-color: rgba(254, 202, 202, 1); }
+.bg-red-300 { background-color: rgba(252, 165, 165, 1); }
+.bg-red-400 { background-color: rgba(248, 113, 113, 1); }
+.bg-red-500 { background-color: rgba(239, 68, 68, 1); }
+.bg-red-600 { background-color: rgba(220, 38, 38, 1); }
+.bg-red-700 { background-color: rgba(185, 28, 28, 1); }
+.bg-red-800 { background-color: rgba(153, 27, 27, 1); }
+.bg-red-900 { background-color: rgba(127, 29, 29, 1); }
+.bg-red-950 { background-color: rgba(69, 10, 10, 1); }
+
+/* ============================
+   Product media: fix 1px hairline at browser zoom (80%, 110%, etc.)
+   ============================ */
+.product__media {
+  background-color: rgb(var(--color-background));
+}
+
+.product__media > :is(img, svg, video-media) {
+  display: block;
+  width: calc(100% + 0px);
+  max-width: none;
+  margin-inline-start: -1px;
+}
+
+/* ============================================================
+   Yotpo Product Reviews - 单条评论卡片重排 (图3 目标样式)
+   ------------------------------------------------------------
+   原布局：左栏 = 用户名+Verified+属性表 / 右栏 = 星星+标题+正文+图片
+   新布局：左栏 = 用户名 + Verified Buyer(上下)
+          右栏 = 星星+标题+正文+图片 → 下方接属性表
+          底部整行 = Was this review helpful?
+   卡片：白底 + 圆角 + padding
+
+   Yotpo 的 HTML/CSS 是 app 服务端注入的，此处仅通过 CSS 覆盖，
+   使用 !important 优先级压过 Yotpo 的内联 style。
+============================================================ */
+
+/* --- 卡片本身：白色圆角背景 --- */
+.yotpo-reviews-main-widget .yotpo-reviews-list-wrapper .yotpo-reviews-item {
+  background: #f6f6f6 !important;
+  border: none !important;
+  border-radius: 40px !important;
+  padding: 24px 70px !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 1px 2px rgba(16, 55, 75, 0.04) !important;
+  list-style: none !important;
+}
+
+/* --- 单条评论内部：改用 grid 重排 ---
+   通过 display: contents 让 left-panel 内部的两个子元素直接参与外层 grid，
+   这样 reviewer 留在左列、customer-questions-container 挪到右列图片下方 */
+.yotpo-reviews-main-widget .yotpo-review {
+  display: grid !important;
+  grid-template-columns: minmax(140px, 200px) 1fr !important;
+  grid-template-areas:
+    "reviewer content"
+    "reviewer questions"
+    "footer   footer" !important;
+  column-gap: 0px !important;
+  row-gap: 16px !important;
+  align-items: start !important;
+}
+
+.yotpo-reviews-main-widget .yotpo-review-left-panel {
+  display: contents !important;
+}
+
+.yotpo-reviews-main-widget .yotpo-review-left-panel > .yotpo-reviewer,
+.yotpo-reviews-main-widget .yotpo-review > .yotpo-reviewer {
+  grid-area: reviewer !important;
+}
+
+.yotpo-reviews-main-widget .yotpo-review-center-panel {
+  grid-area: content !important;
+  min-width: 0 !important;
+}
+
+.yotpo-reviews-main-widget .yotpo-review-customer-questions-container {
+  grid-area: questions !important;
+  width: 100% !important;
+  margin-top: 4px !important;
+}
+
+/* 仅 PC 端：属性区左移对齐上方标题/正文 */
+@media (min-width: 768px) {
+  .yotpo-reviews-main-widget .yotpo-review-customer-questions-container {
+    padding-left: 15px !important;
+  }
+}
+
+.yotpo-reviews-main-widget .yotpo-review-votes-wrapper.top-margin {
+  grid-area: footer !important;
+  justify-content: flex-end !important;
+  margin-top: 4px !important;
+}
+
+.yotpo-reviews-main-widget .yotpo-review-border-smooth,
+.yotpo-reviews-main-widget .yotpo-erfs-separator,
+.yotpo-reviews-main-widget .yotpo-review-right-panel {
+  display: none !important;
+}
+
+/* --- Reviewer：用户名 + Verified Buyer 上下结构 ---
+   Verified Buyer 是 .yotpo-reviewer-name::after，让它换行显示 */
+.yotpo-reviews-main-widget .yotpo-reviewer {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  align-items: flex-start !important;
+}
+.yotpo-reviews-main-widget .yotpo-reviewer-details {
+  display: block !important;
+}
+.yotpo-reviews-main-widget .yotpo-reviewer-name {
+  display: block !important;
+  color: #10374B !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+/* 用户名文字 span：强制加粗（PC + 移动端） */
+.yotpo-reviews-main-widget .yotpo-reviewer-name .yotpo-reviewer-name-text,
+.yotpo-reviews-main-widget .yotpo-reviewer-name-text {
+  font-weight: 700 !important;
+}
+.yotpo-reviews-main-widget .yotpo-reviewer-name::after {
+  display: block !important;
+  margin-left: 0 !important;
+  margin-top: 6px !important;
+  color: rgba(16, 55, 75, 0.72) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  opacity: 1 !important;
+}
+
+/* --- 属性表：每一行 title + value 独立宽度 pill ---
+   Grid 里同列强制同宽，无法做到"每行 pill 独立宽度"。
+   所以 wrapper 改成 flex-column，每一对 title+value 由 JS（下方 script）
+   包进 .yotpo-custom-question-row 容器里成为独立 pill。
+   title 和 value 在 row 里去掉自己的背景/圆角，由 row 统一负责背景。 */
+.yotpo-widget-instance
+  .yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  div.yotpo-custom-questions-wrapper[class*="key-value-question"],
+.yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  div.yotpo-custom-questions-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+}
+
+/* 每一对 title+value 由 JS 包进这个 row 容器，独立 pill */
+.yotpo-custom-question-row {
+  display: inline-flex !important;
+  align-items: stretch !important;
+  background: #E8F2F4 !important;
+  border-radius: 999px !important;
+  max-width: 100% !important;
+}
+
+/* row 内 title：透明背景，仅保留 padding / 字体样式 */
+.yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  .yotpo-custom-question-row
+  .yotpo-custom-questions-title {
+  color: #10374B !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 8px 8px 8px 16px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  line-height: 1.4 !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  flex-shrink: 0 !important;
+}
+
+/* row 内 value：透明背景 */
+.yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  .yotpo-custom-question-row
+  .yotpo-custom-questions-value {
+  color: rgba(16, 55, 75, 0.75) !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 8px 16px 8px 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  min-width: 0 !important;
+}
+
+/* --- 属性 title 前缀图标：按 data-question-row 顺序对应不同 SVG ---
+   1 → Age、2 → Best For、3 → What surprised me */
+.yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  .yotpo-custom-question-row
+  .yotpo-custom-questions-title::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin-right: 8px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  flex-shrink: 0 !important;
+}
+.yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  .yotpo-custom-question-row[data-question-row="1"]
+  .yotpo-custom-questions-title::before {
+  background-image: url("https://cdn.shopify.com/s/files/1/0640/6779/7070/files/ren.svg?v=1785474287") !important;
+}
+.yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  .yotpo-custom-question-row[data-question-row="2"]
+  .yotpo-custom-questions-title::before {
+  background-image: url("https://cdn.shopify.com/s/files/1/0640/6779/7070/files/zan.svg?v=1785474287") !important;
+}
+.yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  .yotpo-custom-question-row[data-question-row="3"]
+  .yotpo-custom-questions-title::before {
+  background-image: url("https://cdn.shopify.com/s/files/1/0640/6779/7070/files/dui.svg?v=1785474287") !important;
+}
+
+/* 兜底：JS 还没执行完 / 失败时，title 和 value 仍在 wrapper 顶层
+   （非 .yotpo-custom-question-row 子），至少让它们各自也是 pill 状 */
+.yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  div.yotpo-custom-questions-wrapper
+  > .yotpo-custom-questions-title {
+  background: #E8F2F4 !important;
+  border-radius: 999px !important;
+  padding: 6px 14px !important;
+  color: #10374B !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+}
+.yotpo-reviews-main-widget
+  .yotpo-review-customer-questions-container
+  div.yotpo-custom-questions-wrapper
+  > .yotpo-custom-questions-value {
+  color: rgba(16, 55, 75, 0.75) !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  padding: 4px 0 !important;
+  margin: 0 !important;
+}
+
+/* --- 星星 + 标题 + 正文 微调 --- */
+.yotpo-reviews-main-widget .yotpo-review-rating-title {
+  margin-bottom: 8px !important;
+}
+.yotpo-reviews-main-widget .yotpo-review-content {
+  color: rgba(16, 55, 75, 0.85) !important;
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  margin-bottom: 12px !important;
+}
+
+/* --- 图片墙圆角 --- */
+.yotpo-reviews-main-widget .yotpo-thumbnail-container {
+  gap: 8px !important;
+}
+.yotpo-reviews-main-widget .yotpo-thumbnail-container img {
+  border-radius: 8px !important;
+}
+
+/* --- 底部 Was this review helpful? --- */
+.yotpo-reviews-main-widget .yotpo-review-votes-wrapper {
+  color: rgba(16, 55, 75, 0.6) !important;
+  font-size: 12px !important;
+}
+
+/* --- 移动端（≤ 767px）：顶行 reviewer + 星星并排，其余整行堆叠 ---
+   通过对 .yotpo-review-center-panel 与 .yotpo-review-rating-title 都做 display: contents，
+   让内部的星星 / 标题 / 正文 / 缩略图直接参与最外层 .yotpo-review 的 grid，
+   这样可以把星星单独放到顶行右侧、标题挪到第二行。 */
+@media (max-width: 767px) {
+  .yotpo-reviews-main-widget .yotpo-reviews-list-wrapper .yotpo-reviews-item {
+    padding: 16px !important;
+    border-radius: 22px !important;
+    margin-bottom: 12px !important;
+  }
+  /* 顶行左右分两列，其余内容整行；用"网格线显式定位"而非 grid-template-areas，
+     这样任何没分配区域的元素都不会乱入右列，reviewer 列(1fr)永不塌成 0。 */
+  .yotpo-reviews-main-widget .yotpo-review {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-areas: none !important;
+    grid-auto-flow: row !important;
+    column-gap: 12px !important;
+    row-gap: 10px !important;
+    align-items: start !important;
+  }
+  /* 三层面板都 display:contents，让内部元素直接参与 .yotpo-review 的 grid */
+  .yotpo-reviews-main-widget .yotpo-review-left-panel,
+  .yotpo-reviews-main-widget .yotpo-review-center-panel,
+  .yotpo-reviews-main-widget .yotpo-review-rating-title {
+    display: contents !important;
+  }
+  /* 顶行左：用户名（Name / Verified Buyer 上下结构）
+     选择器带 > 组合，优先级 ≥ 桌面那条 grid-area:reviewer，确保移动端定位生效 */
+  .yotpo-reviews-main-widget .yotpo-review-left-panel > .yotpo-reviewer,
+  .yotpo-reviews-main-widget .yotpo-review > .yotpo-reviewer,
+  .yotpo-reviews-main-widget .yotpo-reviewer {
+    grid-column: 1 / 2 !important;
+    grid-row: 1 !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+  }
+  #yotpo-reviews-main-widget .yotpo-reviewer-name,
+  .yotpo-reviews-main-widget .yotpo-reviewer-name {
+    padding-bottom: 13px !important;
+  }
+  .yotpo-reviews-main-widget .yotpo-reviewer-name::after {
+    display: block !important;
+    margin-left: 0 !important;
+    margin-top: 2px !important;
+  }
+  /* 顶行右：星星，垂直居中到用户名一行 */
+  .yotpo-reviews-main-widget .yotpo-review-star-rating,
+  .yotpo-reviews-main-widget [class*="review-star-rating"] {
+    grid-column: 2 / 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: start !important;
+    margin: 3px 0 0 0 !important;
+  }
+  /* 其余内容一律整行(跨两列)，避免被挤进右列或塌陷 reviewer 列 */
+  .yotpo-reviews-main-widget .yotpo-review-title,
+  .yotpo-reviews-main-widget .yotpo-review-content,
+  .yotpo-reviews-main-widget .yotpo-thumbnail-container,
+  .yotpo-reviews-main-widget [class*="mobile-panel"],
+  .yotpo-reviews-main-widget .yotpo-review-customer-questions-container,
+  .yotpo-reviews-main-widget .yotpo-review-votes-wrapper.top-margin {
+    grid-column: 1 / -1 !important;
+    width: auto !important;
+    min-width: 0 !important;
+  }
+  /* 去掉标题 margin：用 id + 双类，优先级压过 customer.css 的 #id 规则 */
+  #yotpo-reviews-main-widget .yotpo-review .yotpo-review-title,
+  .yotpo-reviews-main-widget .yotpo-review .yotpo-review-title,
+  .yotpo-reviews-main-widget .yotpo-review-title {
+    margin: 0 !important;
+  }
+  #yotpo-reviews-main-widget .yotpo-review-content,
+  .yotpo-reviews-main-widget .yotpo-review-content {
+    margin-top: 0px !important;
+    margin-bottom: 4px !important;
+  }
+  .yotpo-reviews-main-widget .yotpo-review-votes-wrapper.top-margin {
+    justify-content: flex-end !important;
+  }
+  /* 隐藏会乱入 grid 的分隔线（crfs / erfs 两种拼写都处理） */
+  .yotpo-reviews-main-widget .yotpo-crfs-seperator,
+  .yotpo-reviews-main-widget .yotpo-crfs-separator,
+  .yotpo-reviews-main-widget .yotpo-erfs-separator {
+    display: none !important;
+  }
+
+  /* ===== 手机端 Yotpo Vue 结构（刷新后真实 DOM）专用 =====
+     手机端属性区容器是 .yotpo-review-question-mobile-panel，
+     每条属性 Yotpo 已包成 .yotpo-custom-questions-question-wrapper。 */
+
+  /* 外层 wrapper：竖排，每条属性各自一个 pill（挂在确定的内层类上，
+     不依赖外层面板类名，避免类名对不上导致规则全部失效） */
+  .yotpo-reviews-main-widget
+    .yotpo-custom-questions-wrapper.yotpo-review-key-value-question {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    max-width: 100% !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    margin: 0 !important;
+  }
+
+  /* 每个 question-wrapper = 一个浅蓝 pill */
+  .yotpo-reviews-main-widget .yotpo-custom-questions-question-wrapper {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background: #E8F2F4 !important;
+    border-radius: 22px !important;
+    max-width: 100% !important;
+    padding: 8px 16px !important;
+    margin: 0 !important;
+  }
+
+  /* title：加粗 + 前置图标 */
+  .yotpo-reviews-main-widget
+    .yotpo-custom-questions-question-wrapper
+    .yotpo-custom-questions-title {
+    color: #10374B !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+    text-transform: none !important;
+  }
+  /* value */
+  .yotpo-reviews-main-widget
+    .yotpo-custom-questions-question-wrapper
+    .yotpo-custom-questions-value {
+    color: rgba(16, 55, 75, 0.75) !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+  }
+  /* Yotpo 原生在标题后加的冒号/尾部占位，pill 里不需要 */
+  .yotpo-reviews-main-widget
+    .yotpo-custom-questions-question-wrapper
+    .yotpo-custom-questions-title::after {
+    content: none !important;
+    display: none !important;
+  }
+  .yotpo-reviews-main-widget
+    .yotpo-custom-questions-question-wrapper
+    [class*="suffix-padding"] {
+    display: none !important;
+  }
+
+  /* 图标：按顺序 1→Age、2→Best For、3→What surprised me */
+  .yotpo-reviews-main-widget
+    .yotpo-custom-questions-question-wrapper
+    .yotpo-custom-questions-title::before {
+    content: "" !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 6px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+    flex-shrink: 0 !important;
+  }
+  .yotpo-reviews-main-widget
+    .yotpo-custom-questions-question-wrapper:nth-child(1)
+    .yotpo-custom-questions-title::before {
+    background-image: url("https://cdn.shopify.com/s/files/1/0640/6779/7070/files/ren.svg?v=1785474287") !important;
+  }
+  .yotpo-reviews-main-widget
+    .yotpo-custom-questions-question-wrapper:nth-child(2)
+    .yotpo-custom-questions-title::before {
+    background-image: url("https://cdn.shopify.com/s/files/1/0640/6779/7070/files/zan.svg?v=1785474287") !important;
+  }
+  .yotpo-reviews-main-widget
+    .yotpo-custom-questions-question-wrapper:nth-child(3)
+    .yotpo-custom-questions-title::before {
+    background-image: url("https://cdn.shopify.com/s/files/1/0640/6779/7070/files/dui.svg?v=1785474287") !important;
+  }
+}
+
+/* Reward points cart social-proof (storefront fallback; also in product-reward-points.css) */
+.product-reward-points__cart {
+  display: block;
+  text-align: center;
+  font-size: var(--rp-font-size-mobile, 13px);
+  font-weight: var(--rp-font-weight, 400);
+  color: var(--rp-text-color, #10374b);
+  line-height: 1.2;
+}
+.product-reward-points__dot {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.45em;
+  border-radius: 50%;
+  background-color: currentColor;
+  vertical-align: 0.1em;
+  animation: product-reward-points-dot-blink 1.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes product-reward-points-dot-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}
+@media screen and (min-width: 768px) {
+  .product-reward-points__cart {
+    font-size: var(--rp-font-size-desktop, 14px);
+  }
+}

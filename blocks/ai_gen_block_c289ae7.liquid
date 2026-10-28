@@ -1,0 +1,278 @@
+{% doc %}
+  @prompt
+    Add a full-width cookie consent banner at the bottom of the page, using a custom background color of my choice.
+    The banner has a clean flat design, no rounded corners.
+    Layout structure:
+    Left-aligned text paragraph, containing two underlined links.
+    On the right side of the banner, place a text link labeled "Cookie Settings", and a small "×" close button at the far right end.
+    All text is vertically centered within the banner, with proper spacing between elements.
+    Keep the layout exactly like the standard Shopify cookie bar shown in the example.Modify the existing cookie consent banner to add a toggle switch in the Shopify theme editor to switch between fixed and static positioning.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-cookie-banner-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    padding: 16px 40px;
+    z-index: 9999;
+    {% if block.settings.position == 'fixed' %}
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    {% else %}
+      position: static;
+    {% endif %}
+  }
+
+  .ai-cookie-banner-{{ ai_gen_id }}.hidden {
+    display: none;
+  }
+
+  .ai-cookie-banner__container-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    max-width: 100%;
+  }
+
+  .ai-cookie-banner__text-{{ ai_gen_id }} {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .ai-cookie-banner__text-{{ ai_gen_id }} a {
+    color: {{ block.settings.text_color }};
+    text-decoration: underline;
+  }
+
+  .ai-cookie-banner__text-{{ ai_gen_id }} a:hover {
+    opacity: 0.8;
+  }
+
+  .ai-cookie-banner__actions-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .ai-cookie-banner__settings-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .ai-cookie-banner__settings-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  .ai-cookie-banner__close-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    color: {{ block.settings.text_color }};
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-cookie-banner__close-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-cookie-banner-{{ ai_gen_id }} {
+      padding: 16px 20px;
+    }
+
+    .ai-cookie-banner__container-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .ai-cookie-banner__actions-{{ ai_gen_id }} {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+{% endstyle %}
+
+<cookie-banner-{{ ai_gen_id }} class="ai-cookie-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-cookie-banner__container-{{ ai_gen_id }}">
+    <p class="ai-cookie-banner__text-{{ ai_gen_id }}">
+      {{ block.settings.banner_text }}
+      {% if block.settings.privacy_link != blank %}
+        <a href="{{ block.settings.privacy_link }}">{{ block.settings.privacy_link_text }}</a>
+      {% endif %}
+      {% if block.settings.terms_link != blank %}
+        <a href="{{ block.settings.terms_link }}">{{ block.settings.terms_link_text }}</a>
+      {% endif %}
+    </p>
+    <div class="ai-cookie-banner__actions-{{ ai_gen_id }}">
+      <button
+        type="button"
+        class="ai-cookie-banner__settings-{{ ai_gen_id }}"
+        aria-label="Cookie settings"
+      >
+        {{ block.settings.settings_button_text }}
+      </button>
+      <button
+        type="button"
+        class="ai-cookie-banner__close-{{ ai_gen_id }}"
+        aria-label="Close cookie banner"
+      >
+        ×
+      </button>
+    </div>
+  </div>
+</cookie-banner-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CookieBanner{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.storageKey = 'cookieBannerDismissed{{ ai_gen_id }}';
+      }
+
+      connectedCallback() {
+        this.closeButton = this.querySelector('.ai-cookie-banner__close-{{ ai_gen_id }}');
+        this.settingsButton = this.querySelector('.ai-cookie-banner__settings-{{ ai_gen_id }}');
+
+        if (this.isDismissed()) {
+          this.classList.add('hidden');
+        }
+
+        this.closeButton.addEventListener('click', () => this.dismiss());
+        this.settingsButton.addEventListener('click', () => this.openSettings());
+      }
+
+      isDismissed() {
+        try {
+          return localStorage.getItem(this.storageKey) === 'true';
+        } catch (e) {
+          return false;
+        }
+      }
+
+      dismiss() {
+        try {
+          localStorage.setItem(this.storageKey, 'true');
+        } catch (e) {
+          console.warn('Unable to save cookie banner state');
+        }
+        this.classList.add('hidden');
+      }
+
+      openSettings() {
+        alert('Cookie settings functionality would be implemented here');
+      }
+    }
+
+    customElements.define('cookie-banner-{{ ai_gen_id }}', CookieBanner{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Cookie consent banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Position"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "fixed",
+          "label": "Fixed (stays at bottom)"
+        },
+        {
+          "value": "static",
+          "label": "Static (scrolls with page)"
+        }
+      ],
+      "default": "fixed"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "banner_text",
+      "label": "Banner text",
+      "default": "<p>We use cookies to improve your experience on our site.</p>"
+    },
+    {
+      "type": "url",
+      "id": "privacy_link",
+      "label": "Privacy policy link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "privacy_link_text",
+      "label": "Privacy policy link text",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "url",
+      "id": "terms_link",
+      "label": "Terms link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "terms_link_text",
+      "label": "Terms link text",
+      "default": "Terms of Service"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "settings_button_text",
+      "label": "Settings button text",
+      "default": "Cookie Settings"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cookie consent banner"
+    }
+  ]
+}
+{% endschema %}

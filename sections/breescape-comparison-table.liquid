@@ -1,0 +1,1927 @@
+<!-- ============================================================
+  Section: Breescape — Comparison Table
+  - 上传底图（PC + 移动端）作为整块背景
+  - 整体可调四向 padding，可选标题
+  - 中间是一个浅色背景 + 圆角的"表格"容器
+    · 表头三列文字（Feature / 2.0 / 1.0）在 section 设置中直接录入
+    · 数据行用 block 添加，每个 block 三列文字
+  - 第二列有可选的浅蓝色高亮区域，自动撑满整列，
+    内容渲染在上面，且不破坏行对齐
+============================================================ -->
+
+{%- liquid
+  assign s = section.settings
+  assign blocks = section.blocks
+
+  assign cols_count = 3
+  if s.show_col_4
+    assign cols_count = cols_count | plus: 1
+  endif
+  if s.show_col_5
+    assign cols_count = cols_count | plus: 1
+  endif
+
+  assign panel_bg_opacity = s.panel_bg_opacity | default: 85
+  assign panel_alpha = panel_bg_opacity | divided_by: 100.0
+  assign panel_bg_rgba = s.table_bg_color | color_modify: 'alpha', panel_alpha
+
+  assign panel_shadow_opacity = s.panel_shadow_opacity | default: 80
+  assign shadow_alpha = panel_shadow_opacity | divided_by: 100.0
+  assign panel_shadow_color_rgba = s.panel_shadow_color | default: '#FFFFFF' | color_modify: 'alpha', shadow_alpha
+
+  assign panel_shadow_blur = s.panel_shadow_blur | default: 0
+  assign panel_shadow_spread = s.panel_shadow_spread | default: 0
+  assign panel_shadow_value = 'none'
+  if panel_shadow_blur > 0 or panel_shadow_spread != 0
+    assign panel_shadow_value = '0 0 ' | append: panel_shadow_blur | append: 'px ' | append: panel_shadow_spread | append: 'px ' | append: panel_shadow_color_rgba
+  endif
+
+  assign divider_opacity = s.cell_divider_opacity | default: 68
+  if divider_opacity < 5
+    assign divider_opacity = 50
+  endif
+  assign divider_alpha = divider_opacity | divided_by: 100.0
+  assign divider_color_rgba = s.cell_divider_color | default: '#E1E7EB' | color_modify: 'alpha', divider_alpha
+
+  assign divider_width = s.cell_divider_width | default: 1
+  if divider_width < 1
+    assign divider_width = 1
+  endif
+
+-%}
+
+<div
+  class="section section--padding{% if s.divider %} section--divider{% endif %}{% if s.rounded %} section--rounded relative{% endif %}"
+  style="--section-padding-top: {{ s.padding_top | default: 0 }}px; --section-padding-bottom: {{ s.padding_bottom | default: 0 }}px;"
+>
+<div class="{% unless s.full_width %}page-width {% endunless %}relative">
+<section
+  class="be-cmp{% if s.background_image == blank and s.background_image_mobile == blank %} be-cmp--no-bg{% endif %}{% if s.enable_parallax %} is-parallax{% endif %}"
+  {% if s.enable_parallax %}data-parallax-dir="{{ s.parallax_direction | default: 'vertical' }}"{% endif %}
+  aria-label="{{ s.heading | default: 'Comparison' | escape }}"
+  style="
+    --be-cmp-bg-color:           {{ s.background_color }};
+    --be-cmp-pad-top-pc:         {{ s.section_padding_top_pc }}px;
+    --be-cmp-pad-bottom-pc:      {{ s.section_padding_bottom_pc }}px;
+    --be-cmp-pad-x-pc:           {{ s.section_padding_x_pc }}px;
+    --be-cmp-pad-top-m:          {{ s.section_padding_top_mobile }}px;
+    --be-cmp-pad-bottom-m:       {{ s.section_padding_bottom_mobile }}px;
+    --be-cmp-pad-x-m:            {{ s.section_padding_x_mobile }}px;
+    --be-cmp-max-width:          {{ s.max_width }}px;
+
+    --be-cmp-title-color:        {{ s.title_color }};
+    --be-cmp-title-size-pc:      {{ s.title_size_pc }}px;
+    --be-cmp-title-size-m:       {{ s.title_size_mobile }}px;
+    --be-cmp-title-mb-pc:        {{ s.title_margin_bottom_pc }}px;
+    --be-cmp-title-mb-m:         {{ s.title_margin_bottom_mobile }}px;
+
+    --be-cmp-table-bg:           {{ panel_bg_rgba }};
+    --be-cmp-panel-border-w:     {{ s.panel_border_width | default: 0 }}px;
+    --be-cmp-panel-border-color: {{ s.panel_border_color | default: 'rgba(255,255,255,0)' }};
+    --be-cmp-panel-shadow:       {{ panel_shadow_value }};
+    --be-cmp-panel-blur:         {{ s.panel_blur | default: 12 }}px;
+    --be-cmp-divider-w:          {{ divider_width }}px;
+    --be-cmp-divider-color:      {{ divider_color_rgba }};
+    --be-cmp-divider-inset-x-pc: {{ s.cell_divider_inset_x_pc | default: 51 }}px;
+    --be-cmp-divider-inset-x-m:  {{ s.cell_divider_inset_x_mobile | default: 12 }}px;
+    --be-cmp-table-radius-pc:    {{ s.table_radius_pc }}px;
+    --be-cmp-table-radius-m:     {{ s.table_radius_mobile }}px;
+    --be-cmp-bg-radius-pc:       {{ s.bg_image_radius_pc | default: 25 }}px;
+    --be-cmp-bg-radius-m:        {{ s.bg_image_radius_mobile | default: 10 }}px;
+    --be-cmp-table-pt-pc:        {{ s.table_padding_top_pc }}px;
+    --be-cmp-table-pr-pc:        {{ s.table_padding_right_pc }}px;
+    --be-cmp-table-pb-pc:        {{ s.table_padding_bottom_pc }}px;
+    --be-cmp-table-pl-pc:        {{ s.table_padding_left_pc }}px;
+    --be-cmp-table-pt-m:         {{ s.table_padding_top_mobile }}px;
+    --be-cmp-table-pr-m:         {{ s.table_padding_right_mobile }}px;
+    --be-cmp-table-pb-m:         {{ s.table_padding_bottom_mobile }}px;
+    --be-cmp-table-pl-m:         {{ s.table_padding_left_mobile }}px;
+
+    --be-cmp-col-1:              {{ s.col_1_ratio }}fr;
+    --be-cmp-col-2:              {{ s.col_2_ratio }}fr;
+    --be-cmp-col-3:              {{ s.col_3_ratio }}fr;
+    --be-cmp-col-4:              {{ s.col_4_ratio | default: 3 }}fr;
+    --be-cmp-col-5:              {{ s.col_5_ratio | default: 3 }}fr;
+    --be-cmp-show-col-4:         {% if s.show_col_4 %}1{% else %}0{% endif %};
+    --be-cmp-show-col-5:         {% if s.show_col_5 %}1{% else %}0{% endif %};
+
+    --be-cmp-cell-px-pc:         {{ s.cell_padding_x_pc }}px;
+    --be-cmp-cell-py-pc:         {{ s.cell_padding_y_pc }}px;
+    --be-cmp-cell-px-m:          {{ s.cell_padding_x_mobile }}px;
+    --be-cmp-cell-py-m:          {{ s.cell_padding_y_mobile }}px;
+    --be-cmp-cell-px-pc-4col:    {{ s.cell_padding_x_pc_4col | default: 40 }}px;
+    --be-cmp-cell-px-m-4col:     {{ s.cell_padding_x_mobile_4col | default: 6 }}px;
+    --be-cmp-cell-px-pc-5col:    {{ s.cell_padding_x_pc_5col | default: 20 }}px;
+    --be-cmp-cell-px-m-5col:     {{ s.cell_padding_x_mobile_5col | default: 12 }}px;
+    --be-cmp-divider-inset-x-pc-4col: {{ s.cell_divider_inset_x_pc_4col | default: 32 }}px;
+    --be-cmp-divider-inset-x-m-4col:  {{ s.cell_divider_inset_x_mobile_4col | default: 10 }}px;
+    --be-cmp-divider-inset-x-pc-5col: {{ s.cell_divider_inset_x_pc_5col | default: 24 }}px;
+    --be-cmp-divider-inset-x-m-5col:  {{ s.cell_divider_inset_x_mobile_5col | default: 12 }}px;
+    --be-cmp-table-min-width-m-5col: {{ s.table_min_width_mobile_5col | default: 560 }}px;
+
+    --be-cmp-footnote-color:     {{ s.footnote_color | default: '#10374B' }};
+    --be-cmp-footnote-size-pc:   {{ s.footnote_size_pc | default: 14 }}px;
+    --be-cmp-footnote-size-m:    {{ s.footnote_size_mobile | default: 12 }}px;
+    --be-cmp-footnote-gap-pc:    {{ s.footnote_gap_pc | default: 32 }}px;
+    --be-cmp-footnote-gap-m:     {{ s.footnote_gap_mobile | default: 4 }}px;
+    --be-cmp-footnote-mt-pc:     {{ s.footnote_mt_pc | default: 24 }}px;
+    --be-cmp-footnote-mt-m:      {{ s.footnote_mt_mobile | default: 16 }}px;
+    --be-cmp-footnote-align:     {{ s.footnote_align | default: 'left' }};
+    --be-cmp-row-gap-pc:         {{ s.row_gap_pc }}px;
+    --be-cmp-row-gap-m:          {{ s.row_gap_mobile }}px;
+
+    --be-cmp-head-color:         {{ s.head_color }};
+    --be-cmp-head-c2-color:      {{ s.head_col_2_color | default: s.head_color }};
+    --be-cmp-head-size-pc:       {{ s.head_size_pc }}px;
+    --be-cmp-head-size-m:        {{ s.head_size_mobile }}px;
+    --be-cmp-head-weight:        {{ s.head_weight }};
+    --be-cmp-head-mb-pc:         {{ s.head_margin_bottom_pc | default: 16 }}px;
+    --be-cmp-head-mb-m:          {{ s.head_margin_bottom_mobile | default: 0 }}px;
+    --be-cmp-head-img-size-pc:   {{ s.header_image_size_pc | default: 100 }}px;
+    --be-cmp-head-img-size-m:    {{ s.header_image_size_mobile | default: 56 }}px;
+    --be-cmp-head-img-gap-pc:    {{ s.header_image_gap_pc | default: 16 }}px;
+    --be-cmp-head-img-gap-m:     {{ s.header_image_gap_mobile | default: 8 }}px;
+    --be-cmp-head-img-radius:    {% case s.header_image_shape %}{% when 'square' %}0{% when 'rounded' %}16px{% else %}50%{% endcase %};
+
+    --be-cmp-cell-color:         {{ s.cell_color }};
+    --be-cmp-cell-size-pc:       {{ s.cell_size_pc }}px;
+    --be-cmp-cell-size-m:        {{ s.cell_size_mobile }}px;
+    --be-cmp-cell-weight:        {{ s.cell_weight }};
+
+    --be-cmp-c1-align:           {{ s.col_1_align }};
+    --be-cmp-c2-align:           {{ s.col_2_align }};
+    --be-cmp-c3-align:           {{ s.col_3_align }};
+    --be-cmp-c4-align:           {{ s.col_4_align | default: 'center' }};
+    --be-cmp-c5-align:           {{ s.col_5_align | default: 'center' }};
+    --be-cmp-hl-col:             {{ s.highlight_column | default: 2 }};
+
+    --be-cmp-hl-bg:              {{ s.highlight_bg_color }};
+    --be-cmp-hl-radius-pc:       {{ s.highlight_radius_pc }}px;
+    --be-cmp-hl-radius-m:        {{ s.highlight_radius_mobile }}px;
+    --be-cmp-hl-inset-t-pc:      {{ s.highlight_inset_top_pc }}px;
+    --be-cmp-hl-inset-r-pc:      {{ s.highlight_inset_right_pc }}px;
+    --be-cmp-hl-inset-b-pc:      {{ s.highlight_inset_bottom_pc }}px;
+    --be-cmp-hl-inset-l-pc:      {{ s.highlight_inset_left_pc }}px;
+    --be-cmp-hl-inset-t-m:       {{ s.highlight_inset_top_mobile }}px;
+    --be-cmp-hl-inset-r-m:       {{ s.highlight_inset_right_mobile }}px;
+    --be-cmp-hl-inset-b-m:       {{ s.highlight_inset_bottom_mobile }}px;
+    --be-cmp-hl-inset-l-m:       {{ s.highlight_inset_left_mobile }}px;
+  "
+>
+  {% if s.background_image != blank or s.background_image_mobile != blank %}
+    <picture class="be-cmp__bg" aria-hidden="true">
+      {% if s.background_image_mobile != blank %}
+        <source
+          media="(max-width: 768px)"
+          srcset="
+            {{ s.background_image_mobile | image_url: width: 600 }} 600w,
+            {{ s.background_image_mobile | image_url: width: 900 }} 900w,
+            {{ s.background_image_mobile | image_url: width: 1200 }} 1200w
+          "
+        >
+      {% endif %}
+      {% if s.background_image != blank %}
+        <img
+          src="{{ s.background_image | image_url: width: 1920 }}"
+          srcset="
+            {{ s.background_image | image_url: width: 1280 }} 1280w,
+            {{ s.background_image | image_url: width: 1600 }} 1600w,
+            {{ s.background_image | image_url: width: 1920 }} 1920w,
+            {{ s.background_image | image_url: width: 2400 }} 2400w
+          "
+          sizes="100vw"
+          alt=""
+          loading="lazy"
+        >
+      {% else %}
+        <img
+          src="{{ s.background_image_mobile | image_url: width: 1200 }}"
+          alt=""
+          loading="lazy"
+        >
+      {% endif %}
+    </picture>
+  {% endif %}
+
+  <div class="be-cmp__inner">
+    {% if s.heading != blank %}
+      <h2 class="be-cmp__title">{{ s.heading | escape }}</h2>
+    {% endif %}
+
+    {%- assign data_rows = blocks.size -%}
+    {%- if data_rows > 0 -%}
+      {%- assign panel_row_span = data_rows | times: 2 | minus: 1 -%}
+      {%- assign total_rows = data_rows | times: 2 -%}
+    {%- else -%}
+      {%- assign panel_row_span = 0 -%}
+      {%- assign total_rows = 1 -%}
+    {%- endif -%}
+    <div class="be-cmp__scroll" data-cols="{{ cols_count }}">
+    <div class="be-cmp__table" role="table" data-cols="{{ cols_count }}" aria-label="{{ s.heading | default: 'Comparison' | escape }}">
+      <!-- 浅色 panel：仅覆盖数据行（表头在 panel 之外漂浮在背景图上） -->
+      {% if data_rows > 0 %}
+        <span
+          class="be-cmp__panel"
+          aria-hidden="true"
+          style="grid-row: 2 / span {{ panel_row_span }};"
+        ></span>
+      {% endif %}
+
+      <!-- 高亮列：由 highlight_column（默认第 2 列）决定 grid-column；
+           从表头跨到最后一行数据，浮在 panel 之上、cell 之下 -->
+      {% if s.show_highlight %}
+        {%- assign hl_col = s.highlight_column | default: 2 -%}
+        <span
+          class="be-cmp__col-highlight"
+          aria-hidden="true"
+          style="grid-row: 1 / span {{ total_rows }}; grid-column: {{ hl_col }};"
+        ></span>
+      {% endif %}
+
+      <!-- 表头：单独一行，浮在 panel 上方背景图上；每列文字下方可选一张图片 -->
+      {%- assign has_head_media = false -%}
+      {%- for i in (1..cols_count) -%}
+        {%- assign head_img_key = 'header_image_' | append: i -%}
+        {%- if s[head_img_key] != blank -%}{%- assign has_head_media = true -%}{%- endif -%}
+      {%- endfor -%}
+      {%- for i in (1..cols_count) -%}
+        {%- assign head_text_key = 'header_col_' | append: i -%}
+        {%- assign head_img_key = 'header_image_' | append: i -%}
+        {%- assign head_align_key = 'col_' | append: i | append: '_align' -%}
+        {%- assign head_text = s[head_text_key] -%}
+        {%- assign head_img = s[head_img_key] -%}
+        {%- assign head_align = s[head_align_key] | default: 'center' -%}
+        <div class="be-cmp__cell be-cmp__cell--head be-cmp__cell--c{{ i }}" style="grid-row: 1;" role="columnheader">
+          <span class="be-cmp__head-text">{{ head_text | escape }}</span>
+          {%- if head_img != blank -%}
+            <span class="be-cmp__head-media be-cmp__head-media--{{ head_align }}">
+              {{
+                head_img
+                | image_url: width: 400
+                | image_tag:
+                  class: 'be-cmp__head-img',
+                  widths: '120, 200, 300, 400',
+                  sizes: '(max-width: 768px) 120px, 200px',
+                  alt: head_text,
+                  loading: 'lazy'
+              }}
+            </span>
+          {%- elsif has_head_media -%}
+            <span class="be-cmp__head-media be-cmp__head-media--{{ head_align }} be-cmp__head-media--empty" aria-hidden="true"></span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      <!-- 数据行：每个 block 最多五列；所有 cell 显式 grid-row + grid-column，不参与 auto-placement，
+           因此 panel / 高亮等跨格元素不会"挤占"格子导致行错乱。 -->
+      {% for block in blocks %}
+        {%- assign row_align = block.settings.row_align -%}
+        {%- assign row_idx = forloop.index | times: 2 -%}
+        {%- assign last_row_class = '' -%}
+        {%- if forloop.last -%}{%- assign last_row_class = ' be-cmp__cell--last-row' -%}{%- endif -%}
+        <div class="be-cmp__row" {{ block.shopify_attributes }}>
+          <div class="be-cmp__cell be-cmp__cell--data be-cmp__cell--c1{% if row_align != blank %} be-cmp__cell--align-{{ row_align }}{% endif %}{{ last_row_class }}" style="grid-row: {{ row_idx }};" role="cell">{{ block.settings.col_1 | escape }}</div>
+          <div class="be-cmp__cell be-cmp__cell--data be-cmp__cell--c2{% if row_align != blank %} be-cmp__cell--align-{{ row_align }}{% endif %}{{ last_row_class }}" style="grid-row: {{ row_idx }};" role="cell">{{ block.settings.col_2 | escape }}</div>
+          <div class="be-cmp__cell be-cmp__cell--data be-cmp__cell--c3{% if row_align != blank %} be-cmp__cell--align-{{ row_align }}{% endif %}{{ last_row_class }}" style="grid-row: {{ row_idx }};" role="cell">{{ block.settings.col_3 | escape }}</div>
+          {% if s.show_col_4 %}
+            <div class="be-cmp__cell be-cmp__cell--data be-cmp__cell--c4{% if row_align != blank %} be-cmp__cell--align-{{ row_align }}{% endif %}{{ last_row_class }}" style="grid-row: {{ row_idx }};" role="cell">{{ block.settings.col_4 | escape }}</div>
+          {% endif %}
+          {% if s.show_col_5 %}
+            <div class="be-cmp__cell be-cmp__cell--data be-cmp__cell--c5{% if row_align != blank %} be-cmp__cell--align-{{ row_align }}{% endif %}{{ last_row_class }}" style="grid-row: {{ row_idx }};" role="cell">{{ block.settings.col_5 | escape }}</div>
+          {% endif %}
+        </div>
+        {%- unless forloop.last -%}
+          {%- assign divider_row = row_idx | plus: 1 -%}
+          <hr
+            class="be-cmp__divider"
+            style="grid-row: {{ divider_row }}; grid-column: 1 / -1;"
+            aria-hidden="true"
+          >
+        {%- endunless -%}
+      {% endfor %}
+    </div>
+    </div>{%- comment -%} /.be-cmp__scroll {%- endcomment -%}
+
+    <div class="be-cmp__scrollbar" data-cols="{{ cols_count }}" aria-hidden="true">
+      <span class="be-cmp__scrollbar-thumb"></span>
+    </div>
+
+    {% if s.footnote_line_1 != blank or s.footnote_line_2 != blank %}
+      <div class="be-cmp__footnote" data-align="{{ s.footnote_align | default: 'left' }}">
+        {% if s.footnote_line_1 != blank %}
+          <span class="be-cmp__footnote-line">{{ s.footnote_line_1 }}</span>
+        {% endif %}
+        {% if s.footnote_line_2 != blank %}
+          <span class="be-cmp__footnote-line">{{ s.footnote_line_2 }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+</div>
+</div>
+
+<style>
+  .be-cmp,
+  .be-cmp *,
+  .be-cmp *::before,
+  .be-cmp *::after { box-sizing: border-box; }
+
+  /* 整块：上下 padding 交给主题原生的 .section--padding；
+     水平宽度交给主题原生的 .page-width（或勾选 full_width 时由父级 100% 控制）。
+     这里只负责自身水平内缩、背景图、isolation。 */
+  .be-cmp {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    padding-top: var(--be-cmp-pad-top-pc);
+    padding-bottom: var(--be-cmp-pad-bottom-pc);
+    padding-left: var(--be-cmp-pad-x-pc);
+    padding-right: var(--be-cmp-pad-x-pc);
+    background: var(--be-cmp-bg-color, transparent);
+  }
+
+  /* 视差：背景图 img 用 JS 在 scroll 时设置 transform；
+     vertical/horizontal 用 translate，zoom 用 scale */
+  .be-cmp.is-parallax .be-cmp__bg {
+    overflow: hidden;
+  }
+  .be-cmp.is-parallax .be-cmp__bg img {
+    height: 120%;
+    width: 110%;
+    top: -10%;
+    left: -5%;
+    position: absolute;
+    object-fit: cover;
+    will-change: transform;
+  }
+
+  /* 整块外围背景图（cover，左右铺满） */
+  .be-cmp__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    display: block;
+    border-radius: var(--be-cmp-bg-radius-pc, 0);
+    overflow: hidden;
+  }
+  .be-cmp__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .be-cmp__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--be-cmp-max-width, none);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 表格滚动 wrapper：PC 端默认不滚动；仅在移动端 + 5 列时启用横向滚动 */
+  .be-cmp__scroll {
+    position: relative;
+    width: 100%;
+  }
+
+  .be-cmp .be-cmp__title {
+    margin: 0 auto var(--be-cmp-title-mb-pc) !important;
+    text-align: center;
+    font-style: italic !important;
+    font-weight: 600 !important;
+    font-size: var(--be-cmp-title-size-pc) !important;
+    line-height: 1.1 !important;
+    color: var(--be-cmp-title-color) !important;
+  }
+
+  /* ---- 表格 grid 容器：自身无背景，只负责列对齐和行间距 ---- */
+  .be-cmp__table {
+    position: relative;
+    isolation: isolate;
+    overflow: visible;
+    display: grid;
+    /* 3 列默认；开启 show_col_4 / show_col_5 后由 [data-cols] 覆盖 */
+    grid-template-columns:
+      var(--be-cmp-col-1)
+      var(--be-cmp-col-2)
+      var(--be-cmp-col-3);
+    column-gap: 0;
+    /* 行间距必须为 0，数据行下划线才能横贯整行 */
+    row-gap: 0;
+    /* 分隔行至少 1px，避免仅 background 时 track 高度塌成 0 */
+    grid-auto-rows: minmax(0, auto);
+    align-items: stretch;
+  }
+
+  /* 让 row 不占布局，cell 直接成为 grid items（保留 shopify_attributes 的语义） */
+  .be-cmp__row { display: contents; }
+
+  /* ---- 浅色 panel：仅覆盖数据行（表头不在 panel 内）。
+         占据 grid 第 2 行到最后一行 + 三列。z-index 最低，
+         数据列文字渲染在它之上，第二列高亮在 panel 之上 ---- */
+  .be-cmp__panel {
+    grid-column: 1 / -1;
+    /* grid-row 在 inline style：grid-row: 2 / span (data rows) */
+    align-self: stretch;
+    justify-self: stretch;
+    background: var(--be-cmp-table-bg);
+    border-radius: var(--be-cmp-table-radius-pc);
+    border: var(--be-cmp-panel-border-w, 0) solid var(--be-cmp-panel-border-color, transparent);
+    box-shadow: var(--be-cmp-panel-shadow, none);
+    -webkit-backdrop-filter: blur(var(--be-cmp-panel-blur, 0));
+    backdrop-filter: blur(var(--be-cmp-panel-blur, 0));
+    /* 用 padding 系列变量做"向外扩展"——正值会让 panel 比数据格子大一圈。
+       默认全部为 0，避免向上扩展遮住表头；用户在 schema 里调正值即可获得"溢出" */
+    margin:
+      calc(-1 * var(--be-cmp-table-pt-pc, 0px))
+      calc(-1 * var(--be-cmp-table-pr-pc, 0px))
+      calc(-1 * var(--be-cmp-table-pb-pc, 0px))
+      calc(-1 * var(--be-cmp-table-pl-pc, 0px));
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ---- 第二列高亮：通过 grid-column 自动对齐第二列宽度，
+         grid-row 由 inline style 显式设定从第 1 行覆盖到最后一行；
+         位于 panel 之上、cell 之下 ---- */
+  .be-cmp__col-highlight {
+    grid-column: 2;
+    /* grid-row 在 inline style 上：grid-row: 1 / span (rows count) */
+    align-self: stretch;
+    justify-self: center;
+    background: var(--be-cmp-hl-bg);
+    border-radius: var(--be-cmp-hl-radius-pc);
+    z-index: 1;
+    /* inset 用 margin 实现：正值收缩、负值溢出。 */
+    margin:
+      var(--be-cmp-hl-inset-t-pc)
+      var(--be-cmp-hl-inset-r-pc)
+      var(--be-cmp-hl-inset-b-pc)
+      var(--be-cmp-hl-inset-l-pc);
+    pointer-events: none;
+    width: 229px
+  }
+
+  /* ---- 单元格 ---- */
+  .be-cmp__cell {
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--be-cmp-cell-py-pc) var(--be-cmp-cell-px-pc);
+    color: var(--be-cmp-cell-color);
+    font-size: var(--be-cmp-cell-size-pc);
+    font-weight: var(--be-cmp-cell-weight, 400);
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  /* 每列固定 grid-column，不依赖 source order 自动放置 */
+  .be-cmp__cell--c1 { grid-column: 1; }
+  .be-cmp__cell--c2 { grid-column: 2; }
+  .be-cmp__cell--c3 { grid-column: 3; }
+  .be-cmp__cell--c4 { grid-column: 4; }
+  .be-cmp__cell--c5 { grid-column: 5; }
+
+  /* 4 / 5 列扩展 */
+  .be-cmp__table[data-cols="4"] {
+    grid-template-columns:
+      var(--be-cmp-col-1)
+      var(--be-cmp-col-2)
+      var(--be-cmp-col-3)
+      var(--be-cmp-col-4);
+  }
+  .be-cmp__table[data-cols="5"] {
+    grid-template-columns:
+      var(--be-cmp-col-1)
+      var(--be-cmp-col-2)
+      var(--be-cmp-col-3)
+      var(--be-cmp-col-4)
+      var(--be-cmp-col-5);
+  }
+
+  /* 4 / 5 列时列变窄，单元格左右 padding 与分隔线内缩使用更紧凑的独立值 */
+  .be-cmp__table[data-cols="4"] .be-cmp__cell {
+    padding-inline: var(--be-cmp-cell-px-pc-4col);
+  }
+  .be-cmp__table[data-cols="5"] .be-cmp__cell {
+    padding-inline: var(--be-cmp-cell-px-pc-5col);
+  }
+
+  /* 4 / 5 列时高亮胶囊自动铺满当前列，避免硬编码 229px 溢出 */
+  .be-cmp__table[data-cols="4"] .be-cmp__col-highlight,
+  .be-cmp__table[data-cols="5"] .be-cmp__col-highlight {
+    width: auto;
+    justify-self: stretch;
+  }
+  .be-cmp__table[data-cols="4"] hr.be-cmp__divider,
+  .be-cmp__table[data-cols="4"] .be-cmp__divider {
+    margin-inline: var(--be-cmp-divider-inset-x-pc-4col);
+  }
+  .be-cmp__table[data-cols="5"] hr.be-cmp__divider,
+  .be-cmp__table[data-cols="5"] .be-cmp__divider {
+    margin-inline: var(--be-cmp-divider-inset-x-pc-5col);
+  }
+
+  .be-cmp__cell--head {
+    color: var(--be-cmp-head-color);
+    font-size: var(--be-cmp-head-size-pc);
+    font-weight: var(--be-cmp-head-weight, 700);
+    margin-bottom: var(--be-cmp-head-mb-pc, 0);
+  }
+  .be-cmp__cell--head.be-cmp__cell--c2 {
+    color: var(--be-cmp-head-c2-color);
+  }
+
+  /* 表头文字底对齐，保证文字换行数不同时各列图片仍在同一水平线 */
+  .be-cmp__head-text {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .be-cmp__head-media {
+    display: block;
+    flex: 0 0 auto;
+    width: var(--be-cmp-head-img-size-pc);
+    max-width: 100%;
+    margin-top: var(--be-cmp-head-img-gap-pc);
+  }
+  .be-cmp__head-media--empty { aspect-ratio: 1 / 1; visibility: hidden; }
+  .be-cmp__head-media--center { margin-inline: auto; }
+  .be-cmp__head-media--right  { margin-left: auto; }
+  .be-cmp .be-cmp__head-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--be-cmp-head-img-radius, 50%);
+  }
+
+  /* 数据行下横线：独占 grid 行；border-top 比 background 更不易在 grid 里塌高度
+     z-index 0 → 第 2 列高亮(1) 会盖住中间段横线；左右 margin = 整表 inset */
+  .be-cmp hr.be-cmp__divider,
+  .be-cmp .be-cmp__divider {
+    display: block !important;
+    grid-column: 1 / -1;
+    align-self: center;
+    justify-self: stretch;
+    width: auto;
+    height: 0;
+    min-height: 0;
+    margin: 0 var(--be-cmp-divider-inset-x-pc, 16px);
+    padding: 0;
+    border: 0;
+    border-top: max(var(--be-cmp-divider-w, 1px), 1px) solid var(--be-cmp-divider-color, rgba(255, 255, 255, 0.6));
+    background: none;
+    -webkit-appearance: none;
+    appearance: none;
+    overflow: visible;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 1 !important;
+    box-shadow: none !important;
+  }
+
+  .be-cmp .be-cmp__cell--data {
+    border-bottom: none !important;
+  }
+
+  /* 各列默认对齐（section 级） */
+  .be-cmp__cell--c1 { text-align: var(--be-cmp-c1-align, left); }
+  .be-cmp__cell--c2 { text-align: var(--be-cmp-c2-align, center); }
+  .be-cmp__cell--c3 { text-align: var(--be-cmp-c3-align, center); }
+  .be-cmp__cell--c4 { text-align: var(--be-cmp-c4-align, center); }
+  .be-cmp__cell--c5 { text-align: var(--be-cmp-c5-align, center); }
+
+  /* 行级对齐覆盖（block 级） */
+  .be-cmp__cell--align-left   { text-align: left !important; }
+  .be-cmp__cell--align-center { text-align: center !important; }
+  .be-cmp__cell--align-right  { text-align: right !important; }
+
+  /* ---- 表格下方 footnote：PC 一行、移动端换行 ---- */
+  .be-cmp__footnote {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--be-cmp-footnote-gap-pc, 32px);
+    margin-top: var(--be-cmp-footnote-mt-pc, 24px);
+    color: var(--be-cmp-footnote-color, #10374B);
+    font-size: var(--be-cmp-footnote-size-pc, 14px);
+    line-height: 1.5;
+    justify-content: flex-start;
+  }
+  .be-cmp__footnote[data-align="center"] { justify-content: center; text-align: center; }
+  .be-cmp__footnote[data-align="right"]  { justify-content: flex-end;  text-align: right;  }
+  .be-cmp__footnote-line { display: inline-block; }
+
+  /* ---------- 移动端 ---------- */
+  @media (max-width: 768px) {
+    .be-cmp {
+      padding-top: var(--be-cmp-pad-top-m);
+      padding-bottom: var(--be-cmp-pad-bottom-m);
+      padding-left: var(--be-cmp-pad-x-m);
+      padding-right: var(--be-cmp-pad-x-m);
+    }
+
+    .be-cmp .be-cmp__title {
+      margin-bottom: var(--be-cmp-title-mb-m) !important;
+      font-size: var(--be-cmp-title-size-m) !important;
+    }
+
+    .be-cmp__table {
+      row-gap: 0;
+    }
+
+    .be-cmp__bg {
+      border-radius: var(--be-cmp-bg-radius-m, 0);
+    }
+
+    .be-cmp__panel {
+      border-radius: var(--be-cmp-table-radius-m);
+      margin:
+        calc(-1 * var(--be-cmp-table-pt-m, 0px))
+        calc(-1 * var(--be-cmp-table-pr-m, 0px))
+        calc(-1 * var(--be-cmp-table-pb-m, 0px))
+        calc(-1 * var(--be-cmp-table-pl-m, 0px));
+    }
+
+    .be-cmp__col-highlight {
+      width: 79px;
+      border-radius: var(--be-cmp-hl-radius-m);
+      margin:
+        var(--be-cmp-hl-inset-t-m)
+        var(--be-cmp-hl-inset-r-m)
+        var(--be-cmp-hl-inset-b-m)
+        var(--be-cmp-hl-inset-l-m);
+    }
+
+    .be-cmp__cell {
+      padding: var(--be-cmp-cell-py-m) var(--be-cmp-cell-px-m);
+      font-size: var(--be-cmp-cell-size-m);
+    }
+    .be-cmp__cell--head {
+      font-size: var(--be-cmp-head-size-m);
+      margin-bottom: var(--be-cmp-head-mb-m, 0);
+    }
+    .be-cmp__head-media {
+      width: var(--be-cmp-head-img-size-m);
+      margin-top: var(--be-cmp-head-img-gap-m);
+    }
+
+    .be-cmp hr.be-cmp__divider,
+    .be-cmp .be-cmp__divider {
+      margin-left: var(--be-cmp-divider-inset-x-m, 12px) !important;
+      margin-right: var(--be-cmp-divider-inset-x-m, 12px) !important;
+    }
+
+    /* 移动端 4 / 5 列专用紧凑边距 */
+    .be-cmp__table[data-cols="4"] .be-cmp__cell {
+      padding-inline: var(--be-cmp-cell-px-m-4col);
+    }
+    .be-cmp__table[data-cols="5"] .be-cmp__cell {
+      padding-inline: var(--be-cmp-cell-px-m-5col);
+    }
+    .be-cmp__table[data-cols="4"] .be-cmp__col-highlight,
+    .be-cmp__table[data-cols="5"] .be-cmp__col-highlight {
+      width: auto;
+      justify-self: stretch;
+    }
+    .be-cmp__table[data-cols="4"] hr.be-cmp__divider,
+    .be-cmp__table[data-cols="4"] .be-cmp__divider {
+      margin-left: var(--be-cmp-divider-inset-x-m-4col) !important;
+      margin-right: var(--be-cmp-divider-inset-x-m-4col) !important;
+    }
+    .be-cmp__table[data-cols="5"] hr.be-cmp__divider,
+    .be-cmp__table[data-cols="5"] .be-cmp__divider {
+      margin-left: var(--be-cmp-divider-inset-x-m-5col) !important;
+      margin-right: var(--be-cmp-divider-inset-x-m-5col) !important;
+    }
+
+    /* ---------- 移动端 5 列：横向滚动 ---------- */
+    /* 只在 5 列时启用横滚，3 / 4 列保持原样。
+       滚动区限制在 section padding 内，panel 左右保持外边距，视觉更规整。 */
+    .be-cmp__scroll[data-cols="5"] {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      /* 上下 padding 用于容纳蓝底胶囊的负 inset 溢出，
+         避免 overflow-x:auto 隐含裁掉 y 方向导致胶囊顶/底被切 */
+      padding-top: 12px;
+      padding-bottom: 8px;
+      /* 抵消一部分外部视觉高度，让上边跟标题的距离保持原样 */
+      margin-top: -12px;
+      margin-bottom: -6px;
+      /* 完全隐藏原生滚动条 —— 使用下方自定义 div 进度条替代 */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .be-cmp__scroll[data-cols="5"]::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+      background: transparent;
+    }
+
+    /* 自定义进度条式滚动指示器（跟主题产品轮播下的 progress bar 一致风格）
+       默认不显示，只在 5 列 + 移动端 + 内容溢出时通过 JS 加 .is-visible 触发 */
+    .be-cmp__scrollbar {
+      display: none;
+      position: relative;
+      width: 100%;
+      height: 4px;
+      margin-top: 12px;
+      /* 用 currentColor 的 20% 透明度作 track；下方再用主题 hex 变量兜底 */
+      background-color: rgba(0, 0, 0, 0.1);
+      background-color: color-mix(in srgb, var(--be-cmp-cell-color, #111827) 18%, transparent);
+      border-radius: 999px;
+      overflow: hidden;
+      -webkit-user-select: none;
+              user-select: none;
+      touch-action: pan-x;
+    }
+    .be-cmp__scrollbar-thumb {
+      /* 主题全局有 `div:empty { display: none }` 规则，所以本元素用 <span> 实现；
+         这里再显式 display: block !important 双保险，防止被其他空元素规则命中 */
+      display: block !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 15%;
+      /* 用 section 已有的 cell_color（深色文字色）作 thumb，一定可见；
+         如果变量未定义走 fallback 深灰 */
+      background-color: #111827;
+      background-color: var(--be-cmp-cell-color, #111827);
+      border-radius: 999px;
+      will-change: transform, width;
+    }
+    .be-cmp__scrollbar.is-visible {
+      display: block;
+    }
+    .be-cmp__scroll[data-cols="5"] > .be-cmp__table[data-cols="5"] {
+      /* 每列最小宽度：col_1 稍宽（约 130），其余各 100，5 列 ≈ 530；
+         这里预留富余到 var 以便未来可调 */
+      min-width: var(--be-cmp-table-min-width-m-5col, 560px);
+      width: var(--be-cmp-table-min-width-m-5col, 560px);
+      /* 让文字尽量单行显示；换行仍由 word-break 兜底 */
+    }
+    /* 5 列时单元格避免主动断词，保持整词优先，宽度不足时才 fallback */
+    .be-cmp__table[data-cols="5"] .be-cmp__cell {
+      word-break: normal;
+      overflow-wrap: anywhere;
+    }
+
+    /* footnote 移动端：切成上下两行 */
+    .be-cmp__footnote {
+      flex-direction: column;
+      gap: var(--be-cmp-footnote-gap-m, 4px);
+      margin-top: var(--be-cmp-footnote-mt-m, 16px);
+      font-size: var(--be-cmp-footnote-size-m, 12px);
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    /* 视差：仅当 section 含 .is-parallax 才启用 */
+    var sections = [];
+    function refreshSections() {
+      sections = Array.prototype.slice.call(document.querySelectorAll('.be-cmp.is-parallax'));
+    }
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var vh = window.innerHeight;
+      sections.forEach(function (el) {
+        var img = el.querySelector('.be-cmp__bg img');
+        if (!img) return;
+        var rect = el.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > vh) return;
+        var dir = el.getAttribute('data-parallax-dir') || 'vertical';
+        /* progress 范围约 [-1, 1]：section 中心位于视口顶=−1，正中=0，底=1 */
+        var progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+        if (dir === 'horizontal') {
+          var x = progress * -40; /* 速度系数 */
+          img.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+        } else if (dir === 'zoom') {
+          var dist = Math.min(1, Math.abs(progress));
+          var scale = 1.05 + (1 - dist) * 0.1; /* 中心 1.15，远离 1.05 */
+          img.style.transform = 'scale(' + scale.toFixed(3) + ')';
+        } else {
+          var y = progress * -40;
+          img.style.transform = 'translate3d(0,' + y.toFixed(2) + 'px,0)';
+        }
+      });
+    }
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    function init() {
+      refreshSections();
+      if (!sections.length) return;
+      update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    /* Shopify theme editor: 重新加载 section 后重新探测 */
+    document.addEventListener('shopify:section:load', function () {
+      refreshSections();
+      update();
+    });
+  })();
+
+  /* ---- 自定义进度条式滚动指示器（仅移动端 5 列时激活） ---- */
+  (function () {
+    function bindScrollbar(root) {
+      var scope = root || document;
+      var scrolls = scope.querySelectorAll('.be-cmp__scroll[data-cols="5"]');
+      scrolls.forEach(function (scroll) {
+        if (scroll._beScrollbarBound) return;
+        var bar = scroll.parentElement && scroll.parentElement.querySelector('.be-cmp__scrollbar[data-cols="5"]');
+        if (!bar) return;
+        var thumb = bar.querySelector('.be-cmp__scrollbar-thumb');
+        if (!thumb) return;
+
+        function isMobile() {
+          return window.matchMedia('(max-width: 768px)').matches;
+        }
+
+        function update() {
+          var sw = scroll.scrollWidth;
+          var cw = scroll.clientWidth;
+          if (!isMobile() || sw <= cw + 1) {
+            bar.classList.remove('is-visible');
+            return;
+          }
+          bar.classList.add('is-visible');
+          var ratio = cw / sw;
+          var thumbPct = Math.max(ratio * 100, 15); /* 至少 15% 宽度便于视觉识别 */
+          var scrollable = sw - cw;
+          var progress = scrollable > 0 ? scroll.scrollLeft / scrollable : 0;
+          var leftPct = progress * (100 - thumbPct);
+          thumb.style.width = thumbPct + '%';
+          thumb.style.transform = 'translateX(' + (leftPct / thumbPct * 100) + '%)';
+        }
+
+        var rafId = null;
+        function onScrollEvt() {
+          if (rafId) return;
+          rafId = window.requestAnimationFrame(function () {
+            rafId = null;
+            update();
+          });
+        }
+
+        scroll.addEventListener('scroll', onScrollEvt, { passive: true });
+        window.addEventListener('resize', update, { passive: true });
+
+        /* 点击/拖动 track 让表格跳转到对应位置 */
+        function seekFromEvent(clientX) {
+          var rect = bar.getBoundingClientRect();
+          if (rect.width <= 0) return;
+          var t = (clientX - rect.left) / rect.width;
+          t = Math.max(0, Math.min(1, t));
+          scroll.scrollLeft = t * (scroll.scrollWidth - scroll.clientWidth);
+        }
+        var dragging = false;
+        bar.addEventListener('pointerdown', function (e) {
+          dragging = true;
+          try { bar.setPointerCapture(e.pointerId); } catch (err) {}
+          seekFromEvent(e.clientX);
+          e.preventDefault();
+        });
+        bar.addEventListener('pointermove', function (e) {
+          if (!dragging) return;
+          seekFromEvent(e.clientX);
+        });
+        bar.addEventListener('pointerup', function () { dragging = false; });
+        bar.addEventListener('pointercancel', function () { dragging = false; });
+
+        scroll._beScrollbarBound = true;
+
+        /* 初始化，等布局 ready */
+        update();
+        window.requestAnimationFrame(update);
+        window.setTimeout(update, 200);
+      });
+    }
+
+    function init() { bindScrollbar(document); }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    document.addEventListener('shopify:section:load', function (e) {
+      var target = e && e.target ? e.target : document;
+      bindScrollbar(target);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "tag": "section",
+  "class": "be-cmp-section",
+  "max_blocks": 20,
+  "settings": [
+    { "type": "header", "content": "t:sections.global.settings.header__section.content" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 120, "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 120, "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "label": "t:sections.global.settings.rounded.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "t:sections.global.settings.enable_parallax.label",
+      "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.enable_parallax == true }}",
+      "type": "select",
+      "id": "parallax_direction",
+      "label": "t:sections.global.settings.parallax_direction.label",
+      "default": "vertical",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "t:sections.global.settings.parallax_direction.options__1.label"
+        },
+        {
+          "value": "horizontal",
+          "label": "t:sections.global.settings.parallax_direction.options__2.label"
+        },
+        {
+          "value": "zoom",
+          "label": "t:sections.global.settings.parallax_direction.options__3.label"
+        }
+      ]
+    },
+
+    { "type": "header", "content": "Background" },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "PC background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Mobile background image",
+      "info": "Falls back to PC image when empty."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color (fallback)",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "bg_image_radius_pc",
+      "label": "PC background image corner radius",
+      "info": "Rounds all four corners of the bottom background image.",
+      "min": 0, "max": 80, "step": 1, "default": 25, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "bg_image_radius_mobile",
+      "label": "Mobile background image corner radius",
+      "min": 0, "max": 60, "step": 1, "default": 10, "unit": "px"
+    },
+
+    { "type": "header", "content": "Section layout" },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Section max width",
+      "min": 640, "max": 1920, "step": 16, "default": 1040, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_pc",
+      "label": "PC padding top",
+      "min": 0, "max": 200, "step": 2, "default": 80, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_pc",
+      "label": "PC padding bottom",
+      "min": 0, "max": 200, "step": 2, "default": 80, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x_pc",
+      "label": "PC padding left/right",
+      "min": 0, "max": 120, "step": 2, "default": 32, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "Mobile padding top",
+      "min": 0, "max": 120, "step": 2, "default": 40, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "Mobile padding bottom",
+      "min": 0, "max": 120, "step": 2, "default": 40, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x_mobile",
+      "label": "Mobile padding left/right",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+
+    { "type": "header", "content": "Title (optional)" },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "title_size_pc",
+      "label": "PC title size",
+      "min": 18, "max": 80, "step": 1, "default": 36, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Mobile title size",
+      "min": 14, "max": 48, "step": 1, "default": 22, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom_pc",
+      "label": "PC title margin-bottom",
+      "min": 0, "max": 80, "step": 1, "default": 4, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom_mobile",
+      "label": "Mobile title margin-bottom",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+
+    { "type": "header", "content": "Table panel (data rows only)" },
+    {
+      "type": "color",
+      "id": "table_bg_color",
+      "label": "Panel background color",
+      "default": "#B9BFC3"
+    },
+    {
+      "type": "range",
+      "id": "table_radius_pc",
+      "label": "PC panel corner radius",
+      "min": 0, "max": 60, "step": 1, "default": 29, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_radius_mobile",
+      "label": "Mobile panel corner radius",
+      "min": 0, "max": 40, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_padding_top_pc",
+      "label": "PC panel padding top",
+      "info": "Panel extends UP this many px beyond the first data row. Keep small to avoid covering the header above.",
+      "min": 0, "max": 60, "step": 1, "default": 21, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_padding_right_pc",
+      "label": "PC panel padding right",
+      "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_padding_bottom_pc",
+      "label": "PC panel padding bottom",
+      "min": 0, "max": 80, "step": 1, "default": 15, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_padding_left_pc",
+      "label": "PC panel padding left",
+      "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_padding_top_mobile",
+      "label": "Mobile panel padding top",
+      "info": "Keep small to avoid covering the header above.",
+      "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_padding_right_mobile",
+      "label": "Mobile panel padding right",
+      "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_padding_bottom_mobile",
+      "label": "Mobile panel padding bottom",
+      "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_padding_left_mobile",
+      "label": "Mobile panel padding left",
+      "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "panel_bg_opacity",
+      "label": "Panel background opacity",
+      "info": "0% = fully transparent, 100% = solid.",
+      "min": 0, "max": 100, "step": 1, "default": 85, "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "panel_border_color",
+      "label": "Panel border color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "panel_border_width",
+      "label": "Panel border width",
+      "min": 0, "max": 6, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "panel_shadow_color",
+      "label": "Panel outer glow color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "panel_shadow_opacity",
+      "label": "Panel outer glow opacity",
+      "min": 0, "max": 100, "step": 1, "default": 80, "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "panel_shadow_blur",
+      "label": "Panel outer glow blur",
+      "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "panel_shadow_spread",
+      "label": "Panel outer glow spread",
+      "info": "Negative values shrink the glow, positive values expand it.",
+      "min": -20, "max": 20, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "panel_blur",
+      "label": "Panel frosted glass blur",
+      "info": "Adds a translucent frosted-glass effect (blurs whatever is behind the panel). Pair with a lower Panel background opacity for the best result.",
+      "min": 0, "max": 40, "step": 1, "default": 12, "unit": "px"
+    },
+
+    { "type": "header", "content": "Row divider (under each data row)" },
+    {
+      "type": "color",
+      "id": "cell_divider_color",
+      "label": "Divider color",
+      "default": "#E1E7EB"
+    },
+    {
+      "type": "range",
+      "id": "cell_divider_opacity",
+      "label": "Divider opacity",
+      "min": 0, "max": 100, "step": 1, "default": 68, "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "cell_divider_width",
+      "label": "Divider thickness",
+      "info": "The last data row has no divider. Minimum 1px when enabled.",
+      "min": 1, "max": 4, "step": 1, "default": 1, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cell_divider_inset_x_pc",
+      "label": "PC divider inset (3 cols)",
+      "info": "Used when only 3 columns are enabled. Inset from the panel’s left and right edges.",
+      "min": 0, "max": 80, "step": 1, "default": 51, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cell_divider_inset_x_mobile",
+      "label": "Mobile divider inset (3 cols)",
+      "min": 0, "max": 48, "step": 1, "default": 12, "unit": "px"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_4 }}",
+      "type": "range",
+      "id": "cell_divider_inset_x_pc_4col",
+      "label": "PC divider inset (4 cols)",
+      "min": 0, "max": 80, "step": 1, "default": 32, "unit": "px"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_4 }}",
+      "type": "range",
+      "id": "cell_divider_inset_x_mobile_4col",
+      "label": "Mobile divider inset (4 cols)",
+      "min": 0, "max": 40, "step": 1, "default": 10, "unit": "px"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_5 }}",
+      "type": "range",
+      "id": "cell_divider_inset_x_pc_5col",
+      "label": "PC divider inset (5 cols)",
+      "min": 0, "max": 60, "step": 1, "default": 24, "unit": "px"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_5 }}",
+      "type": "range",
+      "id": "cell_divider_inset_x_mobile_5col",
+      "label": "Mobile divider inset (5 cols)",
+      "min": 0, "max": 30, "step": 1, "default": 12, "unit": "px"
+    },
+
+    { "type": "header", "content": "Columns" },
+    {
+      "type": "checkbox",
+      "id": "show_col_4",
+      "label": "Enable column 4",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_col_5",
+      "label": "Enable column 5",
+      "info": "Enable column 4 first. Column 5 only appears when both are on.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "col_1_ratio",
+      "label": "Column 1 width ratio",
+      "min": 1, "max": 12, "step": 1, "default": 5
+    },
+    {
+      "type": "range",
+      "id": "col_2_ratio",
+      "label": "Column 2 width ratio",
+      "min": 1, "max": 12, "step": 1, "default": 3
+    },
+    {
+      "type": "range",
+      "id": "col_3_ratio",
+      "label": "Column 3 width ratio",
+      "min": 1, "max": 12, "step": 1, "default": 3
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_4 }}",
+      "type": "range",
+      "id": "col_4_ratio",
+      "label": "Column 4 width ratio",
+      "min": 1, "max": 12, "step": 1, "default": 3
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_5 }}",
+      "type": "range",
+      "id": "col_5_ratio",
+      "label": "Column 5 width ratio",
+      "min": 1, "max": 12, "step": 1, "default": 3
+    },
+    {
+      "type": "select",
+      "id": "col_1_align",
+      "label": "Column 1 default alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "col_2_align",
+      "label": "Column 2 default alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "col_3_align",
+      "label": "Column 3 default alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_4 }}",
+      "type": "select",
+      "id": "col_4_align",
+      "label": "Column 4 default alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_5 }}",
+      "type": "select",
+      "id": "col_5_align",
+      "label": "Column 5 default alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+
+    { "type": "header", "content": "Cells" },
+    {
+      "type": "range",
+      "id": "row_gap_pc",
+      "label": "PC row gap",
+      "info": "建议保持 0，行间距过大时数据行下划线会断开。",
+      "min": 0, "max": 40, "step": 1, "default": 4, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "label": "Mobile row gap",
+      "info": "建议保持 0，行间距过大时数据行下划线会断开。",
+      "min": 0, "max": 24, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cell_padding_x_pc",
+      "label": "PC cell padding X (3 cols)",
+      "info": "Used when only 3 columns are enabled.",
+      "min": 0, "max": 200, "step": 2, "default": 72, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cell_padding_y_pc",
+      "label": "PC cell padding Y",
+      "min": 0, "max": 60, "step": 1, "default": 15, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cell_padding_x_mobile",
+      "label": "Mobile cell padding X (3 cols)",
+      "min": 0, "max": 30, "step": 1, "default": 8, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cell_padding_y_mobile",
+      "label": "Mobile cell padding Y",
+      "min": 0, "max": 30, "step": 1, "default": 8, "unit": "px"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_4 }}",
+      "type": "range",
+      "id": "cell_padding_x_pc_4col",
+      "label": "PC cell padding X (4 cols)",
+      "info": "Applied only when 4 columns are enabled (column 5 off).",
+      "min": 0, "max": 120, "step": 2, "default": 40, "unit": "px"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_4 }}",
+      "type": "range",
+      "id": "cell_padding_x_mobile_4col",
+      "label": "Mobile cell padding X (4 cols)",
+      "min": 0, "max": 24, "step": 1, "default": 6, "unit": "px"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_5 }}",
+      "type": "range",
+      "id": "cell_padding_x_pc_5col",
+      "label": "PC cell padding X (5 cols)",
+      "info": "Applied only when 5 columns are enabled.",
+      "min": 0, "max": 80, "step": 1, "default": 20, "unit": "px"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_5 }}",
+      "type": "range",
+      "id": "cell_padding_x_mobile_5col",
+      "label": "Mobile cell padding X (5 cols)",
+      "min": 0, "max": 24, "step": 1, "default": 12, "unit": "px"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_5 }}",
+      "type": "range",
+      "id": "table_min_width_mobile_5col",
+      "label": "Mobile table min width (5 cols)",
+      "info": "Enables horizontal scroll on mobile when 5 columns are on. Set to the width required to keep cell text on one line.",
+      "min": 360, "max": 900, "step": 20, "default": 560, "unit": "px"
+    },
+
+    { "type": "header", "content": "Table header (top row)" },
+    {
+      "type": "text",
+      "id": "header_col_1",
+      "label": "Header col 1",
+      "default": "Feature"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_image_1",
+      "label": "Header col 1 image"
+    },
+    {
+      "type": "text",
+      "id": "header_col_2",
+      "label": "Header col 2",
+      "default": "2.0"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_image_2",
+      "label": "Header col 2 image"
+    },
+    {
+      "type": "text",
+      "id": "header_col_3",
+      "label": "Header col 3",
+      "default": "1.0"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_image_3",
+      "label": "Header col 3 image"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_4 }}",
+      "type": "text",
+      "id": "header_col_4",
+      "label": "Header col 4"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_4 }}",
+      "type": "image_picker",
+      "id": "header_image_4",
+      "label": "Header col 4 image"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_5 }}",
+      "type": "text",
+      "id": "header_col_5",
+      "label": "Header col 5"
+    },
+    {
+      "visible_if": "{{ section.settings.show_col_5 }}",
+      "type": "image_picker",
+      "id": "header_image_5",
+      "label": "Header col 5 image"
+    },
+    {
+      "type": "select",
+      "id": "header_image_shape",
+      "label": "Header image shape",
+      "options": [
+        { "value": "circle",  "label": "Circle" },
+        { "value": "rounded", "label": "Rounded square" },
+        { "value": "square",  "label": "Square" }
+      ],
+      "default": "circle"
+    },
+    {
+      "type": "range",
+      "id": "header_image_size_pc",
+      "label": "PC header image size",
+      "info": "Automatically shrinks to fit when the column is narrower.",
+      "min": 40, "max": 200, "step": 2, "default": 100, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "header_image_size_mobile",
+      "label": "Mobile header image size",
+      "min": 24, "max": 120, "step": 2, "default": 56, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "header_image_gap_pc",
+      "label": "PC gap between header text and image",
+      "min": 0, "max": 40, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "header_image_gap_mobile",
+      "label": "Mobile gap between header text and image",
+      "min": 0, "max": 24, "step": 1, "default": 8, "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "head_color",
+      "label": "Header text color",
+      "info": "Used by columns 1 and 3.",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "head_col_2_color",
+      "label": "Header text color (column 2)",
+      "info": "Independent color for the middle column header (e.g. the highlighted product).",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "head_size_pc",
+      "label": "PC header size",
+      "min": 10, "max": 40, "step": 1, "default": 20, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "head_size_mobile",
+      "label": "Mobile header size",
+      "min": 8, "max": 28, "step": 1, "default": 14, "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "head_weight",
+      "label": "Header weight",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "head_margin_bottom_pc",
+      "label": "PC header margin bottom",
+      "info": "Space below Feature / 2.0 / 1.0 before the first data row.",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "head_margin_bottom_mobile",
+      "label": "Mobile header margin bottom",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+
+    { "type": "header", "content": "Data cells" },
+    {
+      "type": "color",
+      "id": "cell_color",
+      "label": "Cell text color",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "cell_size_pc",
+      "label": "PC cell size",
+      "min": 10, "max": 36, "step": 1, "default": 19, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cell_size_mobile",
+      "label": "Mobile cell size",
+      "min": 8, "max": 24, "step": 1, "default": 13, "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "cell_weight",
+      "label": "Cell weight",
+      "options": [
+        { "value": "300", "label": "300" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "400"
+    },
+
+    { "type": "header", "content": "Footnote (below table)" },
+    {
+      "type": "text",
+      "id": "footnote_line_1",
+      "label": "Footnote line 1",
+      "default": "Higher Value = Better Results"
+    },
+    {
+      "type": "text",
+      "id": "footnote_line_2",
+      "label": "Footnote line 2",
+      "info": "On mobile, line 2 wraps below line 1 automatically.",
+      "default": "*Tested by SGS for verified cooling performance."
+    },
+    {
+      "type": "select",
+      "id": "footnote_align",
+      "label": "Footnote alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "footnote_color",
+      "label": "Footnote color",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "footnote_size_pc",
+      "label": "PC footnote size",
+      "min": 10, "max": 24, "step": 1, "default": 14, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "footnote_size_mobile",
+      "label": "Mobile footnote size",
+      "min": 10, "max": 20, "step": 1, "default": 12, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "footnote_gap_pc",
+      "label": "PC gap between lines",
+      "info": "Horizontal spacing between the two lines when they share one row (desktop).",
+      "min": 0, "max": 80, "step": 2, "default": 32, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "footnote_gap_mobile",
+      "label": "Mobile gap between lines",
+      "info": "Vertical spacing between the two lines on mobile.",
+      "min": 0, "max": 20, "step": 1, "default": 4, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "footnote_mt_pc",
+      "label": "PC footnote margin top",
+      "min": 0, "max": 80, "step": 2, "default": 24, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "footnote_mt_mobile",
+      "label": "Mobile footnote margin top",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+
+    { "type": "header", "content": "Column highlight (background bar)" },
+    {
+      "type": "checkbox",
+      "id": "show_highlight",
+      "label": "Show highlighted column",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "highlight_column",
+      "label": "Highlighted column position",
+      "info": "Which column shows the highlight bar. Column 4/5 need to be enabled above first.",
+      "options": [
+        { "value": "1", "label": "Column 1" },
+        { "value": "2", "label": "Column 2" },
+        { "value": "3", "label": "Column 3" },
+        { "value": "4", "label": "Column 4" },
+        { "value": "5", "label": "Column 5" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "color",
+      "id": "highlight_bg_color",
+      "label": "Highlight color",
+      "default": "#9FE0E9"
+    },
+    {
+      "type": "range",
+      "id": "highlight_radius_pc",
+      "label": "PC highlight radius",
+      "min": 0, "max": 60, "step": 1, "default": 30, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "highlight_radius_mobile",
+      "label": "Mobile highlight radius",
+      "min": 0, "max": 40, "step": 1, "default": 12, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "highlight_inset_top_pc",
+      "label": "PC highlight inset top",
+      "info": "Use negative values to extend beyond the cell.",
+      "min": -40, "max": 40, "step": 1, "default": -25, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "highlight_inset_right_pc",
+      "label": "PC highlight inset right",
+      "min": -40, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "highlight_inset_bottom_pc",
+      "label": "PC highlight inset bottom",
+      "min": -40, "max": 40, "step": 1, "default": -30, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "highlight_inset_left_pc",
+      "label": "PC highlight inset left",
+      "min": -40, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "highlight_inset_top_mobile",
+      "label": "Mobile highlight inset top",
+      "min": -20, "max": 20, "step": 1, "default": -4, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "highlight_inset_right_mobile",
+      "label": "Mobile highlight inset right",
+      "min": -20, "max": 20, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "highlight_inset_bottom_mobile",
+      "label": "Mobile highlight inset bottom",
+      "min": -20, "max": 20, "step": 1, "default": -4, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "highlight_inset_left_mobile",
+      "label": "Mobile highlight inset left",
+      "min": -20, "max": 20, "step": 1, "default": 0, "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Data row",
+      "limit": 20,
+      "settings": [
+        { "type": "header", "content": "Row content" },
+        {
+          "type": "text",
+          "id": "col_1",
+          "label": "Column 1",
+          "default": "Cooling Performance (Qmax)"
+        },
+        {
+          "type": "text",
+          "id": "col_2",
+          "label": "Column 2",
+          "default": ">0.5"
+        },
+        {
+          "type": "text",
+          "id": "col_3",
+          "label": "Column 3",
+          "default": ">0.46"
+        },
+        {
+          "visible_if": "{{ section.settings.show_col_4 }}",
+          "type": "text",
+          "id": "col_4",
+          "label": "Column 4"
+        },
+        {
+          "visible_if": "{{ section.settings.show_col_5 }}",
+          "type": "text",
+          "id": "col_5",
+          "label": "Column 5"
+        },
+        {
+          "type": "select",
+          "id": "row_align",
+          "label": "Row alignment override",
+          "info": "Leave empty to follow column default alignment.",
+          "options": [
+            { "value": "",       "label": "Default (per column)" },
+            { "value": "left",   "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right",  "label": "Right" }
+          ],
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Table",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "Cooling Performance (Qmax)",
+            "col_2": ">0.5",
+            "col_3": ">0.46"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "Breathability & Moisture Control",
+            "col_2": "★★★★★",
+            "col_3": "★★★★★"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "Weight & Drape",
+            "col_2": "★★★★★",
+            "col_3": "★★★★☆"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "col_1": "Size",
+            "col_2": "Standard Fit",
+            "col_3": "Oversized Fit"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

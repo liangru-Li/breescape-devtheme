@@ -1,0 +1,269 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-md",
+        "heading_alignment": "text-center",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": false,
+        "rounded": true
+      }
+    },
+    "rich_text_eby7em": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EYbKjE": {
+          "type": "heading",
+          "settings": {
+            "heading": "Returns & Exchanges",
+            "heading_size": "title-md",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_NM6bFi": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At Breescape, we are committed to providing you with the best shopping experience. If you are not fully satisfied with your purchase, we are happy to offer a return and refund service. </p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_EYbKjE",
+        "text_NM6bFi"
+      ],
+      "custom_css": [
+        "h1 {font-family: \"GillSans\" !important; letter-spacing: -1px !important;}"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h1",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "multicolumn_UDxPVg": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_TUgCnq": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image_ratio": "adapt",
+            "heading": "Quality Guarantee",
+            "heading_size": "text-lg-2xl",
+            "text": "<p>I received a defective item.</p>",
+            "button_label": "File a claim",
+            "button_link": "shopify://pages/quality-guarantee",
+            "button_style": "link",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_NpMdHA": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image_ratio": "adapt",
+            "heading": "Exchanges",
+            "heading_size": "text-lg-2xl",
+            "text": "<p>I’d like to exchange my item for something else.</p>",
+            "button_label": "Contact Us",
+            "button_link": "shopify://pages/sales-support",
+            "button_style": "link",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_BQnXg8": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image_ratio": "adapt",
+            "heading": "Returns",
+            "heading_size": "text-lg-2xl",
+            "text": "<p>I’d like to return my item.</p>",
+            "button_label": "Contact Us",
+            "button_link": "shopify://pages/sales-support",
+            "button_style": "link",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_TUgCnq",
+        "column_NpMdHA",
+        "column_BQnXg8"
+      ],
+      "custom_css": [
+        ".multicolumn-card {background: #fff;}"
+      ],
+      "settings": {
+        "gap": "large",
+        "columns": 3,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "#f3f3f3",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "faq_wQ4nXB": {
+      "type": "faq",
+      "blocks": {
+        "question_AWdaTH": {
+          "type": "question",
+          "settings": {
+            "title": "How long does it take to receive a refund?",
+            "text": "<p>Once your return is processed, we will automatically issue a refund to your credit card (or original method of payment). Refunds are typically received within 15 days, depending on your card issuer’s policies.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_BeXjAb": {
+          "type": "question",
+          "settings": {
+            "title": "Can I track my order?",
+            "text": "<p>Absolutely! You can check your order’s status by visiting our <a href=\"https://breescape.com/pages/track-your-order\" title=\"Track Your Order\">Order Tracking</a> page and entering your order or tracking number.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_We6CtJ": {
+          "type": "question",
+          "settings": {
+            "title": "What if I need to modify the contents of my order?",
+            "text": "<p>Once an order has shipped, we are unable to modify its contents. But don’t worry! If you’d like to return an item after it arrives, simply contact our customer service team. We offer hassle-free returns with no questions asked.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "question_AWdaTH",
+        "question_BeXjAb",
+        "question_We6CtJ"
+      ],
+      "settings": {
+        "style": "with-border",
+        "heading": "FAQs",
+        "heading_size": "title-sm",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#ffffff",
+        "overlay_opacity": 4,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "rich_text_eby7em",
+    "multicolumn_UDxPVg",
+    "faq_wQ4nXB"
+  ]
+}

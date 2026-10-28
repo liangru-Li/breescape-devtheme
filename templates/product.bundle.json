@@ -1,0 +1,1306 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "product-title-sm",
+            "title_size_mobile": "product-title-md",
+            "show_price": false,
+            "show_rating": false
+          }
+        },
+        "liquid_JRYcqm": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<span class=\"hidden md:block\" style=\"color:#808080;\">{{ product.metafields.custom.product_introduce }}</span>"
+          }
+        },
+        "liquid_9LfPxP": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div class=\"hidden md:block\">\n  <div class=\"flex flex-wrap gap-4 py-2\">\n    <div class=\"flex items-center gap-1\">\n      {%- render 'icon', icon: 'cool-touch', size: 'lg' -%}\n      <span class=\"text-sm md:text-base leading-4 font-normal text-primary\">Cool-Touch</span>\n    </div>\n\n    <div class=\"flex items-center gap-1\">\n      {%- render 'icon', icon: 'breathable', size: 'lg' -%}\n      <span class=\"text-sm md:text-base leading-4 font-normal text-primary\">Breathable</span>\n    </div>\n\n    <div class=\"flex items-center gap-1\">\n      {%- render 'icon', icon: 'moisture-wicking', size: 'lg' -%}\n      <span class=\"text-sm md:text-base leading-4 font-normal text-primary\">Moisture-Wicking</span>\n    </div>\n  </div>\n</div>"
+          }
+        },
+        "price_4UmVjm": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "liquid_Yhfw4E": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "{%- if product.metafields.custom.promotion_tips != blank -%}\n        <div class=\"\" style=\"margin-block-start: 0!important;\">\n          <div\n            class=\"text-2sm rounded-full px-3 py-1\"\n            style=\"\n              display: inline-block;\n              background: #f6f6f6;\n              color: #417823;\n              padding: .1875rem .5rem .125rem;\n              border-radius: .375rem;\n           margin-bottom:0.375rem;\n            \"\n          >\n            {{ product.metafields.custom.promotion_tips }}\n          </div>\n        </div>\n      {%- endif -%}"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "show_variant_labels": true,
+            "picker_type": "button",
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "size_chart": "size-guide"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_price": true,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false,
+            "enable_back_in_stock": false,
+            "show_back_in_stock_name": false,
+            "show_back_in_stock_phone": false
+          }
+        },
+        "sticky_buy_button_V9nHLG": {
+          "type": "sticky_buy_button",
+          "settings": {}
+        },
+        "liquid_77mrma": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<br>"
+          }
+        },
+        "collapsible_tab_rmVpDh": {
+          "type": "collapsible_tab",
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Details",
+            "content": "<p><strong>Breescape. Built to sleep through.</strong></p><p>Powered by patented BlendTek™ technology, our bedding is made from a carefully balanced mix of fibers—each chosen for its breathability, moisture-wicking properties, and cool-to-the-touch feel. Together, they create the ideal blend for all-night cooling comfort.</p><p></p><p><strong>Dual-Sided Comfort:</strong></p><ul><li><strong>Cool Side:</strong> 69% Nylon, 20% Polyester, 11% Spandex</li><li><strong>Breathable Side:</strong> 58% Eco-Cosy® Viscose, 42% Nylon</li><li><strong>Fill: </strong>30% Naia™ Acetate, 70% Polyester</li></ul><p></p><p><strong>More Comfort:</strong></p><p>Every size—from Twin to King—is up to 13.8% larger than standard, providing full coverage.</p><p><strong>Comforter Duo:</strong> </p><p>Perfect for home, guests, gifting, or just-in-case moments.</p><p></p><p><strong>Hypoallergenic</strong></p><p>OEKO-TEX® certified (Certificate No. SH025 256533) for safe, skin-friendly comfort — ideal even for the most sensitive skin.</p>",
+            "page": "",
+            "liquid": "<style>\n.details__content ul{        margin-block: var(--sp-2);}\n</style>",
+            "text_size": "text-sm"
+          }
+        },
+        "collapsible_tab_H7RFnx": {
+          "type": "collapsible_tab",
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Reviews  ★★★★★",
+            "content": "",
+            "page": "",
+            "liquid": "<div class=\"w-full max-w-md mx-auto\">\n  <div class=\"flex items-start gap-4 rounded-xl w-full h-full items-center\"\n    style=\"padding: 8px 0;border-bottom: 1px solid #eee;\">\n    <div class=\"overflow-hidden rounded-lg object-cover s-solution-comparison-card relative\"\n      style=\"width: 25%;aspect-ratio: 3 / 4;\">\n      <img src=\"/cdn/shop/files/img_v3_02lr_3d15698f-4b19-45cb-9cf6-c7e223c21d4g.jpg?v=1746017565&width=540\"\n        alt=\"Customer review photo\" class=\"w-full h-full object-cover absolute\" style=\"margin: 0;left:0;top: 0;\">\n    </div>\n\n    <div class=\"flex flex-col flex-1\" style=\"width: 75%;\">\n      <div class=\"review-content flex flex-col\">\n        <div class=\"stars grid grid-4\">\n          <svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\" height=\"14\"\n            viewBox=\"0 0 70 14\">\n            <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          </svg>\n          <span class=\"review-text text-md py-2\">\n            \"This comforter keeps you comfortably cool while still feeling soft and cozy.\"\n          </span>\n        </div>\n        <div class=\"text-sm font-medium flex items-center\">\n          @_maruss&nbsp;\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"flex items-start gap-4 rounded-xl w-full h-full items-center\"\n    style=\"padding: 8px 0;border-bottom: 1px solid #eee;\">\n    <div class=\"overflow-hidden rounded-lg object-cover s-solution-comparison-card relative\"\n      style=\"width: 25%;aspect-ratio: 3 / 4;\">\n      <img src=\"/cdn/shop/files/myusalifee_set_5.heic?v=1746017568&width=540\" alt=\"Customer review photo\"\n        class=\"w-full h-full object-cover\" style=\"margin: 0;margin: 0;left:0;top: 0;\">\n    </div>\n\n    <div class=\"flex flex-col flex-1\" style=\"width: 75%;\">\n      <div class=\"review-content flex flex-col\">\n        <div class=\"stars grid grid-4\">\n          <svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\" height=\"14\"\n            viewBox=\"0 0 70 14\">\n            <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          </svg>\n          <span class=\"review-text text-md py-2\">\n            \"This cool, ultra-soft, breathable comforter keeps you feeling fresh all night long.\"\n          </span>\n        </div>\n\n        <div class=\"text-sm font-medium flex items-center\">\n          @parv_stylee&nbsp;\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"flex items-start gap-4 rounded-xl w-full h-full items-center\"\n    style=\"padding: 8px 0;    border-bottom: 1px solid #eee;\">\n    <div class=\"overflow-hidden rounded-lg object-cover s-solution-comparison-card relative\"\n      style=\"width: 25%;aspect-ratio: 3 / 4;\">\n      <img src=\"/cdn/shop/files/Sharilynn_Brown_1.heic?v=1746017618&width=540\" alt=\"Customer review photo\"\n        class=\"w-full h-full object-cover\" style=\"margin: 0;margin: 0;left:0;top: 0;\">\n    </div>\n\n    <div class=\"flex flex-col flex-1\" style=\"width: 75%;\">\n      <div class=\"review-content flex flex-col\">\n        <div class=\"stars grid grid-4\">\n          <svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\" height=\"14\"\n            viewBox=\"0 0 70 14\">\n            <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          </svg>\n          <span class=\"review-text text-md py-2\">\n            \"It absorbs moisture and releases heat quickly, keeping you dry and refreshed till the morning.\"\n          </span>\n        </div>\n\n        <div class=\"text-sm font-medium flex items-center\">\n          @thesunshinestatemom&nbsp;\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"flex items-start gap-4 rounded-xl w-full h-full items-center\"\n    style=\"padding: 8px 0;\">\n    <div class=\"overflow-hidden rounded-lg object-cover s-solution-comparison-card relative\"\n      style=\"width: 25%;aspect-ratio: 3 / 4;\">\n      <img src=\"/cdn/shop/files/20250425-185952.jpg?v=1745578803&width=540\" alt=\"Customer review photo\"\n        class=\"w-full h-full object-cover\" style=\"margin: 0;margin: 0;left:0;top: 0;\">\n    </div>\n    <div class=\"flex flex-col flex-1\" style=\"width: 75%;\">\n      <div class=\"review-content flex flex-col\">\n        <div class=\"stars grid grid-4\">\n          <svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\" height=\"14\"\n            viewBox=\"0 0 70 14\">\n            <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n            <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          </svg>\n          <span class=\"review-text text-md py-2\">\n            \"Whether you sleep hot or just love a cool, snug feel—Breescape’s got you.\"\n          </span>\n        </div>\n\n        <div class=\"text-sm font-medium flex items-center\">\n          @prifregona&nbsp;\n        </div>\n      </div>\n    </div>\n  </div>\n\n<button class=\"button button--secondary button--md w-full s--button--product--reviews\"\n    style=\"color: rgb(var(--color-button-background));\">Read All Reviews</button>\n\n<style>\n \n.s--button--product--reviews:hover{\n          background-size: 0% 1px!important;\n}\n.s-solution-comparison-card {\n    border-radius: 10px;\n}\n\n</style>\n\n</div>",
+            "text_size": "text-sm"
+          }
+        },
+        "collapsible_tab_Ah7rWA": {
+          "type": "collapsible_tab",
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Includes",
+            "content": "<p>This value pack includes two comforters and will be shipped separately.</p>",
+            "page": "",
+            "liquid": "",
+            "text_size": "text-sm"
+          }
+        },
+        "collapsible_tab_XDeUC8": {
+          "type": "collapsible_tab",
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Care",
+            "content": "<p>Simply toss it in the washing machine on a gentle cycle and tumble dry on low.</p>",
+            "page": "",
+            "liquid": "",
+            "text_size": "text-sm"
+          }
+        },
+        "complementary": {
+          "type": "complementary",
+          "settings": {
+            "heading": "Pairs well with",
+            "product_limit": 4,
+            "show_vendor": false,
+            "show_price": true
+          }
+        },
+        "gift_progress_8UVc8C": {
+          "type": "gift_progress",
+          "settings": {
+            "progress_text": "Add [amount] more to unlock FREE gifts",
+            "complete_text": "You've unlocked all FREE gifts",
+            "suffix_text": "Auto added",
+            "image": "shopify://shop_images/Group_1013_2.png",
+            "tier1_amount": 249,
+            "tier2_amount": 399
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "liquid_JRYcqm",
+        "liquid_9LfPxP",
+        "price_4UmVjm",
+        "liquid_Yhfw4E",
+        "variant_picker",
+        "buy_buttons",
+        "gift_progress_8UVc8C",
+        "sticky_buy_button_V9nHLG",
+        "liquid_77mrma",
+        "collapsible_tab_rmVpDh",
+        "collapsible_tab_H7RFnx",
+        "collapsible_tab_Ah7rWA",
+        "collapsible_tab_XDeUC8",
+        "complementary"
+      ],
+      "custom_css": [],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": 60,
+        "gallery_layout": "thumbnail",
+        "thumbnail_position": "beside",
+        "image_ratio": "square",
+        "image_zoom": "none",
+        "hide_variants": false,
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "mobile_layout": "full_width",
+        "image_ratio_mobile": "square",
+        "mobile_thumbnail": true,
+        "padding_top": 28,
+        "padding_bottom": 60,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_TmY97K": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.name",
+      "settings": {
+        "liquid": "<style>\nfieldset[data-option-index=\"option3\"] svg,\nfieldset[data-option-index=\"option3\"] button {\n    display: none;\n}\n</style>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "help-drawer": {
+      "type": "help-drawer",
+      "disabled": true,
+      "settings": {
+        "heading": "Need help?",
+        "description": "<p>If you have any questions, you are always welcome to contact us. We'll get back to you as soon as possible, within 24 hours on weekdays.</p>"
+      }
+    },
+    "rich_text_N9bMQC": {
+      "type": "rich-text",
+      "blocks": {
+        "button_afreUa": {
+          "type": "button",
+          "settings": {
+            "button_label": "Explore the Love Wall",
+            "button_link": "shopify://pages/wall-of-love",
+            "button_style": "secondary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "button_afreUa"
+      ],
+      "custom_css": [
+        "@media screen and (min-width: 1536px) {.collage.with-richtext {padding-inline: 0px !important; }}",
+        "@media screen and (max-width: 767px) {.collage.with-richtext {gap: 16px; }}",
+        ".button {height: 40px; font-weight: 600;}",
+        ".button span {text-transform: none;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "text_alignment": "right",
+        "text_alignment_mobile": "left",
+        "heading": "Why Breescape?",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p>Tested & Loved By 1000+ Hot Sleepers Before Launch</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 24,
+        "padding_bottom": 12,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "video_jAApYY": {
+      "type": "video",
+      "name": "Video",
+      "settings": {
+        "transparent_header": false,
+        "video_url": "https://youtu.be/PCjVI1OyXNw?si=lsG3Ot8QbZDgYxWF?vq=hd720",
+        "cover_image": "shopify://shop_images/productpage-bundle-cover-image-202505-v1.png",
+        "description": "",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "image_height": "adapt",
+        "video_url_mobile": "https://youtu.be/PCjVI1OyXNw?si=lsG3Ot8QbZDgYxWF?vq=hd720",
+        "cover_image_mobile": "shopify://shop_images/productpage-bundle-cover-image-202505-v1.png",
+        "image_height_mobile": "auto",
+        "padding_top": 12,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    },
+    "custom_liquid_nhVLMY": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "Custom Liquid",
+      "settings": {
+        "liquid": "<style>\n  .percentage {\n      font-size: 48px;\n      font-weight: 300;\n      color: #fff;\n      background-color: #67D2DF;\n      padding: 10px 20px;\n      border-radius: 10px;\n      display: inline-block;\n  }\n\n  .s-line {\n      background-color: #0F374B;\n      height: 30px;\n      width: 1px;\n      margin-top:14px;\n  }\n\n  @media screen and (max-width: 767px) {\n      .percentage {\n          font-size: 28px;\n          \n        \n      }\n\n      .s-line {\n          height: 20px;\n      }\n\n  }\n\n  .mt-1{\n      margin-top: 0.25rem;\n  }\n\n  .mt-2{\n      margin-top: 0.5rem;\n  }\n</style>\n\n\n<div class=\"flex items-start justify-between\">\n  <div class=\"text-center text-md\">\n      <div class=\"percentage title-md font-bold leading-none\">91%</div>\n      <div class=\"md:text-lg text-xs mt-2\">Felt Noticeably <br>Cooler</div>\n  </div>\n  <div class=\"s-line\"> </div>\n  <div class=\"text-center text-md\">\n      <div class=\"percentage title-md font-bold leading-none\">89%</div>\n      <div class=\"md:text-lg text-xs mt-2\">Stayed Dry & <br>Fresh</div>\n  </div>\n  <div class=\"s-line\"> </div>\n  <div class=\"text-center text-md\">\n      <div class=\"percentage title-md font-bold leading-none\">93%</div>\n      <div class=\"md:text-lg text-xs mt-2\">Enjoyed All-Night <br>Breathability</div>\n  </div>\n</div>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 48,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "custom_liquid_rJE9HM": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "liquid": "<style>\n  .s__product-page__why-breescape__item {\n      border-right: 1px solid rgb(var(--color-foreground));\n      border-bottom: none;\n  }\n\n  .s__product-page__why-breescape__item-title {\n      font-size: 56px;\n      margin: 0;\n      font-weight: 300;\n  }\n\n  .s__product-page__why-breescape__item-text {\n      margin: 0;\n      padding-right: 48px;\n      max-width: 100%;\n  }\n\n  .s__product-page__why-breescape__item:last-child {\n      border: none;\n  }\n  .s__product-page__why-breescape__item:last-child .s__product-page__why-breescape__item-text {\n      padding-right: 0;\n  }\n\n  @media screen and (max-width: 767px) {\n      .s__product-page__why-breescape__item-title {\n          font-size: 36px;\n      }\n\n      .s__product-page__why-breescape__item {\n          border-right: none;\n          border-bottom: 1px solid rgb(var(--color-foreground));\n          padding-bottom: 12px;\n          justify-content: space-between;\n      }\n\n      .s__product-page__why-breescape__item-text {\n          margin: 0;\n          padding-right: 0px;\n          max-width: 240px;\n      }\n  }\n</style>\n\n\n<div\n  class=\"s__product-page__why-breescape__container flex md:items-start justify-between w-full md:flex-row flex-col gap-2 md:gap-8\">\n  <div class=\"s__product-page__why-breescape__item text-md flex flex-row gap-4 items-center\">\n      <div class=\"s__product-page__why-breescape__item-title title-md leading-none\">91%</div>\n      <div class=\"s__product-page__why-breescape__item-text text-base text-left\">\n          <div class=\"font-medium\">Felt Noticeably Cooler</div>\n          <span></span>\n      </div>\n  </div>\n\n  <div class=\"s__product-page__why-breescape__item text-md flex flex-row gap-4 items-center\">\n      <div class=\"s__product-page__why-breescape__item-title title-md leading-none\">89%</div>\n      <div class=\"s__product-page__why-breescape__item-text text-base text-left\">\n          <div class=\"font-medium\">\n            Stayed Dry & Fresh</div>\n          <span></span>\n      </div>\n  </div>\n\n  <div class=\"s__product-page__why-breescape__item text-md flex flex-row gap-4 items-center\">\n      <div class=\"s__product-page__why-breescape__item-title title-md leading-none\">93%</div>\n      <div class=\"s__product-page__why-breescape__item-text text-base text-left\">\n          <div class=\"font-medium\">Enjoyed Breathable <br>Comfort All Night</div>\n          <span></span>\n      </div>\n  </div>\n</div>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 48,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "multicolunmn_with_overlay_pqUyfx": {
+      "type": "multicolunmn-with-overlay",
+      "blocks": {
+        "column_Jx3c8U": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/productpage-bundle-real-image-1-202505-v1.png",
+            "image_ratio": "adapt",
+            "heading": "@thesunshinestatemom",
+            "liquid": "<svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\"\n          height=\"14\" viewBox=\"0 0 70 14\">\n          <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n      </svg>",
+            "heading_size": "text-base-xl",
+            "text": "<p>“Yes I would because it it’s cool and big and it is also a nice color and soft! ”</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_Ba7m8F": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/productpage-bundle-real-image-2-202505-v1.png",
+            "image_ratio": "adapt",
+            "heading": "@gokceercan",
+            "liquid": "<svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\"\n          height=\"14\" viewBox=\"0 0 70 14\">\n          <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n      </svg>",
+            "heading_size": "text-base-xl",
+            "text": "<p>“PreMenapose sweating is no longer a problem.”</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_8MMHYp": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/productpage-bundle-real-image-3-202505-v1.png",
+            "image_ratio": "adapt",
+            "heading": "@ahalfbakedmom",
+            "liquid": "<svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\"\n          height=\"14\" viewBox=\"0 0 70 14\">\n          <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n      </svg>",
+            "heading_size": "text-base-xl",
+            "text": "<p>“This cooling comforter blanket keep me cold during warm days.”</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_y3TfYX": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/productpage-bundle-real-image-4-202505-v1.png",
+            "image_ratio": "adapt",
+            "heading": "@liferachel8",
+            "liquid": "<svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\"\n          height=\"14\" viewBox=\"0 0 70 14\">\n          <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n      </svg>",
+            "heading_size": "text-base-xl",
+            "text": "<p>“I preferred it because of its lightness and good air circulation.”</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_eaMiBh": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/productpage-bundle-real-image-5-202505-v1.png",
+            "image_ratio": "adapt",
+            "heading": "@anukinatchkebia",
+            "liquid": "<svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\"\n          height=\"14\" viewBox=\"0 0 70 14\">\n          <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n      </svg>",
+            "heading_size": "text-base-xl",
+            "text": "<p>“This is my first time using a cooling product and loved it! ”</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_TVyQyQ": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/productpage-bundle-real-image-6-202505-v1.png",
+            "image_ratio": "adapt",
+            "heading": "@denizbbtsv",
+            "liquid": "<svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\"\n          height=\"14\" viewBox=\"0 0 70 14\">\n          <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n      </svg>",
+            "heading_size": "text-base-xl",
+            "text": "<p>“Yes! High quality, keeps you cool (especially for hot sleepers, warm climates, and menopause), plus it looks great and it is a great gift idea.”</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_ERJccE": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/productpage-bundle-real-image-73-202505-v1.png",
+            "image_ratio": "adapt",
+            "heading": "@aysegulamerikada",
+            "liquid": "<svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\"\n          height=\"14\" viewBox=\"0 0 70 14\">\n          <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n      </svg>",
+            "heading_size": "text-base-xl",
+            "text": "<p>“I would definitely recommend it to my followers because the bed was so comfortable.”</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_mKYY3b": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/productpage-bundle-real-image-8-202505-v1.png",
+            "image_ratio": "adapt",
+            "heading": "@tunakamcii",
+            "liquid": "<svg class=\"shawn__product-card__rating__icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"70\"\n          height=\"14\" viewBox=\"0 0 70 14\">\n          <path\n              d=\"M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n          <path\n              d=\"M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z\"\n              fill=\"currentColor\"></path>\n      </svg>",
+            "heading_size": "text-base-xl",
+            "text": "<p>“I would recommend it to my night sweat followers. I’d push the cooling feature.”</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_Jx3c8U",
+        "column_Ba7m8F",
+        "column_8MMHYp",
+        "column_y3TfYX",
+        "column_eaMiBh",
+        "column_TVyQyQ",
+        "column_ERJccE",
+        "column_mKYY3b"
+      ],
+      "custom_css": [
+        ".shawn__product-card__rating__icon,.multicolumn-card__overlay > div {color: #fff;}",
+        ".button {height: 40px; font-weight: 600;}",
+        ".button span {text-transform: none;}",
+        "@media screen and (max-width: 767px) {.multicolumn {--card-grid-gap: 4px; } .title-wrapper .button {font-size: var(--font-button-size); }}"
+      ],
+      "name": "Multicolumn with Overlay",
+      "settings": {
+        "gap": "small",
+        "columns": 4,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "heading": "Real Stories, Real Satisfaction",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "liquid": "",
+        "button_label": "Read All Reviews",
+        "button_link": "shopify://pages/reviews",
+        "button_external": false,
+        "button_icon": true,
+        "note": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "rgba(0,0,0,0)",
+        "color_background": "#f3f3f3",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "shawn_product_sheets_blendtek_zjMLid": {
+      "type": "shawn-product-sheets-blendtek",
+      "blocks": {
+        "media_wkzYXE": {
+          "type": "media",
+          "settings": {
+            "image_ratio": "adapt",
+            "video": "shopify://files/videos/product-sheets-blendtek-video-lg-202505.mp4",
+            "title": "3.1X Cooler than Bamboo Rayon",
+            "liquid": "<div class=\"text-base font-medium\">Q-Max > 0.46</div> \n<span class=\"text-base\">A Higher Q-Max Score = A Cooler Fabric <br>BlendTek™ Fabric leads with the highest Q-Max score, outperforming cotton, bamboo, and silk.</span>"
+          }
+        },
+        "media_cREepc": {
+          "type": "media",
+          "settings": {
+            "image_ratio": "adapt",
+            "video": "shopify://files/videos/product-sheets-video-lg-202505_15f6133d-d50f-40cb-9256-fb1aa8be7fa2.mp4",
+            "title": "4.5X More Breathable than Cotton",
+            "liquid": "<span class=\"text-base\">\nBreathable fibers and knit fabric speed up heat and moisture release for cooler, fresher sleep.</span>"
+          }
+        },
+        "media_DbX9aL": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/product-sheets-blendtek-image-lg-202505_e0174bfa-6b08-4b8d-a46c-83ab9602ec3e.png",
+            "image_ratio": "adapt",
+            "title": "1.5X More Absorbent than Cotton",
+            "liquid": "<span class=\"text-base\">\nPolygonal fiber structure expands surface area for faster moisture absorption & quick evaporation.\n</span>"
+          }
+        }
+      },
+      "block_order": [
+        "media_wkzYXE",
+        "media_cREepc",
+        "media_DbX9aL"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 767px) {header {margin-bottom: 24px; } .title-wrapper {margin-bottom: 20px; }}",
+        ".button {height: 40px; font-weight: 600;}",
+        ".button span {text-transform: none;}"
+      ],
+      "name": "Sheets BlendTek",
+      "settings": {
+        "heading": "Powered by BlendTek™",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "liquid": "<a class=\"button button--secondary with-content flex items-center cursor-pointer py-4\" role=\"link\" aria-controls=\"Hotspot-ergonomics\"\n    aria-expanded=\"false\" aria-label=\"More on Ergonomics\" id=\"shopify-block-ergonomics\">\n    <span class=\"btn-plus heading normal-case font-medium md:text-base leading-none tracking-none\" style=\"font-weight: 600!important;\">Learn More</span>\n\n\n\n\n    <svg class=\"plus\" xmlns=\"http://www.w3.org/2000/svg\" width=\"15\" height=\"15\" viewBox=\"0 0 15 15\" fill=\"none\">\n        <path d=\"M14.75 7.5C14.75 11.366 11.616 14.5 7.75 14.5C3.88401 14.5 0.75 11.366 0.75 7.5C0.75 3.63401 3.88401 0.5 7.75 0.5C11.616 0.5 14.75 3.63401 14.75 7.5Z\" fill=\"#67D2DF\"/>\n        <path d=\"M6.81566 10.764V8.482H4.56166V6.662H6.81566V4.38H8.67766V6.662H10.9317V8.482H8.67766V10.764H6.81566Z\" fill=\"white\"/>\n    </svg>\n</a>\n\n\n<x-modal id=\"Hotspot-ergonomics\" class=\"x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none\"\n    role=\"dialog\" aria-modal=\"true\" aria-label=\"More on Ergonomics\" hidden>\n    <overlay-element\n        class=\"overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none\"\n        aria-controls=\"Hotspot-ergonomics\" aria-expanded=\"false\"></overlay-element>\n\n    <div class=\"drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden\">\n        <gesture-element class=\"drawer__header flex justify-between opacity-0 invisible relative\">\n            <span class=\"drawer__title heading title-sm\">Powered by BlendTek™</span>\n            <button\n                class=\"button button--secondary button--close drawer__close hidden sm:flex items-center justify-center\"\n                type=\"button\" is=\"hover-button\" aria-controls=\"Hotspot-ergonomics\" aria-expanded=\"false\"\n                aria-label=\"Close\">\n                <span class=\"btn-fill\" data-fill></span>\n                <span class=\"btn-text\">\n                    {% render 'icon', icon: 'close', size: 'sm' %}\n                </span>\n            </button>\n        </gesture-element>\n\n        <div class=\"drawer__content opacity-0 invisible flex flex-col h-full grow shrink\">\n            <div class=\"drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink\">\n                <div class=\"rte text-base md:text-lg\">\n                    <div class=\"container mx-auto py-10\">\n                        <!-- Header Section -->\n                        <div class=\"text-left mb-8\"\n                            style=\"background-image: url('https://cdn.shopify.com/s/files/1/0640/6779/7070/files/homepage-modal-blendtek-image-202504-v1.png?v=1743990771'); background-size: cover; background-position: center; padding: 20px;\">\n                            <h3 class=\"text-gray-800\" style=\"padding: 10px; \">BlendTek™ Technology: The Science of Cool\n                            </h3>\n                            <p class=\"text-gray-600 mt-2 text-base\" style=\"padding: 10px; \">\n                                Our patented fiber blend is crafted with the optimal ratio for proven, long-lasting\n                                coolness, perfected after a year of research and 25 iterations.\n                            </p>\n                        </div>\n\n                     \n                        <div class=\"flex flex-col md:flex-row items-center justify-between mb-8\">\n                            <!-- Image Placeholder -->\n                            <div class=\"w-full md:w-1/3 mb-6 md:mb-0\">\n                                <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/blendtekpage-high-performance-images-md-202503.png?v=1741578515\"\n                                    alt=\"\" width=\"1177\" height=\"1206\" loading=\"lazy\"\n                                    sizes=\"(max-width: 767px) 100vw, 50vw\" is=\"lazy-image\" class=\"loaded\"\n                                    style=\"margin:0;\" />\n                            </div>\n\n                            <!-- Features Section -->\n                            <div class=\"w-full md:w-2/3 md:pl-8\">\n                                <p class=\"text-base font-semibold text-gray-800\" style=\"margin:0;\">In-House Innovation\n                                </p>\n                                <h3 class=\"text-xl font-medium text-gray-700\" style=\"margin:0;\">A Precisely Balanced\n                                    Blend of High-Performance Fibers</h3>\n                                <ul class=\"space-y-3 text-gray-600 text-base\">\n                                    <li><strong>High Thermal Conductivity Fibers</strong> – Draws heat away fast.</li>\n                                    <li><strong>Polygonal Fiber Structure</strong> – Maximizes surface area to wick away\n                                        sweat.</li>\n                                    <li><strong>High-Porosity Fibers</strong> – Enhances airflow, releasing heat and\n                                        moisture.</li>\n                                </ul>\n                                <p class=\"text-gray-600 mt-4 italic text-sm\">\"These are just a few of the advanced\n                                    fibers in BlendTek™.\"</p>\n                            </div>\n                        </div>\n\n                        <hr>\n                        <div class=\"flex flex-col md:flex-row items-start justify-between mb-8\">\n                            <h3 class=\"text-2xl text-gray-800 mb-4 w-full md:w-1/3\" style=\"margin: 0;\">Sustainable\n                                Partner</h3>\n\n                            <div class=\"w-full md:w-2/3\">\n                                <p class=\"text-gray-600 mb-4 text-sm\" style=\"margin: 0;\">\n                                    We partner with like-minded brands like Naia™ and Eco-Cosy® to drive sustainability\n                                    in textiles, ensuring our materials support both people and the planet.\n                                </p>\n                                <div class=\"flex space-x-6 gap-4 items-center\" style=\"margin: 0;\">\n                                    <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/homepage-modal-blendtek-icon-naia-202504-v1.png?v=1743991112\" alt=\"Naia Logo\"\n                                        class=\"h-12\" style=\"height:60px;    margin-block: var(--sp-4);\">\n                                    <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/homepage-modal-blendtek-icon-ecocosy-202504-v1.png?v=1743991112\" alt=\"Eco-Cosy Logo\"\n                                        class=\"h-12\" style=\"height:46px;    margin-block: var(--sp-4);\">\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                </div>\n            </div>\n        </div>\n    </div>\n</x-modal>\n\n<!-- 样式 -->\n<style>\n    .btn-plus+.plus {\n        width: 1.75em;\n        height: 1.75em;\n        border-radius: 50em;\n        margin-left: 0.5em;\n    }\n</style>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "padding_top": 36,
+        "padding_bottom": 72
+      }
+    },
+    "shawn_solution_WizY8R": {
+      "type": "shawn-solution",
+      "blocks": {
+        "solution_i9m69C": {
+          "type": "solution",
+          "settings": {
+            "enable_video_autoplay": false,
+            "enable_video_looping": false,
+            "image_ratio": "adapt",
+            "layout": "image_first",
+            "heading": "",
+            "text": "",
+            "liquid": "<div class=\"s-solution-comparison-card flex flex-col w-full h-full overflow-hidden\">\n    <div class=\"s-solution-card-title text-center text-base font-medium\" style=\"background: #67D2DF;color: #fff;line-height: 30px;\">Tech-Enhanced Cooling</div>\n    <div class=\"flex py-4 px-4 h-full flex-col justify-between relative\">\n        <div class=\"s-solution-card-image absolute\">\n            <picture>\n                <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-solution-tech-image-202504.png?v=1745573678\"\n                    width=\"50px\" height=\"auto\" alt=\"Breescape\">\n            </picture>\n        </div>\n        <div class=\"s-solution-card-section mb-4\" style=\"    margin-top: 1.5rem;\">\n            <div class=\"font-medium text-sm\">Features:</div>\n            <div class=\"s-solution-section-content text-sm\">Uses high-performance <br>fabrics that are designed to pull\n                heat\n                away for instant,\n                active cooling.</div>\n        </div>\n        <div class=\"s-solution-card-section mb-4\">\n            <div class=\"font-medium text-sm\">Ideal For:</div>\n            <div class=\"s-solution-section-content text-sm s-solution-section-content-p\">Hot Sleepers, Night Sweats, Hot Flashes</div>\n        </div>\n        <div class=\"s-solution-card-section cooling-effect mb-4\">\n            <div class=\"font-medium text-sm\">Cooling Effect:</div>\n            <div class=\"s-solution-stars\">★★★★★</div>\n        </div>\n        <div class=\"s-solution-card-section mb-4 gap-4 flex flex-col\">\n            <div class=\"font-medium text-sm\">Brand:</div>\n            <div class=\"s-solution-brand flex items-center\">\n                <div>\n                    <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/breescape-logo-checkout.png?v=1743579758\"\n                        width=\"92px\" height=\"auto\" alt=\"Breescape\">\n                </div>\n                <div>\n                    <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/zws3Qn.png?v=1745574182\"\n                        width=\"40px\" height=\"auto\" alt=\"Breescape\">\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<style>\n    .s-solution-comparison-card {\n        border-radius: 10px;\n    }\n\n    .s-solution-card-image {\n        margin-bottom: 15px;\n        top: 16px;\n        right: 16px;\n    }\n\n    .s-solution-stars {\n        color: #FFAD07;\n        font-size: 16px;\n    }\n\n    .s-solution-comparison-card img {\n        margin: 0;\n    }\n\n.s-solution-comparison-card .s-solution-brand{\n        gap: var(--sp-2) !important;\n    }\n\n.s-solution-section-content-p{\nheight:40px;}\n</style>",
+            "button_link": ""
+          }
+        },
+        "solution_tFpcYc": {
+          "type": "solution",
+          "settings": {
+            "enable_video_autoplay": false,
+            "enable_video_looping": false,
+            "image_ratio": "adapt",
+            "layout": "image_first",
+            "heading": "",
+            "text": "",
+            "liquid": "<div class=\"s-solution-comparison-card flex flex-col w-full h-full overflow-hidden\">\n    <div class=\"s-solution-card-title text-center text-base font-medium\" style=\"background: rgba(211, 237, 232, 0.5);color: #0F374B;line-height: 30px;\">Natural Cooling</div>\n    <div class=\"flex py-4 px-4 h-full flex-col justify-between relative\">\n        <div class=\"s-solution-card-image absolute\">\n            <picture>\n                <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-solution-natural-image-202504.png?v=1745574604\"\n                    width=\"50px\" height=\"auto\" alt=\"Breescape\">\n            </picture>\n        </div>\n        <div class=\"s-solution-card-section mb-4\" style=\"    margin-top: 1.5rem;\">\n            <div class=\"font-medium text-sm\">Features:</div>\n            <div class=\"s-solution-section-content text-sm\">Made from natural materials <br>such as cotton or bamboo. Offers mild, passive cooling and airflow.</div>\n        </div>\n        <div class=\"s-solution-card-section mb-4\">\n            <div class=\"font-medium text-sm\">Ideal For:</div>\n            <div class=\"s-solution-section-content text-sm s-solution-section-content-p\">Warm climates, seasonal use, anyone who prefers natural fibers</div>\n        </div>\n        <div class=\"s-solution-card-section cooling-effect mb-4\">\n            <div class=\"font-medium text-sm\">Cooling Effect:</div>\n            <div class=\"s-solution-stars\">★★★</div>\n        </div>\n        <div class=\"s-solution-card-section mb-4 gap-4 flex flex-col\">\n            <div class=\"font-medium text-sm\">Brand:</div>\n            <div class=\"s-solution-brand flex items-center\">\n                <div>\n                    <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Ll2vyn.png?v=1745574674\"\n                        width=\"50px\" height=\"auto\" alt=\"Breescape\">\n                </div>\n                <div>\n                    <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/ettitude_1.png?v=1745574700\"\n                        width=\"48px\" height=\"auto\" alt=\"Breescape\">\n                </div>\n                <div>\n                    <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/mfnDks.png?v=1745574691\"\n                        width=\"48px\" height=\"auto\" alt=\"Breescape\">\n                </div>\n            </div>\n        </div>\n    </div>\n</div>",
+            "button_link": ""
+          }
+        },
+        "solution_bX7jfL": {
+          "type": "solution",
+          "settings": {
+            "enable_video_autoplay": false,
+            "enable_video_looping": false,
+            "image_ratio": "adapt",
+            "layout": "image_first",
+            "heading": "",
+            "text": "",
+            "liquid": "<div class=\"s-solution-comparison-card flex flex-col w-full h-full overflow-hidden\">\n    <div class=\"s-solution-card-title text-center text-base font-medium\" style=\"background: rgba(211, 202, 167, 0.4);color: #0F374B;line-height: 30px;\">Basic Cooling</div>\n    <div class=\"flex py-4 px-4 h-full flex-col justify-between relative\">\n        <div class=\"s-solution-card-image absolute\">\n            <picture>\n                <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-solution-basic-image-202504.png?v=1745725287\"\n                    width=\"50px\" height=\"auto\" alt=\"Breescape\">\n            </picture>\n        </div>\n        <div class=\"s-solution-card-section mb-4\" style=\"    margin-top: 1.5rem;\">\n            <div class=\"font-medium text-sm\">Features:</div>\n            <div class=\"s-solution-section-content text-sm\">Thin and airy fabrics, <br>often polyester-based. Feels light but doesn’t stay cool for long.</div>\n        </div>\n        <div class=\"s-solution-card-section mb-4\">\n            <div class=\"font-medium text-sm\">Ideal For:</div>\n            <div class=\"s-solution-section-content text-sm s-solution-section-content-p\">Occasional heat, light layers, summer-only use</div>\n        </div>\n        <div class=\"s-solution-card-section cooling-effect mb-4\">\n            <div class=\"font-medium text-sm\">Cooling Effect:</div>\n            <div class=\"s-solution-stars\">★★</div>\n        </div>\n    </div>\n</div>",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "solution_i9m69C",
+        "solution_tFpcYc",
+        "solution_bX7jfL"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".title-wrapper {flex-direction: column; justify-content: start; align-items: start;}",
+        ".button {height: 40px; font-weight: 600;}",
+        ".button span {text-transform: none;}",
+        "@media screen and (max-width: 767px) {.title-wrapper .button {font-size: var(--font-button-size); } .title-wrapper {margin-bottom: var(--sp-4) !important; }}"
+      ],
+      "name": "Shawn Solution",
+      "settings": {
+        "heading": "Find Your Perfect Cooling Solution",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "liquid": "",
+        "button_label": "Learn More",
+        "button_link": "shopify://blogs/blogs",
+        "button_external": false,
+        "button_icon": true,
+        "gap": "large",
+        "columns": 3,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": true,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "rich_text_tq9Twh": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_9CACcR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Breescape Offers Two Cooling Solutions",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_33PimD": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Two sides, two materials — BlendTek™ lets you choose what feels best.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_9CACcR",
+        "text_33PimD"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".rich-text .subtext-md {margin-top: 10px !important;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 60,
+        "padding_bottom": 24,
+        "divider": true,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_RmPqA6": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "Custom Liquid",
+      "settings": {
+        "liquid": "<style>\n    .s--sides--side {\n        flex: 1;\n        display: flex;\n        align-items: center;\n    }\n\n    .s--sides--icon {\n        text-align: center;\n        display: flex;\n        flex-direction: row;\n        gap: var(--sp-2);\n        justify-content: center;\n        align-items: center;\n    }\n\n    .s--sides--icon span {\n        font-size: 2em;\n        display: block;\n    }\n\n    .s--sides--icon p {\n        font-size: 1em;\n        color: #1a3c5e;\n        margin: 0;\n    }\n\n    .s--sides--center-image img {\n        max-width: 100%;\n        height: auto;\n    }\n\n    /* Style for the letters 'a' and 'c' */\n    .letter {\n        position: absolute;\n        font-size: 16px;\n        font-weight: bold;\n        color: #1a3c5e;\n        background-color: rgba(255, 255, 255, 0.7);\n        border-radius: 50%;\n        width: 24px;\n        height: 24px;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        cursor: pointer;\n        user-select: none;\n    }\n\n    /* Position for letter 'a' */\n    .letter-a {\n        top: 40%;\n        left: 20%;\n    }\n\n    /* Position for letter 'c' */\n    .letter-c {\n        top: 45%;\n        right: 20%;\n    }\n\n    /* Bold style for highlighted state */\n    .highlight-bold {\n        font-weight: bold !important;\n    }\n\n    /* Yellow background for highlighted letters */\n    .letter.highlight-bold {\n        background: #fffb79 !important;\n    }\n\n    /* Default style (normal weight) */\n    .default-style {\n        font-weight: normal !important;\n    }\n</style>\n\n<div class=\"s--sides--container\">\n    <div class=\"flex justify-between md:flex-row flex-col\">\n        <div class=\"s--sides--side left md:w-1/4 justify-start md:justify-center\">\n            <div class=\"s--sides--icon\">\n                <span class=\"snowflake\">{%- render 'icon', icon: 'cool-touch', size: 'xl' -%}</span>\n                <p id=\"tech-cooling\" class=\"md:text-xl text-base default-style\">Tech-Enhanced Cooling</p>\n            </div>\n        </div>\n        <div class=\"s--sides--center-image flex justify-center relative md:w-1/2\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-two-sides-image-lg-202504.png?v=1745579245\"\n                alt=\"Fabric Image\">\n            <span id=\"letter-c\" class=\"letter letter-c default-style\" onclick=\"highlight('c')\">a</span>\n            <span id=\"letter-a\" class=\"letter letter-a default-style\" onclick=\"highlight('a')\">c</span>\n        </div>\n        <div class=\"s--sides--side right md:w-1/4 justify-end md:justify-center\">\n            <div class=\"s--sides--icon\">\n                <span class=\"network\">{%- render 'icon', icon: 'moisture-wicking', size: 'xl' -%}</span>\n                <p id=\"natural-cooling\" class=\"md:text-xl text-base default-style\">Natural Cooling</p>\n            </div>\n        </div>\n    </div>\n</div>\n\n<script>\n    function highlight(letter) {\n        const letterA = document.getElementById('letter-a');\n        const letterC = document.getElementById('letter-c');\n        const techCooling = document.getElementById('tech-cooling');\n        const naturalCooling = document.getElementById('natural-cooling');\n\n        if (letter === 'a') {\n            // Highlight 'a' and 'Tech-Enhanced Cooling' with bold\n            letterA.classList.remove('default-style');\n            letterA.classList.add('highlight-bold');\n            techCooling.classList.remove('default-style');\n            techCooling.classList.add('highlight-bold');\n\n            // Reset 'c' and 'Natural Cooling' to default\n            letterC.classList.remove('highlight-bold');\n            letterC.classList.add('default-style');\n            naturalCooling.classList.remove('highlight-bold');\n            naturalCooling.classList.add('default-style');\n        } else if (letter === 'c') {\n            // Highlight 'c' and 'Natural Cooling' with bold\n            letterC.classList.remove('default-style');\n            letterC.classList.add('highlight-bold');\n            naturalCooling.classList.remove('default-style');\n            naturalCooling.classList.add('highlight-bold');\n\n            // Reset 'a' and 'Tech-Enhanced Cooling' to default\n            letterA.classList.remove('highlight-bold');\n            letterA.classList.add('default-style');\n            techCooling.classList.remove('highlight-bold');\n            techCooling.classList.add('default-style');\n        }\n    }\n</script>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_9a7bPM": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "custom_css": [
+        ".bg-yellow-400 {background: #fffb79;}",
+        ".bg-gray-800 {background: #0f374b;}",
+        ".bg-white {background: #fff;}",
+        ".text-black {color: #0f374b;}",
+        "h2 {font-size: 44px; line-height: 44px;}",
+        "@media screen and (max-width: 749px) {h2 {font-size: 30px; }}"
+      ],
+      "settings": {
+        "liquid": "{%- render 'shawn-comforter-materials' -%}",
+        "color_text": "#0f374b",
+        "color_background": "#daecf2",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "ae6d898f7ba8cc43d381": {
+      "type": "apps",
+      "blocks": {
+        "b47c6d88-1a5a-4fa1-9f91-53b9a8293552": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "b47c6d88-1a5a-4fa1-9f91-53b9a8293552"
+      ],
+      "settings": {
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "divider": true,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_rFzNQR": {
+      "type": "custom-liquid",
+      "settings": {
+        "liquid": "<script>\n    const contents = {\n        a: document.getElementById('contentA'),\n        b: document.getElementById('contentB'),\n        c: document.getElementById('contentC')\n    };\n\n    const buttons = {\n        a: document.getElementById('buttonA'),\n        b: document.getElementById('buttonB'),\n        c: document.getElementById('buttonC')\n    };\n\n    const slider = document.getElementById('contentSlider');\n\n    function showContent(side, scroll = true) {\n        Object.keys(buttons).forEach(key => {\n            if (key === side) {\n                buttons[key].classList.add('bg-yellow-400', 'text-black');\n                buttons[key].classList.remove('bg-white');\n            } else {\n                buttons[key].classList.remove('bg-yellow-400');\n                buttons[key].classList.add('bg-white', 'text-black');\n            }\n        });\n\n        if (window.innerWidth > 768) {\n            Object.keys(contents).forEach(key => {\n                if (key === side) {\n                    contents[key].classList.remove('hidden');\n                } else {\n                    contents[key].classList.add('hidden');\n                }\n            });\n        }\n\n        if (scroll && window.innerWidth <= 768) {\n            const contentElement = contents[side];\n\n            setTimeout(() => {\n                contentElement.scrollIntoView({\n                    behavior: 'smooth',\n                    inline: 'center',\n                    block: 'nearest'\n                });\n            }, 50);\n        }\n    }\n\n    // (mobile only)\n    if (window.innerWidth <= 768) {\n        let isScrolling;\n        slider.addEventListener('scroll', () => {\n\n            clearTimeout(isScrolling);\n\n\n            isScrolling = setTimeout(() => {\n                const sliderRect = slider.getBoundingClientRect();\n                let activeSide = 'a';\n\n                Object.keys(contents).forEach(side => {\n                    const content = contents[side];\n                    const contentRect = content.getBoundingClientRect();\n                    const contentCenter = contentRect.left + contentRect.width / 2;\n                    const sliderCenter = sliderRect.left + sliderRect.width / 2;\n\n\n                    if (Math.abs(contentCenter - sliderCenter) < contentRect.width / 2) {\n                        activeSide = side;\n                    }\n                });\n\n\n                showContent(activeSide, false);\n            }, 100);\n        });\n    }\n\n\n   // 初始加载时不触发滚动\ndocument.addEventListener('DOMContentLoaded', () => showContent('a', false, false));\n\n// 按钮点击时触发滚动\nbuttons['a'].addEventListener('click', () => showContent('a', true, true));\nbuttons['b'].addEventListener('click', () => showContent('b', true, true));\nbuttons['c'].addEventListener('click', () => showContent('c', true, true));\n</script>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "faq_GW9YRt": {
+      "type": "faq",
+      "blocks": {
+        "question_faWcgH": {
+          "type": "question",
+          "repeater": "{{ product.metafields.custom.faqs_col.value }}",
+          "settings": {
+            "title": "{{ block.repeater.heading.value }}",
+            "text": "{{ block.repeater.content | metafield_tag }}",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "question_faWcgH"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "style": "with-border",
+        "heading": "FAQs",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#ffffff",
+        "overlay_opacity": 0,
+        "padding_top": 48,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "product_limit": 4,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "heading": "You may also like",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 52,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    },
+    "featured_collection_1_rpLxJE": {
+      "type": "featured-collection-1",
+      "name": "S Featured Collection",
+      "settings": {
+        "collection": "",
+        "products": "{{ product.metafields[\"shopify--discovery--product_recommendation\"].related_products.value }}",
+        "product_limit": 4,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "You may also like",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "breescape_comparison_table_AI923": {
+      "type": "breescape-comparison-table",
+      "blocks": {
+        "row_CBnXDG": {
+          "type": "row",
+          "settings": {
+            "col_1": "Cool to the Touch",
+            "col_2": "Q-Max＞0.46",
+            "col_3": "Q-Max 0.11",
+            "col_4": "Q-Max 0.15",
+            "col_5": "Q-Max 0.19",
+            "row_align": ""
+          }
+        },
+        "row_ATTgUh": {
+          "type": "row",
+          "settings": {
+            "col_1": "Breathable (Air Permeability)",
+            "col_2": "1320 mm/s",
+            "col_3": "100-400 mm/s",
+            "col_4": "250-600 mm/s",
+            "col_5": "20-80 mm/s",
+            "row_align": ""
+          }
+        },
+        "row_zAdzLh": {
+          "type": "row",
+          "settings": {
+            "col_1": "Moisture-Wicking (Water Absorption Rate)",
+            "col_2": "226%",
+            "col_3": "148%",
+            "col_4": "198%",
+            "col_5": "88%",
+            "row_align": ""
+          }
+        },
+        "row_7EFdDh": {
+          "type": "row",
+          "settings": {
+            "col_1": "Smooth & Soft",
+            "col_2": "★★★★★",
+            "col_3": "★★★",
+            "col_4": "★★★★",
+            "col_5": "★★★★★",
+            "row_align": ""
+          }
+        },
+        "row_QHnBMD": {
+          "type": "row",
+          "settings": {
+            "col_1": "Durability",
+            "col_2": "★★★★★",
+            "col_3": "★★★★",
+            "col_4": "★★",
+            "col_5": "★★★",
+            "row_align": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_CBnXDG",
+        "row_ATTgUh",
+        "row_zAdzLh",
+        "row_7EFdDh",
+        "row_QHnBMD"
+      ],
+      "name": "Comparison Table",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "background_color": "#ededed",
+        "bg_image_radius_pc": 25,
+        "bg_image_radius_mobile": 10,
+        "max_width": 1600,
+        "section_padding_top_pc": 40,
+        "section_padding_bottom_pc": 50,
+        "section_padding_x_pc": 32,
+        "section_padding_top_mobile": 40,
+        "section_padding_bottom_mobile": 40,
+        "section_padding_x_mobile": 16,
+        "heading": "",
+        "title_color": "#ffffff",
+        "title_size_pc": 36,
+        "title_size_mobile": 22,
+        "title_margin_bottom_pc": 4,
+        "title_margin_bottom_mobile": 16,
+        "table_bg_color": "#f5f5f5",
+        "table_radius_pc": 29,
+        "table_radius_mobile": 16,
+        "table_padding_top_pc": 21,
+        "table_padding_right_pc": 0,
+        "table_padding_bottom_pc": 15,
+        "table_padding_left_pc": 0,
+        "table_padding_top_mobile": 0,
+        "table_padding_right_mobile": 0,
+        "table_padding_bottom_mobile": 0,
+        "table_padding_left_mobile": 0,
+        "panel_bg_opacity": 85,
+        "panel_border_color": "#ffffff",
+        "panel_border_width": 0,
+        "panel_shadow_color": "#ffffff",
+        "panel_shadow_opacity": 80,
+        "panel_shadow_blur": 0,
+        "panel_shadow_spread": 0,
+        "panel_blur": 12,
+        "cell_divider_color": "#e1e7eb",
+        "cell_divider_opacity": 68,
+        "cell_divider_width": 1,
+        "cell_divider_inset_x_pc": 51,
+        "cell_divider_inset_x_mobile": 12,
+        "cell_divider_inset_x_pc_4col": 32,
+        "cell_divider_inset_x_mobile_4col": 10,
+        "cell_divider_inset_x_pc_5col": 24,
+        "cell_divider_inset_x_mobile_5col": 12,
+        "show_col_4": true,
+        "show_col_5": true,
+        "col_1_ratio": 5,
+        "col_2_ratio": 3,
+        "col_3_ratio": 3,
+        "col_4_ratio": 3,
+        "col_5_ratio": 3,
+        "col_1_align": "left",
+        "col_2_align": "center",
+        "col_3_align": "center",
+        "col_4_align": "center",
+        "col_5_align": "center",
+        "row_gap_pc": 4,
+        "row_gap_mobile": 0,
+        "cell_padding_x_pc": 72,
+        "cell_padding_y_pc": 15,
+        "cell_padding_x_mobile": 8,
+        "cell_padding_y_mobile": 8,
+        "cell_padding_x_pc_4col": 40,
+        "cell_padding_x_mobile_4col": 6,
+        "cell_padding_x_pc_5col": 20,
+        "cell_padding_x_mobile_5col": 12,
+        "table_min_width_mobile_5col": 560,
+        "header_col_1": "",
+        "header_col_2": "Breescape®",
+        "header_image_2": "shopify://shop_images/Ellipse_45.png",
+        "header_col_3": "Cotton",
+        "header_image_3": "shopify://shop_images/Ellipse_46.png",
+        "header_col_4": "Bamboo Rayon",
+        "header_image_4": "shopify://shop_images/Ellipse_47.png",
+        "header_col_5": "Silk",
+        "header_image_5": "shopify://shop_images/Ellipse_48.png",
+        "header_image_shape": "circle",
+        "header_image_size_pc": 100,
+        "header_image_size_mobile": 56,
+        "header_image_gap_pc": 16,
+        "header_image_gap_mobile": 8,
+        "head_color": "#10374b",
+        "head_col_2_color": "#10374b",
+        "head_size_pc": 20,
+        "head_size_mobile": 12,
+        "head_weight": "700",
+        "head_margin_bottom_pc": 16,
+        "head_margin_bottom_mobile": 0,
+        "cell_color": "#10374b",
+        "cell_size_pc": 19,
+        "cell_size_mobile": 13,
+        "cell_weight": "400",
+        "footnote_line_1": "Higher Value = Better Results",
+        "footnote_line_2": "*Tested by SGS for verified cooling performance.",
+        "footnote_align": "left",
+        "footnote_color": "#10374b",
+        "footnote_size_pc": 14,
+        "footnote_size_mobile": 12,
+        "footnote_gap_pc": 32,
+        "footnote_gap_mobile": 4,
+        "footnote_mt_pc": 44,
+        "footnote_mt_mobile": 16,
+        "show_highlight": true,
+        "highlight_column": "2",
+        "highlight_bg_color": "#9fe0e9",
+        "highlight_radius_pc": 30,
+        "highlight_radius_mobile": 19,
+        "highlight_inset_top_pc": -24,
+        "highlight_inset_right_pc": 0,
+        "highlight_inset_bottom_pc": -30,
+        "highlight_inset_left_pc": 0,
+        "highlight_inset_top_mobile": -4,
+        "highlight_inset_right_mobile": 0,
+        "highlight_inset_bottom_mobile": -8,
+        "highlight_inset_left_mobile": 0
+      }
+    },
+    "lookbook_AI923": {
+      "type": "lookbook",
+      "blocks": {
+        "product_k3rDNp": {
+          "type": "product",
+          "settings": {
+            "product": "cooling-pillowcases",
+            "color_text": "#ffffff",
+            "vertical": 60,
+            "horizontal": 20,
+            "vertical_mobile": 55,
+            "horizontal_mobile": 10
+          }
+        },
+        "product_y6A7Hd": {
+          "type": "product",
+          "settings": {
+            "product": "cooling-comforter",
+            "color_text": "#ffffff",
+            "vertical": 60,
+            "horizontal": 70,
+            "vertical_mobile": 60,
+            "horizontal_mobile": 85
+          }
+        },
+        "product_TfCbYU": {
+          "type": "product",
+          "settings": {
+            "product": "cooling-eye-mask",
+            "color_text": "#ffffff",
+            "vertical": 72,
+            "horizontal": 40,
+            "vertical_mobile": 70,
+            "horizontal_mobile": 24
+          }
+        },
+        "product_Xp6iqX": {
+          "type": "product",
+          "settings": {
+            "product": "cooling-sheet-set",
+            "color_text": "#ffffff",
+            "vertical": 15,
+            "horizontal": 65,
+            "vertical_mobile": 20,
+            "horizontal_mobile": 85
+          }
+        },
+        "product_F8izQy": {
+          "type": "product",
+          "settings": {
+            "product": "breescape-adjustable-all-season-comforter",
+            "color_text": "#ffffff",
+            "vertical": 80,
+            "horizontal": 30,
+            "vertical_mobile": 75,
+            "horizontal_mobile": 10
+          }
+        },
+        "product_bBxPBJ": {
+          "type": "product",
+          "settings": {
+            "product": "breescape-ergonomic-body-pillow",
+            "color_text": "#ffffff",
+            "vertical": 80,
+            "horizontal": 85,
+            "vertical_mobile": 85,
+            "horizontal_mobile": 80
+          }
+        }
+      },
+      "block_order": [
+        "product_k3rDNp",
+        "product_y6A7Hd",
+        "product_TfCbYU",
+        "product_Xp6iqX",
+        "product_F8izQy",
+        "product_bBxPBJ"
+      ],
+      "name": "t:sections.lookbook.name",
+      "settings": {
+        "image": "shopify://shop_images/Group_1105_1.webp",
+        "image_mobile": "shopify://shop_images/Group_1130_1.webp",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "heading_position": "none",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 32,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "breescape_comparison_table_AI923",
+    "custom_liquid_TmY97K",
+    "help-drawer",
+    "rich_text_N9bMQC",
+    "video_jAApYY",
+    "custom_liquid_nhVLMY",
+    "custom_liquid_rJE9HM",
+    "multicolunmn_with_overlay_pqUyfx",
+    "shawn_product_sheets_blendtek_zjMLid",
+    "shawn_solution_WizY8R",
+    "rich_text_tq9Twh",
+    "custom_liquid_RmPqA6",
+    "custom_liquid_9a7bPM",
+    "lookbook_AI923",
+    "ae6d898f7ba8cc43d381",
+    "custom_liquid_rFzNQR",
+    "faq_GW9YRt",
+    "product-recommendations",
+    "featured_collection_1_rpLxJE"
+  ]
+}

@@ -1,0 +1,74 @@
+{% comment %}
+修改 ‘1200’ 来决定客户需要滚动多远才显示按钮：
+{% endcomment %}
+{% assign vertical_offset_for_trigger = 1200 %}
+{% comment %}
+修改 ‘em’ 前的数字来更改按钮距离浏览器底部的距离：
+{% endcomment %}
+<!-- {% assign position_from_bottom = '2.2em' %} -->
+<a href="#" title="Back to the top" class="back-to-top fixed">
+    {%- render 'icon', icon: 'chevron-up', size: 'lg' -%}
+</a>
+
+<style>
+
+    @media screen and (min-width: 1024px) {
+        .back-to-top {
+            bottom: 2.2em;
+        }
+    }
+
+    .back-to-top {
+        position: fixed;
+        right: 1.5rem;
+        bottom: 2.2em;
+        text-decoration: none;
+        color: #0f374b;
+        text-align: center;
+        box-shadow: #24242426 0 20px 30px;
+        background: #fff;
+        font-size: 16px;
+        padding: 0.3em;
+        display: none;
+        -webkit-border-top-left-radius: var(--sp-3);
+        -webkit-border-bottom-left-radius: var(--sp-3);
+        -moz-border-radius-topleft: var(--sp-3);
+        -moz-border-radius-bottomleft: var(--sp-3);
+        border-radius: var(--sp-3);
+        z-index: 60000;
+    }
+
+    .back-to-top:hover {
+        text-decoration: none;
+        color: #555;
+    }
+  @media screen and (max-width: 768px) {
+        .back-to-top {
+            bottom:8rem;
+        }
+    }
+</style>
+
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script> 
+
+<script>
+    window.onload = function () {
+        jQuery(function ($) {
+            var offset = {{ vertical_offset_for_trigger }};
+        var duration = 500;
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > offset) {
+                $('.back-to-top').fadeIn(duration);
+            }
+            else {
+                $('.back-to-top').fadeOut(duration);
+            }
+        });
+        $('.back-to-top').unbind('click.smoothscroll').bind('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, duration);
+            return false;
+        })
+    });
+}
+</script>

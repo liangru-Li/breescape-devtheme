@@ -1,0 +1,446 @@
+{% doc %}
+  Renders a promotion badge and a product-specific Yotpo rating.
+  @param {product} product - The product whose reviews are displayed.
+  @param {block} [block] - Rating and promotion display settings.
+  @param {string} [placement] - Layout placement.
+{% enddoc %}
+{%- comment -%}
+  Product Yotpo Rating Promo
+  左侧可配置徽标（样式对齐价格组件 SAVE），右侧单星 + 分数 + (数量)
+  分数/数量优先用 Yotpo metafield 服务端输出，页面打开即可显示；
+  无 metafield 时再由 JS 从 Yotpo widget 回填。
+  不修改 snippets/product-yotpo-rating.liquid
+{%- endcomment -%}
+
+{%- liquid
+  assign yr_product = product | default: product
+  assign yr_block = block
+  assign yr_placement = placement | default: 'info'
+  if yr_block
+    assign yr_visibility = yr_block.settings.visibility | default: 'all'
+    assign yr_show_badge = yr_block.settings.show_left_badge
+    assign yr_left_text = yr_block.settings.left_text
+    assign yr_separator = yr_block.settings.separator_text | default: 'I'
+    assign yr_separator_weight = yr_block.settings.separator_weight | default: '400'
+    assign yr_badge_bg = yr_block.settings.badge_bg | default: '#B3E8EF'
+    assign yr_badge_color = yr_block.settings.badge_text_color | default: '#10374B'
+    assign yr_badge_size = yr_block.settings.badge_font_size | default: 15
+    assign yr_badge_size_m = yr_block.settings.badge_font_size_mobile | default: 11
+    assign yr_badge_weight = yr_block.settings.badge_weight | default: '700'
+    assign yr_badge_ls = yr_block.settings.badge_letter_spacing
+    if yr_badge_ls == nil
+      assign yr_badge_ls = 0
+    endif
+    assign yr_badge_px = yr_block.settings.badge_padding_x | default: 10
+    assign yr_badge_py = yr_block.settings.badge_padding_y | default: 8
+    assign yr_badge_px_m = yr_block.settings.badge_padding_x_mobile | default: 6
+    assign yr_badge_py_m = yr_block.settings.badge_padding_y_mobile | default: 5
+    assign yr_badge_radius = yr_block.settings.badge_radius | default: 8
+    assign yr_star_color = yr_block.settings.star_color | default: '#B3E8EF'
+    assign yr_rating_color = yr_block.settings.rating_text_color | default: '#10374B'
+    assign yr_rating_size = yr_block.settings.rating_font_size | default: 14
+    assign yr_rating_size_m = yr_block.settings.rating_font_size_mobile | default: 12
+    assign yr_margin_bottom = yr_block.settings.margin_bottom | default: 8
+    assign yr_instance_id = yr_block.settings.instance_id | default: '989160'
+  else
+    assign yr_visibility = visibility | default: 'all'
+    assign yr_show_badge = true
+    assign yr_left_text = left_text | default: ''
+    assign yr_separator = separator_text | default: 'I'
+    assign yr_separator_weight = separator_weight | default: '400'
+    assign yr_badge_bg = '#B3E8EF'
+    assign yr_badge_color = '#10374B'
+    assign yr_badge_size = 15
+    assign yr_badge_size_m = 11
+    assign yr_badge_weight = '700'
+    assign yr_badge_ls = 0
+    assign yr_badge_px = 10
+    assign yr_badge_py = 8
+    assign yr_badge_px_m = 6
+    assign yr_badge_py_m = 5
+    assign yr_badge_radius = 8
+    assign yr_star_color = '#B3E8EF'
+    assign yr_rating_color = '#10374B'
+    assign yr_rating_size = 14
+    assign yr_rating_size_m = 12
+    assign yr_margin_bottom = 8
+    assign yr_instance_id = instance_id | default: '989160'
+  endif
+
+  assign yr_mf_avg = yr_product.metafields.yotpo.reviews_average.value | default: yr_product.metafields.yotpo.reviews_average
+  assign yr_mf_count = yr_product.metafields.yotpo.reviews_count.value | default: yr_product.metafields.yotpo.reviews_count
+  assign yr_has_zero_reviews = false
+  if yr_mf_count != blank
+    assign yr_known_count = yr_mf_count | plus: 0
+    if yr_known_count == 0
+      assign yr_has_zero_reviews = true
+    endif
+  endif
+  assign yr_has_rating = false
+  assign yr_score_text = ''
+  assign yr_count_text = ''
+  if yr_mf_avg != blank and yr_mf_count != blank
+    assign yr_count_num = yr_mf_count | plus: 0
+    assign yr_score_num = yr_mf_avg | plus: 0
+    if yr_count_num > 0 and yr_score_num > 0 and yr_score_num <= 5
+      assign yr_has_rating = true
+      assign yr_score_text = yr_mf_avg | plus: 0 | round: 1
+      assign yr_count_text = yr_count_num
+    endif
+  endif
+-%}
+
+{%- unless yr_promo_assets_rendered -%}
+  {%- assign yr_promo_assets_rendered = true -%}
+  <style>
+    .be-yr-promo {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 16px;
+      width: 100%;
+      line-height: 1;
+      font-size: var(--yr-rating-size, 14px);
+    }
+    .be-yr-promo[data-yr-visibility="mobile"] { display: none; }
+    .be-yr-promo[data-yr-visibility="desktop"] { display: none; }
+    .be-yr-promo[data-yr-visibility="all"] { display: flex; }
+    @media (max-width: 767px) {
+      .be-yr-promo[data-yr-visibility="mobile"] { display: flex; }
+    }
+    @media (min-width: 768px) {
+      .be-yr-promo[data-yr-visibility="desktop"] { display: flex; }
+    }
+
+    /* 移动端：顶部图库位展示，信息栏里的同一块隐藏，避免重复 */
+    .be-yr-promo--mobile-gallery { display: none !important; align-self: stretch; }
+    @media (max-width: 767px) {
+      .be-yr-promo--mobile-gallery[data-yr-visibility="mobile"],
+      .be-yr-promo--mobile-gallery[data-yr-visibility="all"] { display: flex !important; }
+      .be-yr-promo--info { display: none !important; }
+    }
+    @media (min-width: 768px) {
+      .be-yr-promo--mobile-gallery { display: none !important; }
+    }
+
+    .be-yr-promo__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      min-width: 0;
+      font-size: var(--yr-badge-size, 15px);
+      padding: var(--yr-badge-py, 8px) var(--yr-badge-px, 10px);
+    }
+    .be-yr-promo__badge-sep {
+      display: inline-block;
+      padding-inline: 0.35em;
+    }
+
+    .be-yr-promo__right {
+      appearance: none;
+      -webkit-appearance: none;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0;
+      margin-inline-start: auto;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      flex-shrink: 0;
+      color: inherit;
+      font: inherit;
+      line-height: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .be-yr-promo:not(.is-ready) .be-yr-promo__right {
+      display: none;
+    }
+    .be-yr-promo__right:hover {
+      opacity: 0.78;
+    }
+    .be-yr-promo__right:focus-visible {
+      outline: 2px solid rgba(16, 55, 75, 0.35);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .be-yr-promo__star {
+      display: block;
+      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
+    }
+
+    @media (max-width: 767px) {
+      .be-yr-promo {
+        font-size: var(--yr-rating-size-m, 12px);
+        gap: 6px 8px;
+      }
+      .be-yr-promo__badge {
+        font-size: var(--yr-badge-size-m, 11px);
+        padding: var(--yr-badge-py-m, 5px) var(--yr-badge-px-m, 6px);
+      }
+      .be-yr-promo__star {
+        width: 12px;
+        height: 12px;
+      }
+      .be-yr-promo__right { gap: 3px; }
+    }
+
+    .be-yr-promo__score,
+    .be-yr-promo__count {
+      display: none;
+      line-height: 1.1;
+      color: inherit;
+      font-size: inherit;
+    }
+    .be-yr-promo.is-ready .be-yr-promo__score,
+    .be-yr-promo.is-ready .be-yr-promo__count {
+      display: inline;
+    }
+    .be-yr-promo__score {
+      font-weight: 700;
+    }
+    .be-yr-promo__count {
+      font-weight: 400;
+      text-decoration: underline;
+      text-decoration-thickness: 0.5px;
+      text-underline-offset: 2px;
+    }
+
+    /* Yotpo 只负责出数，不展示原五星行 */
+    .be-yr-promo__widget {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+
+  <script>
+    (function () {
+      if (window.__beYrPromoInit) return;
+      window.__beYrPromoInit = true;
+
+      function textOf(el) {
+        return ((el && (el.textContent || el.innerText)) || '').replace(/\s+/g, ' ').trim();
+      }
+
+      function parseFromRoot(root) {
+        if (!root) return null;
+        var scoreEl = root.querySelector('.yotpo-sr-bottom-line-score, [class*="bottom-line-score"]');
+        var reviewsEl = root.querySelector('.yotpo-sr-bottom-line-text, [class*="bottom-line-text"], [class*="reviews-count"], [class*="review-count"]');
+        var score = textOf(scoreEl).replace(/[^\d.]/g, '');
+        var count = textOf(reviewsEl).replace(/[^\d,]/g, '');
+        var blob = textOf(root);
+        if (!score || !count) {
+          var combo = blob.match(/(\d+(?:\.\d+)?)\s*\(\s*([\d,]+)/);
+          if (combo) {
+            score = score || combo[1];
+            count = count || combo[2];
+          }
+        }
+        if (!count) {
+          var reviews = blob.match(/([\d,]+)\s*Reviews?/i);
+          if (reviews) count = reviews[1];
+        }
+        if (count === '0') return { score: '', count: '0' };
+        if (!score || !count) return null;
+        var scoreNumber = Number(score);
+        var countNumber = Number(count.replace(/,/g, ''));
+        if (!Number.isFinite(scoreNumber) || scoreNumber <= 0 || scoreNumber > 5 ||
+            !Number.isInteger(countNumber) || countNumber <= 0) return null;
+        return { score: score, count: count };
+      }
+
+      function fill(promo, data) {
+        if (!promo || !data) return;
+        var scoreNode = promo.querySelector('.be-yr-promo__score');
+        var countNode = promo.querySelector('.be-yr-promo__count');
+        if (!scoreNode || !countNode) return;
+        var hasReviews = Number(data.count.replace(/,/g, '')) > 0;
+        var scoreText = hasReviews ? data.score : '';
+        var countText = hasReviews ? '(' + data.count + ')' : '';
+        if (scoreNode.textContent !== scoreText) scoreNode.textContent = scoreText;
+        if (countNode.textContent !== countText) countNode.textContent = countText;
+        promo.classList.toggle('is-ready', hasReviews);
+        var trigger = promo.querySelector('[data-yr-scroll-reviews]');
+        if (trigger) {
+          trigger.setAttribute('aria-label', hasReviews ? 'See ' + data.score + ' star reviews (' + data.count + ')' : 'See customer reviews');
+        }
+      }
+
+      function goToReviews(e) {
+        var trigger = e.target && e.target.closest ? e.target.closest('[data-yr-scroll-reviews]') : null;
+        if (!trigger) return;
+        e.preventDefault();
+        if (typeof window.__pdpGoToNav === 'function' && window.__pdpGoToNav('reviews')) return;
+        var tab = document.querySelector('.pdp-sticky-nav__tab[data-anchor="reviews"]');
+        if (tab) {
+          tab.click();
+          return;
+        }
+        var fallback = document.querySelector('[id*="ae6d898f7ba8cc43d381"], [class*="yotpo-main-widget"], [class*="yotpo-reviews"]');
+        if (fallback && fallback.closest) {
+          var section = fallback.closest('[id^="shopify-section-"]') || fallback.closest('.shopify-section') || fallback;
+          var top = section.getBoundingClientRect().top + window.pageYOffset - 72;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      }
+
+      function readPromo(promo) {
+        if (promo.getAttribute('data-yr-zero-reviews') === 'true') {
+          return { score: '', count: '0' };
+        }
+        var productId = promo.getAttribute('data-yr-product-id');
+        if (!productId) return null;
+        var widget = promo.querySelector('.be-yr-promo__widget .yotpo-widget-instance');
+        if (widget && widget.getAttribute('data-yotpo-product-id') === productId) {
+          var ownData = parseFromRoot(widget);
+          if (ownData) return ownData;
+        }
+        var widgets = document.querySelectorAll('.yotpo-widget-instance[data-yotpo-product-id]');
+        for (var i = 0; i < widgets.length; i++) {
+          if (widgets[i].getAttribute('data-yotpo-product-id') !== productId) continue;
+          var data = parseFromRoot(widgets[i]);
+          if (data) return data;
+        }
+        return null;
+      }
+
+      function refresh() {
+        document.querySelectorAll('.be-yr-promo').forEach(function (promo) {
+          fill(promo, readPromo(promo));
+        });
+      }
+
+      function watch() {
+        refresh();
+        if (window.__beYrPromoObs) return;
+        var obs = new MutationObserver(function () {
+          if (window.__beYrPromoTick) return;
+          window.__beYrPromoTick = true;
+          window.requestAnimationFrame(function () {
+            window.__beYrPromoTick = false;
+            refresh();
+          });
+        });
+        obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+        window.__beYrPromoObs = obs;
+        window.setTimeout(function () {
+          try { obs.disconnect(); } catch (e) {}
+        }, 30000);
+      }
+
+      function init() {
+        watch();
+        document.addEventListener('click', goToReviews);
+        [400, 1000, 2000, 4000, 8000].forEach(function (ms) {
+          window.setTimeout(refresh, ms);
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+      document.addEventListener('shopify:section:load', function () {
+        window.setTimeout(watch, 100);
+      });
+    })();
+  </script>
+{%- endunless -%}
+
+<div
+  class="be-yr-promo be-yr-promo--{{ yr_placement }}{% if yr_has_rating %} is-ready{% endif %}"
+  data-yr-visibility="{{ yr_visibility }}"
+  data-yr-product-id="{{ yr_product.id }}"
+  data-yr-zero-reviews="{{ yr_has_zero_reviews }}"
+  style="
+    --yr-rating-size: {{ yr_rating_size }}px;
+    --yr-rating-size-m: {{ yr_rating_size_m }}px;
+    --yr-badge-size: {{ yr_badge_size }}px;
+    --yr-badge-size-m: {{ yr_badge_size_m }}px;
+    --yr-badge-px: {{ yr_badge_px }}px;
+    --yr-badge-py: {{ yr_badge_py }}px;
+    --yr-badge-px-m: {{ yr_badge_px_m }}px;
+    --yr-badge-py-m: {{ yr_badge_py_m }}px;
+    color: {{ yr_rating_color }};
+    margin-bottom: {{ yr_margin_bottom }}px;
+  "
+  {% if yr_block and yr_placement == 'info' %}{{ yr_block.shopify_attributes }}{% endif %}
+>
+  {%- if yr_show_badge and yr_left_text != blank -%}
+    {%- liquid
+      assign yr_sep = yr_separator | strip
+      if yr_sep != blank and yr_left_text contains yr_sep
+      elsif yr_left_text contains '|'
+        assign yr_sep = '|'
+      endif
+      assign yr_part1 = yr_left_text
+      assign yr_part2 = ''
+      if yr_sep != blank and yr_left_text contains yr_sep
+        assign yr_parts = yr_left_text | split: yr_sep
+        assign yr_part1 = yr_parts.first | strip
+        assign yr_part2 = ''
+        for yr_part in yr_parts
+          unless forloop.first
+            if yr_part2 != blank
+              assign yr_part2 = yr_part2 | append: yr_sep | append: yr_part
+            else
+              assign yr_part2 = yr_part
+            endif
+          endunless
+        endfor
+        assign yr_part2 = yr_part2 | strip
+      endif
+    -%}
+    <span
+      class="be-yr-promo__badge"
+      style="
+        background: {{ yr_badge_bg }};
+        color: {{ yr_badge_color }};
+        font-weight: {{ yr_badge_weight }};
+        letter-spacing: {{ yr_badge_ls }}px;
+        border-radius: {{ yr_badge_radius }}px;
+      "
+    >
+      <span class="be-yr-promo__badge-text">{{- yr_part1 -}}</span>
+      {%- if yr_part2 != blank -%}
+        <span class="be-yr-promo__badge-sep" style="font-weight: {{ yr_separator_weight }};">{{- yr_sep -}}</span>
+        <span class="be-yr-promo__badge-text">{{- yr_part2 -}}</span>
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+
+  <button type="button" class="be-yr-promo__right" data-yr-scroll-reviews aria-label="{% if yr_has_rating %}See {{ yr_score_text }} star reviews ({{ yr_count_text }}){% else %}See customer reviews{% endif %}">
+    <svg class="be-yr-promo__star" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="{{ yr_star_color }}" d="M12 2.2l2.94 5.96 6.58.96-4.76 4.64 1.12 6.56L12 17.98l-5.88 3.1 1.12-6.56L2.48 9.12l6.58-.96L12 2.2z"/>
+    </svg>
+    <span class="be-yr-promo__score">{% if yr_has_rating %}{{ yr_score_text }}{% endif %}</span>
+    <span class="be-yr-promo__count">{% if yr_has_rating %}({{ yr_count_text }}){% endif %}</span>
+  </button>
+  {%- unless yr_has_rating or yr_has_zero_reviews -%}
+    <div class="be-yr-promo__widget" aria-hidden="true">
+      <div
+        class="yotpo-widget-instance"
+        data-yotpo-instance-id="{{ yr_instance_id }}"
+        data-yotpo-product-id="{{ yr_product.id }}"
+        data-yotpo-cart-product-id="{{ yr_product.id }}"
+        data-yotpo-section-id="{{ template.name }}"
+      ></div>
+    </div>
+  {%- endunless -%}
+</div>

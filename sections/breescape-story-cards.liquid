@@ -1,0 +1,862 @@
+<!-- ============================================================
+  Section: Breescape — Story & Cards
+  第一部分：左图 + 右侧（引号图标 / 引用文字 / 右下角加粗姓名+职位）
+  第二部分：标题 + 三张图片卡片
+    · PC：3 列等宽，间距可调（默认 ~24px）
+    · 卡片图片比例默认 335.58 : 384.68
+    · 移动端：卡片横向可滑动
+============================================================ -->
+
+{%- liquid
+  assign s = section.settings
+  assign cards = section.blocks
+  assign overlay_alpha = s.bg_overlay_opacity | times: 1.0 | divided_by: 100.0
+-%}
+
+<section
+  class="be-story"
+  aria-label="{{ s.heading | default: 'Story' | escape }}"
+  style="
+    --be-story-bg:            {{ s.background_color }};
+    --be-story-pad-top-pc:    {{ s.section_padding_top_pc }}px;
+    --be-story-pad-bottom-pc: {{ s.section_padding_bottom_pc }}px;
+    --be-story-pad-x-pc:      {{ s.section_padding_x_pc }}px;
+    --be-story-pad-top-m:     {{ s.section_padding_top_mobile }}px;
+    --be-story-pad-bottom-m:  {{ s.section_padding_bottom_mobile }}px;
+    --be-story-pad-x-m:       {{ s.section_padding_x_mobile }}px;
+    --be-story-max-width:     {{ s.max_width }}px;
+
+    --be-story-q-gap-pc:      {{ s.quote_col_gap_pc }}px;
+    --be-story-q-gap-m:       {{ s.quote_row_gap_mobile }}px;
+    --be-story-q-img-ratio:   {{ s.quote_image_ratio }};
+    --be-story-q-img-radius:  {{ s.quote_image_radius }}px;
+    --be-story-q-icon-w-pc:   {{ s.quote_icon_width_pc }}px;
+    --be-story-q-icon-w-m:    {{ s.quote_icon_width_mobile }}px;
+
+    --be-story-quote-color:   {{ s.quote_color }};
+    --be-story-quote-fz-pc:   {{ s.quote_size_pc }}px;
+    --be-story-quote-fz-m:    {{ s.quote_size_mobile }}px;
+
+    --be-story-name-color:    {{ s.name_color }};
+    --be-story-name-fz:       {{ s.name_size }}px;
+    --be-story-name-fz-m:     {{ s.name_size_mobile }}px;
+    --be-story-role-color:    {{ s.role_color }};
+    --be-story-role-fz:       {{ s.role_size }}px;
+    --be-story-role-fz-m:     {{ s.role_size_mobile }}px;
+
+    --be-story-title-color:   {{ s.cards_title_color }};
+    --be-story-title-fz-pc:   {{ s.cards_title_size_pc }}px;
+    --be-story-title-fz-m:    {{ s.cards_title_size_mobile }}px;
+    --be-story-title-mb-pc:   {{ s.cards_title_mb_pc }}px;
+    --be-story-title-mb-m:    {{ s.cards_title_mb_mobile }}px;
+
+    --be-story-card-gap-pc:   {{ s.card_gap_pc }}px;
+    --be-story-card-gap-m:    {{ s.card_gap_mobile }}px;
+    --be-story-card-ratio:    {{ s.card_image_ratio }};
+    {%- if s.card_image_ratio_mobile != blank -%}
+      --be-story-card-ratio-m: {{ s.card_image_ratio_mobile }};
+    {%- endif -%}
+    --be-story-card-radius:   {{ s.card_radius }}px;
+    --be-story-card-w-m:      {{ s.card_width_mobile }}%;
+    --be-story-cards-end-pad-m:{{ s.cards_end_padding_mobile }}px;
+
+    --be-story-card-bg:           {{ s.card_bg_color }};
+    --be-story-card-outer-radius: {{ s.card_outer_radius }}px;
+    --be-story-card-pad-pc:       {{ s.card_padding_pc }}px;
+    --be-story-card-pad-bottom-pc:{{ s.card_padding_bottom_pc }}px;
+    --be-story-card-pad-m:        {{ s.card_padding_mobile }}px;
+    --be-story-card-pad-bottom-m: {{ s.card_padding_bottom_mobile }}px;
+    --be-story-card-shadow:       {% if s.card_shadow %}0 6px 18px rgba(16, 55, 75, .08){% else %}none{% endif %};
+
+    --be-story-card-label-color: {{ s.card_label_color }};
+    --be-story-card-heading-color: {{ s.card_heading_color }};
+
+    --be-story-btn-bg:        {{ s.button_bg }};
+    --be-story-btn-color:     {{ s.button_text_color }};
+    --be-story-btn-radius:    {{ s.button_radius }}px;
+
+    --be-story-bg-pos-pc:     {{ s.bg_position_pc }};
+    --be-story-bg-pos-m:      {{ s.bg_position_mobile }};
+    --be-story-bg-size:       {{ s.bg_size }};
+    --be-story-overlay:       {{ s.bg_overlay_color | color_modify: 'alpha', overlay_alpha }};
+    {%- if s.background_image != blank -%}
+      --be-story-bg-image:    url('{{ s.background_image | image_url: width: 2400 }}');
+    {%- endif -%}
+    {%- if s.background_image_mobile != blank -%}
+      --be-story-bg-image-m:  url('{{ s.background_image_mobile | image_url: width: 1200 }}');
+    {%- elsif s.background_image != blank -%}
+      --be-story-bg-image-m:  url('{{ s.background_image | image_url: width: 1200 }}');
+    {%- endif -%}
+  "
+>
+  <div class="be-story__inner">
+
+    {%- comment -%} ---------- 第一部分：引用 ---------- {%- endcomment -%}
+    <div class="be-story__quote">
+      {%- if s.quote_image != blank -%}
+        <div class="be-story__quote-media">
+          <img
+            src="{{ s.quote_image | image_url: width: 1200 }}"
+            alt="{{ s.quote_image.alt | default: s.name | escape }}"
+            width="{{ s.quote_image.width }}"
+            height="{{ s.quote_image.height }}"
+            loading="lazy"
+          >
+          {%- if s.name != blank or s.role != blank -%}
+            <div class="be-story__person be-story__person--overlay">
+              {%- if s.name != blank -%}<span class="be-story__name">{{ s.name | escape }}</span>{%- endif -%}
+              {%- if s.role != blank -%}<span class="be-story__role">{{ s.role }}</span>{%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="be-story__quote-body">
+        {%- if s.quote_icon != blank -%}
+          <img
+            class="be-story__quote-icon"
+            src="{{ s.quote_icon | image_url: width: 240 }}"
+            alt=""
+            loading="lazy"
+            aria-hidden="true"
+          >
+        {%- endif -%}
+
+        {%- if s.quote_text != blank -%}
+          <div class="be-story__quote-text">{{ s.quote_text }}</div>
+        {%- endif -%}
+
+        {%- if s.name != blank or s.role != blank -%}
+          <div class="be-story__person be-story__person--inline">
+            {%- if s.name != blank -%}<span class="be-story__name">{{ s.name | escape }}</span>{%- endif -%}
+            {%- if s.role != blank -%}<span class="be-story__role">{{ s.role }}</span>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} ---------- 第二部分：标题 + 卡片 ---------- {%- endcomment -%}
+    {%- if s.cards_title != blank or cards.size > 0 -%}
+      <div class="be-story__cards-wrap">
+        {%- if s.cards_title != blank -%}
+          <h2 class="be-story__cards-title">{{ s.cards_title | escape }}</h2>
+        {%- endif -%}
+
+        {%- if cards.size > 0 -%}
+          <div class="be-story__cards">
+            {%- for block in cards -%}
+              {%- assign b = block.settings -%}
+              <div class="be-story__card" {{ block.shopify_attributes }}>
+                {%- if b.link != blank -%}<a class="be-story__card-link" href="{{ b.link }}">{%- endif -%}
+                  <div class="be-story__card-media">
+                    {%- if b.image != blank -%}
+                      <img
+                        src="{{ b.image | image_url: width: 800 }}"
+                        alt="{{ b.image.alt | default: b.heading | escape }}"
+                        width="{{ b.image.width }}"
+                        height="{{ b.image.height }}"
+                        loading="lazy"
+                      >
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag: 'be-story__placeholder' }}
+                    {%- endif -%}
+                  </div>
+                {%- if b.link != blank -%}</a>{%- endif -%}
+
+                {%- if b.label != blank -%}
+                  <div class="be-story__card-label">{{ b.label }}</div>
+                {%- endif -%}
+                {%- if b.heading != blank -%}
+                  <div class="be-story__card-heading">{{ b.heading | escape }}</div>
+                {%- endif -%}
+                {%- if b.button_text != blank -%}
+                  <a class="be-story__card-btn" {% if b.link != blank %}href="{{ b.link }}"{% else %}href="#" aria-disabled="true"{% endif %}>
+                    {{ b.button_text | escape }}
+                  </a>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<style>
+  .be-story,
+  .be-story *,
+  .be-story *::before,
+  .be-story *::after { box-sizing: border-box; }
+
+  .be-story {
+    position: relative;
+    background-color: var(--be-story-bg, transparent);
+    background-image: var(--be-story-bg-image, none);
+    background-repeat: no-repeat;
+    background-size: var(--be-story-bg-size, cover);
+    background-position: var(--be-story-bg-pos-pc, center center);
+    padding: var(--be-story-pad-top-pc) var(--be-story-pad-x-pc) var(--be-story-pad-bottom-pc);
+  }
+  .be-story::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--be-story-overlay, transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .be-story__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--be-story-max-width, 1040px);
+    margin-inline: auto;
+  }
+
+  /* ---------- 第一部分 ---------- */
+  .be-story__quote {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    column-gap: var(--be-story-q-gap-pc, 160px);
+  }
+
+  .be-story__quote-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--be-story-q-img-radius, 0);
+  }
+  .be-story__quote-media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: var(--be-story-q-img-ratio, 427 / 268);
+    object-fit: cover;
+  }
+
+  .be-story__quote-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .be-story__quote-icon {
+    display: block;
+    width: var(--be-story-q-icon-w-pc, 56px);
+    height: auto;
+    margin-bottom: 12px;
+  }
+
+  .be-story .be-story__quote-text,
+  .be-story-section .be-story__quote-text,
+  .be-story .be-story__quote-text *,
+  .be-story-section .be-story__quote-text * {
+    font-family: 'GillSans', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-style: italic !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+  }
+  .be-story__quote-text {
+    color: var(--be-story-quote-color, #10374B);
+    font-size: var(--be-story-quote-fz-pc, 22px);
+    line-height: 1.2;
+  }
+  .be-story__quote-text > * { margin: 0; }
+  .be-story__quote-text > * + * { margin-top: .5em; }
+
+  /* 姓名 / 职位 */
+  .be-story__person {
+    display: flex;
+    flex-direction: column;
+  }
+  .be-story__name {
+    color: var(--be-story-name-color, #10374B);
+    font-size: var(--be-story-name-fz, 18px);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .be-story__role {
+    color: var(--be-story-role-color, #6b8a99);
+    font-size: var(--be-story-role-fz, 12px);
+    line-height: 1.3;
+    margin-top: 2px;
+  }
+
+  /* 桌面端：姓名在右栏底部、右对齐 */
+  .be-story__person--inline {
+    align-items: flex-end;
+    text-align: right;
+    width: 100%;
+    margin-top: 20px;
+  }
+  /* 桌面端不显示图片上的姓名 */
+  .be-story__person--overlay { display: none; }
+
+  /* ---------- 第二部分 ---------- */
+  .be-story__cards-wrap { margin-top: 56px; }
+
+  .be-story .be-story__cards-title,
+  .be-story-section .be-story__cards-title {
+    margin: 0 0 var(--be-story-title-mb-pc, 24px) !important;
+    color: var(--be-story-title-color, #10374B) !important;
+    font-size: var(--be-story-title-fz-pc, 22px) !important;
+    font-style: italic !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .be-story__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--be-story-card-gap-pc, 24px);
+  }
+
+  .be-story__card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--be-story-card-bg, #ffffff);
+    padding: var(--be-story-card-pad-pc, 12px) var(--be-story-card-pad-pc, 12px) var(--be-story-card-pad-bottom-pc, 18px);
+    border-radius: var(--be-story-card-outer-radius, 12px);
+    box-shadow: var(--be-story-card-shadow, none);
+  }
+  .be-story__card-link { display: block; }
+
+  .be-story__card-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--be-story-card-radius, 8px);
+  }
+  .be-story__card-media img,
+  .be-story__card-media svg {
+    display: block;
+    width: 100%;
+    aspect-ratio: var(--be-story-card-ratio, 335.58 / 384.68);
+    object-fit: cover;
+  }
+
+  .be-story__card-label {
+    margin-top: 14px;
+    color: var(--be-story-card-label-color, #6b8a99);
+    font-size: 11px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .be-story__card-heading {
+    margin-top: 4px;
+    color: var(--be-story-card-heading-color, #10374B);
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .be-story__card-btn {
+    align-self: center;
+    margin-top: 12px;
+    padding: 9px 26px;
+    background: var(--be-story-btn-bg, #9FE0E9);
+    color: var(--be-story-btn-color, #10374B);
+    border-radius: var(--be-story-btn-radius, 999px);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  /* ---------- 移动端 ---------- */
+  @media (max-width: 768px) {
+    .be-story {
+      padding: var(--be-story-pad-top-m) var(--be-story-pad-x-m) var(--be-story-pad-bottom-m);
+      background-image: var(--be-story-bg-image-m, var(--be-story-bg-image, none));
+      background-position: var(--be-story-bg-pos-m, center center);
+    }
+
+    /* 引用：上下堆叠，先文字后图片 */
+    .be-story__quote {
+      grid-template-columns: 1fr;
+      row-gap: var(--be-story-q-gap-m, 24px);
+    }
+    .be-story__quote-body { order: 1; }
+    .be-story__quote-media { order: 2; }
+
+    .be-story__quote-icon { width: var(--be-story-q-icon-w-m, 44px); }
+    .be-story__quote-text { font-size: var(--be-story-quote-fz-m, 18px); }
+
+    .be-story__name { font-size: var(--be-story-name-fz-m, var(--be-story-name-fz, 18px)); }
+    .be-story__role { font-size: var(--be-story-role-fz-m, var(--be-story-role-fz, 12px)); }
+
+    /* 移动端：姓名压在图片右下角（白字），隐藏右栏姓名 */
+    .be-story__person--inline { display: none; }
+    .be-story__person--overlay {
+      display: flex;
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      align-items: flex-end;
+      text-align: right;
+    }
+    .be-story__person--overlay .be-story__name { color: #fff; }
+    .be-story__person--overlay .be-story__role { color: rgba(255, 255, 255, .85); }
+
+    /* 卡片：横向滑动 */
+    .be-story__cards-wrap { margin-top: 36px; }
+    .be-story .be-story__cards-title,
+    .be-story-section .be-story__cards-title {
+      margin-bottom: var(--be-story-title-mb-m, 16px) !important;
+      font-size: var(--be-story-title-fz-m, 18px) !important;
+    }
+    .be-story__card {
+      padding: var(--be-story-card-pad-m, 10px) var(--be-story-card-pad-m, 10px) var(--be-story-card-pad-bottom-m, 14px);
+    }
+    .be-story__cards {
+      display: flex;
+      grid-template-columns: none;
+      gap: var(--be-story-card-gap-m, 16px);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      justify-content: flex-start;
+      scrollbar-width: none;
+      /* 末尾留白，便于看到最后一张卡片完整 */
+      padding-right: var(--be-story-cards-end-pad-m, 16px);
+    }
+    .be-story__cards::-webkit-scrollbar { display: none; }
+    .be-story__card {
+      flex: 0 0 var(--be-story-card-w-m, 80%);
+      scroll-snap-align: start;
+    }
+    /* 移动端可独立设置卡片图片比例 */
+    .be-story__card-media img,
+    .be-story__card-media svg {
+      aspect-ratio: var(--be-story-card-ratio-m, var(--be-story-card-ratio, 335.58 / 384.68));
+    }
+  }
+
+  /* 移动端背景图按宽度缩放，保证多个 section 之间条纹对齐 */
+  @media (max-width: 1023px) {
+    .be-story {
+      background-size: 100% auto !important;
+      background-repeat: repeat !important;
+      background-position: left top !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Story & Cards",
+  "tag": "section",
+  "class": "be-story-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Section layout" },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#EAF4F7"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image (PC)",
+      "info": "Optional. Used for PC; also used on mobile if no mobile image is set."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image (mobile)",
+      "info": "Optional. If empty, the PC image will be reused on mobile (auto-cropped)."
+    },
+    {
+      "type": "select",
+      "id": "bg_size",
+      "label": "Background fit",
+      "options": [
+        { "value": "cover",   "label": "Cover (fill, may crop)" },
+        { "value": "contain", "label": "Contain (no crop)" },
+        { "value": "auto",    "label": "Original size" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "bg_position_pc",
+      "label": "PC focal point",
+      "options": [
+        { "value": "left top",      "label": "Top left" },
+        { "value": "center top",    "label": "Top center" },
+        { "value": "right top",     "label": "Top right" },
+        { "value": "left center",   "label": "Center left" },
+        { "value": "center center", "label": "Center" },
+        { "value": "right center",  "label": "Center right" },
+        { "value": "left bottom",   "label": "Bottom left" },
+        { "value": "center bottom", "label": "Bottom center" },
+        { "value": "right bottom",  "label": "Bottom right" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "select",
+      "id": "bg_position_mobile",
+      "label": "Mobile focal point (crop)",
+      "info": "Decides which part of the image stays visible after mobile cropping.",
+      "options": [
+        { "value": "left top",      "label": "Top left" },
+        { "value": "center top",    "label": "Top center" },
+        { "value": "right top",     "label": "Top right" },
+        { "value": "left center",   "label": "Center left" },
+        { "value": "center center", "label": "Center" },
+        { "value": "right center",  "label": "Center right" },
+        { "value": "left bottom",   "label": "Bottom left" },
+        { "value": "center bottom", "label": "Bottom center" },
+        { "value": "right bottom",  "label": "Bottom right" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "color",
+      "id": "bg_overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0, "max": 100, "step": 1, "default": 0, "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 640, "max": 1600, "step": 10, "default": 1040, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_pc",
+      "label": "PC padding top",
+      "min": 0, "max": 200, "step": 2, "default": 80, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_pc",
+      "label": "PC padding bottom",
+      "min": 0, "max": 200, "step": 2, "default": 80, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x_pc",
+      "label": "PC padding left/right",
+      "min": 0, "max": 120, "step": 2, "default": 32, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "Mobile padding top",
+      "min": 0, "max": 120, "step": 2, "default": 40, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "Mobile padding bottom",
+      "min": 0, "max": 120, "step": 2, "default": 40, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x_mobile",
+      "label": "Mobile padding left/right",
+      "min": 0, "max": 60, "step": 1, "default": 23, "unit": "px"
+    },
+
+    { "type": "header", "content": "Part 1 — Quote" },
+    {
+      "type": "image_picker",
+      "id": "quote_image",
+      "label": "Left image"
+    },
+    {
+      "type": "text",
+      "id": "quote_image_ratio",
+      "label": "Left image ratio (w / h)",
+      "info": "e.g. 427 / 268",
+      "default": "467 / 311"
+    },
+    {
+      "type": "range",
+      "id": "quote_image_radius",
+      "label": "Left image corner radius",
+      "min": 0, "max": 40, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "image_picker",
+      "id": "quote_icon",
+      "label": "Quote icon image"
+    },
+    {
+      "type": "range",
+      "id": "quote_icon_width_pc",
+      "label": "PC quote icon width",
+      "min": 16, "max": 120, "step": 2, "default": 66, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_icon_width_mobile",
+      "label": "Mobile quote icon width",
+      "min": 16, "max": 100, "step": 2, "default": 44, "unit": "px"
+    },
+    {
+      "type": "richtext",
+      "id": "quote_text",
+      "label": "Quote text",
+      "default": "<p>And then there's this moment when everything finally goes quiet. Head down, cool side up.</p>"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote text color",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "quote_size_pc",
+      "label": "PC quote size",
+      "min": 14, "max": 48, "step": 1, "default": 24, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_size_mobile",
+      "label": "Mobile quote size",
+      "min": 12, "max": 32, "step": 1, "default": 13, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_col_gap_pc",
+      "label": "PC gap (image ↔ text)",
+      "min": 0, "max": 240, "step": 4, "default": 164, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_row_gap_mobile",
+      "label": "Mobile gap (text ↔ image)",
+      "min": 0, "max": 60, "step": 1, "default": 24, "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name (bold)",
+      "default": "Ashley Graham"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Name color",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "name_size",
+      "label": "Name size (PC)",
+      "min": 12, "max": 28, "step": 1, "default": 19, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "name_size_mobile",
+      "label": "Name size (mobile)",
+      "min": 12, "max": 28, "step": 1, "default": 14, "unit": "px"
+    },
+    {
+      "type": "richtext",
+      "id": "role",
+      "label": "Role / sub text",
+      "default": "<p>Model, Entrepreneur, Mom &amp; Breescape Brand Partner</p>"
+    },
+    {
+      "type": "color",
+      "id": "role_color",
+      "label": "Role color",
+      "default": "#6B8A99"
+    },
+    {
+      "type": "range",
+      "id": "role_size",
+      "label": "Role size (PC)",
+      "min": 9, "max": 18, "step": 1, "default": 12, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "role_size_mobile",
+      "label": "Role size (mobile)",
+      "min": 9, "max": 18, "step": 1, "default": 9, "unit": "px"
+    },
+
+    { "type": "header", "content": "Part 2 — Title" },
+    {
+      "type": "text",
+      "id": "cards_title",
+      "label": "Title",
+      "default": "Some patterns come and go. Stripes stay."
+    },
+    {
+      "type": "color",
+      "id": "cards_title_color",
+      "label": "Title color",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "cards_title_size_pc",
+      "label": "PC title size",
+      "min": 14, "max": 48, "step": 1, "default": 30, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cards_title_size_mobile",
+      "label": "Mobile title size",
+      "min": 12, "max": 32, "step": 1, "default": 18, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cards_title_mb_pc",
+      "label": "PC title margin bottom",
+      "min": 0, "max": 80, "step": 1, "default": 24, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cards_title_mb_mobile",
+      "label": "Mobile title margin bottom",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+
+    { "type": "header", "content": "Part 2 — Cards" },
+    {
+      "type": "text",
+      "id": "card_image_ratio",
+      "label": "Card image ratio (w / h) — PC",
+      "info": "Reference design: 335.58 / 384.68",
+      "default": "335.58 / 384.68"
+    },
+    {
+      "type": "text",
+      "id": "card_image_ratio_mobile",
+      "label": "Card image ratio (w / h) — mobile",
+      "info": "Optional. Leave empty to reuse the PC ratio. Examples: 1 / 1, 4 / 5, 266 / 305.",
+      "default": "266 / 305"
+    },
+    {
+      "type": "range",
+      "id": "card_gap_pc",
+      "label": "PC gap between cards",
+      "min": 0, "max": 80, "step": 1, "default": 23, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_gap_mobile",
+      "label": "Mobile gap between cards",
+      "min": 0, "max": 48, "step": 1, "default": 11, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card image corner radius",
+      "min": 0, "max": 40, "step": 1, "default": 8, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "label": "Mobile card width (% of viewport)",
+      "info": "Controls how much of the next card peeks while scrolling.",
+      "min": 50, "max": 100, "step": 1, "default": 80, "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "cards_end_padding_mobile",
+      "label": "Mobile scroll end padding",
+      "info": "Right-side breathing space after the last card while scrolling.",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "card_label_color",
+      "label": "Card label color",
+      "default": "#6B8A99"
+    },
+    {
+      "type": "color",
+      "id": "card_heading_color",
+      "label": "Card heading color",
+      "default": "#10374B"
+    },
+
+    { "type": "header", "content": "Part 2 — Card button" },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#9FE0E9"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button corner radius",
+      "min": 0, "max": 200, "step": 2, "default": 200, "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Small label (top)",
+          "default": "ASHLEY GRAHAM · Breescape"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "SHOP NOW"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story & Cards",
+      "blocks": [
+        { "type": "card", "settings": { "heading": "Cooling Comforter Blanket" } },
+        { "type": "card", "settings": { "heading": "Cooling Sheets" } },
+        { "type": "card", "settings": { "heading": "Cooling Pillowcases" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,15 @@
+{%- comment -%}
+  只输出由 Shopify 跟踪库存的变体数量，供尺码闹钟在切换颜色后判断库存是否为 0。
+{%- endcomment -%}
+{%- if section.settings.show_oos_clock and product.variants_count <= 250 -%}
+  <script type="application/json" data-variant-stock>{
+  {%- assign emitted = false -%}
+  {%- for variant in product.variants -%}
+    {%- if variant.inventory_management == 'shopify' -%}
+      {%- if emitted -%},{%- endif -%}
+"{{ variant.id }}":{{ variant.inventory_quantity | default: 0 }}
+      {%- assign emitted = true -%}
+    {%- endif -%}
+  {%- endfor -%}
+  }</script>
+{%- endif -%}

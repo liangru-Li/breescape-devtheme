@@ -1,0 +1,84 @@
+{%- comment -%}
+  没货闹钟规则。
+  mode 为 size_map：输出 color:size,size; 供切换颜色时判断。
+  mode 为 match：当前颜色+尺码命中任一条规则时输出 true。
+  @param section
+  @param {string} [mode]
+  @param {string} [match_color]
+  @param {string} [match_size]
+{%- endcomment -%}
+{%- liquid
+  assign out_mode = mode | default: 'size_map'
+  assign filter_color = match_color | default: '' | downcase | strip
+  assign filter_size = match_size | default: '' | downcase | strip
+
+  if section != blank
+    if out_mode == 'match'
+      assign hit = false
+      assign has_rules = false
+      for i in (1..4)
+        assign color_key = 'oos_rule_' | append: i | append: '_color'
+        assign sizes_key = 'oos_rule_' | append: i | append: '_sizes'
+        assign rule_color = section.settings[color_key] | default: '' | downcase | strip
+        assign rule_sizes = section.settings[sizes_key] | default: ''
+        if rule_color == blank or rule_sizes == blank
+          continue
+        endif
+        assign has_rules = true
+        if filter_color == blank or filter_size == blank or rule_color != filter_color
+          continue
+        endif
+        assign sizes_norm = rule_sizes | downcase | replace: '，', ',' | replace: '/', ',' | replace: '|', ','
+        assign size_list = sizes_norm | split: ','
+        for size_item in size_list
+          assign size_item_s = size_item | strip
+          if size_item_s != blank and size_item_s == filter_size
+            assign hit = true
+            break
+          endif
+        endfor
+        if hit
+          break
+        endif
+      endfor
+      if has_rules
+        echo 'rules'
+        if hit
+          echo ' true'
+        endif
+      endif
+    else
+      for i in (1..4)
+        assign color_key = 'oos_rule_' | append: i | append: '_color'
+        assign sizes_key = 'oos_rule_' | append: i | append: '_sizes'
+        assign date_key = 'oos_rule_' | append: i | append: '_date'
+        assign rule_color = section.settings[color_key] | default: '' | downcase | strip
+        assign rule_sizes = section.settings[sizes_key] | default: ''
+        assign rule_date = section.settings[date_key] | default: '' | strip | replace: '@', '' | replace: ';', '' | replace: ',', '' | replace: ':', ''
+        if rule_color == blank or rule_sizes == blank
+          continue
+        endif
+        assign sizes_norm = rule_sizes | downcase | replace: '，', ',' | replace: '/', ',' | replace: '|', ','
+        assign size_list = sizes_norm | split: ','
+        assign size_bits = ''
+        for size_item in size_list
+          assign size_item_s = size_item | strip
+          if size_item_s == blank
+            continue
+          endif
+          unless size_bits == blank
+            assign size_bits = size_bits | append: ','
+          endunless
+          assign size_bits = size_bits | append: size_item_s | append: '@' | append: rule_date
+        endfor
+        if size_bits == blank
+          continue
+        endif
+        echo rule_color
+        echo ':'
+        echo size_bits
+        echo ';'
+      endfor
+    endif
+  endif
+-%}

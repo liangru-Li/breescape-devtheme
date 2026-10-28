@@ -1,0 +1,11 @@
+{%- comment -%}
+  尺码按钮下方的预计发货文案。默认隐藏，点击没货尺码后由脚本填入。页面默认选中的尺码若缺货且带闹钟，直接显示。
+  @param product
+  @param option
+  @param block
+{%- endcomment -%}
+{%- liquid
+  assign note_color = section.settings.oos_note_color
+  assign note_space = section.settings.oos_note_spacing | default: 8
+-%}
+<div class="size-oos-note" data-oos-note hidden style="--size-oos-space: {{ note_space }}px;{% if note_color != blank %} color: {{ note_color }};{% endif %}"></div>

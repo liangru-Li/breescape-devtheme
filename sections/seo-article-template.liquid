@@ -1,0 +1,804 @@
+{%- liquid
+  assign article_image = article.metafields.custom.article_banner.value
+  if article_image == blank
+    assign article_image = article.image
+  endif
+  if article_image == blank and section.settings.fallback_image != blank
+    assign article_image = section.settings.fallback_image
+  endif
+
+  assign fallback_author = blank
+  assign fallback_reviewer = blank
+  for block in section.blocks
+    if block.type == 'fallback_author' and fallback_author == blank and block.settings.author != blank
+      assign fallback_author = block.settings.author
+    endif
+    if block.type == 'fallback_reviewer' and fallback_reviewer == blank and block.settings.reviewer != blank
+      assign fallback_reviewer = block.settings.reviewer
+    endif
+  endfor
+
+  assign author_meta = article.metafields.custom.author.value
+  if author_meta == blank and fallback_author != blank
+    assign author_meta = fallback_author
+  endif
+
+  assign reviewer_meta = article.metafields.custom.reviewer.value
+  if reviewer_meta == blank and fallback_reviewer != blank
+    assign reviewer_meta = fallback_reviewer
+  endif
+
+  assign author_name = article.author
+  assign author_avatar = blank
+  assign author_profile_url = blank
+  assign author_identity = blank
+  assign author_description = blank
+  assign author_facebook = blank
+  assign author_instagram = blank
+  assign author_x = blank
+  assign author_pinterest = blank
+  assign author_tiktok = blank
+  assign author_youtube = blank
+  assign has_author_meta = false
+
+  if author_meta != blank
+    assign has_author_meta = true
+    assign author_name = author_meta.name.value | default: author_meta.name | default: article.author
+    assign author_avatar = author_meta.avatar.value | default: author_meta.avatar
+    assign author_profile_url = author_meta.system.url
+    assign author_identity = author_meta.identity.value | default: author_meta.identity
+    assign author_description = author_meta.description
+    assign author_facebook = author_meta.facebook.value | default: author_meta.facebook
+    assign author_instagram = author_meta.instagram.value | default: author_meta.instagram
+    assign author_x = author_meta.x_formerly_twitter.value | default: author_meta.x_formerly_twitter | default: author_meta.twitter.value | default: author_meta.twitter
+    assign author_pinterest = author_meta.pinterest.value | default: author_meta.pinterest
+    assign author_tiktok = author_meta.tiktok.value | default: author_meta.tiktok
+    assign author_youtube = author_meta.youtube.value | default: author_meta.youtube
+  endif
+
+  assign reviewer_name = blank
+  assign reviewer_profile_url = blank
+  if reviewer_meta != blank
+    assign reviewer_name = reviewer_meta.name.value | default: reviewer_meta.name
+    assign reviewer_profile_url = reviewer_meta.system.url
+  endif
+
+  assign recommended_products = article.metafields.custom.related_products.value
+  if recommended_products == blank
+    assign recommended_products = section.settings.featured_products
+  endif
+
+  assign article_body_html = article.content
+  if recommended_products != blank
+    for product in recommended_products
+      capture product_html
+        render 'ygseo-article-product-card', product: product, is_first: forloop.first, section: section
+      endcapture
+      assign placeholder = '[[related_products_' | append: forloop.index | append: ']]'
+      assign article_body_html = article_body_html | replace: placeholder, product_html
+    endfor
+  endif
+
+  assign article_body_html = article_body_html | replace: '<table', '<div class="seo-article-table-scroll"><table'
+  assign article_body_html = article_body_html | replace: '</table>', '</table></div>'
+  assign article_body_html = article_body_html | replace: '<h2', '<h2 data-blog-title'
+  assign article_body_html = article_body_html | replace: '<h3', '<h3 data-blog-title'
+
+  capture article_toc_markup
+    render 'seo-article-toc', content: article_body_html
+  endcapture
+
+  assign manual_more_to_read_count = 0
+  assign has_app_blocks = false
+  for block in section.blocks
+    if block.type == 'more_to_read_article' and block.settings.article != blank and block.settings.article.id != article.id
+      assign manual_more_to_read_count = manual_more_to_read_count | plus: 1
+    endif
+    if block.type == '@app'
+      assign has_app_blocks = true
+    endif
+  endfor
+
+  assign article_url = request.origin | append: article.url
+  assign article_image_alt = article_image.alt | default: article.title
+  assign author_initial = author_name | strip | slice: 0, 1 | upcase
+  assign prev_article = blog.previous_article
+  assign next_article = blog.next_article
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .section::before {
+    display: none;
+  }
+</style>
+
+{{ 'section-seo-article-template.css' | asset_url | stylesheet_tag }}
+
+<section class="section section--padding seo-article" id="SeoArticle-{{ section.id }}">
+  <div class="page-width">
+    <div class="seo-article__shell">
+      <article class="seo-article__hero" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="seo-article__hero-grid">
+          <div class="seo-article__hero-copy seo-article__hero-copy--top">
+            <div class="seo-article__breadcrumbs">
+              <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+                <ul>
+                  <li>
+                    <a class="block" is="magnet-link" href="{{ routes.root_url }}" title="{{ 'general.breadcrumbs.home_link_title' | t | escape }}">
+                      {%- render 'icon', icon: 'home', size: 'sm' -%}
+                    </a>
+                  </li>
+                  <li>
+                    <span>/</span>
+                  </li>
+                  <li>
+                    <a class="block" is="magnet-link" href="{{ blog.url }}">{{ blog.title }}</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <h1 class="seo-article__heading h1" itemprop="headline">{{ article.title }}</h1>
+          </div>
+
+          {%- if article_image != blank -%}
+            <div class="seo-article__hero-media">
+              <div class="seo-article__hero-media-blur">
+                {{- article_image | image_url: width: 1600 | image_tag: loading: 'eager', widths: '480,720,960,1280,1600', sizes: '(max-width: 989px) 100vw, 44vw', alt: article_image_alt -}}
+              </div>
+              <div class="seo-article__hero-media-foreground">
+                {{- article_image | image_url: width: article_image.width, height: article_image.height | image_tag: loading: 'eager', width: article_image.width, height: article_image.height, alt: article_image_alt, itemprop: 'image' -}}
+              </div>
+            </div>
+          {%- else -%}
+            <div class="seo-article__hero-media seo-article__hero-media--empty" aria-hidden="true"></div>
+          {%- endif -%}
+
+          <div class="seo-article__hero-copy seo-article__hero-copy--bottom">
+            <div class="seo-article__meta">
+              {%- if author_name != blank -%}
+                {%- capture author_inner -%}
+                  {%- if has_author_meta and author_avatar != blank -%}
+                    {{- author_avatar | image_url: width: 72 | image_tag: loading: 'lazy', widths: '36,72,96', sizes: '36px', alt: author_name, class: 'seo-article__meta-avatar' -}}
+                  {%- elsif has_author_meta -%}
+                    <span class="seo-article__author-pill-avatar" aria-hidden="true">{{ author_initial }}</span>
+                  {%- endif -%}
+                  <span class="seo-article__author-pill-copy">
+                    <span class="seo-article__author-pill-label">Author</span>
+                    <span class="seo-article__author-pill-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                      <span itemprop="name">{{ author_name }}</span>
+                    </span>
+                  </span>
+                {%- endcapture -%}
+                {%- if author_profile_url != blank -%}
+                  <a class="seo-article__author-pill" href="{{ author_profile_url }}">{{ author_inner }}</a>
+                {%- else -%}
+                  <div class="seo-article__author-pill">{{ author_inner }}</div>
+                {%- endif -%}
+              {%- endif -%}
+
+              <div class="seo-article__meta-chip">
+                {% comment %} {%- render 'icon', icon: 'calendar', size: 'xs' -%} {% endcomment %}
+                <span class="seo-article__author-pill-copy">
+                  <span class="seo-article__meta-label">Published</span>
+                  <span class="seo-article__meta-value">
+                    <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}" itemprop="datePublished">{{ article.published_at | date: '%b %d, %Y' }}</time>
+                  </span>
+                </span>
+              </div>
+
+              {%- if reviewer_name != blank -%}
+                {%- capture reviewer_inner -%}
+                  <span class="seo-article__meta-label">Reviewed by</span>
+                  <span class="seo-article__meta-value">{{ reviewer_name }}</span>
+                {%- endcapture -%}
+                {%- if reviewer_profile_url != blank -%}
+                  <a class="seo-article__meta-chip" href="{{ reviewer_profile_url }}">{{ reviewer_inner }}</a>
+                {%- else -%}
+                  <div class="seo-article__meta-chip">{{ reviewer_inner }}</div>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+
+            {%- if article.excerpt != blank -%}
+              <div class="seo-article__excerpt" itemprop="description">{{ article.excerpt }}</div>
+            {%- endif -%}
+
+            <div class="seo-article__share">
+              <span class="seo-article__share-label">Share</span>
+              <ul class="seo-article__share-list" role="list">
+                {%- if settings.share_facebook -%}
+                  <li>
+                    <a class="seo-article__share-link" href="//www.facebook.com/sharer.php?u={{ article_url | url_encode }}" target="_blank" rel="nofollow noopener" aria-label="Share on Facebook">
+                      {%- render 'icon-brand', icon: 'facebook', size: 'sm' -%}
+                      <span class="seo-article__share-label">Facebook</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.social_instagram_link != blank -%}
+                  <li>
+                    <a class="seo-article__share-link" href="{{ settings.social_instagram_link }}" target="_blank" rel="nofollow noopener" aria-label="Open Instagram">
+                      {%- render 'icon-brand', icon: 'instagram', size: 'sm' -%}
+                      <span class="seo-article__share-label">Instagram</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.share_email -%}
+                  <li>
+                    <a class="seo-article__share-link" href="mailto:?subject={{ article.title | escape }}&body={{ article_url | url_encode }}" aria-label="Share by email">
+                      {%- render 'icon-brand', icon: 'email', size: 'sm' -%}
+                      <span class="seo-article__share-label">Email</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                <li>
+                  <button
+                    class="seo-article__copy-button"
+                    type="button"
+                    data-copy-link
+                    data-url="{{ article_url }}"
+                    data-default-label="Copy link"
+                    data-success-label="Link copied"
+                    data-error-label="Copy failed"
+                    aria-describedby="SeoArticleCopyStatus-{{ section.id }}"
+                  >
+                    <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8.125 5.625L5.83333 7.91667C4.45262 9.29738 4.45262 11.5359 5.83333 12.9167C7.21405 14.2974 9.45262 14.2974 10.8333 12.9167L13.125 10.625M11.875 14.375L14.1667 12.0833C15.5474 10.7026 15.5474 8.46405 14.1667 7.08333C12.7859 5.70262 10.5474 5.70262 9.16667 7.08333L6.875 9.375" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="seo-article__copy-button-text">Copy link</span>
+                  </button>
+                  <span class="sr-only" id="SeoArticleCopyStatus-{{ section.id }}" data-copy-status aria-live="polite"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="seo-article__layout">
+        <main class="seo-article__content">
+          <div class="seo-article__body rte" itemprop="articleBody">
+            {{ article_body_html }}
+          </div>
+
+          {%- if article.tags.size > 0 -%}
+            <div class="seo-article__article-tags">
+              {%- for tag in article.tags -%}
+                <a class="seo-article__tag-link" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {%- if has_author_meta or has_app_blocks or prev_article != blank or next_article != blank -%}
+            <hr class="seo-article__section-divider">
+          {%- endif -%}
+
+          {%- if has_author_meta -%}
+            <section class="seo-article__author-card">
+              <div class="seo-article__author-card-top">
+                {%- if author_profile_url != blank -%}
+                  <a class="seo-article__author-card-avatar" href="{{ author_profile_url }}">
+                    {%- if author_avatar != blank -%}
+                      {{- author_avatar | image_url: width: 144 | image_tag: loading: 'lazy', widths: '72,96,144', sizes: '72px', alt: author_name -}}
+                    {%- else -%}
+                      <span class="seo-article__author-card-avatar-placeholder" aria-hidden="true">{{ author_initial }}</span>
+                    {%- endif -%}
+                  </a>
+                {%- else -%}
+                  <div class="seo-article__author-card-avatar">
+                    {%- if author_avatar != blank -%}
+                      {{- author_avatar | image_url: width: 144 | image_tag: loading: 'lazy', widths: '72,96,144', sizes: '72px', alt: author_name -}}
+                    {%- else -%}
+                      <span class="seo-article__author-card-avatar-placeholder" aria-hidden="true">{{ author_initial }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+
+                <div class="seo-article__author-card-copy">
+                  <span class="seo-article__author-card-kicker">About the author</span>
+                  <h2 class="seo-article__author-card-name">
+                    {%- if author_profile_url != blank -%}
+                      <a href="{{ author_profile_url }}">{{ author_name }}</a>
+                    {%- else -%}
+                      {{ author_name }}
+                    {%- endif -%}
+                  </h2>
+
+                  {%- if author_identity != blank -%}
+                    <div class="seo-article__identity">
+                      {%- assign identity_parts = author_identity | split: ',' -%}
+                      {%- for identity_part in identity_parts -%}
+                        {%- assign identity_label = identity_part | strip -%}
+                        {%- if identity_label != blank -%}
+                          <span class="seo-article__identity-tag">{{ identity_label }}</span>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+
+              {%- if author_description != blank -%}
+                <div class="seo-article__author-card-description">{{ author_description | metafield_tag }}</div>
+              {%- endif -%}
+
+              <div class="seo-article__author-card-actions">
+                {%- if author_profile_url != blank -%}
+                  <a class="seo-article__author-page-link" href="{{ author_profile_url }}">
+                    {%- render 'icon', icon: 'arrow-right', size: 'xs' -%}
+                    <span>{{ section.settings.author_profile_label }}</span>
+                  </a>
+                {%- endif -%}
+
+                <div class="seo-article__author-socials">
+                  {%- if author_facebook != blank -%}
+                    <a class="seo-article__author-social-link" href="{{ author_facebook }}" target="_blank" rel="nofollow noopener" aria-label="{{ author_name | escape }} on Facebook">
+                      {%- render 'icon-brand', icon: 'facebook', size: 'sm' -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if author_instagram != blank -%}
+                    <a class="seo-article__author-social-link" href="{{ author_instagram }}" target="_blank" rel="nofollow noopener" aria-label="{{ author_name | escape }} on Instagram">
+                      {%- render 'icon-brand', icon: 'instagram', size: 'sm' -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if author_x != blank -%}
+                    <a class="seo-article__author-social-link" href="{{ author_x }}" target="_blank" rel="nofollow noopener" aria-label="{{ author_name | escape }} on X">
+                      {%- render 'icon-brand', icon: 'twitter', size: 'sm' -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if author_pinterest != blank -%}
+                    <a class="seo-article__author-social-link" href="{{ author_pinterest }}" target="_blank" rel="nofollow noopener" aria-label="{{ author_name | escape }} on Pinterest">
+                      {%- render 'icon-brand', icon: 'pinterest', size: 'sm' -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if author_tiktok != blank -%}
+                    <a class="seo-article__author-social-link" href="{{ author_tiktok }}" target="_blank" rel="nofollow noopener" aria-label="{{ author_name | escape }} on TikTok">
+                      {%- render 'icon-brand', icon: 'tiktok', size: 'sm' -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if author_youtube != blank -%}
+                    <a class="seo-article__author-social-link" href="{{ author_youtube }}" target="_blank" rel="nofollow noopener" aria-label="{{ author_name | escape }} on YouTube">
+                      {%- render 'icon-brand', icon: 'youtube', size: 'sm' -%}
+                    </a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </section>
+          {%- endif -%}
+
+          {%- if has_app_blocks -%}
+            <div class="seo-article__app-blocks">
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when '@app' -%}
+                    <div {{ block.shopify_attributes }}>
+                      {%- render block -%}
+                    </div>
+                {%- endcase -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {%- if recommended_products != blank -%}
+            <section class="seo-article__recommended-mobile">
+              <div>
+                <h2 class="seo-article__recommended-heading">{{ section.settings.recommended_products_title }}</h2>
+              </div>
+              <ul class="seo-article__recommended-list" role="list">
+                {%- for product in recommended_products limit: 4 -%}
+                  <li>
+                    <article class="seo-article__recommended-card">
+                      <a class="seo-article__recommended-media-link" href="{{ product.url }}">
+                        <div class="seo-article__recommended-media media media--square media--contain">
+                          {%- if product.featured_media != blank or product.featured_image != blank -%}
+                            {%- assign recommended_media = product.featured_media | default: product.featured_image -%}
+                            {{- recommended_media | image_url: width: 480 | image_tag: loading: 'lazy', widths: '120,180,240,360,480', sizes: '88px', alt: product.title, class: 'seo-article__recommended-image' -}}
+                          {%- endif -%}
+                        </div>
+                      </a>
+                      <div class="seo-article__recommended-copy">
+                        <h3 class="seo-article__recommended-title" title="{{ product.title | escape }}">
+                          <a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title }}</a>
+                        </h3>
+                        <p class="seo-article__recommended-price">
+                          {%- if product.price_varies -%}
+                            {{ product.price_min | money }} - {{ product.price_max | money }}
+                          {%- else -%}
+                            {{ product.price | money }}
+                          {%- endif -%}
+                        </p>
+                      </div>
+                    </article>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </section>
+          {%- endif -%}
+        </main>
+
+        <aside class="seo-article__sidebar">
+          <div class="seo-article__sidebar-card seo-article__sidebar-card--sticky">
+            {%- if article_toc_markup != blank -%}
+              <section class="seo-article__sidebar-section">
+                <h2 class="seo-article__sidebar-heading">{{ section.settings.toc_title }}</h2>
+                {{ article_toc_markup }}
+              </section>
+            {%- endif -%}
+
+            {%- if recommended_products != blank -%}
+              <section class="seo-article__sidebar-section">
+                <h2 class="seo-article__sidebar-heading">{{ section.settings.recommended_products_title }}</h2>
+                <ul class="seo-article__recommended-list" role="list">
+                  {%- for product in recommended_products -%}
+                    <li>
+                      <article class="seo-article__recommended-card">
+                        <a class="seo-article__recommended-media-link" href="{{ product.url }}">
+                          <div class="seo-article__recommended-media media media--square media--contain">
+                            {%- if product.featured_media != blank or product.featured_image != blank -%}
+                              {%- assign recommended_media = product.featured_media | default: product.featured_image -%}
+                              {{- recommended_media | image_url: width: 480 | image_tag: loading: 'lazy', widths: '120,180,240,360,480', sizes: '104px', alt: product.title, class: 'seo-article__recommended-image' -}}
+                            {%- endif -%}
+                          </div>
+                        </a>
+                        <div class="seo-article__recommended-copy">
+                          <h3 class="seo-article__recommended-title" title="{{ product.title | escape }}">
+                            <a href="{{ product.url }}" title="{{ product.title | escape }}">{{ product.title }}</a>
+                          </h3>
+                          <p class="seo-article__recommended-price">
+                            {%- if product.price_varies -%}
+                              {{ product.price_min | money }} - {{ product.price_max | money }}
+                            {%- else -%}
+                              {{ product.price | money }}
+                            {%- endif -%}
+                          </p>
+                        </div>
+                      </article>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </section>
+            {%- endif -%}
+          </div>
+        </aside>
+      </div>
+
+      <section class="seo-article__more">
+        <div>
+          <span class="seo-article__sidebar-kicker">Stay in the loop</span>
+          <h2 class="seo-article__more-heading">{{ section.settings.more_to_read_title }}</h2>
+        </div>
+
+        <div class="seo-article__more-grid">
+          {%- if manual_more_to_read_count > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'more_to_read_article' and block.settings.article != blank and block.settings.article.id != article.id -%}
+                {%- assign related_article = block.settings.article -%}
+                <article class="seo-article__more-card" {{ block.shopify_attributes }}>
+                  {%- if related_article.image != blank -%}
+                    <a class="seo-article__more-card-media" href="{{ related_article.url }}">
+                      {{- related_article.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320,480,720,900', sizes: '(max-width: 767px) 100vw, 33vw', alt: related_article.title -}}
+                    </a>
+                  {%- endif -%}
+                  <div class="seo-article__more-card-body">
+                    <div class="seo-article__more-card-meta">
+                      {{ related_article.published_at | date: '%b %d, %Y' }}
+                      {%- if related_article.tags.first != blank -%}
+                        <span> / {{ related_article.tags.first }}</span>
+                      {%- endif -%}
+                    </div>
+                    <h3 class="seo-article__more-card-title"><a href="{{ related_article.url }}">{{ related_article.title }}</a></h3>
+                    <div class="seo-article__more-card-excerpt">
+                      {%- if related_article.excerpt != blank -%}
+                        {{ related_article.excerpt | strip_html | truncatewords: 24 }}
+                      {%- else -%}
+                        {{ related_article.content | strip_html | truncatewords: 24 }}
+                      {%- endif -%}
+                    </div>
+                    <a class="seo-article__more-link" href="{{ related_article.url }}">Read article</a>
+                  </div>
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- assign auto_more_to_read_count = 0 -%}
+            {%- for related_article in blog.articles -%}
+              {%- if related_article.id != article.id and auto_more_to_read_count < 3 -%}
+                {%- assign auto_more_to_read_count = auto_more_to_read_count | plus: 1 -%}
+                <article class="seo-article__more-card">
+                  {%- if related_article.image != blank -%}
+                    <a class="seo-article__more-card-media" href="{{ related_article.url }}">
+                      {{- related_article.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320,480,720,900', sizes: '(max-width: 767px) 100vw, 33vw', alt: related_article.title -}}
+                    </a>
+                  {%- endif -%}
+                  <div class="seo-article__more-card-body">
+                    <div class="seo-article__more-card-meta">
+                      {{ related_article.published_at | date: '%b %d, %Y' }}
+                      {%- if related_article.tags.first != blank -%}
+                        <span> / {{ related_article.tags.first }}</span>
+                      {%- endif -%}
+                    </div>
+                    <h3 class="seo-article__more-card-title"><a href="{{ related_article.url }}">{{ related_article.title }}</a></h3>
+                    <div class="seo-article__more-card-excerpt">
+                      {%- if related_article.excerpt != blank -%}
+                        {{ related_article.excerpt | strip_html | truncatewords: 24 }}
+                      {%- else -%}
+                        {{ related_article.content | strip_html | truncatewords: 24 }}
+                      {%- endif -%}
+                    </div>
+                    <a class="seo-article__more-link" href="{{ related_article.url }}">Read article</a>
+                  </div>
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const section = document.getElementById('SeoArticle-{{ section.id }}');
+      if (!section) return;
+
+      const slugify = (value) => {
+        const base = value
+          .toLowerCase()
+          .trim()
+          .replace(/&/g, 'and')
+          .replace(/[^a-z0-9\u4e00-\u9fa5\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-');
+        return base || 'section';
+      };
+
+      const headings = Array.from(section.querySelectorAll('[data-blog-title]'));
+      const tocLinks = Array.from(section.querySelectorAll('[data-toc-index]'));
+      const usedIds = new Map();
+
+      headings.forEach((heading, index) => {
+        const baseId = slugify(heading.textContent || `section-${index + 1}`);
+        const seen = usedIds.get(baseId) || 0;
+        usedIds.set(baseId, seen + 1);
+        const finalId = seen > 0 ? `${baseId}-${seen + 1}` : baseId;
+        heading.id = finalId;
+
+        const tocLink = tocLinks[index];
+        if (tocLink) tocLink.setAttribute('href', `#${finalId}`);
+      });
+
+      tocLinks.forEach((tocLink) => {
+        tocLink.addEventListener('click', (event) => {
+          const targetId = tocLink.getAttribute('href');
+          if (!targetId || !targetId.startsWith('#')) return;
+
+          const targetHeading = section.querySelector(targetId);
+          if (!targetHeading) return;
+
+          event.preventDefault();
+          targetHeading.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+            block: 'start'
+          });
+
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', targetId);
+          }
+        });
+      });
+
+      if (headings.length && tocLinks.length) {
+        const setActiveLink = (id) => {
+          tocLinks.forEach((link) => link.classList.remove('is-active'));
+          const activeLink = tocLinks.find((link) => link.getAttribute('href') === `#${id}`);
+          if (activeLink) activeLink.classList.add('is-active');
+        };
+
+        const getHeaderOffset = () => {
+          const stickyHeaderHeight = parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue('--sticky-header-height')
+          ) || 0;
+          return stickyHeaderHeight + 36;
+        };
+
+        const updateActiveTocLink = () => {
+          const marker = getHeaderOffset();
+          let activeHeading = headings[0];
+
+          headings.forEach((heading) => {
+            if (heading.getBoundingClientRect().top - marker <= 0) {
+              activeHeading = heading;
+            }
+          });
+
+          if (activeHeading && activeHeading.id) {
+            setActiveLink(activeHeading.id);
+          }
+        };
+
+        let ticking = false;
+        const requestActiveUpdate = () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            updateActiveTocLink();
+            ticking = false;
+          });
+        };
+
+        updateActiveTocLink();
+        window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+        window.addEventListener('resize', requestActiveUpdate);
+      }
+
+      const copyButton = section.querySelector('[data-copy-link]');
+      const copyStatus = section.querySelector('[data-copy-status]');
+
+      const setCopyFeedback = (message) => {
+        if (copyStatus) copyStatus.textContent = message;
+        if (!copyButton) return;
+
+        const textTarget = copyButton.querySelector('.seo-article__copy-button-text');
+        if (textTarget) textTarget.textContent = message;
+
+        window.clearTimeout(copyButton._copyResetTimer);
+        copyButton._copyResetTimer = window.setTimeout(() => {
+          const defaultLabel = copyButton.dataset.defaultLabel || 'Copy link';
+          if (copyStatus) copyStatus.textContent = '';
+          if (textTarget) textTarget.textContent = defaultLabel;
+        }, 2200);
+      };
+
+      const fallbackCopy = (value) => {
+        const input = document.createElement('textarea');
+        input.value = value;
+        input.setAttribute('readonly', '');
+        input.style.position = 'absolute';
+        input.style.left = '-9999px';
+        document.body.appendChild(input);
+        input.select();
+        const result = document.execCommand('copy');
+        document.body.removeChild(input);
+        return result;
+      };
+
+      if (copyButton) {
+        const defaultLabel = copyButton.dataset.defaultLabel || 'Copy link';
+        const textTarget = copyButton.querySelector('.seo-article__copy-button-text');
+        if (textTarget) textTarget.textContent = defaultLabel;
+
+        copyButton.addEventListener('click', async () => {
+          const url = window.location.href || copyButton.dataset.url;
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              await navigator.clipboard.writeText(url);
+            } else if (!fallbackCopy(url)) {
+              throw new Error('fallback-copy-failed');
+            }
+            setCopyFeedback(copyButton.dataset.successLabel || 'Link copied');
+          } catch (error) {
+            setCopyFeedback(copyButton.dataset.errorLabel || 'Copy failed');
+          }
+        });
+      }
+    })();
+  </script>
+{%- comment -%} FAQ 结构化数据：article.metafields.custom.schema（如 FAQPage）渲染为 ld+json，仅在存在时输出 {%- endcomment -%}
+{% if article.metafields.custom.schema %}
+<script type="application/ld+json">{{ article.metafields.custom.schema.value | json }}</script>
+{% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "SEO Article Template",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback hero image"
+    },
+    {
+      "type": "text",
+      "id": "toc_title",
+      "label": "TOC title",
+      "default": "In this article"
+    },
+    {
+      "type": "text",
+      "id": "recommended_products_title",
+      "label": "Recommended products title",
+      "default": "Recommended Products"
+    },
+    {
+      "type": "product_list",
+      "id": "featured_products",
+      "label": "Recommended products"
+    },
+    {
+      "type": "text",
+      "id": "more_to_read_title",
+      "label": "More to Read title",
+      "default": "More to Read"
+    },
+    {
+      "type": "text",
+      "id": "author_profile_label",
+      "label": "Author profile label",
+      "default": "View author page"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "more_to_read_article",
+      "name": "More to Read article",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Article"
+        }
+      ]
+    },
+    {
+      "type": "fallback_author",
+      "name": "Fallback author",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "metaobject",
+          "id": "author",
+          "metaobject_type": "blog_author_information",
+          "label": "Author"
+        }
+      ]
+    },
+    {
+      "type": "fallback_reviewer",
+      "name": "Fallback reviewer",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "metaobject",
+          "id": "reviewer",
+          "metaobject_type": "blog_author_information",
+          "label": "Reviewer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEO Article Template"
+    }
+  ]
+}
+{% endschema %}
+

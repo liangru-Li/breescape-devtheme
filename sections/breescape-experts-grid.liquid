@@ -1,0 +1,1097 @@
+<!-- ============================================================
+  Section: Breescape — Backed by Experts, Proven to Sleep Through (Grid)
+  PC : 4 列网格，第 2 列上方含 title + 按钮，第 2 列整体下沉
+  Mobile: 2 列瀑布流
+    左列：photo1 → photo2 → 按钮
+    右列：title → photo3 → photo4
+  - 4 个 photo 用 4 个 block
+  - 字体 / 字号默认跟主题
+============================================================ -->
+
+{%- liquid
+  assign s = section.settings
+  assign all = section.blocks
+-%}
+
+<section
+  class="be-eg"
+  aria-label="{{ s.title | escape }}"
+  style="
+    --be-eg-bg:                  {{ s.background_color }};
+
+    --be-eg-pad-x-pc:            {{ s.section_padding_x_pc }}px;
+    --be-eg-pad-top-pc:          {{ s.section_padding_top_pc }}px;
+    --be-eg-pad-bottom-pc:       {{ s.section_padding_bottom_pc }}px;
+    --be-eg-pad-x-m:             {{ s.section_padding_x_mobile }}px;
+    --be-eg-pad-top-m:           {{ s.section_padding_top_mobile }}px;
+    --be-eg-pad-bottom-m:        {{ s.section_padding_bottom_mobile }}px;
+
+    --be-eg-max-width:           {{ s.max_width }}px;
+
+    --be-eg-col-gap-pc:          {{ s.col_gap_pc }}px;
+    --be-eg-col-gap-m:           {{ s.col_gap_mobile }}px;
+    --be-eg-row-gap-m:           {{ s.row_gap_mobile }}px;
+
+    --be-eg-col2-offset-pc:      {{ s.col2_offset_pc }}px;
+
+    --be-eg-photo-aspect-pc:     {{ s.photo_aspect_pc }};
+    --be-eg-photo-aspect-m:      {{ s.photo_aspect_mobile }};
+
+    --be-eg-name-mb:             {{ s.name_mb }}px;
+    --be-eg-role-mb:             {{ s.role_mb }}px;
+
+    --be-eg-title-color:         {{ s.title_color }};
+    --be-eg-title-mb:            {{ s.title_mb }}px;
+    --be-eg-title-align-pc:      {{ s.title_align_pc }};
+    --be-eg-title-align-m:       {{ s.title_align_m }};
+    {%- if s.title_fz_pc > 0 -%}--be-eg-title-fz-pc: {{ s.title_fz_pc }}px;{%- endif %}
+    {%- if s.title_fz_m  > 0 -%}--be-eg-title-fz-m:  {{ s.title_fz_m }}px;{%- endif %}
+
+    --be-eg-name-color:          {{ s.name_color }};
+    --be-eg-role-color:          {{ s.role_color }};
+    --be-eg-quote-color:         {{ s.quote_color }};
+
+    --be-eg-btn-from:            {{ s.btn_color_from }};
+    --be-eg-btn-to:              {{ s.btn_color_to }};
+    --be-eg-btn-text-color:      {{ s.btn_text_color }};
+    --be-eg-btn-text-fz-pc:      {{ s.btn_text_size_pc }}px;
+    --be-eg-btn-text-fz-m:       {{ s.btn_text_size_m }}px;
+    --be-eg-btn-text-align:      {{ s.btn_text_align }};
+    --be-eg-btn-radius:          {{ s.btn_radius }}px;
+    --be-eg-btn-pad-x:           {{ s.btn_padding_x }}px;
+    --be-eg-btn-pad-y:           {{ s.btn_padding_y }}px;
+    --be-eg-btn-gap:             {{ s.btn_gap }}px;
+    --be-eg-btn-border-color:    {{ s.btn_border_color }};
+    --be-eg-btn-border-alpha:    {{ s.btn_border_alpha }};
+    --be-eg-btn-border-w:        {{ s.btn_border_width }}px;
+    {%- if s.btn_min_width_pc  > 0 -%}--be-eg-btn-min-w-pc: {{ s.btn_min_width_pc }}px;{%- endif %}
+    {%- if s.btn_min_width_m   > 0 -%}--be-eg-btn-min-w-m:  {{ s.btn_min_width_m }}px;{%- endif %}
+    {%- if s.btn_min_height_pc > 0 -%}--be-eg-btn-min-h-pc: {{ s.btn_min_height_pc }}px;{%- endif %}
+    {%- if s.btn_min_height_m  > 0 -%}--be-eg-btn-min-h-m:  {{ s.btn_min_height_m }}px;{%- endif %}
+
+    --be-eg-arrow-bg:            {{ s.btn_arrow_bg }};
+    --be-eg-arrow-icon:          {{ s.btn_arrow_icon }};
+    --be-eg-arrow-size-pc:       {{ s.btn_arrow_size_pc }}px;
+    --be-eg-arrow-size-m:        {{ s.btn_arrow_size_mobile }}px;
+  "
+>
+  <div class="be-eg__inner">
+
+    {%- comment -%} ====== PC LAYOUT (4 列) ====== {%- endcomment -%}
+    <div class="be-eg__pc">
+      {%- for block in all limit: 4 -%}
+        {%- assign i = forloop.index -%}
+        <div class="be-eg__col be-eg__col--{{ i }}{% if i == 2 %} be-eg__col--with-head{% endif %}" {{ block.shopify_attributes }}>
+          {%- if i == 2 -%}
+            <div class="be-eg__head">
+              {%- if s.title != blank -%}
+                <h2 class="be-eg__title">{{ s.title }}</h2>
+              {%- endif -%}
+              {%- if s.button_label != blank -%}
+                <a class="be-eg__btn" href="{{ s.button_link | default: '#' }}">
+                  <span class="be-eg__btn-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span class="be-eg__btn-label">{{ s.button_label }}</span>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- render 'breescape-eg-card', block: block -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} ====== MOBILE LAYOUT (2 列瀑布流) ====== {%- endcomment -%}
+    <div class="be-eg__m">
+      <div class="be-eg__m-col be-eg__m-col--left">
+        {%- assign b1 = all[0] -%}
+        {%- if b1 -%}{%- render 'breescape-eg-card', block: b1 -%}{%- endif -%}
+        {%- assign b2 = all[1] -%}
+        {%- if b2 -%}{%- render 'breescape-eg-card', block: b2 -%}{%- endif -%}
+        {%- if s.button_label != blank -%}
+          <a class="be-eg__btn be-eg__btn--mobile" href="{{ s.button_link | default: '#' }}">
+            <span class="be-eg__btn-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="be-eg__btn-label">{{ s.button_label }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+      <div class="be-eg__m-col be-eg__m-col--right">
+        {%- if s.title != blank -%}
+          <h2 class="be-eg__title be-eg__title--mobile">{{ s.title }}</h2>
+        {%- endif -%}
+        {%- assign b3 = all[2] -%}
+        {%- if b3 -%}{%- render 'breescape-eg-card', block: b3 -%}{%- endif -%}
+        {%- assign b4 = all[3] -%}
+        {%- if b4 -%}{%- render 'breescape-eg-card', block: b4 -%}{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .be-eg,
+  .be-eg *,
+  .be-eg *::before,
+  .be-eg *::after { box-sizing: border-box; }
+
+  .be-eg {
+    position: relative;
+    width: 100%;
+    background: var(--be-eg-bg, transparent);
+    padding:
+      var(--be-eg-pad-top-pc)
+      var(--be-eg-pad-x-pc)
+      var(--be-eg-pad-bottom-pc);
+  }
+
+  .be-eg__inner {
+    width: 100%;
+    max-width: var(--be-eg-max-width);
+    margin: 0 auto;
+  }
+
+  /* ---------- PC 4 列 ---------- */
+  .be-eg__pc {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: var(--be-eg-col-gap-pc);
+    align-items: start;
+  }
+
+  .be-eg__col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 第 2 列上方的 title + 按钮区，决定下沉量；标题对齐由变量控制，按钮始终居中 */
+  .be-eg__head {
+    min-height: var(--be-eg-col2-offset-pc);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: var(--be-eg-title-mb);
+  }
+  .be-eg__head .be-eg__title { width: 100%; }
+  .be-eg__head .be-eg__btn   { align-self: center; }
+
+  /* 标题：字体 / 字重跟主题 H2，仅设斜体 / 颜色；字号 + 对齐 PC + 移动端可独立调
+     ↘ 同时把样式作用到 richtext 内的 <p>，避免主题给 p 设的样式覆盖标题 */
+  .be-eg .be-eg__title,
+  .be-eg .be-eg__title > p {
+    margin: 0 0 16px;
+    color: var(--be-eg-title-color);
+    font-style: italic;
+    text-decoration: none;
+    text-align: var(--be-eg-title-align-pc, center);
+    font-size: var(--be-eg-title-fz-pc) !important;
+  }
+  .be-eg .be-eg__title > p { margin: 0; }
+
+  /* ---------- 卡片（图 + meta） ---------- */
+  .be-eg__card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .be-eg__photo {
+    /* 单条可覆盖宽度 / 高宽比，未设则取 section 默认 */
+    width: var(--be-eg-i-img-w-pc, 100%);
+    aspect-ratio: var(--be-eg-i-img-aspect-pc, var(--be-eg-photo-aspect-pc));
+    margin: 0 auto;
+    /* 图片 4 角圆角：每条 block 单独控制（PC） */
+    border-radius:
+      var(--be-eg-i-img-tl-pc, 16px)
+      var(--be-eg-i-img-tr-pc, 16px)
+      var(--be-eg-i-img-br-pc, 16px)
+      var(--be-eg-i-img-bl-pc, 16px);
+    overflow: hidden;
+    background: #eee;
+  }
+  .be-eg__photo img,
+  .be-eg__photo svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* 图片下方 meta 区：背景色 + 上下/左右内边距 + 4 角圆角 由每条 block 单独控制 */
+  .be-eg__meta {
+    background: var(--be-eg-i-meta-bg, transparent);
+    text-align: left;
+    padding:
+      var(--be-eg-i-meta-pt-pc, 16px)
+      var(--be-eg-i-meta-px-pc, 16px)
+      var(--be-eg-i-meta-pb-pc, 16px);
+    border-radius:
+      var(--be-eg-i-meta-tl-pc, 0)
+      var(--be-eg-i-meta-tr-pc, 0)
+      var(--be-eg-i-meta-br-pc, 0)
+      var(--be-eg-i-meta-bl-pc, 0);
+  }
+
+  .be-eg .be-eg__name {
+    margin: 0 0 var(--be-eg-name-mb);
+    color: var(--be-eg-name-color);
+    font-size: var(--be-eg-i-name-fz-pc);
+  }
+  .be-eg .be-eg__role {
+    margin: 0 0 var(--be-eg-role-mb);
+    color: var(--be-eg-role-color);
+    font-size: var(--be-eg-i-role-fz-pc);
+  }
+  .be-eg .be-eg__quote {
+    margin: 0;
+    color: var(--be-eg-quote-color);
+    font-style: italic;
+    font-size: var(--be-eg-i-quote-fz-pc);
+  }
+
+  /* ---------- 按钮（discover-btn 同款动效） ----------
+     hover 效果：
+     1) 圆形箭头从左平滑到右；箭头底色变白色径向渐变；svg 颜色变 teal
+     2) 文字 translateX(-arrow-size) 整体左移
+     3) ::before 白色高光斜条扫过；::after 渐变覆盖层淡入；整体轻微提亮 */
+  .be-eg__btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    padding: var(--be-eg-btn-pad-y) var(--be-eg-btn-pad-x);
+    background: linear-gradient(270deg, #67D2E087 0%, #67D2E054 100%);
+    border: var(--be-eg-btn-border-w) solid rgba(255, 255, 255, var(--be-eg-btn-border-alpha));
+    border-radius: var(--be-eg-btn-radius);
+    color: var(--be-eg-btn-text-color);
+    font-size: var(--be-eg-btn-text-fz-pc);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 1.66px 6.66px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    line-height: 1;
+    min-width: var(--be-eg-btn-min-w-pc, 0);
+    min-height: var(--be-eg-btn-min-h-pc, 0);
+    box-sizing: border-box;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  /* hover 时淡入的渐变覆盖层 */
+  .be-eg__btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(90deg, #39c3cc 0%, #6fe6ec 40%, #baf7fa 100%);
+    transition: opacity 0.25s ease;
+  }
+  /* hover 时扫过的白色高光斜条 */
+  .be-eg__btn::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -55%;
+    width: 55%;
+    height: 160%;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      120deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.55) 45%,
+      rgba(255,255,255,0) 75%
+    );
+    transform: skewX(-18deg);
+    opacity: 0.55;
+    transition: left 0.55s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
+  }
+
+  .be-eg__btn-label,
+  .be-eg__btn-arrow { position: relative; z-index: 2; }
+
+  .be-eg__btn-label {
+    flex: 1 1 auto;
+    width: 100%;
+    text-align: var(--be-eg-btn-text-align, center);
+    padding-left: calc(var(--be-eg-arrow-size-pc) + var(--be-eg-btn-gap));
+    transform: translateX(0);
+    transition: transform 0.35s cubic-bezier(0.2,0.9,0.2,1), color 0.25s ease;
+  }
+  .be-eg__btn-arrow {
+    position: absolute;
+    top: 50%;
+    left: var(--be-eg-btn-pad-y);
+    transform: translateY(-50%);
+    width: var(--be-eg-arrow-size-pc);
+    height: var(--be-eg-arrow-size-pc);
+    border-radius: 50%;
+    background: var(--be-eg-arrow-bg);
+    color: var(--be-eg-arrow-icon);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 1.66px 6.66px rgba(0,0,0,0.1);
+    z-index: 3;
+    transition:
+      left 0.35s cubic-bezier(0.2,0.9,0.2,1),
+      background 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.2s ease;
+  }
+  .be-eg__btn-arrow svg {
+    width: 46%;
+    height: 46%;
+    display: block;
+    transition: color 0.25s ease, opacity 0.25s ease;
+  }
+
+  /* hover / focus-visible 状态 */
+  .be-eg__btn:hover { filter: brightness(1.03); }
+  .be-eg__btn:hover::before,
+  .be-eg__btn:focus-visible::before { left: 115%; opacity: 0.7; }
+  .be-eg__btn:hover::after,
+  .be-eg__btn:focus-visible::after  { opacity: 1; }
+
+  .be-eg__btn:hover .be-eg__btn-arrow,
+  .be-eg__btn:focus-visible .be-eg__btn-arrow {
+    left: calc(100% - var(--be-eg-arrow-size-pc) - var(--be-eg-btn-pad-y));
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #e9feff 60%, #d7fdff 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.95);
+  }
+  .be-eg__btn:hover .be-eg__btn-arrow svg,
+  .be-eg__btn:focus-visible .be-eg__btn-arrow svg {
+    color: var(--be-eg-arrow-bg);
+    opacity: 1;
+  }
+  .be-eg__btn:hover .be-eg__btn-label,
+  .be-eg__btn:focus-visible .be-eg__btn-label {
+    transform: translateX(calc(-1 * var(--be-eg-arrow-size-pc)));
+    color: var(--be-eg-btn-text-color);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .be-eg__btn,
+    .be-eg__btn::before,
+    .be-eg__btn::after,
+    .be-eg__btn-arrow,
+    .be-eg__btn-arrow svg,
+    .be-eg__btn-label { transition: none; }
+  }
+
+  /* ---------- Mobile（2 列瀑布流） ---------- */
+  .be-eg__m { display: none; }
+
+  @media (max-width: 768px) {
+    .be-eg {
+      padding:
+        var(--be-eg-pad-top-m)
+        var(--be-eg-pad-x-m)
+        var(--be-eg-pad-bottom-m);
+    }
+
+    .be-eg__pc { display: none; }
+
+    .be-eg__m {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--be-eg-col-gap-m);
+      align-items: start;
+    }
+    .be-eg__m-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--be-eg-row-gap-m);
+    }
+    .be-eg__m-col .be-eg__title--mobile {
+      margin: 0 0 0;
+    }
+
+    .be-eg__photo {
+      width: var(--be-eg-i-img-w-m, 100%);
+      aspect-ratio: var(--be-eg-i-img-aspect-m, var(--be-eg-photo-aspect-m));
+      /* 图片 4 角圆角：每条 block 单独控制（移动端） */
+      border-radius:
+        var(--be-eg-i-img-tl-m, 12px)
+        var(--be-eg-i-img-tr-m, 12px)
+        var(--be-eg-i-img-br-m, 12px)
+        var(--be-eg-i-img-bl-m, 12px);
+    }
+    .be-eg .be-eg__title,
+    .be-eg .be-eg__title > p {
+      font-size: var(--be-eg-title-fz-m) !important;
+      text-align: var(--be-eg-title-align-m, left) !important;
+    }
+    .be-eg__btn--mobile  {
+      min-width:  var(--be-eg-btn-min-w-m, 0);
+      min-height: var(--be-eg-btn-min-h-m, 0);
+      font-size:  var(--be-eg-btn-text-fz-m);
+    }
+    .be-eg__meta {
+      padding:
+        var(--be-eg-i-meta-pt-m, 12px)
+        var(--be-eg-i-meta-px-m, 12px)
+        var(--be-eg-i-meta-pb-m, 12px);
+      border-radius:
+        var(--be-eg-i-meta-tl-m, 0)
+        var(--be-eg-i-meta-tr-m, 0)
+        var(--be-eg-i-meta-br-m, 0)
+        var(--be-eg-i-meta-bl-m, 0);
+    }
+    .be-eg .be-eg__name  { font-size: var(--be-eg-i-name-fz-m); }
+    .be-eg .be-eg__role  { font-size: var(--be-eg-i-role-fz-m); }
+    .be-eg .be-eg__quote { font-size: var(--be-eg-i-quote-fz-m); }
+
+    .be-eg__btn--mobile {
+      align-self: stretch;
+      justify-content: flex-start;
+    }
+    .be-eg__btn--mobile .be-eg__btn-arrow {
+      width: var(--be-eg-arrow-size-m);
+      height: var(--be-eg-arrow-size-m);
+    }
+    .be-eg__btn--mobile .be-eg__btn-label {
+      padding-left: calc(var(--be-eg-arrow-size-m) + var(--be-eg-btn-gap));
+    }
+    .be-eg__btn--mobile:hover .be-eg__btn-arrow,
+    .be-eg__btn--mobile:focus-visible .be-eg__btn-arrow {
+      left: calc(100% - var(--be-eg-arrow-size-m) - var(--be-eg-btn-pad-y));
+    }
+    .be-eg__btn--mobile:hover .be-eg__btn-label,
+    .be-eg__btn--mobile:focus-visible .be-eg__btn-label {
+      transform: translateX(calc(-1 * var(--be-eg-arrow-size-m)));
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Experts Grid",
+  "tag": "section",
+  "class": "be-eg-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "header", "content": "整体设置" },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "整体背景色",
+      "default": "#F3F4F4"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "内容最大宽度",
+      "min": 800, "max": 1920, "step": 16, "default": 1280, "unit": "px"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "标题文本",
+      "default": "<p>Backed by Experts, Proven to Sleep Through</p>"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "标题颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "title_mb",
+      "label": "标题与按钮的间距（PC + 移动端共用）",
+      "min": 0, "max": 80, "step": 1, "default": 24, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_fz_pc",
+      "label": "PC 标题字号",
+      "info": "0 = 跟随主题；最小可设 5px。",
+      "min": 0, "max": 100, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_fz_m",
+      "label": "移动端 标题字号",
+      "info": "0 = 跟随主题；最小可设 5px。",
+      "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "title_align_pc",
+      "label": "PC 标题对齐",
+      "options": [
+        { "value": "left",   "label": "靠左" },
+        { "value": "center", "label": "居中" },
+        { "value": "right",  "label": "靠右" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "title_align_m",
+      "label": "移动端 标题对齐",
+      "options": [
+        { "value": "left",  "label": "靠左" },
+        { "value": "right", "label": "靠右" }
+      ],
+      "default": "left"
+    },
+
+    { "type": "header", "content": "PC端 - 间距与下沉" },
+    {
+      "type": "range",
+      "id": "section_padding_top_pc",
+      "label": "整体上间距",
+      "min": 0, "max": 200, "step": 2, "default": 48, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_pc",
+      "label": "整体下间距",
+      "min": 0, "max": 200, "step": 2, "default": 64, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x_pc",
+      "label": "整体外侧左右间距",
+      "min": 0, "max": 200, "step": 2, "default": 32, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_pc",
+      "label": "列与列间距",
+      "min": 0, "max": 80, "step": 1, "default": 27, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "col2_offset_pc",
+      "label": "第 2 列上方留空（容纳标题+按钮，下沉量）",
+      "info": "影响第 2 张图片相对其他三张的下沉距离。",
+      "min": 0, "max": 400, "step": 4, "default": 140, "unit": "px"
+    },
+
+    { "type": "header", "content": "PC端 - 图片" },
+    {
+      "type": "text",
+      "id": "photo_aspect_pc",
+      "label": "图片高宽比",
+      "default": "303 / 392",
+      "info": "CSS aspect-ratio 写法（例如 303 / 392）。图片圆角、下方文字区域 等单条样式请到每条「Expert」内调整。"
+    },
+
+    { "type": "header", "content": "移动端 - 间距" },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "整体上间距",
+      "min": 0, "max": 120, "step": 2, "default": 32, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "整体下间距",
+      "min": 0, "max": 120, "step": 2, "default": 32, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x_mobile",
+      "label": "整体外侧左右间距",
+      "min": 0, "max": 60, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_mobile",
+      "label": "左右两列间距",
+      "min": 0, "max": 40, "step": 1, "default": 16, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "label": "同列上下卡片间距",
+      "min": 0, "max": 60, "step": 1, "default": 24, "unit": "px"
+    },
+
+    { "type": "header", "content": "移动端 - 图片" },
+    {
+      "type": "text",
+      "id": "photo_aspect_mobile",
+      "label": "图片高宽比",
+      "default": "164 / 235"
+    },
+
+    { "type": "header", "content": "文字样式（名字 / 简介 / 引文）" },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "名字颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "range",
+      "id": "name_mb",
+      "label": "名字 → 简介 间距",
+      "min": 0, "max": 24, "step": 1, "default": 4, "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "role_color",
+      "label": "简介颜色",
+      "default": "#7A8A92"
+    },
+    {
+      "type": "range",
+      "id": "role_mb",
+      "label": "简介 → 引文 间距",
+      "min": 0, "max": 24, "step": 1, "default": 8, "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "引文颜色",
+      "default": "#7A8A92"
+    },
+
+    { "type": "header", "content": "按钮 - 内容与链接" },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "按钮文字",
+      "default": "DISCOVER MORE"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "按钮链接"
+    },
+
+    { "type": "header", "content": "按钮 - 渐变与外观" },
+    {
+      "type": "color",
+      "id": "btn_color_from",
+      "label": "渐变起始色",
+      "default": "#8FE0E8"
+    },
+    {
+      "type": "color",
+      "id": "btn_color_to",
+      "label": "渐变结束色",
+      "default": "#67D2E0"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "文字颜色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "btn_text_size_pc",
+      "label": "PC 文字字号",
+      "min": 8, "max": 28, "step": 1, "default": 14, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "btn_text_size_m",
+      "label": "移动端 文字字号",
+      "min": 6, "max": 24, "step": 1, "default": 12, "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "btn_text_align",
+      "label": "按钮文字对齐",
+      "info": "PC + 移动端共用；只影响按钮内文字（箭头位置不变）。",
+      "options": [
+        { "value": "left",   "label": "靠左" },
+        { "value": "center", "label": "居中" },
+        { "value": "right",  "label": "靠右" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "btn_radius",
+      "label": "按钮圆角",
+      "min": 0, "max": 100, "step": 1, "default": 60, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "btn_padding_x",
+      "label": "按钮左右内边距",
+      "min": 0, "max": 60, "step": 1, "default": 24, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "btn_padding_y",
+      "label": "按钮上下内边距",
+      "min": 0, "max": 40, "step": 1, "default": 6, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "btn_gap",
+      "label": "箭头与文字间距",
+      "min": 0, "max": 32, "step": 1, "default": 12, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "btn_min_width_pc",
+      "label": "PC 按钮最小宽度（整体宽度）",
+      "info": "0 = 自适应（按内容撑开）；设值时按钮整体宽度至少为该值。",
+      "min": 0, "max": 400, "step": 4, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "btn_min_width_m",
+      "label": "移动端 按钮最小宽度（整体宽度）",
+      "info": "0 = 自适应；设值时按钮整体宽度至少为该值。",
+      "min": 0, "max": 320, "step": 4, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "btn_min_height_pc",
+      "label": "PC 按钮最小高度（整体高度）",
+      "info": "0 = 自适应；设值时按钮整体高度至少为该值。",
+      "min": 0, "max": 120, "step": 2, "default": 0, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "btn_min_height_m",
+      "label": "移动端 按钮最小高度（整体高度）",
+      "info": "0 = 自适应；设值时按钮整体高度至少为该值。",
+      "min": 0, "max": 100, "step": 1, "default": 0, "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color",
+      "label": "按钮描边颜色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "btn_border_alpha",
+      "label": "按钮描边透明度",
+      "min": 0, "max": 1, "step": 0.1, "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "btn_border_width",
+      "label": "按钮描边宽度",
+      "min": 0, "max": 4, "step": 0.5, "default": 1, "unit": "px"
+    },
+
+    { "type": "header", "content": "按钮 - 圆形箭头" },
+    {
+      "type": "color",
+      "id": "btn_arrow_bg",
+      "label": "箭头圆形背景色",
+      "default": "#67D2E0"
+    },
+    {
+      "type": "color",
+      "id": "btn_arrow_icon",
+      "label": "箭头颜色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "btn_arrow_size_pc",
+      "label": "PC 箭头大小",
+      "min": 16, "max": 60, "step": 1, "default": 36, "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "btn_arrow_size_mobile",
+      "label": "移动端 箭头大小",
+      "min": 16, "max": 60, "step": 1, "default": 32, "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "expert",
+      "name": "Expert",
+      "limit": 4,
+      "settings": [
+        { "type": "header", "content": "内容" },
+        { "type": "image_picker", "id": "image", "label": "人物图片" },
+        { "type": "text", "id": "name", "label": "名字", "default": "Kelly Murray" },
+        { "type": "text", "id": "role", "label": "职业 / 简介", "default": "Adult Sleep Coach" },
+        { "type": "textarea", "id": "quote", "label": "引文", "default": "\"Sweaty nights disrupt sleep architecture...\"" },
+
+        { "type": "header", "content": "图片大小 - 仅本条" },
+        {
+          "type": "text",
+          "id": "img_aspect_pc",
+          "label": "PC 图片高宽比（留空则跟整体设置）",
+          "info": "CSS aspect-ratio 写法，如 303 / 392；留空则使用整体设置的高宽比。"
+        },
+        {
+          "type": "range",
+          "id": "img_w_pc",
+          "label": "PC 图片宽度（占列宽的 %）",
+          "info": "0 = 100%（占满列宽）。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "%"
+        },
+        {
+          "type": "text",
+          "id": "img_aspect_m",
+          "label": "移动端 图片高宽比（留空则跟整体设置）"
+        },
+        {
+          "type": "range",
+          "id": "img_w_m",
+          "label": "移动端 图片宽度（占列宽的 %）",
+          "info": "0 = 100%（占满列宽）。",
+          "min": 0, "max": 100, "step": 1, "default": 0, "unit": "%"
+        },
+
+        { "type": "header", "content": "图片圆角 - PC端" },
+        {
+          "type": "range",
+          "id": "img_tl_pc",
+          "label": "左上角",
+          "min": 0, "max": 80, "step": 1, "default": 16, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "img_tr_pc",
+          "label": "右上角",
+          "min": 0, "max": 80, "step": 1, "default": 16, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "img_br_pc",
+          "label": "右下角",
+          "min": 0, "max": 80, "step": 1, "default": 16, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "img_bl_pc",
+          "label": "左下角",
+          "min": 0, "max": 80, "step": 1, "default": 16, "unit": "px"
+        },
+
+        { "type": "header", "content": "图片圆角 - 移动端" },
+        {
+          "type": "range",
+          "id": "img_tl_m",
+          "label": "左上角",
+          "min": 0, "max": 60, "step": 1, "default": 12, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "img_tr_m",
+          "label": "右上角",
+          "min": 0, "max": 60, "step": 1, "default": 12, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "img_br_m",
+          "label": "右下角",
+          "min": 0, "max": 60, "step": 1, "default": 12, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "img_bl_m",
+          "label": "左下角",
+          "min": 0, "max": 60, "step": 1, "default": 12, "unit": "px"
+        },
+
+        { "type": "header", "content": "图片下方区域 - 背景与边距 (PC端)" },
+        {
+          "type": "color",
+          "id": "meta_bg",
+          "label": "图片下方文字区背景色（共用 PC + 移动端）",
+          "default": "#E5E8E9"
+        },
+        {
+          "type": "range",
+          "id": "meta_pt_pc",
+          "label": "上内边距",
+          "min": 0, "max": 80, "step": 1, "default": 20, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_pb_pc",
+          "label": "下内边距",
+          "min": 0, "max": 80, "step": 1, "default": 20, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_px_pc",
+          "label": "左右内边距",
+          "min": 0, "max": 60, "step": 1, "default": 20, "unit": "px"
+        },
+
+        { "type": "header", "content": "图片下方区域 - 背景与边距 (移动端)" },
+        {
+          "type": "range",
+          "id": "meta_pt_m",
+          "label": "上内边距",
+          "min": 0, "max": 60, "step": 1, "default": 14, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_pb_m",
+          "label": "下内边距",
+          "min": 0, "max": 60, "step": 1, "default": 14, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_px_m",
+          "label": "左右内边距",
+          "min": 0, "max": 40, "step": 1, "default": 14, "unit": "px"
+        },
+
+        { "type": "header", "content": "图片下方区域 - 圆角 (PC端)" },
+        {
+          "type": "range",
+          "id": "meta_tl_pc",
+          "label": "左上角",
+          "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_tr_pc",
+          "label": "右上角",
+          "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_br_pc",
+          "label": "右下角",
+          "min": 0, "max": 80, "step": 1, "default": 16, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_bl_pc",
+          "label": "左下角",
+          "min": 0, "max": 80, "step": 1, "default": 16, "unit": "px"
+        },
+
+        { "type": "header", "content": "图片下方区域 - 圆角 (移动端)" },
+        {
+          "type": "range",
+          "id": "meta_tl_m",
+          "label": "左上角",
+          "min": 0, "max": 60, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_tr_m",
+          "label": "右上角",
+          "min": 0, "max": 60, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_br_m",
+          "label": "右下角",
+          "min": 0, "max": 60, "step": 1, "default": 12, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "meta_bl_m",
+          "label": "左下角",
+          "min": 0, "max": 60, "step": 1, "default": 12, "unit": "px"
+        },
+
+        { "type": "header", "content": "文字大小 - PC端" },
+        {
+          "type": "range",
+          "id": "name_fz_pc",
+          "label": "名字字号",
+          "info": "0 = 跟随主题；最小可设 5px。",
+          "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "role_fz_pc",
+          "label": "简介字号",
+          "info": "0 = 跟随主题；最小可设 5px。",
+          "min": 0, "max": 60, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "quote_fz_pc",
+          "label": "引文字号",
+          "info": "0 = 跟随主题；最小可设 5px。",
+          "min": 0, "max": 60, "step": 1, "default": 0, "unit": "px"
+        },
+
+        { "type": "header", "content": "文字大小 - 移动端" },
+        {
+          "type": "range",
+          "id": "name_fz_m",
+          "label": "名字字号",
+          "info": "0 = 跟随主题；最小可设 5px。",
+          "min": 0, "max": 60, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "role_fz_m",
+          "label": "简介字号",
+          "info": "0 = 跟随主题；最小可设 5px。",
+          "min": 0, "max": 60, "step": 1, "default": 0, "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "quote_fz_m",
+          "label": "引文字号",
+          "info": "0 = 跟随主题；最小可设 5px。",
+          "min": 0, "max": 60, "step": 1, "default": 0, "unit": "px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Experts Grid",
+      "blocks": [
+        {
+          "type": "expert",
+          "settings": {
+            "name": "Kelly Murray",
+            "role": "Adult Sleep Coach",
+            "quote": "\"Sweaty nights disrupt sleep architecture...\""
+          }
+        },
+        {
+          "type": "expert",
+          "settings": {
+            "name": "Dr. Dusan Roncevic",
+            "role": "Neurologist",
+            "quote": "\"Allow your body to cool down to around 93°F...\""
+          }
+        },
+        {
+          "type": "expert",
+          "settings": {
+            "name": "Brittany Carsey",
+            "role": "Sleep Technologist",
+            "quote": "\"Cooling gets better the longer you sleep...\""
+          }
+        },
+        {
+          "type": "expert",
+          "settings": {
+            "name": "Colby Vermillion",
+            "role": "Sleep Technologist",
+            "quote": "\"A refreshing, almost freeing sensation...\""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

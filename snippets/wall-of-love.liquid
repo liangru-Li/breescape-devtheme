@@ -1,0 +1,361 @@
+
+
+<style>
+/* Performance: contain repaints to the card boundary */
+.shawn__card {
+  contain: layout style paint;
+}
+/* GPU-accelerate the thumbnail swap area */
+.shawn__thumbnail-container {
+  transform: translateZ(0);
+}
+</style>
+
+<script>
+const mediaData = [
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742785774140_wid_NjdlMGNjZWU4M2RhY2MwMDVhYTg0ZTZl_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742785798771_9a8d7c0e-367c-4c7f-81dc-6ee10bb37e7c.jpeg",       username: "@sara.and.ramal",          comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552102390_wid_NjdkZDNjMjYzNGQwYWQwMDU2MDVmM2Iw.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552129647_5e7b58ec-1d11-4e91-b856-cb4b2b78bda5.jpeg",       username: "@nicoule_________",         comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552073558_wid_NjdkZDNjMDkzNGQwYWQwMDU2MDVmMmYy_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552078881_bc2b7cb2-d3b5-49b8-92ca-aaed7f11b8a1.webp",       username: "@alparslansdiary",          comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550507872_wid_NjdkZDM1ZWIxNjFlZjQwMGFmMTgzNjAz_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550515548_83216942-eb3b-4c89-9264-3db4295d7f1b.webp",       username: "@nicolewirick_ ",           comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546553338_wid_NjdkZDI2NzlhMTQ3MGUwMDU4YmU5N2Uw.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546560732_71d62c6f-b52f-461b-a5b3-e4d83e442694.webp",       username: "@selin.aydnli",            comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546543775_wid_NjdkZDI2NmZhMTQ3MGUwMDU4YmU5NzQ4_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546553567_93a05069-b77c-458c-8709-358fc360aa1f.webp",       username: "@naans.sh",                comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546531201_wid_NjdkZDI2NjNhMTQ3MGUwMDU4YmU5NmE4.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742874603883_39bab546-b97b-4e5c-818d-8d7b3098cdc3.jpeg",       username: "@naans.sh",                comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550498111_wid_NjdkZDM1ZTExNjFlZjQwMGFmMTgzNTU1_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550506120_e907ac72-c2c7-4d7e-b139-550c213b1d2d.webp",       username: "@megangulyard",            comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550452316_wid_NjdkZDM1YjQxNjFlZjQwMGFmMTgzNDc3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550500924_8415a8b0-bcb4-46f7-970e-5f082a509a75.webp",       username: "@kent2fitness",            comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550410546_wid_NjdkZDM1OGExNjFlZjQwMGFmMTgzMzhl_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550444355_533e778a-c7ec-4f0e-aecb-fcfd750d2968.webp",       username: "@healing.girl.mode ",      comments: ["It's so smooth and gentle on your skin, and it's like a hug for a whole body."] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550377858_wid_NjdkZDM1NjkxNjFlZjQwMGFmMTgzMmIw_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550399917_dcd39f82-201d-44e3-86b7-0199d42336e0.webp",       username: "@courcneywitucki",         comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550352203_wid_NjdkZDM1NTAxNjFlZjQwMGFmMTgzMWQy_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550371508_bce53dcd-215a-41b5-8950-95d298075e8b.webp",       username: "@amerika_gunluklerim",     comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742552728438_wid_NjdkZDNlOTgzNGQwYWQwMDU2MDYwY2E5_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552733091_b56100ba-f047-468e-88c2-1a56be0b8ed4.webp",       username: "@lesliesoldano",           comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552807041_wid_NjdkZDNlZTYzNGQwYWQwMDU2MDYwZmIy_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552813877_658f6c96-4652-4752-a1af-13fe2cfe8209.webp",       username: "@selin.aydnli",            comments: ["A great night's sleep starts with the right comforter!"] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552788125_wid_NjdkZDNlZDQzNGQwYWQwMDU2MDYwZTRj_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552794674_47ce9217-f06a-48cb-99fe-e2f40caf9496.webp",       username: "@naans.sh",                comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552767055_wid_NjdkZDNlYmUzNGQwYWQwMDU2MDYwZGFh_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552774232_5187247e-ce96-4c83-bde0-67f12fe227bb.webp",       username: "@mur.mur_style",           comments: ["Perfect for relaxing on the sofa during the day, and ideal for a refreshing and restful sleep at night."] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552757326_wid_NjdkZDNlYjUzNGQwYWQwMDU2MDYwZDQ2_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552761652_1e78a952-0d2b-4149-9fbb-18e0fb41260e.webp",       username: "@motherofalya",            comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/custom-videos/videos/1742884210813_wid_NjdlMjRkNzJiNGExZDgwMDU4N2E2MzFl.mp4",       thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546525608_edfc7409-3ae7-47fa-9de4-faa9e8828900.webp",       username: "@mur.mur",                 comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546512529_wid_NjdkZDI2NTBhMTQ3MGUwMDU4YmU5NTY2.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546518230_54c25012-3e99-4cb3-afa0-e837017e14a8.webp",       username: "@motherofalya",            comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546499864_wid_NjdkZDI2NDNhMTQ3MGUwMDU4YmU5NGM2_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546507507_88fd3dcd-22f5-4102-ae7f-1c997fbe9cce.webp",       username: "@motherofalya",            comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546448705_wid_NjdkZDI2MTBhMTQ3MGUwMDU4YmU5NDJk_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546469631_2530d55b-0669-4d57-a178-946c77f7a253.jpeg",       username: "@kpehefaith",              comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546403850_wid_NjdkZDI1ZTNhMTQ3MGUwMDU4YmU5Mzlj.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546417420_63ab4a8a-51e0-4f58-ae60-c3d9a461c909.jpeg",       username: "@kpehefaith",              comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546390381_wid_NjdkZDI1ZDZhMTQ3MGUwMDU4YmU5MmRm.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546397830_ae236789-b3a8-46b6-ac50-fdcca61b6456.webp",       username: "@kbra.tezel",              comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546378755_wid_NjdkZDI1Y2FhMTQ3MGUwMDU4YmU5MjQ3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546395178_dc8f58e1-1878-46ae-81fa-ae01aea1a9cd.webp",       username: "@kbra.tezel",              comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546347601_wid_NjdkZDI1YWJhMTQ3MGUwMDU4YmU5MTA1_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546354830_78102b88-e87d-4f72-9ed4-0f69e67a3d10.webp",       username: "@itsariamuse",             comments: ["Nothing enhances sleep quite like comfortable sheets—that's why I swear by Breescape Cooling Sheets!"] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546335562_wid_NjdkZDI1OWZhMTQ3MGUwMDU4YmU5MDYz_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546342836_4975bb3d-768f-4e19-8f11-bc32502b27ac.webp",       username: "@fouziathebliss",          comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546325686_wid_NjdkZDI1OTVhMTQ3MGUwMDU4YmU4ZmFm_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546333008_afb774d7-0b3b-4279-9867-7d23ea9705b8.webp",       username: "@fouziathebliss",          comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546289590_wid_NjdkZDI1NzFhMTQ3MGUwMDU4YmU4ZWRl.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546296743_5551d0ae-4a3d-4d93-b773-b3fa06fd9cc3.webp",       username: "@erika_homedecor",         comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546266547_wid_NjdkZDI1NWFhMTQ3MGUwMDU4YmU4ZTFj_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546278904_1d89cdf5-8f1c-452b-9a79-d72b4e87259a.webp",       username: "@denizbbtsv",              comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546245425_wid_NjdkZDI1NDVhMTQ3MGUwMDU4YmU4ZDcz_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546257106_96800979-5c4a-4b22-b9ca-925dbcbd1a67.webp",       username: "@denizbbtsv",              comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546197406_wid_NjdkZDI1MTVhMTQ3MGUwMDU4YmU4YzQ0.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546222510_6436bdf3-7643-4971-8914-8f62f99daf5b.jpeg",       username: "@centstillstanding",       comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546161629_wid_NjdkZDI0ZjFhMTQ3MGUwMDU4YmU4Yjk3.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546179447_32f4e589-e540-45c7-9d20-d24a728670f3.jpeg",       username: "@brontecruz",              comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546119117_wid_NjdkZDI0YzdhMTQ3MGUwMDU4YmU4YWI4_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546144505_9aae2c88-26d1-4e75-a773-69d3c96060b1.jpeg",       username: "@thebeescene",             comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546062838_wid_NjdkZDI0OGVhMTQ3MGUwMDU4YmU4OTVh_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546106014_bbec9d93-77f0-46d7-950a-f24834505cca.jpeg",       username: "@thebeescene",             comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742546032346_wid_NjdkZDI0NzBhMTQ3MGUwMDU4YmU4OGE0_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546039283_2fc1e306-bf42-4433-86ca-912e25889b1e.webp",       username: "@tanuxa_usa",              comments: ["Say goodbye to hot, restless nights and hello to cool, refreshing sleep!"] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545663003_wid_NjdkZDIyZmVhMTQ3MGUwMDU4YmU4Njcy_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742546003858_a60d0c7f-d0df-4baf-872e-3371dfb7b7f2.webp",       username: "@arrianahasiuk",           comments: ["Breescape cooling comforter is the answer you've been looking for!"] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545399094_wid_NjdkZDIxZjZhMTQ3MGUwMDU4YmU3YWM3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742545602641_b9a0458c-575f-47bd-b80b-96f252ffdd63.webp",       username: "@anukinatchkebia",         comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545129234_wid_NjdkZDIwZTlhMTQ3MGUwMDU4YmU1ZmUy_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742545339710_82bf1f0a-41a1-4475-9392-73ebe6eba146.webp",       username: "@amerikada.mutfak",        comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545091349_wid_NjdkZDIwYzNhMTQ3MGUwMDU4YmU1ZjA0_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742545115082_465c6679-06e8-4e6d-b76b-ef7453d00fe6.webp",       username: "@americagaleri",           comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545076867_wid_NjdkZDIwYjRhMTQ3MGUwMDU4YmU1ZTll_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742545080053_1304c115-362b-4ddc-9f59-c54e6daeec14.webp",       username: "@akhvlediani_sali",        comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545068201_wid_NjdkZDIwYWNhMTQ3MGUwMDU4YmU1ZTNh_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742545071356_64c73d53-4562-4e35-8dd6-6609531c179e.webp",       username: "@akhvlediani_sali",        comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545049604_wid_NjdkZDIwOTlhMTQ3MGUwMDU4YmU1ZDQ3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742545065634_523f7800-9405-4e9b-ab42-865652a3f01b.webp",       username: "@aarlen.s",                comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545037143_wid_NjdkZDIwOGRhMTQ3MGUwMDU4YmU1Y2E3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742545045804_b17a5673-2cfc-4619-9885-c29604a7ffca.webp",       username: "@xavierserrr ",            comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545020598_wid_NjdkZDIwN2NhMTQ3MGUwMDU4YmU1YmMx_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742545034674_1574b569-e5c1-4fb3-9c61-ce538a383adf.webp",       username: "@texture.creation",        comments: ["Comfort and convenient for the best sleep ever."] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742545010924_wid_NjdkZDIwNzJhMTQ3MGUwMDU4YmU1YjI4_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742545019698_dd0deac6-e8f2-4ef3-9cfb-67be49a6322d.webp",       username: "@teoo_sadoevi",            comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544885798_wid_NjdkZDFmZjVhMTQ3MGUwMDU4YmU1YTRj_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544893691_9888c6dd-941b-437c-a727-642c8c1020ca.webp",       username: "@serapbrdk",               comments: ["No sweat, no discomfort—just pure relaxation."] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544875398_wid_NjdkZDFmZWJhMTQ3MGUwMDU4YmU1OWIy_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544886000_a75805c3-cce9-4f97-abcc-aea67fe23248.webp",       username: "@serapbrdk-",              comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544862833_wid_NjdkZDFmZGVhMTQ3MGUwMDU4YmU1OTEx.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544870738_6a3c8948-1781-4da4-b67d-c80828844c6b.webp",       username: "@sara.and.ramal",          comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544855935_wid_NjdkZDFmZDdhMTQ3MGUwMDU4YmU1ODc5_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544888675_9b0ef9aa-7ee4-477a-ad4a-790c664ddb36.webp",       username: "@raynewonders",            comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544811007_wid_NjdkZDFmYWFhMTQ3MGUwMDU4YmU1N2M2_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544818604_ace759a3-198a-4f0f-a160-47e2fffce3b0.webp",       username: "@nicoule_________",        comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544803902_wid_NjdkZDFmYTNhMTQ3MGUwMDU4YmU1NzYz_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544808475_aea19fa7-5527-41bf-ad15-31d624b16ab0.webp",       username: "@nicolewirick_",           comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544797201_wid_NjdkZDFmOWRhMTQ3MGUwMDU4YmU1NzA0_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544801574_74651e21-b3c9-41b7-8243-76f3b66d8175.webp",       username: "@msk_hvilidzemariami",     comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544786588_wid_NjdkZDFmOTJhMTQ3MGUwMDU4YmU1NjVh_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544814098_f04c312a-2389-4e73-a1f6-81e1765fc8de.webp",       username: "@magicblog.usa",           comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544770801_wid_NjdkZDFmODJhMTQ3MGUwMDU4YmU1NTg1_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544786592_5bd83c5b-bb3b-42b2-af11-04f5e3bdae7c.webp",       username: "@kenyaa.rod",              comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544754677_wid_NjdkZDFmNzJhMTQ3MGUwMDU4YmU1NGFm_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544783285_4c2ced99-e1d0-44fc-a4ef-bccd389b34ae.webp",       username: "@helloiamesra",            comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544723750_wid_NjdkZDFmNTNhMTQ3MGUwMDU4YmU1M2M3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544735195_c9e31823-30cd-4bfe-a162-781668a1c274.webp",       username: "@healing.girl.mode",       comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544716877_wid_NjdkZDFmNGNhMTQ3MGUwMDU4YmU1MzI4_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544724631_f323fa0c-d26b-4f5d-9ab9-decc194a53d2.webp",       username: "@feelinlikejen",           comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544711361_wid_NjdkZDFmNDdhMTQ3MGUwMDU4YmU1MmMz.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544716733_416f0b04-d177-41b1-a330-47779c3313ce.webp",       username: "@didems_kitchen_usa",      comments: ["Whether you're looking for better sleep or the perfect gift for a loved one, this comforter is a must-have."] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544703254_wid_NjdkZDFmM2ZhMTQ3MGUwMDU4YmU1MjJh_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544709556_8e160759-4df2-4c27-9cd1-a3a5ff272186.webp",       username: "@claricecalazans",         comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544681547_wid_NjdkZDFmMjlhMTQ3MGUwMDU4YmU1MTc4_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544688526_39c3ca34-4634-4788-a646-6de22e7bf7bf.webp",       username: "@barbarabraga85",          comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544674961_wid_NjdkZDFmMjJhMTQ3MGUwMDU4YmU1MGQ3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544681400_a87b4c34-d1b1-4cf9-aee1-d4fabffee34a.webp",       username: "@ayse.izol",               comments: ["No more tossing and turning—just deep restful sleep."] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544661650_wid_NjdkZDFmMTVhMTQ3MGUwMDU4YmU0ZmY5_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544674800_67de060e-cf96-4de8-b108-d76754f92881.webp",       username: "@amerikayadairr",          comments: ["The exceptional smoothness and soothing touch help melt away the stresses of the day."] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742544652519_wid_NjdkZDFmMGNhMTQ3MGUwMDU4YmU0ZjUx_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742544662230_952845e7-3788-4f1f-a1df-29dd5b2bb416.webp",       username: "@amerikayadairr",          comments: ["providing a restorative sleep experience that feels like being embraced by clouds."] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742894090128_wid_NjdlMjc0MDk3Zjg4ODkwMDU4Mzg2ZTY0.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742894093292_c27c04bf-6d3f-41c3-bc60-cc6fa0c7e5a8.webp",       username: "@amothertwosons",          comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/custom-videos/videos/1742894352887_wid_NjdlMjc1MTA3Zjg4ODkwMDU4Mzg3MDI3.mp4",       thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742894363300_8b353027-33c5-4467-83c8-dfa314dafbd6.webp",       username: "@busraalya",               comments: ["Designed to provide a cool and comfortable sleep experience on hot summer nights."] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742894623344_wid_NjdlMjc2MWY3Zjg4ODkwMDU4Mzg4MDlj_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742894626648_990dddd0-a841-499c-adab-cea300ec46c7.webp",       username: "@contentwith_ceyda",       comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742894464768_wid_NjdlMjc1ODA3Zjg4ODkwMDU4Mzg3Nzgw.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742894483119_3f6d3e76-740e-4bb4-a86b-01ae88ba4ceb.webp",       username: "@busraalya",               comments: ["Plus, my dog Coco loves it too!"] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742894220273_wid_NjdlMjc0OGM3Zjg4ODkwMDU4Mzg2ZWZm_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742894232626_e8716ddd-b725-44c6-b134-4d84c9819958.webp",       username: "@amothertwosons",          comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742551190416_wid_NjdkZDM4OTYxNjFlZjQwMGFmMTg0OWE4.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551198032_f2b5997b-596c-4ba0-9f5a-7d1fac5b9811.webp",       username: "@ninacoladaaa",            comments: ["Oh my gosh, you guys! This is actually so cool!"] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742551125659_wid_NjdkZDM4NTUxNjFlZjQwMGFmMTg0N2Qw.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551174810_4dd46eff-70d0-4007-a5e6-de33368295de.jpeg",       username: "@kynzie_naquin",           comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742551027390_wid_NjdkZDM3ZjMxNjFlZjQwMGFmMTg0NTUz.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551093907_457dd63f-29a6-4e0a-991a-6958df524444.png",       username: "@kynzie_naquin",           comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550975472_wid_NjdkZDM3YmYxNjFlZjQwMGFmMTg0M2M2_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550998675_66f0e7f0-efe5-497c-b6dc-6d4981eb759d.webp",       username: "@katiemariemomof4",        comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550958173_wid_NjdkZDM3YWUxNjFlZjQwMGFmMTg0MzIw.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550967787_cd08a7d6-7c8d-45d1-9b0e-14a0cb688686.webp",       username: "@kaile.b",                 comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550948161_wid_NjdkZDM3YTQxNjFlZjQwMGFmMTg0Mjdk_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550956032_f19c2426-0444-45db-9771-de99aa1dbf1b.webp",       username: "@jackiekxhl",              comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550935328_wid_NjdkZDM3OTcxNjFlZjQwMGFmMTg0MjE5_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550939332_c0db42eb-191b-4cd5-95e7-e392a5da62ea.webp",       username: "@gigiprezia",              comments: ["Honestly, I don't understand the magic. There's no way it works, yet you sleep like a baby!"] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550889724_wid_NjdkZDM3NjkxNjFlZjQwMGFmMTg0MGMx_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550925782_8e38725c-43df-4f9d-bc67-879655cb0fd1.webp",       username: "@gageslife",               comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550840918_wid_NjdkZDM3MzgxNjFlZjQwMGFmMTgzZmY4.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550848927_bd656b69-5c50-4f88-9bd7-89b716a08a63.webp",       username: "@gageslife",               comments: ["Get healthier, deeper sleep with Breescape! This is an absolute game-changing bed set."] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550806176_wid_NjdkZDM3MTYxNjFlZjQwMGFmMTgzZTBm_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550821852_5d3e1d77-8f6f-425f-81dc-2b2df5364dc2.jpeg",       username: "@centstillstanding",       comments: ["No more sweaty nights, no more fans blowing on my bed!"] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550750576_wid_NjdkZDM2ZGUxNjFlZjQwMGFmMTgzZDNi.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550788147_af44715d-d6c3-4827-b24b-3d8682a5d9f1.jpeg",       username: "@casa_decoazul",           comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550687548_wid_NjdkZDM2OWYxNjFlZjQwMGFmMTgzYzE1_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550705318_ea0c9ca5-76e0-4494-9e72-a490f1a2fe7e.jpeg",       username: "@bbd_destiny",             comments: ["I suggest this for all my hot sleepers. Go get it!"] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550622655_wid_NjdkZDM2NWUxNjFlZjQwMGFmMTgzYjgy_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550665267_f2c6993b-fe2c-4617-84f8-830c70c74f11.jpeg",       username: "@skyyhighlerr",            comments: [""] },
+    { category: "verdict",    url: "https://cdn2.videowise.com/converted/videos/1742550529671_wid_NjdkZDM2MDExNjFlZjQwMGFmMTgzOGYw_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550539752_0f4d0894-f93d-4158-b1be-f053927875f0.webp",       username: "@amerika_gunluklerim",     comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742550515561_wid_NjdkZDM1ZjMxNjFlZjQwMGFmMTgzNmIy_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742550530143_cc6bf82c-ed5f-4d3a-8f74-5addec56116b.webp",       username: "@alexismarieoliva",        comments: ["The material is luxurious feel and easy to clean too."] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552699187_wid_NjdkZDNlN2IzNGQwYWQwMDU2MDYwYjAy.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742786216222_e931ed04-b54e-425e-9389-f5f515bd100e.jpeg",       username: "@kynzie_naquin",           comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742552662012_wid_NjdkZDNlNTUzNGQwYWQwMDU2MDYwN2Zk_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552680468_0ade871d-717a-4956-8db7-c9f60af611cb.jpeg",       username: "@kilaqueen",               comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552621333_wid_NjdkZDNlMmQzNGQwYWQwMDU2MDYwNWRl_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552641594_17a17fe4-5749-432d-9a7a-f1354be685ef.jpeg",       username: "@kerraezgi",               comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552610112_wid_NjdkZDNlMjEzNGQwYWQwMDU2MDYwNGQ5_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552618819_658153cb-6ded-4c1a-88fb-cdfb56c94d6b.webp",       username: "@kbra.tezel",              comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552588142_wid_NjdkZDNlMGIzNGQwYWQwMDU2MDYwMzMz_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552596145_ef23565d-584d-4931-808d-e47b41bf40bc.webp",       username: "@kaile.b",                 comments: ["I've never slept better! It's ultra-soft, silky smooth, and actually helps regulate temperature."] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552566557_wid_NjdkZDNkZjYzNGQwYWQwMDU2MDYwMWMw_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552573901_64580ec6-e1e3-4a8e-9428-4da2412286ef.webp",       username: "@itsme_heathermarie",      comments: ["To all my restless and hot sleepers: Are you ready to elevate your sleep game!"] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552539523_wid_NjdkZDNkZGIzNGQwYWQwMDU2MDVmZmM0_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552546330_841726d7-4c83-4a32-90f8-1b06d99b6c23.webp",       username: "@fouziathebliss",          comments: ["Seriously, it's like a sleep super power! I never want to get out of bed now."] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552496868_wid_NjdkZDNkYjAzNGQwYWQwMDU2MDVmZDkw_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552519369_ae932b33-2e61-46d0-b41d-c48e53865412.jpeg",       username: "@elenegaprindashvilii",    comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552463061_wid_NjdkZDNkOGUzNGQwYWQwMDU2MDVmY2Jk_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552481671_98a7ab99-ab53-4532-a4d8-30906b5912c8.jpeg",       username: "@dileks_journal",          comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552398890_wid_NjdkZDNkNGUzNGQwYWQwMDU2MDVmYWI2.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552438312_2686eff9-2653-44fc-a865-7f077e52a4a5.jpeg",       username: "@dianatevzadzee",          comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552355314_wid_NjdkZDNkMjMzNGQwYWQwMDU2MDVmODUz.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552373530_9dce68fe-495f-44ee-b4c4-ca72c709c041.webp",       username: "@claricecalazans",         comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552315218_wid_NjdkZDNjZmIzNGQwYWQwMDU2MDVmNzg4_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552335285_22ecac1f-2ec6-4acf-b0b1-eec640fb8dcb.jpeg",       username: "@casa_decoazul",           comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742552279897_wid_NjdkZDNjZDczNGQwYWQwMDU2MDVmNmY5.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552292713_f884a3ab-f025-4a5d-aba9-7dd0085f207b.jpeg",       username: "@brontecruz",              comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552214843_wid_NjdkZDNjOTYzNGQwYWQwMDU2MDVmNWRi_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552239403_b84c8b5c-408c-47ce-bbbe-cf307f198d8d.jpeg",       username: "@xavierserrr",             comments: ["Breezy and absorb technology keep your skin healthy also avoid bad smells."] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552184079_wid_NjdkZDNjNzczNGQwYWQwMDU2MDVmNTQw_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552199420_bb447fb1-9e4d-4a74-826a-8b4642d9151b.jpeg",       username: "@tanuxa_usa",              comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552067673_wid_NjdkZDNjMDMzNGQwYWQwMDU2MDVmMjhl.mp4",           thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552073566_11de62c1-1085-443a-bbd8-90f7f24d783f.webp",       username: "@sarahbanksie",            comments: [""] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742552061367_wid_NjdkZDNiZmQzNGQwYWQwMDU2MDVmMWVj_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552068928_a12d6731-e1af-4e34-84b5-60e97a59ec1d.webp",       username: "@nini.barbakadze",         comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552055340_wid_NjdkZDNiZjczNGQwYWQwMDU2MDVmMTg4_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552061389_622e5b62-0f7a-48ba-a29e-4f20a9873ecf.webp",       username: "@nicolewirick_",           comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742552046470_wid_NjdkZDNiZWUzNGQwYWQwMDU2MDVmMGFj_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552057261_f092d68e-79ce-496a-8d4a-e01e6272e4ae.webp",       username: "@natashkaats_",            comments: ["Upgrade your sleep experience today and enjoy the comfort you deserve."] },
+    { category: "first-look", url: "https://cdn2.videowise.com/converted/videos/1742552036552_wid_NjdkZDNiZTQzNGQwYWQwMDU2MDVlZmQ4_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742552047763_a703fc3e-82aa-41cb-9f19-59eea4a3c576.webp",       username: "@mariammuladzee",          comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742551985691_wid_NjdkZDNiYjEzNGQwYWQwMDU2MDVlYTNl_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551989374_e54ed08f-d2a5-43eb-bab0-5146b2828ac5.webp",       username: "@helloiamesra",            comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742551977823_wid_NjdkZDNiYTkzNGQwYWQwMDU2MDVlOTlk_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551985672_7746b870-44fb-40a1-a750-8aa3781c9c75.webp",       username: "@didemkrkrt36",            comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742551967316_wid_NjdkZDNiOWYzNGQwYWQwMDU2MDVlNDc3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551979172_c31792c9-6ed1-423a-b996-44d563544c65.webp",       username: "@claricecalazan",          comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742551959538_wid_NjdkZDNiOTczNGQwYWQwMDU2MDVlM2Q3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551967332_b93a025e-50c8-4983-a079-6762929be6ff.webp",       username: "@barbarabraga85",          comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742551948411_wid_NjdkZDNiOGMzNGQwYWQwMDU2MDVkZmU3_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551960308_9787f131-d18e-44f9-9965-17be9d587f83.webp",       username: "@amerikada.mutfak",        comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742551941725_wid_NjdkZDNiODUzNGQwYWQwMDU2MDVkZjQ0_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551948439_45809e71-5dc5-44b0-95ff-0080d09158ea.webp",       username: "@amerikada_hayattt",       comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742551934579_wid_NjdkZDNiN2UzNGQwYWQwMDU2MDVkZWE1_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551941729_f17157e2-2aa9-406e-802f-6339f0cf4e06.webp",       username: "@aleegamez_",              comments: [""] },
+    { category: "cooling",    url: "https://cdn2.videowise.com/converted/videos/1742551929658_wid_NjdkZDNiNzkzNGQwYWQwMDU2MDVkZTQ4_h264c.mp4",    thumbnail: "https://cdn2.videowise.com/custom-videos/thumbnails/1742551933098_1bbacd1e-416f-4b80-895e-f0212d5b6811.webp",       username: "@_maruss",                 comments: ["This is the perfect solution for uninterrupted, restful sleep."] },
+];
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+const INITIAL_LOAD    = 8;
+const LOAD_MORE_COUNT = 8;
+const HEIGHT_PATTERN  = [100, 95, 90, 98];
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function getColumnCount() {
+    const w = window.innerWidth;
+    return w > 960 ? 4 : w > 768 ? 3 : w > 360 ? 2 : 1;
+}
+function getBaseHeight() {
+    return window.innerWidth < 768 ? 300 : 500;
+}
+function getCardHeight(i) {
+    return getBaseHeight() * HEIGHT_PATTERN[i % HEIGHT_PATTERN.length] / 100;
+}
+
+// ─── Card DOM builder ─────────────────────────────────────────────────────────
+function createCard({ url, thumbnail, username, comments }, index) {
+    const card = document.createElement('div');
+    card.className  = 'shawn__card bg-white mb-4 rounded shadow p-4';
+    card.dataset.videoUrl = url;
+    card.dataset.index    = index;
+
+    const thumb      = thumbnail || 'https://via.placeholder.com/300x200';
+    const hasComment = comments && comments.length > 0 && comments[0] !== '';
+    const commentHTML = hasComment
+        ? `<div class="text-sm px-4" style="color:#10425b;margin-bottom:10px;">${comments.join('<br>')}</div>`
+        : '';
+
+    // ← loading="lazy" prevents all thumbnails loading at once
+    const imgBlock = (cls = '') => `
+        <div class="shawn__thumbnail-container ${cls} rounded overflow-hidden">
+            <img class="shawn__thumbnail" src="${thumb}" loading="lazy" decoding="async"
+                 style="width:100%;object-fit:cover;border-radius:8px;" alt="">
+            <span class="shawn__play-btn">
+                <svg viewBox="0 0 36 36" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+                    <path d="M34 17.5C34 18.33 33.57 19.1 32.87 19.52L9.535 33.663C9.164 33.887 8.749 34 8.333 34 7.937 34 7.54 33.899 7.183 33.694 6.453 33.274 6 32.492 6 31.643V3.358C6 2.51 6.453 1.727 7.183 1.308 7.913.886 8.814.9 9.535 1.338L32.87 15.481C33.57 15.905 34 16.671 34 17.5"/>
+                </svg>
+            </span>
+        </div>`;
+
+    card.innerHTML = index % 2 === 0
+        ? `<p class="font-bold text-sm mb-2 px-4 py-2" style="color:#10425b;">${username}</p>${commentHTML}${imgBlock('mt-2')}`
+        : `${imgBlock('mb-3')}<p class="font-bold text-sm mt-3 mb-2 px-4 py-2" style="color:#10425b;">${username}</p>${commentHTML}`;
+
+    return card;
+}
+
+// ─── Video element factory ────────────────────────────────────────────────────
+function createVideoElement(url, height) {
+    const v = document.createElement('video');
+    v.className = 'shawn__media-preview';
+    // preload="none" ← don't fetch anything until play() is called
+    v.setAttribute('preload', 'none');
+    v.setAttribute('playsinline', 'true');
+    v.setAttribute('webkit-playsinline', 'true');
+    v.setAttribute('x5-video-player-type', 'h5-page');
+    v.muted = true;
+    Object.assign(v.style, { height, width: '100%', objectFit: 'cover', borderRadius: '8px' });
+    // Set src directly (not via <source>) so play() triggers fetch immediately
+    v.src = url;
+    return v;
+}
+
+// ─── Mute button ─────────────────────────────────────────────────────────────
+function muteIcon(muted) {
+    const speaker = `<path d="M4 15H5.586L10.293 19.707C10.923 20.337 12 19.891 12 19V5C12 4.109 10.923 3.663 10.293 4.293L5.586 9H4a1 1 0 00-1 1v4a1 1 0 001 1z" stroke="white" stroke-width="1.25" stroke-linejoin="round"/>`;
+    const xLines  = `<path d="M19 12l2 2m-4 0l2-2-2 2zm2-2l2-2-2 2zm0 0l-2-2 2 2z" stroke="white" stroke-width="1.25" stroke-linecap="round"/>`;
+    const waves   = `<path d="M16 8c1.333 1.833 1.333 6.167 0 8" stroke="white" stroke-width="1.25" stroke-linecap="round"/><path d="M18 5c2.667 3.5 2.667 10.5 0 14" stroke="white" stroke-width="1.25" stroke-linecap="round"/>`;
+    return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;">${speaker}${muted ? xLines : waves}</svg>`;
+}
+
+function addMuteControl(container, video) {
+    const btn = document.createElement('button');
+    btn.className = 'shawn__control-btn';
+    btn.innerHTML = muteIcon(true);
+    Object.assign(btn.style, { display: 'none' });
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        btn.innerHTML = muteIcon(video.muted);
+    });
+    container.appendChild(btn);
+    return btn;
+}
+
+// ─── Global active-video tracker ─────────────────────────────────────────────
+// Ensures only one video plays at a time — key for mobile performance
+let _activeStop = null;
+
+function stopActive() {
+    if (_activeStop) { _activeStop(); _activeStop = null; }
+}
+
+// ─── Video interaction (single definition) ───────────────────────────────────
+function setupVideoHandlers(card, videoUrl, height) {
+    const thumbnail = card.querySelector('.shawn__thumbnail');
+    const playBtn   = card.querySelector('.shawn__play-btn');
+    const container = card.querySelector('.shawn__thumbnail-container');
+    let video = null, muteBtn = null;
+
+    function showVideo() {
+        if (video) return;          // already playing on this card
+        stopActive();               // stop whatever was playing elsewhere
+
+        video   = createVideoElement(videoUrl, `${height}px`);
+        muteBtn = addMuteControl(container, video);
+        container.insertBefore(video, playBtn);
+        thumbnail.classList.add('hidden');
+        playBtn.classList.add('hidden');
+        muteBtn.style.display = 'block';
+
+        // play() directly — no load() call needed, browser handles buffering
+        video.play().catch(() => {
+            // iOS: autoplay blocked — show tap-to-play overlay
+            const overlay = document.createElement('button');
+            overlay.className = 'shawn__play-btn';
+            container.appendChild(overlay);
+            overlay.addEventListener('click', (e) => {
+                e.stopPropagation();
+                video.play();
+                overlay.remove();
+            }, { once: true });
+        });
+
+        // Register stop callback so global tracker can clean up this card
+        _activeStop = hideVideo;
+    }
+
+    function hideVideo() {
+        if (!video) return;
+        video.pause();
+        video.removeAttribute('src');   // release network connection immediately
+        video.load();                   // abort pending fetch
+        video.remove();
+        muteBtn.remove();
+        thumbnail.classList.remove('hidden');
+        playBtn.classList.remove('hidden');
+        video = null; muteBtn = null;
+        if (_activeStop === hideVideo) _activeStop = null;
+    }
+
+    playBtn.addEventListener('click', (e) => { e.stopPropagation(); showVideo(); });
+    container.addEventListener('touchstart', (e) => { e.stopPropagation(); showVideo(); }, { passive: true });
+
+    if (window.innerWidth >= 768) {
+        container.addEventListener('mouseenter', showVideo);
+        container.addEventListener('mouseleave', hideVideo);
+    }
+}
+
+// ─── Pre-build card elements & category buckets ───────────────────────────────
+const cards = mediaData.map((data, i) => createCard(data, i));
+
+const buckets = { all: cards };
+mediaData.forEach(({ category }, i) => {
+    if (!buckets[category]) buckets[category] = [];
+    buckets[category].push(cards[i]);
+});
+
+// ─── Main controller ──────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const columns = ['shawn__column1','shawn__column2','shawn__column3','shawn__column4']
+        .map(id => document.getElementById(id)).filter(Boolean);
+    const tabButtons  = document.querySelectorAll('.tab-btn');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (!loadMoreBtn) return;
+
+    let currentCards = cards;
+    let loadedCount  = 0;
+
+    function clearColumns() {
+        stopActive();                           // stop video before wiping DOM
+        columns.forEach(col => (col.innerHTML = ''));
+    }
+
+    function appendCards(subset, startIndex) {
+        const colCount = getColumnCount();
+        subset.forEach((card, idx) => {
+            const globalIndex = startIndex + idx;
+            const cloned  = card.cloneNode(true);
+            const height  = getCardHeight(globalIndex);
+            cloned.querySelector('.shawn__thumbnail').style.height = `${height}px`;
+            setupVideoHandlers(cloned, card.dataset.videoUrl, height);
+            columns[globalIndex % colCount].appendChild(cloned);
+        });
+    }
+
+    function render(filtered, limit) {
+        clearColumns();
+        const count = Math.min(limit, filtered.length);
+        appendCards(filtered.slice(0, count), 0);
+        loadedCount = count;
+        syncLoadMoreBtn();
+    }
+
+    function syncLoadMoreBtn() {
+        loadMoreBtn.classList.toggle('hidden', loadedCount >= currentCards.length);
+    }
+
+    // Tab switching
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabButtons.forEach(b => b.classList.remove('shawn__tab-active'));
+            btn.classList.add('shawn__tab-active');
+            currentCards = buckets[btn.dataset.tab] || [];
+            render(currentCards, INITIAL_LOAD);
+        });
+    });
+
+    // Load more
+    loadMoreBtn.addEventListener('click', () => {
+        const start = loadedCount;
+        const end   = Math.min(start + LOAD_MORE_COUNT, currentCards.length);
+        appendCards(currentCards.slice(start, end), start);
+        loadedCount = end;
+        syncLoadMoreBtn();
+    });
+
+    // Resize (debounced)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => render(currentCards, loadedCount), 150);
+    });
+
+    // Init
+    tabButtons[0]?.classList.add('shawn__tab-active');
+    currentCards = cards;
+    render(currentCards, INITIAL_LOAD);
+});
+</script>

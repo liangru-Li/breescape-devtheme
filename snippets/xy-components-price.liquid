@@ -1,0 +1,305 @@
+{%- comment -%}
+  ID:
+    - Comforter 7528441315406
+    - Sheet Set 7578286882894
+    - Comforter Set 7578333773902
+    - Pillowcases 7578334593102
+    - Eye Mask 7562295312462
+    - 2-Pack Comforter 7648601047118
+    - Comforter + Eye Mask Bundle 7629546061902
+    - Sheet Set + Eye Mask Bundle 7629565263950
+{%- endcomment -%}
+
+{%- assign parent_product = null -%}
+{%- assign base_price = 0 -%}
+
+{%- if product.variants -%}
+  {%- assign parent_product = product -%}
+  {%- assign base_price = product.selected_or_first_available_variant.price -%}
+
+{%- elsif product.product -%}
+  {%- assign parent_product = product.product -%}
+  {%- assign base_price = product.price -%}
+
+{%- elsif is_variant and product_variants != blank -%}
+  {%- assign parent_product = product_variants -%}
+  {%- assign base_price = product.price -%}
+
+{%- else -%}
+  {%- assign parent_product = product -%}
+  {%- assign base_price = product.price -%}
+{%- endif -%}
+
+{%- assign compare_at = 0 -%}
+{%- if product.variants -%}
+  {%- assign compare_at = product.selected_or_first_available_variant.compare_at_price | default: 0 -%}
+{%- elsif product.compare_at_price -%}
+  {%- assign compare_at = product.compare_at_price | default: 0 -%}
+{%- endif -%}
+
+{%- comment -%} 价格优先级：compare_at_price > discount_amount > product_discounts {%- endcomment -%}
+{%- assign discount_amount = parent_product.metafields.custom.discount_amount | default: 0 | plus: 0 -%}
+{%- assign percent = parent_product.metafields.custom.product_discounts | default: 0 | plus: 0 -%}
+{%- assign custom_text = '' -%}
+{%- assign regular_price = base_price -%}
+{%- assign save_badge_custom_label = '' -%}
+
+{%- comment -%} 颜色+尺码促销规则 {%- endcomment -%}
+{%- assign sale_rule_match = '' -%}
+{%- assign sale_rule_percent = 0 -%}
+{%- assign sale_rule_badge = '' -%}
+{%- if enable_clearance_override -%}
+  {%- assign clearance_check_variant = product -%}
+  {%- if product.selected_or_first_available_variant != blank -%}
+    {%- assign clearance_check_variant = product.selected_or_first_available_variant -%}
+  {%- endif -%}
+  {%- capture sale_rule_match -%}
+    {%- render 'clearance-ivory-comforter-check', product: parent_product, variant: clearance_check_variant, section: section -%}
+  {%- endcapture -%}
+  {%- assign sale_rule_match = sale_rule_match | strip -%}
+  {%- if sale_rule_match != blank -%}
+    {%- assign sale_rule_parts = sale_rule_match | split: ':::' -%}
+    {%- assign sale_rule_percent = sale_rule_parts.first | plus: 0 -%}
+    {%- assign sale_rule_badge = sale_rule_parts.last | default: '' -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if sale_rule_percent > 0 -%}
+  {%- if compare_at > base_price -%}
+    {%- assign regular_price = compare_at -%}
+  {%- else -%}
+    {%- assign regular_price = base_price -%}
+  {%- endif -%}
+  {%- assign discount_amount = 0 -%}
+  {%- assign percent = sale_rule_percent -%}
+  {%- assign discount = regular_price | times: sale_rule_percent | divided_by: 100 -%}
+  {%- assign final_price = regular_price | minus: discount -%}
+  {%- assign save_badge_custom_label = sale_rule_badge -%}
+{%- elsif compare_at > base_price -%}
+  {%- assign discount = compare_at | minus: base_price -%}
+  {%- assign final_price = base_price -%}
+  {%- assign regular_price = compare_at -%}
+{%- elsif discount_amount > 0 -%}
+  {%- comment -%} metafield 以货币单位存储，乘 100 转为最小货币单位（分） {%- endcomment -%}
+  {%- assign discount = discount_amount | times: 100 -%}
+  {%- assign final_price = base_price | minus: discount -%}
+{%- elsif percent > 0 -%}
+  {%- assign discount = base_price | times: percent | divided_by: 100 -%}
+  {%- assign final_price = base_price | minus: discount -%}
+{%- else -%}
+  {%- assign discount = 0 -%}
+  {%- assign final_price = base_price -%}
+{%- endif -%}
+
+{%- comment -%} SAVE 显示优先级：discount_amount > product_discounts > compare_at_price {%- endcomment -%}
+{%- assign save_is_amount = false -%}
+{%- assign save_show_percent = false -%}
+{%- assign save_discount = 0 -%}
+{%- assign save_percent = 0 -%}
+{%- if discount_amount > 0 -%}
+  {%- assign save_discount = discount_amount | times: 100 -%}
+  {%- assign save_is_amount = true -%}
+{%- elsif percent > 0 -%}
+  {%- assign save_percent = percent -%}
+  {%- assign save_discount = base_price | times: percent | divided_by: 100 -%}
+  {%- if sale_rule_percent > 0 -%}
+    {%- assign save_discount = discount -%}
+  {%- endif -%}
+  {%- assign save_show_percent = true -%}
+{%- elsif compare_at > base_price -%}
+  {%- assign save_discount = compare_at | minus: base_price -%}
+  {%- assign save_percent = save_discount | times: 100 | divided_by: compare_at -%}
+{%- endif -%}
+
+{%- assign show_metafield_tip = false -%}
+{%- if discount_amount > 0 or percent > 0 -%}
+  {%- assign show_metafield_tip = true -%}
+{%- endif -%}
+{%- if save_discount > 0 and show_metafield_tip and parent_product.metafields.custom.promotion_tips != blank -%}
+  {%- assign custom_text = parent_product.metafields.custom.promotion_tips
+    | upcase
+    | remove: 'SAVE '
+    | remove: 'UP TO '
+    | remove: 'GET '
+    | append: ' AUTO-APPLIED. GO GET IT!'
+  -%}
+{%- endif -%}
+
+{% case position %}
+    {%- comment -%}产品页价格注释{%- endcomment -%}
+  {% when 'main-price-tips' %}
+    {%- if save_discount > 0 and show_metafield_tip and product.metafields.custom.promotion_tips != blank -%}
+      <div
+        style="margin-block-start: 0!important;"
+        class="flex flex-col"
+        id="XYProductPrice-{{ section.id }}-{{ product.id }}-main-price"
+      >
+        {%- if save_discount > 0 -%}
+          <div class="rte">
+            <span
+              class="text-sm font-bold leading-none text-white"
+              style="background:#fdf0ee;padding: .125rem .25rem;border-radius: .125rem;color:#c04a3a;"
+            >
+              SAVE {% if save_is_amount %}{{ save_discount | money_without_trailing_zeros }}{% else %}{{ save_discount | money }}{% endif %}
+            </span>
+          </div>
+          <span class="text-xs text-zinc-500" style="margin-top:4px;">
+            {{ custom_text }}
+          </span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%}产品页sticky button / Buy buttons 按钮内价格{%- endcomment -%}
+  {% when 'sticky-button' %}
+    {%- liquid
+      assign sale_price_font_size = sale_price_font_size | default: 18
+      assign compare_price_font_size = compare_price_font_size | default: 14
+      assign sale_price_font_size_mobile = sale_price_font_size_mobile | default: sale_price_font_size
+      assign compare_price_font_size_mobile = compare_price_font_size_mobile | default: compare_price_font_size
+      assign xy_buy_btn_price_id = 'XYProductPrice-' | append: section.id | append: '-' | append: product.id | append: '-sticky'
+    -%}
+    <div
+      style="margin-block-start: 0!important; --xy-bb-sale: {{ sale_price_font_size }}px; --xy-bb-compare: {{ compare_price_font_size }}px; --xy-bb-sale-m: {{ sale_price_font_size_mobile }}px; --xy-bb-compare-m: {{ compare_price_font_size_mobile }}px;"
+      class="flex items-baseline gap-1"
+      id="{{ xy_buy_btn_price_id }}"
+    >
+      {%- if discount > 0 -%}
+        <div class="rte xy-buy-btn-price__sale">
+          {{- final_price | money -}}
+        </div>
+        <s class="text-sm font-normal xy-buy-btn-price__compare">
+          {{- regular_price | money -}}
+        </s>
+      {%- else -%}
+        <div class="rte xy-buy-btn-price__sale">
+          {{- base_price | money -}}
+        </div>
+      {%- endif -%}
+    </div>
+    <style>
+      #{{ xy_buy_btn_price_id }} .xy-buy-btn-price__sale {
+        font-size: var(--xy-bb-sale-m) !important;
+      }
+      #{{ xy_buy_btn_price_id }} .xy-buy-btn-price__compare {
+        font-size: var(--xy-bb-compare-m);
+      }
+      @media screen and (min-width: 768px) {
+        #{{ xy_buy_btn_price_id }} .xy-buy-btn-price__sale {
+          font-size: var(--xy-bb-sale) !important;
+        }
+        #{{ xy_buy_btn_price_id }} .xy-buy-btn-price__compare {
+          font-size: var(--xy-bb-compare);
+        }
+      }
+    </style>
+
+    {%- comment -%}产品页价格模块{%- endcomment -%}
+  {% when 'app-product-price' %}
+    <div
+      style="margin-block-start: 0!important;"
+      class="flex flex-col"
+      id="XYProductPrice-{{ section.id }}-{{ product.id }}-main-product-price"
+    >
+      {%- if discount > 0 -%}
+        <div class="price price--on-sale flex flex-wrap items-baseline gap-2 lg:gap-1d5">
+          <span class="sr-only">Sale price</span>
+          <span class="price__regular whitespace-nowrap">
+            {{- final_price | money }}
+          </span>
+
+          <span class="sr-only">Regular price</span>
+          <span class="price__sale inline-flex items-center h-auto relative">
+            <s>{{- regular_price | money }}</s>
+          </span>
+        </div>
+
+      {%- else -%}
+        <div class="price flex flex-wrap items-baseline gap-2 lg:gap-1d5">
+          <span class="sr-only">Regular price</span>
+          <span class="price__regular whitespace-nowrap">
+            {{- base_price | money }}
+          </span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%}featured collection{%- endcomment -%}
+  {% when 'app-featured-collection-price' %}
+    <div
+      style="margin-block-start: 0!important;"
+      class="flex flex-col"
+      id="XYProductPrice-{{ section.id }}-{{ product.id }}-fc-price"
+    >
+      <div class="price-container text-left flex gap-0d5 items-center">
+        <p class="text-sm">From:</p>
+
+        {%- if discount > 0 -%}
+          <p class="sale-price font-medium text-base">
+            <span class="sr-only">Sale price</span>
+            {{- final_price | money }}
+          </p>
+          <p class="original-price text-base" style="color:#999;">
+            <span class="sr-only">Regular price</span>
+            <s>{{- regular_price | money }}</s>
+          </p>
+        {%- else -%}
+          <p class="sale-price font-medium text-base">
+            <span class="sr-only">Regular price</span>
+            {{- base_price | money }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+
+
+    {% when 'price-style-visual' %}
+  <div
+    style="margin-block-start: 0!important;"
+    class="flex flex-col gap-1"
+    id="XYProductPrice-{{ section.id }}-{{ product.id }}-visual-price"
+  >
+
+    {%- if discount > 0 -%}
+      <div class="flex items-baseline gap-2 flex-wrap">
+        <span class="text-3xl font-medium text-black">
+          {{ final_price | money }}
+        </span>
+
+        <s class="text-lg text-gray-400">
+          {{ regular_price | money }}
+        </s>
+
+        <span
+          class="text-xs font-bold"
+          style="background:#fdf0ee;color:#c04a3a;padding:4px 8px;border-radius:6px;"
+        >
+          {%- if save_badge_custom_label != blank -%}
+            {{ save_badge_custom_label }}
+          {%- else -%}
+            SAVE
+            {%- if save_is_amount -%}
+              {{ save_discount | money_without_trailing_zeros }}
+            {%- elsif save_show_percent -%}
+              {{ save_percent | round }}%
+            {%- else -%}
+              {{ save_discount | money }}
+            {%- endif -%}
+          {%- endif -%}
+        </span>
+      </div>
+
+      {%- if show_metafield_tip -%}
+        <div class="text-sm text-zinc-500">
+          discount auto-applied at checkout
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <span class="text-2xl font-bold text-black">
+        {{ base_price | money }}
+      </span>
+    {%- endif -%}
+
+  </div>
+{% endcase %}

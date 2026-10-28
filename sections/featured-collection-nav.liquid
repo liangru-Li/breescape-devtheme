@@ -1,0 +1,1484 @@
+{%- comment -%}
+  Featured collection 顶部导航
+  自动收集当前页面中所有开启了「加入顶部导航」开关的 Featured collection 模块，
+  按页面顺序生成图片 + 名称的 Tab，点击后平滑滚动定位到对应模块。
+
+  数据来源：每个 Featured collection 在开启开关后会输出
+  <script type="application/json" data-fc-nav-item> 数据（见 sections/featured-collection.liquid）。
+  因此本模块无需手动配置 Tab，新增/删除 Featured collection 会自动同步。
+{%- endcomment -%}
+
+{%- liquid
+  assign item_size = section.settings.item_size | default: 84
+  assign item_size_mobile = section.settings.item_size_mobile | default: 64
+  assign gap = section.settings.gap | default: 32
+  assign gap_mobile = section.settings.gap_mobile | default: 16
+  assign label_gap = section.settings.label_gap | default: 12
+  assign font_size = section.settings.label_font_size | default: 14
+  assign font_size_mobile = section.settings.label_font_size_mobile | default: 11
+  assign text_color = section.settings.label_color | default: '#10374B'
+  assign active_color = section.settings.active_color | default: '#10374B'
+  assign media_bg = section.settings.media_background | default: '#F2F2F2'
+
+  case section.settings.shape
+    when 'circle'
+      assign radius = '50%'
+    when 'rounded'
+      assign radius = '16px'
+    else
+      assign radius = '0px'
+  endcase
+
+  # 吸顶后上内距要收紧：卡片里只留 sticky_padding_top，余下的挪到区块外面
+  # （为什么这么分，见下方样式里的说明）
+  assign pad_top = section.settings.padding_top | default: 40
+  assign pad_top_inner = section.settings.sticky_padding_top | default: 5
+  if pad_top_inner > pad_top
+    assign pad_top_inner = pad_top
+  endif
+  assign pad_top_outer = pad_top | minus: pad_top_inner
+
+  # 横向滚动容器会裁掉超出内容框的部分，所以要为选中描边和 hover 上浮留出上下空间
+  assign clip_space = 3
+  if section.settings.active_style == 'ring'
+    assign ring_width = section.settings.active_ring_width | default: 2
+    assign ring_offset = section.settings.active_ring_offset | default: 0
+    assign clip_space = ring_width | plus: ring_offset | plus: 3
+  endif
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+
+  #FcNav-{{ section.id }} {
+    /* --fcnav-size-max：设置里的上限；--fcnav-size：实际渲染尺寸（JS 按屏宽自适应后写入） */
+    --fcnav-size-max: {{ item_size }}px;
+    --fcnav-size: {{ item_size }}px;
+    --fcnav-gap: {{ gap }}px;
+    --fcnav-label-gap: {{ label_gap }}px;
+    --fcnav-font: {{ font_size }}px;
+    --fcnav-weight: {{ section.settings.label_weight | default: '500' }};
+    --fcnav-weight-active: {{ section.settings.label_weight_active | default: '700' }};
+    --fcnav-color: {{ text_color }};
+    --fcnav-active: {{ active_color }};
+    --fcnav-radius: {{ radius }};
+    --fcnav-media-bg: {{ media_bg }};
+    --fcnav-clip: {{ clip_space }}px;
+    --fcnav-fit: {{ section.settings.image_fit | default: 'cover' }};
+  }
+
+  {%- if section.settings.sticky and pad_top_outer > 0 -%}
+    /* 上内距设到 60px 这种值时，整块留白会跟着一起吸上去，接洽后卡片被撑得很高。
+       所以卡片里只留一点点，余下的那段挪成区块的外边距：吸顶是按边框盒对齐吸附线的，
+       外边距不参与，卡片吸上去就是紧凑的；区块在文档流里的高度也没变，
+       Tab 相对卡片顶边的位置前后一致，贴上/离开的那一帧不会跳。
+       主题在 768px 以下会把内边距按 0.75 折算，这里跟着折算，未吸顶时的留白和设置值一致。 */
+    {%- if section.settings.sticky_mobile -%}
+      #shopify-section-{{ section.id }} {
+        --section-padding-top: {{ pad_top_inner }}px;
+        margin-block-start: calc({{ pad_top_outer }}px * 0.75);
+      }
+    {%- endif -%}
+
+    @media screen and (min-width: 768px) {
+      #shopify-section-{{ section.id }} {
+        --section-padding-top: {{ pad_top_inner }}px;
+        margin-block-start: {{ pad_top_outer }}px;
+      }
+    }
+  {%- endif -%}
+
+  /* Tab 由 JS 收集生成，收集到内容前先整体隐藏，避免出现只有留白的空区块 */
+  #shopify-section-{{ section.id }}:not([data-fc-nav-ready]) {
+    display: none;
+  }
+
+  /* 主题默认让区块背景往下多出一个 --border-radius 的高度（用来盖住下个区块的圆角），
+     导航条吸顶时这一截背景会压住正文标题，看起来就是多了一块调不掉的高度，这里去掉。 */
+  #shopify-section-{{ section.id }} .section::before {
+    height: 100%;
+  }
+
+  {%- if section.settings.sticky -%}
+    {%- capture sticky_rules -%}
+      /* 吸顶：贴在 header 下方。
+         --fcnav-sticky-top 由本模块的 JS 按 header 实际位置逐帧更新，
+         没有 JS 时退回主题自带的 --sticky-header-height（与 scroll-spy 一致）。 */
+      /* 19：比 header（20）低，保证不会盖住 header 和它的下拉菜单；
+         同时高于产品卡认证徽标等页面内容（这些用的是 10）。 */
+      #shopify-section-{{ section.id }} {
+        position: sticky;
+        z-index: 19;
+        inset-block-start: var(--fcnav-sticky-top, calc(var(--sticky-header-height, 0px) + {{ section.settings.sticky_offset }}px));
+      }
+
+      .header-hidden[data-sticky-type='on-scroll-up'] ~ .page-container #shopify-section-{{ section.id }} {
+        inset-block-start: var(--fcnav-sticky-top, {{ section.settings.sticky_offset }}px);
+      }
+
+      {%- if section.settings.sticky_match_header -%}
+        /* 吸顶时整条变成和 header 同一枚浮层胶囊：同宽、同底色与模糊、四角同圆角。
+           header 那条白条其实是 .header::before（左右按 --header-inset-x 内缩），
+           所以这里同样用 .section::before 当胶囊，几何与配色由 JS 直接量 header 得到
+           （见 syncHeaderSkin），商家改 header 的圆角/内缩/透明度都会自动跟着变。 */
+        #shopify-section-{{ section.id }}.is-stuck .section {
+          /* 胶囊之外要透出页面内容，所以区块自身不能再铺满底色 */
+          background: none;
+        }
+
+        #shopify-section-{{ section.id }}.is-stuck .section::before {
+          inset-inline-start: var(--fcnav-skin-left, 0px);
+          inset-inline-end: auto;
+          width: var(--fcnav-skin-width, 100%);
+          border-radius: var(--fcnav-skin-radius, 0px);
+          background: var(--fcnav-skin-bg, rgb(var(--color-background)));
+          -webkit-backdrop-filter: var(--fcnav-skin-filter, none);
+          backdrop-filter: var(--fcnav-skin-filter, none);
+        }
+
+        /* Tab 收进胶囊里，避免内容比背景还宽 */
+        #shopify-section-{{ section.id }}.is-stuck .page-width {
+          max-width: var(--fcnav-skin-width, 100%);
+          margin-inline: auto;
+        }
+
+        /* 顶部分割线是通栏细线，浮成胶囊后会露在外面，吸顶期间隐藏 */
+        #shopify-section-{{ section.id }}.is-stuck .section--divider::after {
+          display: none;
+        }
+
+        {%- if section.settings.sticky_join_header -%}
+          /* 接洽：吸顶时和 header 拼成一整张卡片，圆角只留最上和最下四个角。
+             关键是整张卡只能有一层磨砂：两层背景各自只模糊自己身下的内容，模糊又跨不过接缝，
+             接缝处就会出现一条清晰度和色调的断层（上半截透出徽标、下半截透出商品图）。
+             所以让导航这层往上罩住 header，同时让 header 自己那层不画底色，
+             整张卡的磨砂就是连续的。html 上的钩子类由本模块 JS 开关，
+             带上 section id 以免同一页放多个导航时互相影响。
+             下拉大菜单展开时 header 需要自己的实色底（主题会换成 #F9F9F9），
+             移动端抽屉打开时 header 会被提到更高层级，这两种状态下不接管它的背景。 */
+          html.fcnav-joined-{{ section.id }}:not(.menu-drawer-open) body:not(.has-dropdown-menu) .header-section .header::before {
+            background-color: transparent;
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+          }
+
+          #shopify-section-{{ section.id }}.is-stuck.is-joined .section::before {
+            inset-block-start: calc(var(--fcnav-join-top, 0px) * -1);
+            height: calc(100% + var(--fcnav-join-top, 0px));
+            border-start-start-radius: var(--fcnav-join-radius, 0px);
+            border-start-end-radius: var(--fcnav-join-radius, 0px);
+          }
+
+          /* 上面那两种状态下 header 用回自己的底色，这层就得把向上罩住的部分收回来，
+             不然 header 那行会叠上两层半透明白，亮度突然跳一下。 */
+          html.fcnav-joined-{{ section.id }}.menu-drawer-open #shopify-section-{{ section.id }}.is-stuck.is-joined .section::before,
+          body.has-dropdown-menu #shopify-section-{{ section.id }}.is-stuck.is-joined .section::before {
+            inset-block-start: 0;
+            height: 100%;
+            border-start-start-radius: var(--fcnav-skin-radius, 0px);
+            border-start-end-radius: var(--fcnav-skin-radius, 0px);
+          }
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if section.settings.sticky_shadow -%}
+        {%- if section.settings.sticky_match_header -%}
+          /* 阴影跟着胶囊走，而不是整条通栏 */
+          #shopify-section-{{ section.id }}.is-stuck .section::before {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+          }
+        {%- else -%}
+          #shopify-section-{{ section.id }}.is-stuck .section {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+          }
+        {%- endif -%}
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- if section.settings.sticky_mobile -%}
+      {{ sticky_rules }}
+    {%- else -%}
+      @media screen and (min-width: 768px) {
+        {{ sticky_rules }}
+      }
+    {%- endif -%}
+  {%- endif -%}
+
+  @media screen and (max-width: 767px) {
+    #FcNav-{{ section.id }} {
+      --fcnav-size-max: {{ item_size_mobile }}px;
+      --fcnav-size: {{ item_size_mobile }}px;
+      --fcnav-gap: {{ gap_mobile }}px;
+      --fcnav-font: {{ font_size_mobile }}px;
+    }
+  }
+
+  .fc-nav {
+    display: block;
+    position: relative;
+  }
+  .fc-nav[hidden] {
+    display: none;
+  }
+
+  .fc-nav__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y;
+    /* overflow 的裁剪边界是 padding 边，四周都留出这点空间，
+       选中描边和 hover 上浮才不会被切掉（首尾两个 Tab 的描边最容易被切）。
+       左右留白用负 margin 抵消，保证 Tab 仍与页面内容对齐。 */
+    padding: var(--fcnav-clip);
+    margin-inline: calc(var(--fcnav-clip) * -1);
+  }
+  .fc-nav__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fc-nav__track {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--fcnav-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: max-content;
+    min-width: 100%;
+    /* 内容比容器窄时按对齐方式分布；内容超出时 max-content 会吃掉剩余空间，
+       分布自然失效、从左开始，横向滚动不受影响 */
+    justify-content: center;
+  }
+  .fc-nav--left .fc-nav__track {
+    justify-content: flex-start;
+  }
+
+  .fc-nav__item {
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
+  /* 自适应：桌面按内容宽度 + 设置间距排列；移动端多于 3 个时一屏 3.5 个、手指滑动 */
+  .fc-nav.is-adaptive.is-mobile-pack .fc-nav__item {
+    flex: 0 0 var(--fcnav-item-width);
+    width: var(--fcnav-item-width);
+    max-width: var(--fcnav-item-width);
+  }
+  .fc-nav.is-adaptive.is-mobile-pack .fc-nav__link {
+    width: 100%;
+  }
+  /* 名称单行，超出截断成省略号。
+     移动端锁成格子宽；桌面端锁成图片宽，Tab 才不会被长名称撑开，
+     圆图之间的空隙才是设置里的 Tab 间距。 */
+  .fc-nav.is-adaptive.is-mobile-pack .fc-nav__label,
+  .fc-nav.is-adaptive.is-label-clamp .fc-nav__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fc-nav.is-adaptive.is-mobile-pack .fc-nav__label {
+    width: 100%;
+  }
+  .fc-nav.is-adaptive.is-label-clamp .fc-nav__label {
+    width: var(--fcnav-size);
+  }
+  /* 宽度已锁死，不再需要用 ::after 预占加粗宽度 */
+  .fc-nav.is-adaptive.is-mobile-pack .fc-nav__label::after,
+  .fc-nav.is-adaptive.is-label-clamp .fc-nav__label::after {
+    display: none;
+  }
+
+  @media screen and (min-width: 768px) {
+    /* iPad ~ 大屏：间距用设置值，必要时缩小图片以保证全部可见。
+       宽度锁定为容器宽，这样有剩余空间时能按对齐方式分布，
+       超宽时子项溢出，updateLayout 才能用 scrollWidth 量出需要缩小。 */
+    .fc-nav.is-adaptive .fc-nav__track {
+      max-width: 100%;
+    }
+    /* 桌面端左右留白固定为描边空间，不随箭头出现而变，
+       否则可用宽度变化会和缩放计算来回拉锯 */
+    .fc-nav.is-adaptive .fc-nav__viewport,
+    .fc-nav.is-adaptive.is-overflow .fc-nav__viewport {
+      overflow-x: hidden;
+      padding-inline: var(--fcnav-clip);
+      margin-inline: calc(var(--fcnav-clip) * -1);
+    }
+    /* 名称始终按图片宽度截断。不截断的话长名称会把 Tab 撑宽，
+       圆图间距就不是设置值，而且长短名称会让间距看起来不齐。 */
+    .fc-nav.is-adaptive .fc-nav__label {
+      width: var(--fcnav-size);
+      max-width: var(--fcnav-size);
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .fc-nav.is-adaptive .fc-nav__label::after {
+      display: none;
+    }
+  }
+
+  .fc-nav__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--fcnav-label-gap);
+    text-decoration: none;
+    color: var(--fcnav-color);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .fc-nav__media {
+    display: block;
+    width: var(--fcnav-size);
+    height: var(--fcnav-size);
+    border-radius: var(--fcnav-radius);
+    background: var(--fcnav-media-bg);
+    overflow: hidden;
+    flex: 0 0 auto;
+    transition: outline-color 0.2s ease, transform 0.2s ease;
+  }
+  .fc-nav__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: var(--fcnav-fit);
+  }
+
+  .fc-nav__label {
+    display: block;
+    font-size: var(--fcnav-font);
+    font-weight: var(--fcnav-weight);
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* 用一份不可见的加粗副本把「加粗后」的宽度先占住，
+     这样切换选中时 Tab 宽度不变，整排不会左右抖动 */
+  .fc-nav__label::after {
+    content: attr(data-text);
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    font-weight: var(--fcnav-weight-active);
+    white-space: nowrap;
+  }
+
+  .fc-nav__link:hover .fc-nav__media {
+    transform: translateY(-2px);
+  }
+  .fc-nav__link:hover .fc-nav__label {
+    color: var(--fcnav-active);
+  }
+
+  /* 选中：名称变色 + 加粗；未选中沿用「名称字重」设置（默认中等，不加粗） */
+  .fc-nav__link[aria-current='true'] .fc-nav__label {
+    color: var(--fcnav-active);
+    font-weight: var(--fcnav-weight-active);
+  }
+
+  {%- case section.settings.active_style -%}
+    {%- when 'ring' -%}
+      .fc-nav__link[aria-current='true'] .fc-nav__media {
+        outline: {{ section.settings.active_ring_width | default: 2 }}px solid var(--fcnav-active);
+        outline-offset: {{ section.settings.active_ring_offset | default: 0 }}px;
+      }
+    {%- when 'underline' -%}
+      .fc-nav__label {
+        /* 始终预留下划线的位置，选中时才上色，避免切换时高度跳动 */
+        padding-block-end: 5px;
+        border-block-end: 2px solid transparent;
+      }
+      .fc-nav__link[aria-current='true'] .fc-nav__label {
+        border-block-end-color: var(--fcnav-active);
+      }
+    {%- when 'none' -%}
+      .fc-nav__link[aria-current='true'] .fc-nav__label {
+        color: var(--fcnav-color);
+        font-weight: var(--fcnav-weight);
+      }
+  {%- endcase -%}
+
+  .fc-nav__arrow {
+    position: absolute;
+    top: calc(var(--fcnav-clip) + var(--fcnav-size) / 2);
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid rgba(16, 55, 75, 0.12);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--fcnav-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: opacity 0.2s ease, background 0.2s ease;
+  }
+  .fc-nav__arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+  .fc-nav__arrow--prev {
+    left: 0;
+  }
+  .fc-nav__arrow--next {
+    right: 0;
+  }
+  .fc-nav__arrow:hover {
+    background: #fff;
+  }
+  .fc-nav__arrow[disabled] {
+    opacity: 0.35;
+    cursor: default;
+  }
+  .fc-nav__arrow[hidden] {
+    display: none;
+  }
+
+  .fc-nav.is-overflow .fc-nav__viewport {
+    padding-inline: 40px;
+    margin-inline: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    {%- unless section.settings.show_arrows -%}
+      .fc-nav__arrow {
+        display: none !important;
+      }
+      .fc-nav.is-overflow .fc-nav__viewport {
+        padding-inline: var(--fcnav-clip);
+        margin-inline: calc(var(--fcnav-clip) * -1);
+      }
+    {%- endunless -%}
+  }
+
+  @media screen and (max-width: 767px) {
+    /* 移动端不放左右按钮，手指滑动；视口拉满，才能露出第 4 个的一半 */
+    .fc-nav__arrow {
+      display: none !important;
+    }
+    .fc-nav.is-overflow .fc-nav__viewport {
+      padding-inline: var(--fcnav-clip);
+      margin-inline: calc(var(--fcnav-clip) * -1);
+    }
+  }
+
+  .fc-nav__empty {
+    margin: 0;
+    padding: 16px;
+    border: 1px dashed rgba(16, 55, 75, 0.3);
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    color: rgba(16, 55, 75, 0.7);
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %}">
+    <fc-collection-nav
+      id="FcNav-{{ section.id }}"
+      class="fc-nav fc-nav--{{ section.settings.alignment }}"
+      data-scroll-offset="{{ section.settings.scroll_offset }}"
+      data-follow-scroll="{{ section.settings.follow_scroll }}"
+      data-sticky="{{ section.settings.sticky }}"
+      data-sticky-mobile="{{ section.settings.sticky_mobile }}"
+      data-sticky-offset="{{ section.settings.sticky_offset }}"
+      data-match-header="{{ section.settings.sticky_match_header }}"
+      data-join-header="{{ section.settings.sticky_join_header }}"
+      data-show-arrows="{{ section.settings.show_arrows }}"
+      role="navigation"
+      aria-label="{{ section.settings.aria_label | default: 'Featured collections' | escape }}"
+      hidden
+    >
+      <button class="fc-nav__arrow fc-nav__arrow--prev" type="button" data-fc-nav-prev aria-label="{{ 'general.pagination.previous' | t | escape }}" hidden>
+        {%- render 'icon', icon: 'chevron-left' -%}
+      </button>
+
+      <div class="fc-nav__viewport" data-fc-nav-viewport>
+        <ul class="fc-nav__track" data-fc-nav-track role="list"></ul>
+      </div>
+
+      <button class="fc-nav__arrow fc-nav__arrow--next" type="button" data-fc-nav-next aria-label="{{ 'general.pagination.next' | t | escape }}" hidden>
+        {%- render 'icon', icon: 'chevron-right' -%}
+      </button>
+    </fc-collection-nav>
+
+    {%- if request.design_mode -%}
+      <p class="fc-nav__empty" data-fc-nav-empty hidden>
+        还没有可显示的 Tab：请在需要衔接的每个「Featured collection」模块里打开「加入顶部导航」开关，并设置 Tab 名称与图片。
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    if (window.customElements.get('fc-collection-nav')) return;
+
+    class FeaturedCollectionNav extends HTMLElement {
+      connectedCallback() {
+        this.viewport = this.querySelector('[data-fc-nav-viewport]');
+        this.track = this.querySelector('[data-fc-nav-track]');
+        this.prev = this.querySelector('[data-fc-nav-prev]');
+        this.next = this.querySelector('[data-fc-nav-next]');
+        this.wrapper = this.closest('[id^="shopify-section-"]');
+        this.sectionEl = this.closest('.section');
+        this.hint = this.wrapper ? this.wrapper.querySelector('[data-fc-nav-empty]') : null;
+        this.designMode = !!(window.Shopify && window.Shopify.designMode);
+        this.followScroll = this.dataset.followScroll !== 'false';
+
+        this.targets = [];
+        this.onArrowClick = this.onArrowClick.bind(this);
+        this.onLinkClick = this.onLinkClick.bind(this);
+        this.onViewportScroll = this.onViewportScroll.bind(this);
+        this.onPageScroll = this.onPageScroll.bind(this);
+        this.cancelJump = this.cancelJump.bind(this);
+        this.refresh = this.refresh.bind(this);
+        this.updateLayout = this.updateLayout.bind(this);
+        this.updateArrows = this.updateArrows.bind(this);
+
+        if (this.prev) this.prev.addEventListener('click', this.onArrowClick);
+        if (this.next) this.next.addEventListener('click', this.onArrowClick);
+        this.track.addEventListener('click', this.onLinkClick);
+        this.viewport.addEventListener('scroll', this.updateArrows, { passive: true });
+        this.viewport.addEventListener('scroll', this.onViewportScroll, { passive: true });
+        window.addEventListener('resize', this.updateLayout);
+
+        if ('ResizeObserver' in window) {
+          this.resizeObserver = new ResizeObserver(this.updateLayout);
+          this.resizeObserver.observe(this.viewport);
+        }
+
+        window.addEventListener('scroll', this.onPageScroll, { passive: true });
+        window.addEventListener('resize', this.onPageScroll);
+        document.addEventListener('header:scrolled', this.onPageScroll);
+
+        // 用户自己动了滚轮/手指就放弃程序化跳转，避免互相打架
+        window.addEventListener('wheel', this.cancelJump, { passive: true });
+        window.addEventListener('touchstart', this.cancelJump, { passive: true });
+
+        // 本模块通常排在 Featured collection 之前，解析时后面的模块还未进入 DOM，
+        // 因此等文档就绪后再收集数据。
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', this.refresh, { once: true });
+        } else {
+          this.refresh();
+        }
+        window.addEventListener('load', this.refresh);
+
+        if (this.designMode) {
+          document.addEventListener('shopify:section:load', this.refresh);
+          document.addEventListener('shopify:section:unload', this.refresh);
+          document.addEventListener('shopify:section:reorder', this.refresh);
+        }
+      }
+
+      disconnectedCallback() {
+        window.removeEventListener('resize', this.updateLayout);
+        window.removeEventListener('load', this.refresh);
+        window.removeEventListener('scroll', this.onPageScroll);
+        window.removeEventListener('resize', this.onPageScroll);
+        window.removeEventListener('wheel', this.cancelJump);
+        window.removeEventListener('touchstart', this.cancelJump);
+        document.removeEventListener('header:scrolled', this.onPageScroll);
+        document.removeEventListener('shopify:section:load', this.refresh);
+        document.removeEventListener('shopify:section:unload', this.refresh);
+        document.removeEventListener('shopify:section:reorder', this.refresh);
+        if (this.tickFrame) cancelAnimationFrame(this.tickFrame);
+        if (this.jumpFrame) cancelAnimationFrame(this.jumpFrame);
+        if (this.resizeObserver) this.resizeObserver.disconnect();
+        // 钩子类挂在 html 上，模块被移除（换模板、编辑器里删区块）时必须自己收走
+        if (this.joinedClass) document.documentElement.classList.remove(this.joinedClass);
+      }
+
+      get scrollOffset() {
+        return parseInt(this.dataset.scrollOffset, 10) || 0;
+      }
+
+      collect() {
+        const nodes = document.querySelectorAll('script[type="application/json"][data-fc-nav-item]');
+        const items = [];
+        const seen = new Set();
+
+        nodes.forEach((node) => {
+          let data;
+          try {
+            data = JSON.parse(node.textContent);
+          } catch (error) {
+            return;
+          }
+          if (!data || !data.target || seen.has(data.target)) return;
+          if (!document.getElementById(data.target)) return;
+          if (!data.label && !data.image) return;
+          seen.add(data.target);
+          items.push(data);
+        });
+
+        return items;
+      }
+
+      refresh() {
+        const items = this.collect();
+        const signature = items.map((item) => [item.target, item.label, item.image].join('|')).join('~');
+
+        if (signature !== this.signature) {
+          this.signature = signature;
+          this.render(items);
+        }
+
+        this.targets = items.map((item) => document.getElementById(item.target)).filter(Boolean);
+        requestAnimationFrame(this.updateLayout);
+        this.onPageScroll();
+      }
+
+      render(items) {
+        this.track.textContent = '';
+        this.activeId = null;
+
+        items.forEach((item) => {
+          const li = document.createElement('li');
+          li.className = 'fc-nav__item';
+
+          const link = document.createElement('a');
+          link.className = 'fc-nav__link';
+          link.href = '#' + item.target;
+          link.dataset.target = item.target;
+
+          const media = document.createElement('span');
+          media.className = 'fc-nav__media';
+          if (item.image) {
+            const img = document.createElement('img');
+            img.src = item.image;
+            img.alt = item.alt || item.label || '';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            media.appendChild(img);
+          }
+          link.appendChild(media);
+
+          if (item.label) {
+            const label = document.createElement('span');
+            label.className = 'fc-nav__label';
+            label.textContent = item.label;
+            // 供 ::after 预留加粗后的宽度，避免选中时 Tab 宽度变化
+            label.dataset.text = item.label;
+            link.appendChild(label);
+          }
+
+          li.appendChild(link);
+          this.track.appendChild(li);
+        });
+
+        const isEmpty = items.length === 0;
+        this.hidden = isEmpty;
+        if (this.hint) this.hint.hidden = !isEmpty;
+
+        if (this.wrapper) {
+          if (isEmpty && !this.designMode) {
+            this.wrapper.removeAttribute('data-fc-nav-ready');
+          } else {
+            this.wrapper.setAttribute('data-fc-nav-ready', '');
+          }
+        }
+
+        this.updateLayout();
+      }
+
+      // 桌面/平板：左对齐，间距用设置值；空间不够时缩小图片，保证全部可见。
+      // 移动端：多于 3 个时一屏排 3.5 个，露出下一个的一半，提示可以滑动。
+      updateLayout() {
+        if (this.hidden || !this.viewport || !this.track) return;
+
+        const count = this.track.children.length;
+        if (!count) return;
+
+        const styles = getComputedStyle(this);
+        const gap = parseFloat(styles.getPropertyValue('--fcnav-gap')) || 0;
+        const clip = parseFloat(styles.getPropertyValue('--fcnav-clip')) || 0;
+        const maxSize = parseFloat(styles.getPropertyValue('--fcnav-size-max')) || 84;
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        const visible = 3;
+
+        this.classList.add('is-adaptive');
+        this.classList.toggle('is-mobile-pack', isMobile);
+        this.classList.remove('is-label-clamp');
+
+        if (isMobile) {
+          const available = Math.max(0, this.viewport.clientWidth - clip * 2);
+          // 多于 3 个：3 个完整 + 半个下一个。半个前面还有一条间距。
+          const peek = count > visible;
+          const columns = peek ? 3.5 : Math.max(1, count);
+          const gaps = peek ? 3 : Math.max(0, columns - 1);
+          const itemWidth = Math.max(1, (available - gap * gaps) / columns);
+          const size = Math.max(24, Math.min(maxSize, Math.floor(itemWidth)));
+
+          this.style.setProperty('--fcnav-item-width', itemWidth + 'px');
+          this.style.setProperty('--fcnav-size', size + 'px');
+        } else {
+          // 先按最大尺寸排，再按「设置间距」测是否超出；超出才缩小，不均分整行
+          this.style.removeProperty('--fcnav-item-width');
+          this.style.setProperty('--fcnav-size', maxSize + 'px');
+
+          const available = Math.max(0, this.viewport.clientWidth - clip * 2);
+          // 名称已锁成图片宽，这里量到的是「图片 + 设置间距」是否放得下
+          const needed = this.track.scrollWidth;
+
+          if (needed > available + 2) {
+            const size = Math.max(40, Math.min(maxSize, Math.floor((available - gap * (count - 1)) / count)));
+            this.style.setProperty('--fcnav-size', size + 'px');
+            this.classList.add('is-label-clamp');
+          }
+        }
+
+        this.updateArrows();
+        this.syncHeaderSkin();
+      }
+
+      updateArrows() {
+        if (this.hidden) return;
+        const viewport = this.viewport;
+        // overflow: hidden 的容器仍可用 scrollLeft 程序化滚动，
+        // 所以桌面端极端数量下也能靠箭头看到后面的 Tab
+        const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+        const overflow = maxScroll > 2;
+
+        this.classList.toggle('is-overflow', overflow);
+
+        [this.prev, this.next].forEach((button) => {
+          if (button) button.hidden = !overflow;
+        });
+
+        if (!overflow) {
+          if (viewport.scrollLeft) viewport.scrollLeft = 0;
+          return;
+        }
+        if (this.prev) this.prev.disabled = viewport.scrollLeft <= 1;
+        if (this.next) this.next.disabled = viewport.scrollLeft >= maxScroll - 1;
+      }
+
+      onArrowClick(event) {
+        const direction = event.currentTarget === this.prev ? -1 : 1;
+        const styles = getComputedStyle(this);
+        const itemWidth = parseFloat(styles.getPropertyValue('--fcnav-item-width')) || 0;
+        const gap = parseFloat(styles.getPropertyValue('--fcnav-gap')) || 0;
+        // 移动端按「一格」滑动，对齐下一组可见 Tab
+        const amount = itemWidth > 0
+          ? itemWidth + gap
+          : Math.max(this.viewport.clientWidth * 0.75, 120);
+        this.viewport.scrollBy({ left: direction * amount, behavior: 'smooth' });
+      }
+
+      onLinkClick(event) {
+        const link = event.target.closest('.fc-nav__link');
+        if (!link) return;
+
+        const target = document.getElementById(link.dataset.target);
+        if (!target) return;
+
+        event.preventDefault();
+        this.scrollToTarget(target);
+      }
+
+      // 判定基准线：视口顶部往下多少像素处算「当前区块的开始」。
+      // 点击跳转和选中判定共用这一条线，两者才不会互相错位。
+      activeLine() {
+        let line = this.scrollOffset + this.stickyHeaderHeight();
+        // 吸顶时导航条本身（含它与 header 之间的间距）也会盖住目标区块顶部，需要一并让出来
+        if (this.stickyEnabled && this.wrapper) {
+          line += this.wrapper.getBoundingClientRect().height + this.stickyGap();
+        }
+        return line;
+      }
+
+      desiredScrollTop(target) {
+        const top = target.getBoundingClientRect().top + window.pageYOffset - this.activeLine();
+        const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        return Math.max(0, Math.min(top, max));
+      }
+
+      // 自己做补间而不用原生 smooth：每一帧都重新测量目标位置，
+      // 这样滚动过程中 header 收缩、图片/评分加载等造成的位移都能被抵消，最后再校正一次确保精确落位。
+      scrollToTarget(target) {
+        this.cancelJump();
+        this.jumpTargetId = target.id;
+        this.setActive(target.id);
+
+        const startY = window.pageYOffset;
+        const startTime = performance.now();
+        const duration = 480;
+        const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+        const step = (now) => {
+          const progress = Math.min(1, (now - startTime) / duration);
+          const desired = this.desiredScrollTop(target);
+
+          window.scrollTo(0, startY + (desired - startY) * ease(progress));
+
+          if (progress < 1) {
+            this.jumpFrame = requestAnimationFrame(step);
+            return;
+          }
+
+          window.scrollTo(0, this.desiredScrollTop(target));
+          this.jumpFrame = null;
+          this.jumpTargetId = null;
+        };
+
+        this.jumpFrame = requestAnimationFrame(step);
+      }
+
+      cancelJump() {
+        if (this.jumpFrame) cancelAnimationFrame(this.jumpFrame);
+        this.jumpFrame = null;
+        this.jumpTargetId = null;
+      }
+
+      onViewportScroll() {
+        this.userScrolledAt = Date.now();
+      }
+
+      // 吸顶 header 的完整高度，用于点击跳转时预留空间。
+      // 这里取整体高度而不是当前可见高度：宁可少滚一点，也不让目标区块被 header 盖住。
+      stickyHeaderHeight() {
+        const headerSection = document.querySelector('.header-section');
+        if (!headerSection) return 0;
+
+        const position = window.getComputedStyle(headerSection).position;
+        const isSticky =
+          headerSection.classList.contains('header-sticky') || position === 'fixed' || position === 'sticky';
+        if (!isSticky) return 0;
+
+        const header = headerSection.querySelector('header.header') || headerSection;
+        // 加上上内缩：白条下沿比 header 自身高度更低，跳转落点要按下沿算
+        return (header.getBoundingClientRect().height || 0) + (this.headerInsetY || 0);
+      }
+
+      get stickyEnabled() {
+        if (this.dataset.sticky !== 'true') return false;
+        if (this.dataset.stickyMobile !== 'false') return true;
+        return window.matchMedia('(min-width: 768px)').matches;
+      }
+
+      // 吸顶时让整条长成 header 那枚浮层胶囊：同宽、同底色与模糊、四角同圆角。
+      // header 的白条其实是 .header::before（左右各内缩 --header-inset-x），几何按它量，
+      // 商家在 header 设置里改圆角/内缩/透明度/模糊，导航吸顶后会自动跟着变。
+      syncHeaderSkin() {
+        if (!this.wrapper || this.dataset.matchHeader !== 'true') return;
+
+        const headerSection = document.querySelector('.header-section');
+        const header = headerSection && headerSection.querySelector('header.header');
+        if (!header) return;
+
+        const headerStyles = getComputedStyle(headerSection);
+        const pill = getComputedStyle(header, '::before');
+        const insetX = parseFloat(headerStyles.getPropertyValue('--header-inset-x')) || 0;
+        const radius = (
+          headerStyles.getPropertyValue('--header-radius-bottom') ||
+          headerStyles.getPropertyValue('--header-radius') ||
+          ''
+        ).trim();
+        // 缓存起来给 stickyGap 用，避免逐帧读样式
+        this.headerInsetY = parseFloat(headerStyles.getPropertyValue('--header-inset-y')) || 0;
+        const headerRect = header.getBoundingClientRect();
+        const base = (this.sectionEl || this.wrapper).getBoundingClientRect();
+
+        // 底色和模糊都按 header 的变量自己拼，别去量 .header::before 的实时值：
+        // 接洽期间那层是被我们按掉的（见上面的 CSS），量回来会是 transparent / none，
+        // 一旦这期间又同步一次，整条就只剩白纱、磨砂全没了。
+        const blur = headerStyles.getPropertyValue('--header-blur').trim();
+        const rgb = headerStyles.getPropertyValue('--color-background').trim().replace(/,/g, ' ');
+        const alpha = parseFloat(headerStyles.getPropertyValue('--header-bg-alpha'));
+        let filter = blur ? 'blur(' + blur + ')' : '';
+        let bg = rgb ? 'rgb(' + rgb + ' / ' + (isNaN(alpha) ? 1 : alpha) + ')' : '';
+
+        // 变量取不到（header 换了写法）才退回量 ::before，并且只认没被按掉的值
+        if (!filter) {
+          const measured = pill.backdropFilter || pill.webkitBackdropFilter || '';
+          filter = measured && measured !== 'none' ? measured : 'none';
+        }
+        if (!bg) {
+          const measured = pill.backgroundColor;
+          bg =
+            measured && measured !== 'transparent' && !/,\s*0\)\s*$/.test(measured)
+              ? measured
+              : 'rgb(255 255 255 / 0.75)';
+        }
+
+        this.wrapper.style.setProperty('--fcnav-skin-left', headerRect.left + insetX - base.left + 'px');
+        this.wrapper.style.setProperty('--fcnav-skin-width', Math.max(0, headerRect.width - insetX * 2) + 'px');
+        this.wrapper.style.setProperty('--fcnav-skin-radius', radius || '0px');
+        this.wrapper.style.setProperty('--fcnav-skin-bg', bg);
+        this.wrapper.style.setProperty('--fcnav-skin-filter', filter);
+        // 接洽时整张卡的上两角，用 header 自己的上圆角
+        this.wrapper.style.setProperty(
+          '--fcnav-join-radius',
+          headerStyles.getPropertyValue('--header-radius-top').trim() || radius || '0px'
+        );
+      }
+
+      // header 白条的盒子。吸附位置要按它的下沿算，不能拿 header 自身高度代替：
+      // 它带上下内缩（--header-inset-y）时下沿比高度更低，用高度会让导航往上顶进 header 里，
+      // 两层半透明白叠在一起会把中间的内容洗成一条灰带。
+      headerPillRect() {
+        const headerSection = document.querySelector('.header-section');
+        if (!headerSection) return null;
+
+        const header = headerSection.querySelector('header.header') || headerSection;
+        return header.getBoundingClientRect();
+      }
+
+      // header 的显示/隐藏是 CSS 过渡（主题里 --animation-nav 为 0.5s），过渡期间不会有 scroll 事件，
+      // 所以停止滚动后再多跟随约 0.8 秒，避免导航条停在过渡中途的位置。
+      onPageScroll() {
+        this.tickFramesLeft = 48;
+        if (this.tickFrame) return;
+
+        const step = () => {
+          if (this.dataset.sticky === 'true') this.updateSticky();
+          this.updateActive();
+          this.tickFramesLeft -= 1;
+          this.tickFrame = this.tickFramesLeft > 0 ? requestAnimationFrame(step) : null;
+        };
+
+        this.tickFrame = requestAnimationFrame(step);
+      }
+
+      // 与 header 的间距：留空（0）且开着「同款」时，自动取 header 自己的上下内缩值，
+      // 两枚胶囊之间的留白就和 header 距屏幕顶部的留白一样；header 通栏（内缩 0）时则紧贴，正合适。
+      stickyGap() {
+        if (this.isJoined) return 0; // 要和 header 拼成一整块，中间不能留缝
+
+        const gap = parseInt(this.dataset.stickyOffset, 10) || 0;
+        if (gap > 0 || this.dataset.matchHeader !== 'true') return gap;
+        return this.headerInsetY || 0;
+      }
+
+      get joinEnabled() {
+        return this.dataset.matchHeader === 'true' && this.dataset.joinHeader === 'true';
+      }
+
+      updateSticky() {
+        if (!this.wrapper || this.hidden) return;
+
+        const rect = this.headerPillRect();
+        const bottom = rect ? Math.max(0, rect.bottom) : 0;
+        // header 还看得见才谈得上接洽；它被滚动隐藏时导航自己浮着，四角圆角照旧。
+        // 这一步只决定「该不该留缝」（见 stickyGap），故意不掺入下面滑出容器的判定：
+        // 吸附位置不能跟着接洽状态来回变，否则临界点上会抖一下。
+        this.isJoined = this.joinEnabled && bottom > 1;
+
+        const top = bottom + this.stickyGap();
+
+        this.wrapper.style.setProperty('--fcnav-sticky-top', top + 'px');
+        // 往上罩住 header 的那一段：header 滚动中会收缩，所以每帧都重新量
+        if (this.isJoined) this.wrapper.style.setProperty('--fcnav-join-top', rect.height + 'px');
+
+        // 读 rect 会先刷新样式，所以量到的是刚写进去的吸附位置生效后的结果。
+        // 比吸附线还高说明它已经被自己所在容器（main）的底边顶着往上走了 —— 页面滚到最后一个
+        // 区块之后就会这样。这时它罩不住 header 了，必须让 header 把磨砂底色拿回去，
+        // 否则整条 header 会变透明，正文从 logo 和图标中间穿过去。
+        const drift = this.wrapper.getBoundingClientRect().top - top;
+        const stuck = this.stickyEnabled && window.pageYOffset > 1 && drift <= 1;
+
+        // 刚贴上去的那一帧再量一次 header，值取自 header 当前的真实状态（圆角在滚动后才出现）
+        if (stuck && !this.isStuck) this.syncHeaderSkin();
+        this.isStuck = stuck;
+        this.wrapper.classList.toggle('is-stuck', stuck);
+        this.setJoined(stuck && this.isJoined && drift >= -1);
+      }
+
+      // 抹平 header 下方圆角要改的是 header 自己的样式，只能靠挂在 html 上的钩子类去命中
+      setJoined(on) {
+        if (this.joinedClass === undefined) {
+          this.joinedClass = 'fcnav-joined-' + (this.wrapper ? this.wrapper.id.replace('shopify-section-', '') : '');
+        }
+        if (this.joinedNow === on) return;
+        this.joinedNow = on;
+        this.wrapper.classList.toggle('is-joined', on);
+        document.documentElement.classList.toggle(this.joinedClass, on);
+      }
+
+      // 按基准线所在的区块决定高亮，而不是靠 IntersectionObserver 的触发顺序，
+      // 这样区块长短不一时结果也是确定的，且和点击跳转的落点完全一致。
+      updateActive() {
+        if (this.hidden || !this.targets.length) return;
+        if (this.jumpTargetId) return; // 跳转过程中以点击的那个为准
+
+        const line = this.activeLine() + 2;
+        const atBottom = window.pageYOffset + window.innerHeight >= document.documentElement.scrollHeight - 2;
+        let current = null;
+
+        this.targets.forEach((target) => {
+          const rect = target.getBoundingClientRect();
+          // 取最后一个已经越过基准线的区块；页面滚到底时放宽为「已经进入视口」，
+          // 否则最后一个区块在页面滚不动的情况下永远高亮不到。
+          if (rect.top <= line || (atBottom && rect.top < window.innerHeight)) current = target.id;
+        });
+
+        this.setActive(current || this.targets[0].id);
+      }
+
+      setActive(targetId) {
+        if (this.activeId === targetId) return;
+        this.activeId = targetId;
+
+        let active = null;
+
+        this.track.querySelectorAll('.fc-nav__link').forEach((link) => {
+          const isActive = link.dataset.target === targetId;
+          if (isActive) {
+            link.setAttribute('aria-current', 'true');
+            active = link;
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+
+        if (active && this.followScroll) this.revealActive(active);
+      }
+
+      revealActive(link) {
+        const viewport = this.viewport;
+        if (viewport.scrollWidth <= viewport.clientWidth + 2) return;
+        if (this.userScrolledAt && Date.now() - this.userScrolledAt < 1200) return;
+
+        const viewportRect = viewport.getBoundingClientRect();
+        const linkRect = link.getBoundingClientRect();
+        if (linkRect.left >= viewportRect.left && linkRect.right <= viewportRect.right) return;
+
+        viewport.scrollBy({
+          left: linkRect.left - viewportRect.left - (viewportRect.width - linkRect.width) / 2,
+          behavior: 'smooth',
+        });
+      }
+    }
+
+    window.customElements.define('fc-collection-nav', FeaturedCollectionNav);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Featured collection 导航",
+  "tag": "section",
+  "class": "featured-collection-nav-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "本模块会自动收集页面中已打开「加入顶部导航」开关的 Featured collection，并按页面顺序生成 Tab。请把本模块放在第一个 Featured collection 上方，然后到每个 Featured collection 里打开开关、设置 Tab 名称与图片（开关默认关闭，未开启时本模块不会显示）。"
+    },
+    {
+      "type": "header",
+      "content": "Tab 尺寸"
+    },
+    {
+      "type": "range",
+      "id": "item_size",
+      "label": "图片最大尺寸（桌面端）",
+      "info": "iPad 及以上按「Tab 间距」排列；空间不够时自动缩小，最大不超过此值。",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 160
+    },
+    {
+      "type": "range",
+      "id": "item_size_mobile",
+      "label": "图片最大尺寸（移动端）",
+      "info": "移动端一屏固定显示 3 个 Tab，可左右滑动切换；图片不超过此值。",
+      "min": 32,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "select",
+      "id": "shape",
+      "label": "图片形状",
+      "options": [
+        {
+          "value": "circle",
+          "label": "圆形"
+        },
+        {
+          "value": "rounded",
+          "label": "圆角"
+        },
+        {
+          "value": "square",
+          "label": "方形"
+        }
+      ],
+      "default": "circle"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "图片填充方式",
+      "options": [
+        {
+          "value": "cover",
+          "label": "裁剪填满（cover）"
+        },
+        {
+          "value": "contain",
+          "label": "完整显示（contain）"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Tab 间距（桌面端）",
+      "min": 8,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Tab 间距（移动端）",
+      "min": 6,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "label_gap",
+      "label": "图片与名称间距",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "名称样式"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "名称字号（桌面端）",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "label_font_size_mobile",
+      "label": "名称字号（移动端）",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "select",
+      "id": "label_weight",
+      "label": "名称字重",
+      "options": [
+        {
+          "value": "400",
+          "label": "常规"
+        },
+        {
+          "value": "500",
+          "label": "中等"
+        },
+        {
+          "value": "600",
+          "label": "半粗"
+        },
+        {
+          "value": "700",
+          "label": "加粗"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "label_weight_active",
+      "label": "选中时名称字重",
+      "info": "只有选中的 Tab 用这个字重，未选中的用上面的「名称字重」。",
+      "options": [
+        {
+          "value": "500",
+          "label": "中等"
+        },
+        {
+          "value": "600",
+          "label": "半粗"
+        },
+        {
+          "value": "700",
+          "label": "加粗"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "名称颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "color",
+      "id": "active_color",
+      "label": "选中/悬停颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "color",
+      "id": "media_background",
+      "label": "图片占位背景色",
+      "default": "#F2F2F2"
+    },
+    {
+      "type": "select",
+      "id": "active_style",
+      "label": "选中样式",
+      "info": "滚动到对应区域时当前 Tab 的高亮方式。四种都会让名称变色并加粗，区别在图片上的标记。",
+      "options": [
+        {
+          "value": "ring",
+          "label": "图片描边（推荐）"
+        },
+        {
+          "value": "underline",
+          "label": "名称下划线"
+        },
+        {
+          "value": "text",
+          "label": "仅名称变色加粗"
+        },
+        {
+          "value": "none",
+          "label": "不高亮"
+        }
+      ],
+      "default": "ring"
+    },
+    {
+      "type": "range",
+      "id": "active_ring_width",
+      "label": "描边粗细",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ section.settings.active_style == 'ring' }}"
+    },
+    {
+      "type": "range",
+      "id": "active_ring_offset",
+      "label": "描边与图片的间距",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.active_style == 'ring' }}"
+    },
+    {
+      "type": "header",
+      "content": "滑动与跳转"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "对齐方式",
+      "info": "Tab 未占满一行时的水平分布；占满或需要滑动时始终从左开始。",
+      "options": [
+        {
+          "value": "center",
+          "label": "居中"
+        },
+        {
+          "value": "left",
+          "label": "左对齐"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "显示左右切换按钮（桌面端）",
+      "info": "桌面端已自适应铺满全部 Tab，一般不会出现切换按钮。移动端不显示按钮，一屏露出 3 个半，手指滑动。",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "follow_scroll",
+      "label": "页面滚动时自动把选中 Tab 滑入可视区",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "scroll_offset",
+      "label": "点击跳转的顶部偏移",
+      "info": "已自动扣除吸顶导航高度，此处为额外留白。",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "无障碍名称",
+      "default": "Featured collections"
+    },
+    {
+      "type": "header",
+      "content": "吸顶",
+      "info": "开启后导航条会在页面向下滚动时固定在 header 下方，跟随 header 的显示/隐藏自动上下移动。建议同时把上下内边距调小一些。"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "吸顶固定在 header 下方",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_mobile",
+      "label": "移动端也吸顶",
+      "default": true,
+      "visible_if": "{{ section.settings.sticky }}"
+    },
+    {
+      "type": "range",
+      "id": "sticky_offset",
+      "label": "与 header 的间距",
+      "info": "为 0 且开启「吸顶时与 header 同款」时，自动跟随 header 自身的上下内缩值；开启「拼成一整块」时该间距无效。",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.sticky }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_match_header",
+      "label": "吸顶时与 header 同款（同宽、同底色、四角圆角）",
+      "info": "自动读取 header 的宽度、圆角、底色与模糊度，改 header 设置这里会跟着变。",
+      "default": true,
+      "visible_if": "{{ section.settings.sticky }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_join_header",
+      "label": "吸顶时与 header 拼成一整块",
+      "info": "抹平 header 下方与导航上方的圆角、去掉中间缝隙；关闭则是两条独立浮层胶囊。",
+      "default": true,
+      "visible_if": "{{ section.settings.sticky and section.settings.sticky_match_header }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_shadow",
+      "label": "吸顶时显示底部阴影",
+      "default": true,
+      "visible_if": "{{ section.settings.sticky }}"
+    },
+    {
+      "type": "range",
+      "id": "sticky_padding_top",
+      "label": "吸顶后 Tab 上方留白",
+      "info": "下方「上内边距」只在未吸顶时完整显示；吸顶贴上 header 后按这里的值收紧，卡片不会被撑高。",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 5,
+      "visible_if": "{{ section.settings.sticky }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection 导航"
+    }
+  ],
+  "disabled_on": {
+    "templates": [
+      "password"
+    ]
+  }
+}
+{% endschema %}

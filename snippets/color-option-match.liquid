@@ -1,0 +1,26 @@
+{%- doc -%}
+  Returns true when an option name should use the color swatch module.
+  Compatible names: Color, Solid Color, Ashley Graham's Edit
+  (also colour / 颜色 / 色).
+
+  @param {string} option_name
+{%- enddoc -%}
+{%- liquid
+  assign n = option_name | default: '' | downcase | strip
+  assign n_plain = n | replace: "'", '' | replace: '’', '' | replace: '‘', ''
+  assign matched = false
+
+  if n contains 'color' or n contains 'colour' or n contains '颜色' or n contains '色'
+    assign matched = true
+  endif
+
+  if n == 'solid color' or n contains 'solid color'
+    assign matched = true
+  endif
+
+  if n_plain == 'ashley grahams edit' or n contains 'ashley graham'
+    assign matched = true
+  endif
+
+  echo matched
+-%}

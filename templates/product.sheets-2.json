@@ -1,0 +1,2489 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "liquid_JRYcqm": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<div class=\"yotpo-widget-instance hidden md:block\" data-yotpo-instance-id=\"989160\" data-yotpo-product-id=\"{{product.id}}\" data-yotpo-cart-product-id=\"{{item.product.id}}\" data-yotpo-section-id=\"{{template.name}}\"></div>"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "product-title-sm",
+            "title_size_mobile": "product-title-md",
+            "title_tag": "h1",
+            "title_weight": "600",
+            "show_price": false,
+            "show_rating": false
+          }
+        },
+        "product_intro_features_6MqJMw": {
+          "type": "product_intro_features",
+          "disabled": true,
+          "settings": {
+            "visibility": "pc",
+            "show_intro": true,
+            "intro_color": "#10374b",
+            "intro_size": 14,
+            "intro_line_height": 1.2,
+            "intro_weight": "400",
+            "show_tooltip": true,
+            "tooltip_text": "If any product that bears our limited warranty Seal proves to be deffective within two years from the date it was first sold to a consumer by an authorized retailer, we, Good Houseekeeping, will refund the purchase price or $2,000, whichever is less or, at Good Housekeeping's sole discretion, repair or replace the product.",
+            "tooltip_color": "#10374b",
+            "tooltip_bg": "#ffffff",
+            "tooltip_radius": 12,
+            "tooltip_max_width": 360,
+            "tooltip_text_size": 13,
+            "tooltip_icon_size": 16,
+            "show_features": true,
+            "features_margin_top": 7,
+            "feature_gap": 8,
+            "feature_bg": "#ffffff",
+            "feature_text_color": "#10374b",
+            "feature_radius": 4,
+            "feature_padding_x": 0,
+            "feature_padding_y": 0,
+            "feature_inner_gap": 4,
+            "feature_icon_size": 16,
+            "feature_text_size": 13,
+            "show_divider": true,
+            "divider_color": "#ffffff",
+            "divider_width": 1,
+            "divider_margin_top": 13,
+            "divider_margin_bottom": 13
+          }
+        },
+        "price_4UmVjm": {
+          "type": "price",
+          "settings": {
+            "use_custom_layout": true,
+            "price_gap": 6,
+            "regular_price_use_color": false,
+            "regular_price_color": "#9ca3af",
+            "regular_price_size": 20,
+            "regular_price_weight": "400",
+            "sale_price_color": "#10374b",
+            "sale_price_size": 32,
+            "sale_price_weight": "700",
+            "save_format": "percent",
+            "save_bg": "#b3e8ef",
+            "save_text_color": "#10374b",
+            "save_font_size": 15,
+            "save_weight": "700",
+            "save_letter_spacing": 1.3,
+            "save_padding_x": 10,
+            "save_padding_y": 8,
+            "save_radius": 8,
+            "show_discount_tip": false,
+            "discount_tip_color": "#71717a",
+            "show_taxes_notice": false
+          }
+        },
+        "liquid_X3tDn9": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<hr style=\"border-bottom: 1px solid #f0eeea;margin:24px 0 16px;\">"
+          }
+        },
+        "product_variations_bFhU89": {
+          "type": "product_variations",
+          "disabled": true,
+          "settings": {
+            "option_name": "Choose Your Comfort",
+            "option_value_metafield": "custom.version_sibling",
+            "products": [
+              "cooling-sheet-set",
+              "antislip-cooling-sheet-set",
+              "ashley-graham-x-breescape-cooling-sheets"
+            ],
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "size_chart": "",
+            "label_weight": "700",
+            "value_weight": "400",
+            "swatch_radius": 41,
+            "swatch_min_width": 128,
+            "swatch_padding_y": 0,
+            "swatch_text_align": "center",
+            "size_guide_font_size": 14
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "enable_dynamic_variants": true,
+            "show_variant_labels": true,
+            "picker_type": "button",
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "size_chart": "",
+            "size_liquid": "{{product.metafields.custom.size_guide}}",
+            "label_weight": "700",
+            "value_weight": "400",
+            "swatch_radius": 60,
+            "size_guide_font_size": 14
+          }
+        },
+        "addon_HpJHff": {
+          "type": "addon",
+          "disabled": true,
+          "settings": {
+            "heading": "Select Add-ons:",
+            "heading_color": "#10374b",
+            "heading_size": 16,
+            "heading_weight": "700",
+            "product": "cooling-comforter",
+            "product_title_override": "",
+            "default_checked": false,
+            "default_variant_id": "",
+            "show_color": true,
+            "color_option_name": "",
+            "color_label": "Color",
+            "color_options": "",
+            "show_size": true,
+            "size_option_name": "",
+            "size_label": "Size",
+            "size_options": "",
+            "compare_color": "#9ca3af",
+            "compare_size": 12,
+            "sale_color": "#10374b",
+            "sale_size": 13,
+            "sale_weight": "700",
+            "price_offset_x": -8,
+            "card_bg": "#ffffff",
+            "card_border_color": "#d1d5db",
+            "active_color": "#10374b",
+            "checked_shadow": "0 6px 18px rgba(16, 55, 75, 0.14)",
+            "card_radius": 29,
+            "card_padding_x": 25,
+            "card_padding_y": 25,
+            "card_gap": 14,
+            "card_margin_y": 12,
+            "check_size": 20,
+            "check_gap": 14,
+            "check_bg": "#10374b",
+            "check_color": "#ffffff",
+            "image_size": 64,
+            "image_radius": 8,
+            "title_color": "#10374b",
+            "title_size": 12,
+            "title_weight": "700",
+            "picker_font_size": 14,
+            "arrow_color": "#10374b",
+            "arrow_size": 24,
+            "arrow_offset": 0,
+            "arrow_top": 13,
+            "arrow_stroke": 2.5
+          }
+        },
+        "addon_kedaTh": {
+          "type": "addon",
+          "disabled": true,
+          "settings": {
+            "heading": "Select Add-ons:",
+            "heading_color": "#10374b",
+            "heading_size": 16,
+            "heading_weight": "700",
+            "product": "cooling-pillowcases",
+            "product_title_override": "",
+            "default_checked": false,
+            "default_variant_id": "",
+            "show_color": true,
+            "color_option_name": "",
+            "color_label": "Color",
+            "color_options": "",
+            "show_size": true,
+            "size_option_name": "",
+            "size_label": "Size",
+            "size_options": "",
+            "compare_color": "#9ca3af",
+            "compare_size": 12,
+            "sale_color": "#10374b",
+            "sale_size": 13,
+            "sale_weight": "700",
+            "price_offset_x": -8,
+            "card_bg": "#ffffff",
+            "card_border_color": "#d1d5db",
+            "active_color": "#10374b",
+            "checked_shadow": "0 6px 18px rgba(16, 55, 75, 0.14)",
+            "card_radius": 29,
+            "card_padding_x": 25,
+            "card_padding_y": 25,
+            "card_gap": 14,
+            "card_margin_y": 12,
+            "check_size": 20,
+            "check_gap": 14,
+            "check_bg": "#10374b",
+            "check_color": "#ffffff",
+            "image_size": 64,
+            "image_radius": 8,
+            "title_color": "#10374b",
+            "title_size": 12,
+            "title_weight": "700",
+            "picker_font_size": 14,
+            "arrow_color": "#10374b",
+            "arrow_size": 24,
+            "arrow_offset": 0,
+            "arrow_top": 13,
+            "arrow_stroke": 2.5
+          }
+        },
+        "marquee_EhGkbi": {
+          "type": "marquee",
+          "disabled": true,
+          "settings": {
+            "text": "FAST & FREE US SHIPPING · SECURE CHECKOUT · FAST & FREE US SHIPPING",
+            "direction": "rtl",
+            "duration": 25,
+            "repeat": 4,
+            "gap": 32,
+            "text_color": "#10374b",
+            "use_bg_color": false,
+            "bg_color": "#f4f4f5",
+            "font_size": 14,
+            "font_weight": "500",
+            "letter_spacing": 0
+          }
+        },
+        "liquid_LPNwJt": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<style>\n* {\n  box-sizing: border-box;\n}\n.xy-fg-wrap {\n  margin: 0 !important;\n  padding: 0 !important;\n  margin-top: 24px !important;\n}\n.xy-fg__top {\n  display: flex !important;\n  justify-content: space-between !important;\n  align-items: center !important;\n  padding: 4px 0 !important;\n  margin: 0 !important;\n}\n\n.xy-fg__heading {\n  font-size: 14px !important;\n  font-weight: 700;\n  color: #10374B !important;\n  margin: 0 !important;\n  letter-spacing: 0px;\n}\n.xy-fg__sub {\n  font-size: 10px !important;\n  color: #10374B !important;\n  margin: 0 !important;\n}\n\n@media (max-width: 767px) {\n  .xy-fg__top {\n    flex-direction: column !important;\n    justify-content: center !important;\n    text-align: center !important;\n    padding: 4px 15px !important;\n  }\n  .xy-fg__heading {\n    display: block !important;\n    margin: 2px 0 !important;\n    letter-spacing: 0px !important;\n    font-size: 13px !important;\n  }\n  .xy-fg__sub {\n    display: block !important;\n    margin: 2px 0 !important;\n    font-size: 10px !important;\n  }\n}\n\n.xy-fg__img {\n  width: 100%;\n  height: auto;\n  display: block;\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\n.gradient > div,\n.shopify-section--custom-liquid {\n  padding: 0 !important;\n  margin: 0 !important;\n}\n</style>\n\n<div class=\"xy-fg-wrap\">\n  <div class=\"xy-fg__top\">\n    <span class=\"xy-fg__heading\">Spend $399 and unlock both gifts</span>\n    <span class=\"xy-fg__sub\">*Automatically added to cart</span>\n  </div>\n  <img \n    src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Group_927.png?v=1779947438\"\n    class=\"xy-fg__img\"\n    alt=\"\"\n  >\n</div>"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_price": true,
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "enable_back_in_stock": false,
+            "show_back_in_stock_name": false,
+            "show_back_in_stock_phone": false
+          }
+        },
+        "free_gift_aJL3VU": {
+          "type": "free_gift",
+          "disabled": true,
+          "settings": {
+            "heading": "Free Gift on Orders $399+",
+            "subheading": "*Automatically added to cart",
+            "heading_color": "#10374b",
+            "heading_size": 16,
+            "heading_weight": "700",
+            "subheading_color": "#7b8a93",
+            "subheading_size": 13,
+            "subheading_weight": "400",
+            "product": "cooling-eye-mask",
+            "product_title_override": "",
+            "badge_icon": "shopify://shop_images/20260509-111732.png",
+            "badge_size": 34,
+            "badge_offset_x": -10,
+            "badge_offset_y": 0,
+            "title_color": "#10374b",
+            "title_size": 14,
+            "title_weight": "700",
+            "color_color": "#7b8a93",
+            "color_size": 13,
+            "color_weight": "500",
+            "compare_color": "#10374b",
+            "compare_size": 14,
+            "free_color": "#10374b",
+            "free_size": 16,
+            "free_weight": "700",
+            "free_text_override": "$0.00",
+            "card_bg": "#d1f2f6",
+            "card_radius": 29,
+            "card_padding_x": 25,
+            "card_padding_y": 14,
+            "card_margin_y": 23,
+            "top_gap": 14,
+            "card_gap": 14,
+            "image_size": 72,
+            "image_radius": 40
+          }
+        },
+        "liquid_LAKDNQ": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<br>"
+          }
+        },
+        "liquid_izh7Hy": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<div class=\"xo-marquee-wrap overflow-hidden\">\n  <div class=\"xo-marquee-track\">\n    <div class=\"xo-marquee flex items-center\">\n      <div class=\"flex items-center\">\n        <p>Fast &amp; Free US Shipping</p><b>·</b>\n      </div>\n      <div class=\"flex items-center\">\n        <p>Secure Checkout</p><b>·</b>\n      </div>\n    </div>\n    <div class=\"xo-marquee flex items-center\" aria-hidden=\"true\">\n      <div class=\"flex items-center\">\n        <p>Fast &amp; Free US Shipping</p><b>·</b>\n      </div>\n      <div class=\"flex items-center\">\n        <p>Secure Checkout</p><b>·</b>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n  .xo-marquee-wrap {\n    margin-bottom: 10px;\n    border-top: 1px solid #f0eeea;\n    border-bottom: 1px solid #f0eeea;\n    padding: 7px 0;\n  }\n\n  .xo-marquee-track {\n    display: flex;\n    width: max-content;\n    animation: marquee 12s linear infinite;\n  }\n\n  .xo-marquee {\n    flex-shrink: 0;\n    white-space: nowrap;\n  }\n\n  .xo-marquee p {\n    font-size: 12px;\n    color: #aaa;\n    padding: 0 14px;\n  }\n\n  .xo-marquee b {\n    color: #d5d3cf;\n    font-weight: 400;\n  }\n\n  @keyframes marquee {\n    from {\n      transform: translateX(0)\n    }\n\n    to {\n      transform: translateX(-50%)\n    }\n  }\n</style>"
+          }
+        },
+        "liquid_KELMcR": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "{%- liquid\nassign cert_page_handle = 'third-party-tested'\nassign cert_page = pages[cert_page_handle]\nassign cert_modal_id = 'xo__third-party-tested'\nassign cert_trigger_id = 'xo__third-party-tested-trigger'\n-%}\n\n<div class=\"xo__third-party-tested w-full bg-zinc-100\">\n  <a\n    type=\"button\"\n    class=\"link inline-block size-style cursor-pointer flex items-center justify-between\"\n    role=\"link\"\n    is=\"hover-link\"\n    aria-controls=\"{{ cert_modal_id }}\"\n    aria-expanded=\"false\"\n    aria-label=\"{{ cert_page.title | default: 'Third-Party Tested, Globally Certified' | escape }}\"\n    id=\"{{ cert_trigger_id }}\"\n  >\n    <span class=\"link-text\">View Third-Party Test Results</span>\n    {%- render 'icon', icon: 'arrow-right', size: 'sm' -%}\n  </a>\n</div>\n\n<x-modal\n  id=\"{{ cert_modal_id }}\"\n  class=\"x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none\"\n  role=\"dialog\"\n  aria-modal=\"true\"\n  aria-label=\"{{ cert_page.title | default: 'Third-Party Tested, Globally Certified' | escape }}\"\n  hidden\n>\n  <overlay-element\n    class=\"overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none\"\n    aria-controls=\"{{ cert_modal_id }}\"\n    aria-expanded=\"false\"\n  ></overlay-element>\n\n  <div class=\"drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden\">\n    <gesture-element class=\"drawer__header flex justify-between opacity-0 invisible relative items-center\">\n      <span class=\"drawer__title heading text-lg-2xl leading-tight tracking-tight\">\n\n      </span>\n\n      <button\n        class=\"button button--secondary button--close drawer__close hidden sm:flex items-center justify-center\"\n        type=\"button\"\n        is=\"hover-button\"\n        aria-controls=\"{{ cert_modal_id }}\"\n        aria-expanded=\"false\"\n        aria-label=\"Close\"\n      >\n        <span class=\"btn-fill\" data-fill></span>\n        <span class=\"btn-text\">{% render 'icon', icon: 'close', size: 'sm' %}</span>\n      </button>\n    </gesture-element>\n\n    <div class=\"drawer__content opacity-0 invisible flex flex-col h-full grow shrink\">\n      <div class=\"drawer__scrollable relative grow shrink\">\n        <div class=\"rte text-base md:text-lg\">\n          <div class=\"container mx-auto py-10\">\n            {%- if cert_page != blank -%}\n              {{ cert_page.content }}\n            {%- else -%}\n              <p class=\"text-sm opacity-70\">\n                Page not found: <strong>{{ cert_page_handle }}</strong>\n              </p>\n            {%- endif -%}\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</x-modal>\n\n<style>\n  .xo__third-party-tested {\n    padding: var(--sp-5) var(--sp-6);\n    border-radius: var(--sp-2d5);\n  }\n  .xo__third-party-tested a {\n    background: transparent !important;\n  }\n</style>"
+          }
+        },
+        "collapsible_tab_64B6jP": {
+          "type": "collapsible_tab",
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Includes",
+            "content": "<p><strong>Twin/Twin XL: </strong>1 Flat Sheet, 1 Fitted Sheet, 1 Pillowcase, 1 Laundry Bag</p><p><strong>Full/Queen/King/Cal King: </strong>1 Flat Sheet, 1 Fitted Sheet, 2 Pillowcases, 1 Laundry Bag</p>",
+            "page": "",
+            "liquid": "",
+            "text_size": "text-base"
+          }
+        },
+        "collapsible_tab_rmVpDh": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "opened": true,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Details",
+            "content": "<p><strong>Breescape. Built to sleep through.</strong><br/></p><p>Powered by patented BlendTek™ technology, our bedding is made from a carefully balanced mix of fibers engineered for breathability and moisture-wicking comfort, helping you enjoy a cooler, more refreshing sleep.</p><p></p><p><strong>BlendTek™ Fabric:</strong> 69% Nylon, 20% Polyester, 11% Spandex</p><p><strong>Larger: </strong>Up to 15.3% more coverage across all sizes. </p><p><strong>Certified</strong></p><p>Every item bearing the OEKO-TEX® STANDARD 100 label is certified as having passed safety tests for harmful substances.</p>",
+            "page": "",
+            "liquid": "<p class=\"product__sku\" id=\"Sku-{{ section.id }}-{{ product.id }}\" {{ block.shopify_attributes }}>SKU:&nbsp;{{- product.selected_or_first_available_variant.sku -}}\n</p>\n<style>\n  .details__content ul {\n    margin-block: var(--sp-2);\n  }\n</style>",
+            "text_size": "text-base"
+          }
+        },
+        "collapsible_tab_PVCcUC": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Cooling That Speaks for Itself",
+            "content": "",
+            "page": "",
+            "liquid": "<div class=\"reeview-app-widget\" id=\"reeview-app-widget_67f644557979090057374a19\"></div>",
+            "text_size": "text-base"
+          }
+        },
+        "collapsible_tab_JYKRbM": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Reviews ★★★★★",
+            "content": "",
+            "page": "",
+            "liquid": "<div class=\"w-full max-w-md mx-auto\">\n  <div class=\"flex gap-4 rounded-xl w-full items-stretch\" style=\"padding: 8px 0;border-bottom: 1px solid #eee;\">\n    <div class=\"s-solution-comparison-card relative overflow-hidden rounded-lg\">\n      <img src=\"{{ 'img_v3_02lr_ee642fa1-4086-485b-b573-415b1d26f8dg.jpg' | file_url }}\"\n        alt=\"{{ img_alt | default: 'Cooler, cozier, better sleep for everyone!' }}\"\n        class=\"s-solution-comparison-card__img w-full m-0 rounded-lg\" loading=\"lazy\">\n    </div>\n\n    <div class=\"flex flex-col flex-1 py-2\">\n      <div class=\"review-content flex flex-col justify-between h-full\">\n        <div class=\"stars grid grid-4\">\n          {%- render 'icon', icon: '5reviews', size: 'custom', class: 'shawn__product-card__rating__icon' -%}\n          <span class=\"review-text text-md py-2\">\n            \"Cooler, cozier, better sleep for everyone!\"\n          </span>\n        </div>\n        <div class=\"text-sm font-medium flex items-center\">\n          @sarahbanksie\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"flex gap-4 rounded-xl w-full items-stretch\" style=\"padding: 8px 0;border-bottom: 1px solid #eee;\">\n    <div class=\"s-solution-comparison-card relative overflow-hidden rounded-lg\">\n      <img src=\"{{ '20250429-110909.jpg' | file_url }}\"\n        alt=\"{{ img_alt | default: 'No more tossing and turning—just pure relaxation.' }}\"\n        class=\"s-solution-comparison-card__img w-full m-0 rounded-lg\" loading=\"lazy\">\n    </div>\n\n    <div class=\"flex flex-col flex-1 py-2\">\n      <div class=\"review-content flex flex-col justify-between h-full\">\n        <div class=\"stars grid grid-4\">\n          {%- render 'icon', icon: '5reviews', size: 'custom', class: 'shawn__product-card__rating__icon' -%}\n          <span class=\"review-text text-md py-2\">\n            \"No more tossing and turning—just pure relaxation.\"\n          </span>\n        </div>\n        <div class=\"text-sm font-medium flex items-center\">\n          @itsme_heathermarie_\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"flex gap-4 rounded-xl w-full items-stretch\" style=\"padding: 8px 0;\">\n    <div class=\"s-solution-comparison-card relative overflow-hidden rounded-lg\">\n      <img src=\"{{ '20250429-110951.jpg' | file_url }}\"\n        alt=\"{{ img_alt | default: 'Its so smooth and gentle on your skin' }}\"\n        class=\"s-solution-comparison-card__img w-full m-0 rounded-lg\" loading=\"lazy\">\n    </div>\n\n    <div class=\"flex flex-col flex-1 py-2\">\n      <div class=\"review-content flex flex-col justify-between h-full\">\n        <div class=\"stars grid grid-4\">\n          {%- render 'icon', icon: '5reviews', size: 'custom', class: 'shawn__product-card__rating__icon' -%}\n          <span class=\"review-text text-md py-2\">\n            \"It's so smooth and gentle on your skin\"\n          </span>\n        </div>\n        <div class=\"text-sm font-medium flex items-center\">\n          @alexisnbasik\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <button class=\"button button--secondary button--md w-full s--button--product--reviews\"\n    style=\"color: rgb(var(--color-button-background));\">\n    Read All Reviews\n  </button>\n\n  <style>\n    .s--button--product--reviews:hover {\n      background-size: 0% 1px !important;\n    }\n\n    .s-solution-comparison-card {\n      flex: 0 0 25%;\n      max-width: 120px;\n      overflow: hidden;\n      border-radius: 10px;\n      aspect-ratio: 3 / 4;\n    }\n\n    .s-solution-comparison-card__img {\n      display: block;\n      width: 100%;\n      height: 100%;\n      margin-block: 0 !important;\n      object-fit: cover;\n      border-radius: inherit;\n    }\n  </style>\n</div>",
+            "text_size": "text-base"
+          }
+        },
+        "collapsible_tab_XDeUC8": {
+          "type": "collapsible_tab",
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Care",
+            "content": "<p>Simply machine wash on a gentle cycle and tumble dry on low.</p>",
+            "page": "",
+            "liquid": "",
+            "text_size": "text-base"
+          }
+        },
+        "sticky_buy_button_L47yeR": {
+          "type": "sticky_buy_button",
+          "settings": {}
+        },
+        "google_youtube_automated_discounts_price_tWXbYq": {
+          "type": "shopify://apps/google-youtube/blocks/automated_discounts_price/14ec7bd0-ac77-49a9-9417-90752398bdff",
+          "settings": {}
+        },
+        "complementary": {
+          "type": "complementary",
+          "disabled": true,
+          "settings": {
+            "heading": "Pairs well with",
+            "product_limit": 4,
+            "show_vendor": false,
+            "show_price": true
+          }
+        },
+        "gift_progress_8UVc8C": {
+          "type": "gift_progress",
+          "settings": {
+            "progress_text": "Add [amount] more to unlock FREE gifts",
+            "complete_text": "You've unlocked all FREE gifts",
+            "suffix_text": "Auto added",
+            "image": "shopify://shop_images/Group_1013_2.png",
+            "tier1_amount": 249,
+            "tier2_amount": 399
+          }
+        }
+      },
+      "block_order": [
+        "liquid_JRYcqm",
+        "title",
+        "product_intro_features_6MqJMw",
+        "price_4UmVjm",
+        "liquid_X3tDn9",
+        "product_variations_bFhU89",
+        "variant_picker",
+        "addon_HpJHff",
+        "addon_kedaTh",
+        "marquee_EhGkbi",
+        "liquid_LPNwJt",
+        "buy_buttons",
+        "gift_progress_8UVc8C",
+        "free_gift_aJL3VU",
+        "liquid_LAKDNQ",
+        "liquid_izh7Hy",
+        "liquid_KELMcR",
+        "collapsible_tab_64B6jP",
+        "collapsible_tab_rmVpDh",
+        "collapsible_tab_PVCcUC",
+        "collapsible_tab_JYKRbM",
+        "collapsible_tab_XDeUC8",
+        "sticky_buy_button_L47yeR",
+        "google_youtube_automated_discounts_price_tWXbYq",
+        "complementary"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".product__accordion {padding-inline: 0;}",
+        ".xo__comfort__input .swatches li {flex: 1;}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "enable_info_card": true,
+        "info_card_bg": "#ffffff",
+        "info_card_shadow": "0 2px 12px rgba(0,0,0,0.04)",
+        "info_card_radius": 16,
+        "info_card_padding": 28,
+        "info_card_padding_y": 28,
+        "info_card_gap": 24,
+        "info_card_radius_mobile": 12,
+        "info_card_padding_mobile": 16,
+        "info_card_padding_y_mobile": 16,
+        "info_card_margin_mobile": 12,
+        "media_size": 60,
+        "gallery_layout": "thumbnail",
+        "thumbnail_position": "beside",
+        "image_ratio": "square",
+        "image_zoom": "none",
+        "hide_variants": false,
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "mobile_layout": "full_width",
+        "image_ratio_mobile": "square",
+        "mobile_thumbnail": false,
+        "padding_top": 28,
+        "padding_bottom": 60,
+        "divider": false,
+        "full_width": true,
+        "rounded": false
+      }
+    },
+    "ss_featured_product_4_T3KgRh": {
+      "type": "ss-featured-product-4",
+      "blocks": {
+        "heading_L9367V": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>Breescape Cooling Sheets</h2>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_accent_custom": false,
+            "heading_accent_font": "josefin_sans_n4",
+            "heading_size": 56,
+            "heading_size_mobile": 32,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#10374b",
+            "heading_accent_color": "#afafaf"
+          }
+        },
+        "text_U68zgN": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The best cooling sheets for hot sleepers, with a cool-touch feel, silky-smooth softness, and breathable comfort.</p>",
+            "text_custom": true,
+            "text_font": "inter_i4",
+            "text_size": 16,
+            "text_size_mobile": 12,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 20,
+            "text_mt_mobile": 16,
+            "text_color": "#10374b"
+          }
+        },
+        "button_NRxV7a": {
+          "type": "button",
+          "settings": {
+            "enable_quick_shop": true,
+            "product": "cooling-sheet-set",
+            "quick_shop_text_size": 14,
+            "quick_shop_text_size_mobile": 14,
+            "quick_shop_price_size": 28,
+            "quick_shop_price_size_mobile": 28,
+            "button": "SHOP NOW",
+            "url": "",
+            "open_in_new_tab": false,
+            "button_style": "outline",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 14,
+            "button_size_mobile": 14,
+            "button_advanced": false,
+            "button_height": 100,
+            "button_padding_horizontal": 28,
+            "button_padding_horizontal_mobile": 28,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_mt": 20,
+            "button_mt_mobile": 16,
+            "button_color": "#121212",
+            "button_hover_color": "#121212",
+            "button_bg_color": "#67d2e0",
+            "button_bg_hover_color": "#4fadb6",
+            "button_border_color": "#67c6d3",
+            "button_border_hover_color": "#4fadb6"
+          }
+        },
+        "caption_6GqmHA": {
+          "type": "caption",
+          "settings": {
+            "icon": "image_mountain",
+            "custom_icon": "shopify://shop_images/truemedpage_truemed-logo_image_lg_202603_v1.webp",
+            "text": "<p>HSA/FSA Eligible</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 10,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 20,
+            "text_mt_mobile": 16,
+            "icon_color": "#10374b",
+            "text_color": "#10374b"
+          }
+        },
+        "caption_tXhhVD": {
+          "type": "caption",
+          "settings": {
+            "icon": "image_mountain",
+            "custom_icon": "shopify://shop_images/productpage-shipping-icon-202505.svg",
+            "text": "<p>Fast & Free Shipping</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 10,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 20,
+            "text_mt_mobile": 16,
+            "icon_color": "#10374b",
+            "text_color": "#10374b"
+          }
+        },
+        "author_iD3c36": {
+          "type": "author",
+          "disabled": true,
+          "settings": {
+            "use_author_image": true,
+            "author_image": "shopify://shop_images/1200_9a0950ec-9440-43aa-9c5b-aeb1e6f48871.png",
+            "image_width": 80,
+            "image_width_mobile": 64,
+            "image_radius": 50,
+            "image_border_thickness": 0,
+            "text": "<p>Backed by the Good Housekeeping Seal</p>",
+            "text_custom": true,
+            "text_font": "serif",
+            "text_size": 12,
+            "text_size_mobile": 12,
+            "text_advanced": false,
+            "text_height": 150,
+            "author_mt": 24,
+            "author_mt_mobile": 12,
+            "author": "",
+            "author_custom": false,
+            "author_font": "josefin_sans_n4",
+            "author_size": 14,
+            "author_size_mobile": 12,
+            "author_advanced": true,
+            "author_height": 130,
+            "author_name_mt": 8,
+            "author_name_mt_mobile": 2,
+            "text_color": "#121212",
+            "author_color": "#121212",
+            "image_border_color": "#121212"
+          }
+        },
+        "feature_46wR9N": {
+          "type": "feature",
+          "settings": {
+            "icon": "image_mountain",
+            "custom_icon": "shopify://shop_images/Breescape_Cooling.svg",
+            "text": "Cool-Touch",
+            "hide_mobile": false
+          }
+        },
+        "feature_JVfHRH": {
+          "type": "feature",
+          "settings": {
+            "icon": "image_mountain",
+            "custom_icon": "shopify://shop_images/Breescape_icon_Moisture-wicking.svg",
+            "text": "Breathable",
+            "hide_mobile": false
+          }
+        },
+        "feature_NCj4AE": {
+          "type": "feature",
+          "settings": {
+            "icon": "image_mountain",
+            "custom_icon": "shopify://shop_images/Breescape_icon_Breathable.svg",
+            "text": "Moisture-Wicking",
+            "hide_mobile": false
+          }
+        },
+        "feature_nEyner": {
+          "type": "feature",
+          "settings": {
+            "icon": "image_mountain",
+            "custom_icon": "shopify://shop_images/Frame_136.svg",
+            "text": "Dual-Side Pockets",
+            "hide_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_L9367V",
+        "text_U68zgN",
+        "button_NRxV7a",
+        "caption_6GqmHA",
+        "caption_tXhhVD",
+        "author_iD3c36",
+        "feature_46wR9N",
+        "feature_JVfHRH",
+        "feature_NCj4AE",
+        "feature_nEyner"
+      ],
+      "name": "SS - Featured product #4",
+      "settings": {
+        "layout": "image_content",
+        "layout_mobile": "image_content",
+        "layout_advanced": false,
+        "image_width": 45,
+        "layout_gap": 80,
+        "layout_gap_mobile": 20,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "content_vertical_align": "center",
+        "source": "uploaded",
+        "video": "shopify://files/videos/20260703-162332.mp4",
+        "video_url": "",
+        "video_ratio": "landscape",
+        "video_ratio_mobile": "landscape",
+        "video_radius": 16,
+        "video_border_thickness": 0,
+        "video_autoplay": true,
+        "video_loop": true,
+        "use_controls": true,
+        "play_icon_size": 16,
+        "play_icon_size_mobile": 16,
+        "play_padding": 14,
+        "play_padding_mobile": 14,
+        "play_radius": 100,
+        "play_border_thickness": 0,
+        "first_image": "shopify://shop_images/20260702-192144.jpg",
+        "second_image": "shopify://shop_images/Frame_10.png",
+        "use_third_image": true,
+        "third_image": "shopify://shop_images/20260702-192402.jpg",
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "image_radius": 16,
+        "image_border_thickness": 0,
+        "features_columns": "two",
+        "features_columns_mobile": "two",
+        "features_advanced": false,
+        "features_border_thickness": 1,
+        "features_mt": 20,
+        "features_mt_mobile": 20,
+        "feature_gap": 10,
+        "feature_gap_mobile": 10,
+        "feature_mt": 10,
+        "feature_mt_mobile": 10,
+        "feature_icon_size": 20,
+        "feature_icon_size_mobile": 20,
+        "feature_text_custom": false,
+        "feature_text_font": "josefin_sans_n4",
+        "feature_text_size": 14,
+        "feature_text_size_mobile": 12,
+        "feature_text_height": 150,
+        "feature_icon_color": "#10374b",
+        "feature_text_color": "#10374b",
+        "features_border_color": "#dbdbdb",
+        "image_border_color": "#121212",
+        "video_border_color": "#121212",
+        "play_color": "#10374b",
+        "play_hover_color": "#10374b",
+        "play_bg_color": "#ffffff",
+        "play_bg_hover_color": "#f3f3f3",
+        "play_border_color": "#10374b",
+        "play_border_hover_color": "#10374b",
+        "background_style": "solid",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#10374b",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "scrolling_text_ftJFct": {
+      "type": "scrolling-text",
+      "blocks": {
+        "image_QMPcR8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/27press_logo.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "image_NaWzbW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/product_press_gma_image_202509_v1.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "image_jBfYPq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/17press_logo.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "image_mB9XFb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/20press_logo.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "image_73CGtp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/22press_logo.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "image_XnCDwa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/press_logo_the-view_image_sm_202510_v1.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "image_V4NwwP": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/23press_logo.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "image_fRVRNT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/28press_logo.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "image_AAKmkh": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/25press_logo.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "image_Hyq9ba": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/16press_logo.png",
+            "height": 32,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        }
+      },
+      "block_order": [
+        "image_QMPcR8",
+        "image_NaWzbW",
+        "image_jBfYPq",
+        "image_mB9XFb",
+        "image_73CGtp",
+        "image_XnCDwa",
+        "image_V4NwwP",
+        "image_fRVRNT",
+        "image_AAKmkh",
+        "image_Hyq9ba"
+      ],
+      "name": "t:sections.scrolling-text.name",
+      "settings": {
+        "direction": "left",
+        "speed": 5,
+        "grid_horizontal": 70,
+        "enable_twin": false,
+        "enable_parallax": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "divider": true,
+        "rounded": false
+      }
+    },
+    "ss_video_slider_pro_EyxmKc": {
+      "type": "ss-video-slider-pro",
+      "blocks": {
+        "subheading_NmHyJW": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "",
+            "subheading_custom": false,
+            "subheading_font": "josefin_sans_n4",
+            "subheading_size": 12,
+            "subheading_size_mobile": 12,
+            "subheading_advanced": false,
+            "subheading_height": 130,
+            "subheading_mt": 0,
+            "subheading_mt_mobile": 0,
+            "subheading_color": "#121212"
+          }
+        },
+        "heading_zqFAac": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>Why 13,3000+ Hot Sleepers Love Breescape?</h2>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 48,
+            "heading_size_mobile": 32,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 12,
+            "heading_mt_mobile": 12,
+            "heading_color": "#10374b",
+            "heading_accent_color_type": "solid",
+            "heading_accent_color": "#808080",
+            "heading_accent_gradient": "linear-gradient(135deg, #121212 0%, #808080 100%)"
+          }
+        },
+        "text_eiXUcp": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 14,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 14,
+            "text_mt_mobile": 14,
+            "text_color": "#121212"
+          }
+        },
+        "profile_eMwWRp": {
+          "type": "profile",
+          "settings": {
+            "source": "uploaded",
+            "video": "shopify://files/videos/【床单组-凉感1.0-吸排锦涤-新线迹】anabondana【2026_6_5-2027_6_5】【KOL_KOC】.mov",
+            "video_url": "",
+            "name": "@anabondana",
+            "verify_icon": true,
+            "details": "<p>★★★★★</p><p><em>The first summer I slept through without waking up drenched.</em></p>",
+            "show_rating": false,
+            "stars_count": 5,
+            "product_text": "",
+            "product_url": ""
+          }
+        },
+        "profile_RqH8Eh": {
+          "type": "profile",
+          "settings": {
+            "source": "uploaded",
+            "video": "shopify://files/videos/【床单组-凉感1.0-吸排锦涤-新线迹】glamour_girlz_usa【2026_6_16-2027_6_16】【KOL_KOC】(1).mov",
+            "video_url": "",
+            "name": "@glamour",
+            "verify_icon": true,
+            "details": "<p>★★★★★</p><p><em>My little one has really sensitive skin, and this feels so gentle.</em></p>",
+            "show_rating": false,
+            "stars_count": 5,
+            "product_text": "",
+            "product_url": ""
+          }
+        },
+        "profile_9AVexM": {
+          "type": "profile",
+          "settings": {
+            "source": "uploaded",
+            "video": "shopify://files/videos/【床单组-凉感1.0-吸排锦涤-新线迹】yatzsalazar【2026_6_18-2027_6_18】【KOL_KOC】3.mov",
+            "video_url": "",
+            "name": "@yatzsalazar",
+            "verify_icon": true,
+            "details": "<p>★★★★★</p><p><em>I live in Texas. The sheet is a God send!</em></p>",
+            "show_rating": false,
+            "stars_count": 5,
+            "product_text": "",
+            "product_url": ""
+          }
+        },
+        "profile_6NWrGg": {
+          "type": "profile",
+          "settings": {
+            "source": "uploaded",
+            "video": "shopify://files/videos/【床单组-凉感1.0-吸排锦涤-新线迹】doubleshotofbabies【2026_6_18-2027_6_18】【KOL_KOC】2.mov",
+            "video_url": "",
+            "name": "@doubleshotofbabies",
+            "verify_icon": true,
+            "details": "<p>★★★★★</p><p><em>Noticeably cooler than my previous sheets.</em></p>",
+            "show_rating": false,
+            "stars_count": 5,
+            "product_text": "",
+            "product_url": ""
+          }
+        },
+        "profile_D3eEde": {
+          "type": "profile",
+          "settings": {
+            "source": "uploaded",
+            "video": "shopify://files/videos/【床单组-凉感1.0-吸排锦涤-新线迹】jesschaska【2026_6_30-2027_6_30】【KOL_KOC】.mp4",
+            "video_url": "",
+            "name": "@jesschaska",
+            "verify_icon": true,
+            "details": "<p>★★★★★</p><p><em>Postpartum night sweats were rough, but these sheets really helped!</em></p>",
+            "show_rating": false,
+            "stars_count": 5,
+            "product_text": "",
+            "product_url": ""
+          }
+        },
+        "profile_nVepRA": {
+          "type": "profile",
+          "settings": {
+            "source": "uploaded",
+            "video": "shopify://files/videos/cooling sheets0701.mp4",
+            "video_url": "",
+            "name": "nicoule",
+            "verify_icon": true,
+            "details": "<p>★★★★★</p><p><em>Sleep for a week and haven't woke up once for sweating!</em></p>",
+            "show_rating": false,
+            "stars_count": 5,
+            "product_text": "",
+            "product_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_NmHyJW",
+        "heading_zqFAac",
+        "text_eiXUcp",
+        "profile_eMwWRp",
+        "profile_RqH8Eh",
+        "profile_9AVexM",
+        "profile_6NWrGg",
+        "profile_D3eEde",
+        "profile_nVepRA"
+      ],
+      "name": "SS - Video slider pro 💎",
+      "settings": {
+        "content_max_width": 80,
+        "content_align": "center",
+        "content_align_mobile": "center",
+        "slider_view": "4",
+        "slider_view_mobile": 1.4,
+        "slider_advanced": false,
+        "slider_mt": 48,
+        "slider_mt_mobile": 32,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "arrow_size": 50,
+        "arrow_size_mobile": 50,
+        "arrow_icon_size": 10,
+        "arrow_icon_size_mobile": 10,
+        "arrow_radius": 100,
+        "arrow_border_thickness": 0,
+        "arrow_hover_effect": "color",
+        "arrow_shadow": true,
+        "slide_border_thickness": 0,
+        "slide_radius": 12,
+        "video_ratio": "9/16",
+        "video_ratio_mobile": "9/16",
+        "video_loop": true,
+        "use_video_shadow": true,
+        "control_size": 64,
+        "control_size_mobile": 50,
+        "control_border_thickness": 1,
+        "control_radius": 10,
+        "content_advanced": false,
+        "content_padding_horizontal": 20,
+        "content_padding_horizontal_mobile": 16,
+        "content_padding_vertical": 20,
+        "content_padding_vertical_mobile": 16,
+        "profile_content_align": "left",
+        "profile_content_align_mobile": "left",
+        "verify_icon_width": 22,
+        "verify_icon_width_mobile": 18,
+        "name_custom": false,
+        "name_font": "josefin_sans_n4",
+        "name_size": 18,
+        "name_size_mobile": 16,
+        "name_advanced": false,
+        "name_height": 130,
+        "name_gap": 4,
+        "name_gap_mobile": 4,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "text_advanced": false,
+        "text_height": 130,
+        "text_mt": 4,
+        "text_mt_mobile": 4,
+        "text_max_length": 0,
+        "product_custom": false,
+        "product_font": "josefin_sans_n4",
+        "product_size": 16,
+        "product_size_mobile": 14,
+        "product_advanced": false,
+        "product_height": 130,
+        "product_mt": 4,
+        "product_mt_mobile": 4,
+        "stars_size": 15,
+        "stars_size_mobile": 14,
+        "stars_advanced": false,
+        "stars_mt": 12,
+        "stars_mt_mobile": 6,
+        "arrow_color": "#10374b",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ededed",
+        "arrow_bg_hover_color": "#121212",
+        "arrow_border_color": "#121212",
+        "arrow_border_hover_color": "#121212",
+        "control_color": "#ffffff",
+        "name_color": "#ffffff",
+        "text_color": "#ffffff",
+        "product_color_type": "solid",
+        "product_color": "#4c8ae7",
+        "product_gradient": "linear-gradient(135deg, #4C8AE7 0%, #9CC3FF 100%)",
+        "stars_color": "#f6af00",
+        "slide_border_color": "#121212",
+        "verify_icon_color": "#ffffff",
+        "verify_icon_bg": "#4c8ae7",
+        "background_style": "solid",
+        "background_color": "#ade3e9",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "help-drawer": {
+      "type": "help-drawer",
+      "disabled": true,
+      "settings": {
+        "heading": "Need help?",
+        "description": "<p>If you have any questions, you are always welcome to contact us. We'll get back to you as soon as possible, within 24 hours on weekdays.</p>"
+      }
+    },
+    "number_counter_rygkLx": {
+      "type": "number-counter",
+      "blocks": {
+        "counter_yzWRpQ": {
+          "type": "counter",
+          "settings": {
+            "title": "Felt Noticeably Cooler",
+            "number": "91",
+            "unit": "%",
+            "duration": 2
+          }
+        },
+        "counter_BxzYfM": {
+          "type": "counter",
+          "settings": {
+            "title": "Stayed Dry & Fresh",
+            "number": "89",
+            "unit": "%",
+            "duration": 2
+          }
+        },
+        "counter_h3Mnyp": {
+          "type": "counter",
+          "settings": {
+            "title": "Enjoyed All-Night Breathability",
+            "number": "93",
+            "unit": "%",
+            "duration": 2
+          }
+        }
+      },
+      "block_order": [
+        "counter_yzWRpQ",
+        "counter_BxzYfM",
+        "counter_h3Mnyp"
+      ],
+      "custom_css": [],
+      "name": "t:sections.number-counter.name",
+      "settings": {
+        "gap": "small",
+        "columns": 3,
+        "text_alignment": "center",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "text_alignment_mobile": "center",
+        "number_size": 40,
+        "number_size_mobile": 32,
+        "unit_size": 40,
+        "unit_size_mobile": 32,
+        "title_size": 30,
+        "title_size_mobile": 28,
+        "color_text": "",
+        "color_background": "#ade3e9",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "padding_top": 0,
+        "padding_bottom": 28,
+        "divider": false,
+        "full_width": true,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_pwWkGX": {
+      "type": "image-with-text-overlay",
+      "name": "t:sections.image-with-text-overlay.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/Ashley.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/Ashley_1.webp",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "#ade3e9",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 70,
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": true,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "multicolumn_ge8ppF": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_UCpJNh": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/Frame_1.png",
+            "image_ratio": "adapt",
+            "heading": "🔥 Wake up overheated at 3AM",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_DxUUzC": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/Frame_2.png",
+            "image_ratio": "adapt",
+            "heading": "😵 Hot flash feels like living in a furnace",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_jztqqr": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/Frame_3.png",
+            "image_ratio": "adapt",
+            "heading": "💦 Night sweats that soak through sheets",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_ADa3RA": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/Frame_4.png",
+            "image_ratio": "adapt",
+            "heading": "🧠 Waking up tired instead of refreshed",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_UCpJNh",
+        "column_DxUUzC",
+        "column_jztqqr",
+        "column_ADa3RA"
+      ],
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "gap": "large",
+        "columns": 4,
+        "carousel_on_desktop": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "gap_mobile": 20,
+        "heading": "🔥Hot Sleepers... Is This You Every Night?",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#ade3e9",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "multicolumn_n7EWTV": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_g3xBzy": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/moisture-wicking-2.png",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_MNW6i3": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/moisture-wicking_4d43c6d0-bbb2-442d-b042-277f860715ac.png",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_4bPeHA": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/moisture-wicking-1.png",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_7WKCBx": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/A_3-1_pc_dbfc265f-2797-43bf-afa7-4fc4e2056dd3.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_g3xBzy",
+        "column_MNW6i3",
+        "column_4bPeHA",
+        "column_7WKCBx"
+      ],
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "gap": "small",
+        "columns": 3,
+        "carousel_on_desktop": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "gap_mobile": 18,
+        "heading": "<strong>How BlendTek™ Works</strong>",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p><em>BlendTek™ Technology: balanced cooling, airflow, moisture-wicking & softness. Built to sleep through the night.</em></p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#ade3e9",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 56,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "rich_text_9g8rrj": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_ktyyrz": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Details Handled. Just sleep easy.</strong>",
+            "mobile_line_break_after": "Handled.",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_ktyyrz"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#ade3e9",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 56,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_bJxmgd": {
+      "type": "image-with-text-overlay",
+      "name": "t:sections.image-with-text-overlay.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/Frame_132.jpg",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-start md:justify-start",
+        "text_alignment": "center",
+        "image_mobile": "shopify://shop_images/20260703-140232.webp",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-end justify-center",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "#ade3e9",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "multicolumn_hFnCTD": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_8NEQqY": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/1_a6_image_with-badge.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_KVfU6E": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/product_cooling-comforter_twilight-blue_1_image_with-badge.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_ywGDew": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/product_cooling-comforter_misty-grey_1_image_with-badge.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_UBADpP": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/product_cooling-comforter_mint-green_1_image_with-badge.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_BQVRqG": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/product_cooling-comforter_mint-green_1_image_with-badge.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_8NEQqY",
+        "column_KVfU6E",
+        "column_ywGDew",
+        "column_UBADpP",
+        "column_BQVRqG"
+      ],
+      "disabled": true,
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "gap": "large",
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "gap_mobile": 20,
+        "heading": "Multicolumn-<strong>多色可选板块</strong>",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 56,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_3rxiQ4": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.name",
+      "settings": {
+        "liquid": "",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 8,
+        "padding_bottom": 0,
+        "divider": true,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "video_9b4xqi": {
+      "type": "video",
+      "disabled": true,
+      "name": "t:sections.video.name",
+      "settings": {
+        "transparent_header": false,
+        "video_url": "https://youtu.be/NZh3ehCtyNA",
+        "cover_image": "shopify://shop_images/1.0_4.png",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_controls": false,
+        "image_height": "adapt",
+        "video_url_mobile": "",
+        "image_height_mobile": "auto",
+        "padding_top": 32,
+        "padding_bottom": 20,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_L3wbNY": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "liquid": "<style>\nh2 {\n    font-size: 44px!important;\n}\n\n@media screen and (max-width: 767px) {\n    h2 {\n        font-size: 30px!important;\n    }\n}\n\n</style>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 8,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "multicolumn_with_video2_mEMrni": {
+      "type": "multicolumn-with-video2",
+      "blocks": {
+        "ugc_column_eHkEtL": {
+          "type": "ugc_column",
+          "settings": {
+            "video": "shopify://files/videos/product-sheets-video-lifewithamerica-202505.mov",
+            "enable_video_autoplay": false,
+            "enable_video_looping": false,
+            "image_ratio": "adapt",
+            "layout": "image_first",
+            "heading": "@lifewithamerica",
+            "text": "<p>Love the little side pocket, I just toss my phone or remote in there.</p>",
+            "button_link": ""
+          }
+        },
+        "ugc_column_Ek6bEh": {
+          "type": "ugc_column",
+          "settings": {
+            "video": "shopify://files/videos/product-sheets-video-parv_stylee -202505-v2_52c7d251-23c5-4344-9f9f-7635ffd77fc3.mp4",
+            "enable_video_autoplay": false,
+            "enable_video_looping": false,
+            "image_ratio": "adapt",
+            "layout": "text_first",
+            "heading": "@parv_stylee",
+            "text": "<p>This product is really perfect for all seasons.</p>",
+            "button_link": ""
+          }
+        },
+        "ugc_column_eQe3Gh": {
+          "type": "ugc_column",
+          "settings": {
+            "video": "shopify://files/videos/product-sheets-video-kbra.mp4",
+            "enable_video_autoplay": false,
+            "enable_video_looping": false,
+            "image_ratio": "adapt",
+            "layout": "image_first",
+            "heading": "@kbra.tezel",
+            "text": "<p>Keeps you at the right temp all night.</p>",
+            "button_link": ""
+          }
+        },
+        "ugc_column_cFAYQg": {
+          "type": "ugc_column",
+          "settings": {
+            "video": "shopify://files/videos/product-sheets-video-duyguakdnz-202505-v2.mp4",
+            "enable_video_autoplay": false,
+            "enable_video_looping": false,
+            "image_ratio": "adapt",
+            "layout": "text_first",
+            "heading": "@duyguakdnz",
+            "text": "<p>The sheets have a noticeably softer difference.</p>",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "ugc_column_eHkEtL",
+        "ugc_column_Ek6bEh",
+        "ugc_column_eQe3Gh",
+        "ugc_column_cFAYQg"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".title-wrapper {justify-content: space-between; align-items: start;}",
+        ".title-wrapper .gap-4 {gap: 0;}",
+        ".button {height: 40px; font-weight: 600;}",
+        ".button span {text-transform: none;}"
+      ],
+      "settings": {
+        "heading": "Why Breescape?",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p>Tested & Loved By 1000+ Hot Sleepers Before Launch</p>",
+        "liquid": "",
+        "button_label": "Explore the Love Wall",
+        "button_link": "shopify://pages/wall-of-love",
+        "button_external": false,
+        "button_icon": true,
+        "gap": "large",
+        "columns": 4,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 32,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_43kEUb": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "liquid": "<style>\n    .s__product-page__why-breescape__item {\n        border-right: 1px solid rgb(var(--color-foreground));\n        border-bottom: none;\n    }\n\n    .s__product-page__why-breescape__item-title {\n        font-size: 56px;\n        margin: 0;\n    }\n\n    .s__product-page__why-breescape__item-text {\n        margin: 0;\n        padding-right: 48px;\n        max-width: 100%;\n    }\n\n    .s__product-page__why-breescape__item:last-child {\n        border: none;\n    }\n\n\n    @media screen and (max-width: 767px) {\n        .s__product-page__why-breescape__item-title {\n            font-size: 36px;\n        }\n\n        .s__product-page__why-breescape__item {\n            border-right: none;\n            border-bottom: 1px solid rgb(var(--color-foreground));\n            padding-bottom: 12px;\n            justify-content: space-between;\n        }\n\n        .s__product-page__why-breescape__item-text {\n            margin: 0;\n            padding-right: 0px;\n            max-width: 240px;\n        }\n    }\n</style>\n\n\n<div class=\"s__product-page__why-breescape__container flex md:items-start justify-between w-full md:flex-row flex-col gap-2 md:gap-8\">\n    <div class=\"s__product-page__why-breescape__item text-md flex flex-row gap-4 items-center\">\n        <div class=\"s__product-page__why-breescape__item-title title-md leading-none\">93%</div>\n        <div class=\"s__product-page__why-breescape__item-text text-sm text-left\">\n            <p class=\"font-medium\">Enjoyed All-Night Breathability</p>\n            <span>No tossing and turning for fresh air, just a constant, refreshing airflow.</span>\n        </div>\n    </div>\n\n    <div class=\"s__product-page__why-breescape__item text-md flex flex-row gap-4 items-center\">\n        <div class=\"s__product-page__why-breescape__item-title title-md leading-none\">89%</div>\n        <div class=\"s__product-page__why-breescape__item-text text-sm text-left\">\n            <p class=\"font-medium\">Stayed Dry & Fresh</p>\n            <span>No sudden sweats in the middle of the night, just all-night comfort and dryness.</span>\n        </div>\n    </div>\n\n    <div class=\"s__product-page__why-breescape__item text-md flex flex-row gap-4 items-center\">\n        <div class=\"s__product-page__why-breescape__item-title title-md leading-none\">91%</div>\n        <div class=\"s__product-page__why-breescape__item-text text-sm text-left\">\n            <p class=\"font-medium\">Slept at the Right Temp</p>\n            <span>No hot flashes or cold spots, just balanced comfort all night.</span>\n        </div>\n    </div>\n</div>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 48,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_qALCVb": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.name",
+      "settings": {
+        "liquid": "",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 8,
+        "padding_bottom": 0,
+        "divider": true,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "shawn_product_sheets_blendtek_zjMLid": {
+      "type": "shawn-product-sheets-blendtek",
+      "blocks": {
+        "media_cREepc": {
+          "type": "media",
+          "settings": {
+            "image_ratio": "adapt",
+            "video": "shopify://files/videos/product-sheets-video-lg-202505_15f6133d-d50f-40cb-9256-fb1aa8be7fa2.mp4",
+            "title": "4.5X More Breathable than Cotton",
+            "liquid": "<span class=\"text-base\">\nBreathable fibers and knit fabric speed up heat and moisture release for cooler, fresher sleep.</span>"
+          }
+        },
+        "media_DbX9aL": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/product-sheets-blendtek-image-lg-202505_e0174bfa-6b08-4b8d-a46c-83ab9602ec3e.png",
+            "image_ratio": "adapt",
+            "title": "1.5X More Absorbent than Cotton",
+            "liquid": "<span class=\"text-base\">\nPolygonal fiber structure expands surface area for faster moisture absorption & quick evaporation.\n</span>"
+          }
+        },
+        "media_wkzYXE": {
+          "type": "media",
+          "settings": {
+            "image_ratio": "adapt",
+            "video": "shopify://files/videos/product-sheets-blendtek-video-lg-202505.mp4",
+            "title": "2.6x Cooler than Cotton Muslin",
+            "liquid": "<div class=\"text-base font-medium\">Q-Max > 0.46</div> \n<span class=\"text-base\">A Higher Q-Max Score = A Cooler Fabric <br>BlendTek™ Fabric leads with the highest Q-Max score, outperforming cotton, bamboo, and silk.</span>"
+          }
+        }
+      },
+      "block_order": [
+        "media_cREepc",
+        "media_DbX9aL",
+        "media_wkzYXE"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media screen and (max-width: 767px) {header {margin-bottom: 24px; } .title-wrapper {margin-bottom: 20px; }}",
+        ".button {height: 40px; font-weight: 600;}",
+        ".button span {text-transform: none;}"
+      ],
+      "settings": {
+        "heading": "Powered by BlendTek™",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "liquid": "<a class=\"button button--secondary with-content flex items-center cursor-pointer py-4\" role=\"link\" aria-controls=\"Hotspot-ergonomics\"\n    aria-expanded=\"false\" aria-label=\"More on Ergonomics\" id=\"shopify-block-ergonomics\">\n    <span class=\"btn-plus heading normal-case font-medium md:text-base leading-none tracking-none\" style=\"font-weight: 600!important;\">Learn More</span>\n\n\n\n\n    <svg class=\"plus\" xmlns=\"http://www.w3.org/2000/svg\" width=\"15\" height=\"15\" viewBox=\"0 0 15 15\" fill=\"none\">\n        <path d=\"M14.75 7.5C14.75 11.366 11.616 14.5 7.75 14.5C3.88401 14.5 0.75 11.366 0.75 7.5C0.75 3.63401 3.88401 0.5 7.75 0.5C11.616 0.5 14.75 3.63401 14.75 7.5Z\" fill=\"#67D2DF\"/>\n        <path d=\"M6.81566 10.764V8.482H4.56166V6.662H6.81566V4.38H8.67766V6.662H10.9317V8.482H8.67766V10.764H6.81566Z\" fill=\"white\"/>\n    </svg>\n</a>\n\n\n<x-modal id=\"Hotspot-ergonomics\" class=\"x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none\"\n    role=\"dialog\" aria-modal=\"true\" aria-label=\"More on Ergonomics\" hidden>\n    <overlay-element\n        class=\"overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none\"\n        aria-controls=\"Hotspot-ergonomics\" aria-expanded=\"false\"></overlay-element>\n\n    <div class=\"drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden\">\n        <gesture-element class=\"drawer__header flex justify-between opacity-0 invisible relative\">\n            <span class=\"drawer__title heading title-sm\">Powered by BlendTek™</span>\n            <button\n                class=\"button button--secondary button--close drawer__close hidden sm:flex items-center justify-center\"\n                type=\"button\" is=\"hover-button\" aria-controls=\"Hotspot-ergonomics\" aria-expanded=\"false\"\n                aria-label=\"Close\">\n                <span class=\"btn-fill\" data-fill></span>\n                <span class=\"btn-text\">\n                    {% render 'icon', icon: 'close', size: 'sm' %}\n                </span>\n            </button>\n        </gesture-element>\n\n        <div class=\"drawer__content opacity-0 invisible flex flex-col h-full grow shrink\">\n            <div class=\"drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink\">\n                <div class=\"rte text-base md:text-lg\">\n                    <div class=\"container mx-auto py-10\">\n                        <!-- Header Section -->\n                        <div class=\"text-left mb-8\"\n                            style=\"background-image: url('https://cdn.shopify.com/s/files/1/0640/6779/7070/files/homepage-modal-blendtek-image-202504-v1.png?v=1743990771'); background-size: cover; background-position: center; padding: 20px;\">\n                            <h3 class=\"text-gray-800\" style=\"padding: 10px; \">BlendTek™ Technology: The Science of Cool\n                            </h3>\n                            <p class=\"text-gray-600 mt-2 text-base\" style=\"padding: 10px; \">\n                                Our patented fiber blend is crafted with the optimal ratio for proven, long-lasting\n                                coolness, perfected after a year of research and 25 iterations.\n                            </p>\n                        </div>\n\n                     \n                        <div class=\"flex flex-col md:flex-row items-center justify-between mb-8\">\n                            <!-- Image Placeholder -->\n                            <div class=\"w-full md:w-1/3 mb-6 md:mb-0\">\n                                <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/blendtekpage-high-performance-images-md-202503.png?v=1741578515\"\n                                    alt=\"\" width=\"1177\" height=\"1206\" loading=\"lazy\"\n                                    sizes=\"(max-width: 767px) 100vw, 50vw\" is=\"lazy-image\" class=\"loaded\"\n                                    style=\"margin:0;\" />\n                            </div>\n\n                            <!-- Features Section -->\n                            <div class=\"w-full md:w-2/3 md:pl-8\">\n                                <p class=\"text-base font-semibold text-gray-800\" style=\"margin:0;\">In-House Innovation\n                                </p>\n                                <h3 class=\"text-xl font-medium text-gray-700\" style=\"margin:0;\">A Precisely Balanced\n                                    Blend of High-Performance Fibers</h3>\n                                <ul class=\"space-y-3 text-gray-600 text-base\">\n                                    <li><strong>High Thermal Conductivity Fibers</strong> – Draws heat away fast.</li>\n                                    <li><strong>Polygonal Fiber Structure</strong> – Maximizes surface area to wick away\n                                        sweat.</li>\n                                    <li><strong>High-Porosity Fibers</strong> – Enhances airflow, releasing heat and\n                                        moisture.</li>\n                                </ul>\n                                <p class=\"text-gray-600 mt-4 italic text-sm\">\"These are just a few of the advanced\n                                    fibers in BlendTek™.\"</p>\n                            </div>\n                        </div>\n\n                        <hr>\n                        <div class=\"flex flex-col md:flex-row items-start justify-between mb-8\">\n                            <h3 class=\"text-2xl text-gray-800 mb-4 w-full md:w-1/3\" style=\"margin: 0;\">Sustainable\n                                Partner</h3>\n\n                            <div class=\"w-full md:w-2/3\">\n                                <p class=\"text-gray-600 mb-4 text-sm\" style=\"margin: 0;\">\n                                    We partner with like-minded brands like Naia™ and Eco-Cosy® to drive sustainability\n                                    in textiles, ensuring our materials support both people and the planet.\n                                </p>\n                                <div class=\"flex space-x-6 gap-4 items-center\" style=\"margin: 0;\">\n                                    <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/homepage-modal-blendtek-icon-naia-202504-v1.png?v=1743991112\" alt=\"Naia Logo\"\n                                        class=\"h-12\" style=\"height:60px;    margin-block: var(--sp-4);\">\n                                    <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/homepage-modal-blendtek-icon-ecocosy-202504-v1.png?v=1743991112\" alt=\"Eco-Cosy Logo\"\n                                        class=\"h-12\" style=\"height:46px;    margin-block: var(--sp-4);\">\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                </div>\n            </div>\n        </div>\n    </div>\n</x-modal>\n\n<!-- 样式 -->\n<style>\n    .btn-plus+.plus {\n        width: 1.75em;\n        height: 1.75em;\n        border-radius: 50em;\n        margin-left: 0.5em;\n    }\n</style>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "padding_top": 40,
+        "padding_bottom": 48
+      }
+    },
+    "video_Cc4JwQ": {
+      "type": "video",
+      "disabled": true,
+      "settings": {
+        "transparent_header": false,
+        "video": "shopify://files/videos/product-sheets-video-lg-202505.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_controls": false,
+        "image_height": "adapt",
+        "video_url_mobile": "",
+        "image_height_mobile": "adapt",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    },
+    "shawn_multicolumn_with_icons_giAXxQ": {
+      "type": "shawn-multicolumn-with-icons",
+      "blocks": {
+        "column_PAthp6": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "custom_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"54\" height=\"55\" viewbox=\"0 0 54 55\" fill=\"none\">\n<g clip-path=\"url(#clip0_7_164)\">\n<path d=\"M52.4856 0.737649C52.0216 0.263446 51.4078 0.00752703 50.7192 0C45.8464 0.0451622 43.032 0.624743 39.252 1.7538C37.8897 2.16026 36.9166 3.36458 36.7744 4.8173C36.6247 6.33023 36.3103 7.85069 35.9735 9.17545C35.704 8.49049 35.457 7.84316 35.225 7.25606C34.8657 6.3227 34.1247 5.58506 33.1891 5.23129C32.2609 4.88504 31.2354 4.94526 30.3597 5.41193C26.0857 7.67757 21.9988 10.6206 18.2039 14.1508C5.86095 25.6295 7.26815 37.7179 8.2487 41.903C2.71721 48.1429 0.411802 51.9516 0.2621 52.2075C-0.254372 53.0806 0.0225769 54.2097 0.898333 54.7366C1.19025 54.9172 1.5196 55 1.84146 55C2.46272 55 3.0765 54.6839 3.42081 54.1043C3.45824 54.0441 5.53909 50.6193 10.5167 44.9288C12.4478 45.8321 14.6485 46.231 16.9539 46.231C21.8192 46.231 27.1112 44.4847 31.0932 42.1739C51.3254 30.4167 53.047 7.06035 53.1818 2.49897C53.2042 1.85165 52.9497 1.21185 52.5006 0.745176L52.4856 0.737649ZM22.403 27.8651C17.9943 31.7791 14.3565 35.3469 11.3924 38.4706C10.9433 33.7512 11.7218 25.193 20.6889 16.8605C24.192 13.6013 27.9495 10.8841 31.8717 8.78404C32.4181 10.1991 33.0917 11.9153 33.7953 13.6766C34.1995 14.7003 35.1726 15.3326 36.2954 15.2573C37.3133 15.182 38.1741 14.4368 38.511 13.4659C39.2146 11.426 40.0978 8.39264 40.4122 5.26892C43.5185 4.3431 45.8164 3.85384 49.4317 3.72588C49.0051 10.0034 46.3029 29.0694 29.2369 38.9825C23.8102 42.1363 17.3356 43.2729 13.1514 41.9933C16.2128 38.6965 20.0752 34.8501 24.8731 30.5974C25.4719 30.063 25.7489 29.1973 25.442 28.4597C25.1725 27.8124 24.6336 27.5263 24.1321 27.4059C23.5183 27.2629 22.8746 27.4511 22.403 27.8651Z\" fill=\"#0F374B\"></path>\n</g>\n<defs>\n<clippath id=\"clip0_7_164\">\n<rect width=\"53.1667\" height=\"55\" fill=\"white\"></rect>\n</clippath>\n</defs>\n</svg>",
+            "heading": "Airy & Lightweight",
+            "text": "<p>Breathable fiber gaps & knitted fabric offer weightless comfort with continuous airflow.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_eLVT4m": {
+          "type": "column",
+          "settings": {
+            "icon": "box",
+            "custom_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"46\" height=\"55\" viewbox=\"0 0 46 55\" fill=\"none\">\n<g clip-path=\"url(#clip0_7_166)\">\n<path d=\"M31.1843 34.4224L23.8383 42.7291C23.0213 43.6521 21.478 43.6218 20.7063 42.6686L14.0034 34.3619C13.035 33.159 13.9656 31.4492 15.5997 31.4492H29.6485C31.3205 31.4492 32.2434 33.2346 31.1843 34.4224Z\" fill=\"#0F374B\"></path>\n<path d=\"M22.6204 55.0001C21.6974 55.0001 20.7744 54.7353 19.9725 54.1982C16.9388 52.1934 11.5901 48.615 9.87277 47.2229C2.4663 41.2236 0 37.683 0 28.5366V9.30546C0 7.573 1.19532 6.07506 2.85213 5.75732C13.6781 3.64659 19.2689 1.26351 21.1678 0.340539C22.0908 -0.105816 23.1499 -0.113381 24.0729 0.340539C25.9718 1.26351 31.5626 3.64659 42.3886 5.75732C44.0378 6.08263 45.2407 7.573 45.2407 9.30546V28.5366C45.2407 37.683 42.7744 41.2236 35.368 47.2154C33.6506 48.6074 28.3019 52.1858 25.2682 54.1906C24.4663 54.7202 23.5433 54.9925 22.6204 54.9925V55.0001ZM21.947 51.2174C22.3631 51.4974 22.8851 51.4898 23.3012 51.2174C28.37 47.8584 31.956 45.3921 33.1286 44.4389C40.2325 38.6892 41.6699 36.0111 41.6699 28.5366V9.30546C30.6699 7.11152 24.7538 4.63009 22.6204 3.6012C20.4869 4.62252 14.5708 7.10395 3.53301 9.26007L3.57084 28.5366C3.57084 36.0111 5.00825 38.6817 12.1121 44.4389C13.2847 45.3846 16.8631 47.8584 21.9395 51.2174H21.947Z\" fill=\"#0F374B\"></path>\n</g>\n<defs>\n<clippath id=\"clip0_7_166\">\n<rect width=\"45.2407\" height=\"55\" fill=\"white\"></rect>\n</clippath>\n</defs>\n</svg>",
+            "heading": "Gentle on Skin",
+            "text": "<p>Every item bearing the OEKO-TEX® STANDARD 100 label is certified as having passed safety tests for harmful substances.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_typ9NR": {
+          "type": "column",
+          "settings": {
+            "icon": "shield",
+            "custom_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"53\" height=\"55\" viewbox=\"0 0 53 55\" fill=\"none\">\n<g clip-path=\"url(#clip0_7_151)\">\n<path d=\"M50.4964 43.5973C50.4964 43.5973 49.3962 44.0267 47.4638 44.4561C46.5258 44.6672 45.9686 45.4767 46.2155 46.272C46.427 46.9337 47.1323 47.3771 47.9151 47.3771C48.0632 47.3771 48.2184 47.363 48.3665 47.3278C50.6304 46.821 51.9351 46.3072 51.9844 46.2861C52.859 45.9412 53.2398 45.0614 52.8237 44.3153C52.4147 43.5762 51.3638 43.2525 50.4893 43.5973H50.4964Z\" fill=\"#0F374B\"></path>\n<path d=\"M11.1925 44.4773C12.9979 44.4351 15.0361 44.5547 17.0743 44.8293C17.166 44.8433 17.2647 44.8504 17.3564 44.8504C18.2027 44.8504 18.9503 44.3295 19.0913 43.6045C19.2465 42.7951 18.5906 42.0349 17.6315 41.9082C15.3746 41.6056 13.1249 41.4789 11.1008 41.5211C10.1346 41.5422 9.36587 42.225 9.38702 43.0414C9.41523 43.8438 10.191 44.4844 11.1431 44.4844C11.1572 44.4844 11.1713 44.4844 11.1925 44.4844V44.4773Z\" fill=\"#0F374B\"></path>\n<path d=\"M24.2044 46.3424C25.7912 46.7929 27.4133 47.18 29.0143 47.4827C29.1412 47.5038 29.2752 47.5179 29.4021 47.5179C30.2061 47.5179 30.9326 47.0463 31.1159 46.3565C31.3275 45.5541 30.728 44.7658 29.783 44.5898C28.3019 44.3083 26.8068 43.9563 25.3328 43.534C24.8603 43.4003 24.3948 43.2736 23.9364 43.1539C23.0125 42.9146 22.0252 43.351 21.736 44.1323C21.4469 44.9136 21.9687 45.7441 22.8997 45.9835C23.3299 46.0961 23.7671 46.2157 24.2044 46.3424Z\" fill=\"#0F374B\"></path>\n<path d=\"M38.4788 48.3766C39.6354 48.3766 40.7991 48.3344 41.9346 48.257C42.9008 48.1866 43.6201 47.4686 43.5355 46.6522C43.4509 45.8357 42.6045 45.2303 41.6383 45.3007C39.6989 45.4415 37.6819 45.4485 35.686 45.3289C34.7268 45.2655 33.8735 45.8849 33.8029 46.7014C33.7324 47.5179 34.4588 48.2288 35.4321 48.2851C36.4477 48.3485 37.4703 48.3766 38.4788 48.3766Z\" fill=\"#0F374B\"></path>\n<path d=\"M1.76322 46.4199C2.09469 46.4199 2.44027 46.3424 2.73647 46.1735C2.74353 46.1735 3.66741 45.6597 5.47992 45.2022C6.41086 44.9699 6.9398 44.1393 6.66475 43.358C6.3897 42.5697 5.40234 42.1263 4.47846 42.3586C2.12995 42.9498 0.895755 43.6396 0.761756 43.717C-0.0351835 44.1745 -0.232655 45.0895 0.303339 45.7653C0.641862 46.1876 1.19901 46.4199 1.76322 46.4199Z\" fill=\"#0F374B\"></path>\n<path d=\"M50.4964 36.8756C50.3906 36.9178 39.8118 40.9439 25.3258 36.8122C9.26712 32.23 1.10025 36.7981 0.761731 36.9952C-0.0422609 37.4598 -0.239733 38.3818 0.303315 39.0575C0.853414 39.7332 1.94656 39.9092 2.7435 39.4447C2.81403 39.4024 9.78196 35.5171 24.1903 39.6277C29.5503 41.155 34.4025 41.6689 38.5 41.6689C46.547 41.6689 51.6671 39.691 51.9845 39.5643C52.859 39.2194 53.2398 38.3396 52.8237 37.5935C52.4147 36.8544 51.3639 36.5307 50.4893 36.8756H50.4964Z\" fill=\"#0F374B\"></path>\n<path d=\"M50.4964 50.2137C50.3906 50.256 39.8118 54.2821 25.3258 50.1504C9.26712 45.5753 1.10025 50.1363 0.761731 50.3334C-0.0422609 50.7979 -0.239733 51.72 0.303315 52.3957C0.853414 53.0714 1.94656 53.2474 2.7435 52.7828C2.81403 52.7406 9.78196 48.8553 24.1903 52.9658C29.5503 54.4932 34.4025 55.0071 38.5 55.0071C46.547 55.0071 51.6671 53.0292 51.9845 52.9025C52.859 52.5576 53.2398 51.6778 52.8237 50.9317C52.4147 50.1926 51.3639 49.8688 50.4893 50.2137H50.4964Z\" fill=\"#0F374B\"></path>\n<path d=\"M10.3179 35.9392C9.84539 35.9392 9.45045 35.8336 9.15424 35.707C7.75783 35.1157 7.17952 33.6306 7.34173 32.5325C7.377 32.2791 7.46868 31.6738 9.86655 27.9081C9.90181 27.8589 9.92297 27.8096 9.95118 27.7533C12.476 22.5658 15.4381 17.505 16.9755 14.95C17.6103 13.8942 18.4354 12.9721 19.4298 12.219L35.1359 0.239205C35.6437 -0.147921 36.3771 -0.0564183 36.7721 0.450364C37.167 0.957147 37.0683 1.68213 36.5605 2.06925L20.8544 14.042C20.0998 14.6192 19.4651 15.323 18.9785 16.1254C17.4551 18.6453 14.5353 23.6427 12.0528 28.7457C11.9894 28.8795 11.9188 29.0062 11.8413 29.1329C10.5436 31.1741 9.7396 32.61 9.64087 32.9337C9.62676 33.0675 9.78192 33.4546 10.0781 33.5813C10.6071 33.7995 11.7637 33.2364 13.153 31.4697C13.6115 30.8925 13.9852 30.3224 14.3026 29.7311C14.6482 29.0906 14.8739 28.5135 15.1137 27.8941C16.0234 25.5713 16.8838 23.3682 23.1395 19.4336C23.8588 18.9761 24.6487 18.7579 25.4245 18.7931C26.3836 18.8424 27.1876 19.2365 27.7448 19.9333C28.6193 21.0243 28.8309 22.7277 28.3866 25.149C27.8717 27.9644 28.6052 29.3651 28.986 29.4496C29.2752 29.5129 30.2908 28.795 31.0242 26.064C32.4206 20.8624 33.3163 19.8911 34.2684 18.8635C34.5576 18.5467 34.8115 18.2722 35.1006 17.8358C36.9131 15.0626 37.4773 12.9651 37.8864 11.4307C37.9992 11.0013 38.105 10.6212 38.2108 10.2904C38.7256 8.74893 42.3365 6.15167 43.867 5.10291C44.3959 4.74394 45.1223 4.87064 45.489 5.39853C45.8558 5.91939 45.7218 6.64438 45.1928 7.00335C42.8584 8.60112 40.6792 10.4382 40.4253 11.0224C40.3336 11.304 40.2419 11.6418 40.1432 12.0219C39.72 13.6056 39.0712 16.0058 37.0612 19.0817C36.6663 19.687 36.3066 20.0741 35.9892 20.419C35.2346 21.2355 34.5294 22.0027 33.2811 26.6553C32.1456 30.9066 30.051 32.0469 28.4853 31.702C26.7363 31.3148 25.3187 29.0132 26.1015 24.7337C26.5247 22.418 26.1227 21.6085 25.9323 21.3692C25.8406 21.2496 25.6854 21.1158 25.3187 21.1018C25.0366 21.0877 24.7051 21.1862 24.3948 21.3833C18.788 24.9167 18.0969 26.6834 17.2929 28.7317C17.039 29.3792 16.7781 30.0479 16.369 30.8081C15.9882 31.526 15.5368 32.2087 14.9938 32.8915C13.0755 35.3198 11.4604 35.9322 10.325 35.9322L10.3179 35.9392Z\" fill=\"#0F374B\"></path>\n<path d=\"M17.0531 35.6155C16.228 35.6155 15.29 35.2354 14.5847 30.6673C14.486 30.0409 14.9232 29.4496 15.558 29.3511C16.1927 29.2596 16.7922 29.6889 16.8839 30.3154C17.0461 31.3501 17.2929 32.4481 17.5045 33.0886C18.1251 32.6944 19.1266 31.7372 19.1266 29.8649C19.1266 27.2465 19.6626 26.2118 20.128 25.5995C20.2832 25.3954 20.389 25.149 20.4454 24.8815C20.6922 23.5583 20.8121 22.4532 20.7769 21.8479C20.7346 21.2144 21.2282 20.6654 21.87 20.6232C22.533 20.588 23.0689 21.0666 23.1042 21.7071C23.1677 22.7277 22.942 24.2269 22.7375 25.3039C22.6246 25.9233 22.3637 26.5075 21.9899 26.9931C21.6373 27.4506 21.461 28.4149 21.461 29.8649C21.461 33.9051 18.3085 35.6155 17.0531 35.6155Z\" fill=\"#0F374B\"></path>\n<path d=\"M22.6529 33.0885C22.6529 33.0885 22.5894 33.0885 22.5612 33.0885C20.5089 33.0111 19.6767 29.6889 19.3593 27.718C19.2606 27.0916 19.6908 26.5003 20.3326 26.4018C20.9673 26.3033 21.5668 26.7326 21.6655 27.3591C21.8771 28.6753 22.3214 30.083 22.6811 30.632C22.8574 30.2168 23.0125 29.1961 22.808 27.6899C22.5047 25.4727 23.2523 22.6924 24.8109 20.243C25.1565 19.701 25.8759 19.5391 26.4189 19.884C26.962 20.2219 27.1242 20.9328 26.7857 21.4748C25.5444 23.4174 24.8956 25.7402 25.1212 27.3872C25.3046 28.7175 25.4386 31.1318 24.3032 32.3706C23.8729 32.8422 23.2946 33.0956 22.6599 33.0956L22.6529 33.0885Z\" fill=\"#0F374B\"></path>\n</g>\n<defs>\n<clippath id=\"clip0_7_151\">\n<rect width=\"53\" height=\"55\" fill=\"white\"></rect>\n</clippath>\n</defs>\n</svg>",
+            "heading": "Silky Soft",
+            "text": "<p>BlendTek™ Fiber</p><p>Provides an ultra-soft, gentle touch for your skin.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_PAthp6",
+        "column_eLVT4m",
+        "column_typ9NR"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".column__text p {margin: 0;}"
+      ],
+      "settings": {
+        "style": "with-border",
+        "columns": 3,
+        "text_alignment": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 32,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "faq_LmxTQr": {
+      "type": "faq",
+      "blocks": {
+        "question_Ghr3UL": {
+          "type": "question",
+          "settings": {
+            "title": "Does the cooling wear off after a few hours?",
+            "text": "<p>No, the cooling effect remains consistent throughout the night. BlendTek's innovative fabric technology ensures optimal breathability, moisture control, and extended coverage, providing lasting coolness without the reliance on chemicals or additives that wear off over time.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_nf6zii": {
+          "type": "question",
+          "settings": {
+            "title": "Is this sheet set hypoallergenic and suitable for sensitive skin?",
+            "text": "<p>Yes, this sheet set is gentle on skin. It’s OEKO-TEX® certified, ensuring it meets high safety and environmental standards.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_EXCRyz": {
+          "type": "question",
+          "settings": {
+            "title": "How do I wash and care for the sheet set?",
+            "text": "<p>Our cooling sheets are easy to care for—simply machine wash in cold water and tumble dry on low to keep them feeling fresh.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "question_Ghr3UL",
+        "question_nf6zii",
+        "question_EXCRyz"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "style": "with-border",
+        "heading": "FAQs",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#ade3e9",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#ffffff",
+        "overlay_opacity": 0,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "reveal_image_with_text_overlay_yXUTax": {
+      "type": "reveal-image-with-text-overlay",
+      "blocks": {
+        "heading_EjtKrF": {
+          "type": "heading",
+          "settings": {
+            "heading": "Sleep Better, Live Better",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_kWCHWp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The best version of you starts with the best night's sleep, don't wait to invest in it.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_EjtKrF",
+        "text_kWCHWp"
+      ],
+      "name": "t:sections.reveal-image-with-text-overlay.name",
+      "settings": {
+        "image": "shopify://shop_images/image_20260617063405951_1_1.webp",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_mobile": "shopify://shop_images/image_20260617063405951_1_1.webp",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#ade3e9",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 10,
+        "section_height_mobile": 100,
+        "enable_parallax": false
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "product_limit": 4,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "heading": "You may also like",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 52,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    },
+    "breescape_comparison_table_AI923": {
+      "type": "breescape-comparison-table",
+      "blocks": {
+        "row_CBnXDG": {
+          "type": "row",
+          "settings": {
+            "col_1": "Cool to the Touch",
+            "col_2": "Q-Max＞0.46",
+            "col_3": "Q-Max 0.11",
+            "col_4": "Q-Max 0.15",
+            "col_5": "Q-Max 0.19",
+            "row_align": ""
+          }
+        },
+        "row_ATTgUh": {
+          "type": "row",
+          "settings": {
+            "col_1": "Breathable (Air Permeability)",
+            "col_2": "1320 mm/s",
+            "col_3": "100-400 mm/s",
+            "col_4": "250-600 mm/s",
+            "col_5": "20-80 mm/s",
+            "row_align": ""
+          }
+        },
+        "row_zAdzLh": {
+          "type": "row",
+          "settings": {
+            "col_1": "Moisture-Wicking (Water Absorption Rate)",
+            "col_2": "226%",
+            "col_3": "148%",
+            "col_4": "198%",
+            "col_5": "88%",
+            "row_align": ""
+          }
+        },
+        "row_7EFdDh": {
+          "type": "row",
+          "settings": {
+            "col_1": "Smooth & Soft",
+            "col_2": "★★★★★",
+            "col_3": "★★★",
+            "col_4": "★★★★",
+            "col_5": "★★★★★",
+            "row_align": ""
+          }
+        },
+        "row_QHnBMD": {
+          "type": "row",
+          "settings": {
+            "col_1": "Durability",
+            "col_2": "★★★★★",
+            "col_3": "★★★★",
+            "col_4": "★★",
+            "col_5": "★★★",
+            "row_align": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_CBnXDG",
+        "row_ATTgUh",
+        "row_zAdzLh",
+        "row_7EFdDh",
+        "row_QHnBMD"
+      ],
+      "name": "Comparison Table",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "background_color": "#ededed",
+        "bg_image_radius_pc": 25,
+        "bg_image_radius_mobile": 10,
+        "max_width": 1600,
+        "section_padding_top_pc": 40,
+        "section_padding_bottom_pc": 50,
+        "section_padding_x_pc": 32,
+        "section_padding_top_mobile": 40,
+        "section_padding_bottom_mobile": 40,
+        "section_padding_x_mobile": 16,
+        "heading": "",
+        "title_color": "#ffffff",
+        "title_size_pc": 36,
+        "title_size_mobile": 22,
+        "title_margin_bottom_pc": 4,
+        "title_margin_bottom_mobile": 16,
+        "table_bg_color": "#f5f5f5",
+        "table_radius_pc": 29,
+        "table_radius_mobile": 16,
+        "table_padding_top_pc": 21,
+        "table_padding_right_pc": 0,
+        "table_padding_bottom_pc": 15,
+        "table_padding_left_pc": 0,
+        "table_padding_top_mobile": 0,
+        "table_padding_right_mobile": 0,
+        "table_padding_bottom_mobile": 0,
+        "table_padding_left_mobile": 0,
+        "panel_bg_opacity": 85,
+        "panel_border_color": "#ffffff",
+        "panel_border_width": 0,
+        "panel_shadow_color": "#ffffff",
+        "panel_shadow_opacity": 80,
+        "panel_shadow_blur": 0,
+        "panel_shadow_spread": 0,
+        "panel_blur": 12,
+        "cell_divider_color": "#e1e7eb",
+        "cell_divider_opacity": 68,
+        "cell_divider_width": 1,
+        "cell_divider_inset_x_pc": 51,
+        "cell_divider_inset_x_mobile": 12,
+        "cell_divider_inset_x_pc_4col": 32,
+        "cell_divider_inset_x_mobile_4col": 10,
+        "cell_divider_inset_x_pc_5col": 24,
+        "cell_divider_inset_x_mobile_5col": 12,
+        "show_col_4": true,
+        "show_col_5": true,
+        "col_1_ratio": 5,
+        "col_2_ratio": 3,
+        "col_3_ratio": 3,
+        "col_4_ratio": 3,
+        "col_5_ratio": 3,
+        "col_1_align": "left",
+        "col_2_align": "center",
+        "col_3_align": "center",
+        "col_4_align": "center",
+        "col_5_align": "center",
+        "row_gap_pc": 4,
+        "row_gap_mobile": 0,
+        "cell_padding_x_pc": 72,
+        "cell_padding_y_pc": 15,
+        "cell_padding_x_mobile": 8,
+        "cell_padding_y_mobile": 8,
+        "cell_padding_x_pc_4col": 40,
+        "cell_padding_x_mobile_4col": 6,
+        "cell_padding_x_pc_5col": 20,
+        "cell_padding_x_mobile_5col": 12,
+        "table_min_width_mobile_5col": 560,
+        "header_col_1": "",
+        "header_col_2": "Breescape®",
+        "header_image_2": "shopify://shop_images/Ellipse_45.png",
+        "header_col_3": "Cotton",
+        "header_image_3": "shopify://shop_images/Ellipse_46.png",
+        "header_col_4": "Bamboo Rayon",
+        "header_image_4": "shopify://shop_images/Ellipse_47.png",
+        "header_col_5": "Silk",
+        "header_image_5": "shopify://shop_images/Ellipse_48.png",
+        "header_image_shape": "circle",
+        "header_image_size_pc": 100,
+        "header_image_size_mobile": 56,
+        "header_image_gap_pc": 16,
+        "header_image_gap_mobile": 8,
+        "head_color": "#10374b",
+        "head_col_2_color": "#10374b",
+        "head_size_pc": 20,
+        "head_size_mobile": 12,
+        "head_weight": "700",
+        "head_margin_bottom_pc": 16,
+        "head_margin_bottom_mobile": 0,
+        "cell_color": "#10374b",
+        "cell_size_pc": 19,
+        "cell_size_mobile": 13,
+        "cell_weight": "400",
+        "footnote_line_1": "Higher Value = Better Results",
+        "footnote_line_2": "*Tested by SGS for verified cooling performance.",
+        "footnote_align": "left",
+        "footnote_color": "#10374b",
+        "footnote_size_pc": 14,
+        "footnote_size_mobile": 12,
+        "footnote_gap_pc": 32,
+        "footnote_gap_mobile": 4,
+        "footnote_mt_pc": 44,
+        "footnote_mt_mobile": 16,
+        "show_highlight": true,
+        "highlight_column": "2",
+        "highlight_bg_color": "#9fe0e9",
+        "highlight_radius_pc": 30,
+        "highlight_radius_mobile": 19,
+        "highlight_inset_top_pc": -24,
+        "highlight_inset_right_pc": 0,
+        "highlight_inset_bottom_pc": -30,
+        "highlight_inset_left_pc": 0,
+        "highlight_inset_top_mobile": -4,
+        "highlight_inset_right_mobile": 0,
+        "highlight_inset_bottom_mobile": -8,
+        "highlight_inset_left_mobile": 0
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "ss_featured_product_4_T3KgRh",
+    "scrolling_text_ftJFct",
+    "breescape_comparison_table_AI923",
+    "ss_video_slider_pro_EyxmKc",
+    "help-drawer",
+    "number_counter_rygkLx",
+    "image_with_text_overlay_pwWkGX",
+    "multicolumn_ge8ppF",
+    "multicolumn_n7EWTV",
+    "rich_text_9g8rrj",
+    "image_with_text_overlay_bJxmgd",
+    "multicolumn_hFnCTD",
+    "custom_liquid_3rxiQ4",
+    "video_9b4xqi",
+    "custom_liquid_L3wbNY",
+    "multicolumn_with_video2_mEMrni",
+    "custom_liquid_43kEUb",
+    "custom_liquid_qALCVb",
+    "shawn_product_sheets_blendtek_zjMLid",
+    "video_Cc4JwQ",
+    "shawn_multicolumn_with_icons_giAXxQ",
+    "faq_LmxTQr",
+    "reveal_image_with_text_overlay_yXUTax",
+    "product-recommendations"
+  ]
+}

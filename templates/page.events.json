@@ -1,0 +1,284 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-md",
+        "heading_alignment": "text-center",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": false,
+        "rounded": true
+      }
+    },
+    "image_with_text_overlay_8BJkzy": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_rU68na": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Keep Cool and Dream On！",
+            "subheading_size": "subtitle-md",
+            "secondary_color": false
+          }
+        },
+        "heading_TKCekb": {
+          "type": "heading",
+          "settings": {
+            "heading": "Events",
+            "heading_size": "title-md",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_wMCEkL": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Discover the endless possibilities of comfort with us! Stay updated on the latest events, promotions, and brand stories, and see how cooling technology transforms your sleep.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_rU68na",
+        "heading_TKCekb",
+        "text_wMCEkL"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/eventspage-keep-cool-banner-lg-202503-v1.png",
+        "image_height": "550px",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/eventspage-keep-cool-banner-sm-202503.png",
+        "image_height_mobile": "500px",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "rgba(0,0,0,0)",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 10,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_GEQHGw": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_Fw9FBC": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Unlocking Better Sleep For Hot Sleeper",
+            "subheading_size": "subtitle-sm",
+            "secondary_color": true
+          }
+        },
+        "heading_WnJVgC": {
+          "type": "heading",
+          "settings": {
+            "heading": "Breescape Official Live Launch",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_WxJQHz": {
+          "type": "text",
+          "settings": {
+            "text": "<p>8:00-9:00 PM EST | March 14</p>",
+            "text_font": "body",
+            "text_size": "subtext-custom",
+            "text_max_size": 16,
+            "secondary_color": false,
+            "highlighted_text": "scribble",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_bKC7gU": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Unlock the science of cooling sleep this Sleep Awareness Week and take home exclusive brand giveaways!</p>",
+            "text_font": "body",
+            "text_size": "subtext-custom",
+            "text_max_size": 14,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_DfQ4dk": {
+          "type": "text",
+          "settings": {
+            "text": "<p><a href=\"https://www.instagram.com/Breescapehome\" target=\"_blank\" title=\"https://www.instagram.com/Breescapehome\">Instagram</a> /  <a href=\"https://www.tiktok.com/@breescapehome\" target=\"_blank\" title=\"https://www.tiktok.com/@breescapehome\">Tiktok</a>  @Breescapehome </p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Fw9FBC",
+        "heading_WnJVgC",
+        "text_WxJQHz",
+        "text_bKC7gU",
+        "text_DfQ4dk"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/eventspage-live-streaming-banner-lg-202503-v1_1.png",
+        "image_height": "450px",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "adapt",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "#ffffff",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_3DpKkX": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_HcWGyA": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Cool comfort, experienced. Innovation, felt",
+            "subheading_size": "subtitle-sm",
+            "secondary_color": true
+          }
+        },
+        "heading_CgRrkz": {
+          "type": "heading",
+          "settings": {
+            "heading": "Breescape Media Trip",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_pryc4f": {
+          "type": "text",
+          "settings": {
+            "text": "<p>On June 17, we welcomed 20+ editors from top U.S. publications to Remedy Place, Los Angeles for a night of real sleep talk, sensory demos, and cozy moments with Breescape.</p>",
+            "text_font": "body",
+            "text_size": "subtext-custom",
+            "text_max_size": 14,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_NnYM4x": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p><a href=\"https://www.instagram.com/Breescapehome\" target=\"_blank\" title=\"https://www.instagram.com/Breescapehome\">Instagram</a> /  <a href=\"https://www.tiktok.com/@breescapehome\" target=\"_blank\" title=\"https://www.tiktok.com/@breescapehome\">Tiktok</a>  @Breescapehome </p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "link_7xY7Ha": {
+          "type": "link",
+          "settings": {
+            "label": "Learn More >>",
+            "link": "shopify://blogs/blogs/a-cool-down-that-delivers-breescape-s-pr-media-event",
+            "external": true
+          }
+        }
+      },
+      "block_order": [
+        "subheading_HcWGyA",
+        "heading_CgRrkz",
+        "text_pryc4f",
+        "text_NnYM4x",
+        "link_7xY7Ha"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/eventspage-media-trip_banner-image-202506-v2.jpg",
+        "image_height": "450px",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "adapt",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "#ffffff",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "image_with_text_overlay_8BJkzy",
+    "image_with_text_GEQHGw",
+    "image_with_text_3DpKkX"
+  ]
+}

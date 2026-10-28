@@ -1,0 +1,597 @@
+{{ 'breescape-adjustable-comforter.css' | asset_url | stylesheet_tag }}
+<div class="ac-story" style="--ac-bg:{{ section.settings.background }};--ac-ink:{{ section.settings.text_color }}">
+  {%- for block in section.blocks -%}
+    <section id="ac-{{ block.id }}" class="ac-block ac-block--{{ block.type }}{% if block.settings.divider %} ac-block--divider{% endif %}" style="--ac-top:{{ block.settings.padding_top }}px;--ac-bottom:{{ block.settings.padding_bottom }}px;--ac-mobile-top:{{ block.settings.mobile_padding_top }}px;--ac-mobile-bottom:{{ block.settings.mobile_padding_bottom }}px" {{ block.shopify_attributes }} aria-label="{{ block.settings.heading | escape }}">
+      <div class="page-width ac-shell">
+        {% unless block.type == 'comparison' %}<h2 class="ac-heading" id="ac-title-{{ block.id }}">{{ block.settings.heading | escape }}</h2>{% endunless %}
+        {%- case block.type -%}
+          {%- when 'temperature' -%}
+            <div class="ac-temperature">
+              {%- assign layer_types = 'cooling,midweight,combined' | split: ',' -%}
+              {%- for layer_type in layer_types -%}
+                {%- assign image_key = layer_type | append: '_image' -%}
+                {%- assign label_key = layer_type | append: '_label' -%}
+                {%- assign bubble_key = layer_type | append: '_bubble' -%}
+                <div class="ac-layer ac-layer--{{ layer_type }}">
+                  <p class="ac-bubble">{{ block.settings[bubble_key] | escape }}</p>
+                  <div class="ac-layer-media">
+                    {% if block.settings[image_key] != blank %}{{ block.settings[image_key] | image_url: width: 720 | image_tag: widths: '180, 360, 540, 720', sizes: '(max-width: 767px) 152px, 227px', loading: 'lazy', decoding: 'async', alt: block.settings[label_key] }}{% endif %}
+                  </div>
+                  <h3 class="ac-layer-label">{{ block.settings[label_key] | escape }}</h3>
+                </div>
+                {%- if forloop.index == 1 -%}<span class="ac-equation" aria-hidden="true">+</span>{%- elsif forloop.index == 2 -%}<span class="ac-equation ac-equation--equals" aria-hidden="true">=</span>{%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- when 'seasons' -%}
+            <div class="ac-scroll" tabindex="0" role="region" aria-labelledby="ac-title-{{ block.id }}" aria-describedby="ac-hint-{{ block.id }}">
+              <p id="ac-hint-{{ block.id }}" class="ac-screenreader">{{ block.settings.scroll_hint | escape }}</p>
+              <ul class="ac-track" role="list">
+                {%- for i in (1..4) -%}
+                  {%- assign image_key = 'image_' | append: i -%}{%- assign label_key = 'label_' | append: i -%}
+                  <li class="ac-card ac-season-card">
+                    {% if block.settings[image_key] != blank %}{{ block.settings[image_key] | image_url: width: 800 | image_tag: widths: '286, 400, 572, 680, 800', sizes: '(max-width: 767px) min(85vw, 340px), (min-width: 1536px) 310px, 25vw', loading: 'lazy', decoding: 'async', alt: block.settings[label_key] }}{% endif %}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- when 'lifestyle' -%}
+            <div class="ac-scroll" tabindex="0" role="region" aria-labelledby="ac-title-{{ block.id }}" aria-describedby="ac-hint-{{ block.id }}">
+              <p id="ac-hint-{{ block.id }}" class="ac-screenreader">{{ block.settings.scroll_hint | escape }}</p>
+              <ul class="ac-track" role="list">
+                {%- for i in (1..4) -%}
+                  {%- assign image_key = 'image_' | append: i -%}{%- assign label_key = 'caption_' | append: i -%}
+                  <li class="ac-card ac-life-card">
+                    <div class="ac-life-photo">{% if block.settings[image_key] != blank %}{{ block.settings[image_key] | image_url: width: 800 | image_tag: widths: '286, 400, 572, 680, 800', sizes: '(max-width: 767px) min(85vw, 340px), (min-width: 1536px) 310px, 25vw', loading: 'lazy', decoding: 'async', alt: block.settings[label_key] }}{% endif %}</div>
+                    <h3 class="ac-life-caption"><span>{{ block.settings[label_key] | escape }}</span></h3>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- when 'comparison' -%}
+            <div class="ac-scroll ac-scroll--comparison" tabindex="0" role="region" aria-label="{{ block.settings.heading | escape }}" aria-describedby="ac-hint-{{ block.id }}">
+              <p id="ac-hint-{{ block.id }}" class="ac-screenreader">{{ block.settings.scroll_hint | escape }}</p>
+              <div class="ac-compare-frame">
+                <div class="ac-compare-panel" aria-hidden="true"></div><div class="ac-compare-highlight" aria-hidden="true"></div><div class="ac-compare-rules" aria-hidden="true"></div>
+                <table class="ac-compare-table">
+                  <caption class="ac-screenreader">{{ block.settings.heading | escape }}</caption>
+                  <colgroup><col class="ac-feature-col"><col class="ac-brand-col"><col></colgroup>
+                  <thead><tr><td></td><th scope="col">{{ block.settings.brand_name | escape }}{% if block.settings.brand_image != blank %}{{ block.settings.brand_image | image_url: width: 360 | image_tag: widths: '120, 240, 360', sizes: '(max-width: 767px) 76px, 120px', loading: 'lazy', decoding: 'async', alt: block.settings.brand_name }}{% endif %}</th><th scope="col">{{ block.settings.other_name | escape }}{% if block.settings.other_image != blank %}{{ block.settings.other_image | image_url: width: 360 | image_tag: widths: '120, 240, 360', sizes: '(max-width: 767px) 76px, 120px', loading: 'lazy', decoding: 'async', alt: block.settings.other_name }}{% endif %}</th></tr></thead>
+                  <tbody>
+                    {% for i in (1..4) %}{% assign label_key = 'feature_' | append: i %}{% assign brand_key = 'brand_' | append: i %}{% assign other_key = 'other_' | append: i %}
+                      <tr><th scope="row">{{ block.settings[label_key] | escape | newline_to_br }}</th>
+                      {% if i < 3 %}<td aria-label="{{ block.settings.brand_rating_label | escape }}"><span aria-hidden="true">★★★<span class="ac-star-break">★★</span></span></td><td aria-label="{{ block.settings.other_rating_label | escape }}"><span aria-hidden="true">★★</span></td>
+                      {% else %}<td>{{ block.settings[brand_key] | escape | replace: ', ', ', <wbr>' }}</td><td>{{ block.settings[other_key] | escape | replace: ', ', ', <wbr>' }}</td>{% endif %}</tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        {%- endcase -%}
+      </div>
+    </section>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Adjustable Comforter 四板块",
+  "tag": "div",
+  "class": "section-adjustable-comforter",
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "背景颜色",
+      "default": "#ededed"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "文字颜色",
+      "default": "#0f374b"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "temperature",
+      "name": "1 温度与双层组合",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "标题",
+          "default": "Comfort That Adapts to Your Temperature"
+        },
+        {
+          "type": "checkbox",
+          "id": "divider",
+          "label": "显示全宽分隔线",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "顶部间距（电脑）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "底部间距（电脑）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_top",
+          "label": "顶部间距（手机）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_bottom",
+          "label": "底部间距（手机）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "image_picker",
+          "id": "cooling_image",
+          "label": "Cooling Layer 图片"
+        },
+        {
+          "type": "text",
+          "id": "cooling_label",
+          "label": "图片说明",
+          "default": "Cooling Layer"
+        },
+        {
+          "type": "text",
+          "id": "cooling_bubble",
+          "label": "气泡文字",
+          "default": "Too Hot?"
+        },
+        {
+          "type": "image_picker",
+          "id": "midweight_image",
+          "label": "Midweight Layer 图片"
+        },
+        {
+          "type": "text",
+          "id": "midweight_label",
+          "label": "图片说明",
+          "default": "Midweight Layer"
+        },
+        {
+          "type": "text",
+          "id": "midweight_bubble",
+          "label": "气泡文字",
+          "default": "Feel Chilly?"
+        },
+        {
+          "type": "image_picker",
+          "id": "combined_image",
+          "label": "Zip Together 图片"
+        },
+        {
+          "type": "text",
+          "id": "combined_label",
+          "label": "图片说明",
+          "default": "Zip Together"
+        },
+        {
+          "type": "text",
+          "id": "combined_bubble",
+          "label": "气泡文字",
+          "default": "Need More Warmth?"
+        }
+      ]
+    },
+    {
+      "type": "seasons",
+      "name": "2 四季场景",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "标题",
+          "default": "One Comforter. Four Seasons."
+        },
+        {
+          "type": "checkbox",
+          "id": "divider",
+          "label": "显示全宽分隔线",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "顶部间距（电脑）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "底部间距（电脑）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_top",
+          "label": "顶部间距（手机）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_bottom",
+          "label": "底部间距（手机）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "text",
+          "id": "scroll_hint",
+          "label": "滑动提示（辅助阅读）",
+          "default": "Swipe horizontally to explore more."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "图片 1"
+        },
+        {
+          "type": "text",
+          "id": "label_1",
+          "label": "图片说明 1",
+          "default": "Spring bedroom"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "图片 2"
+        },
+        {
+          "type": "text",
+          "id": "label_2",
+          "label": "图片说明 2",
+          "default": "Summer bedroom"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "图片 3"
+        },
+        {
+          "type": "text",
+          "id": "label_3",
+          "label": "图片说明 3",
+          "default": "Autumn bedroom"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "图片 4"
+        },
+        {
+          "type": "text",
+          "id": "label_4",
+          "label": "图片说明 4",
+          "default": "Winter bedroom"
+        }
+      ]
+    },
+    {
+      "type": "lifestyle",
+      "name": "3 日常生活",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "标题",
+          "default": "Made For Real Life"
+        },
+        {
+          "type": "checkbox",
+          "id": "divider",
+          "label": "显示全宽分隔线",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "顶部间距（电脑）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "底部间距（电脑）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_top",
+          "label": "顶部间距（手机）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_bottom",
+          "label": "底部间距（手机）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "text",
+          "id": "scroll_hint",
+          "label": "滑动提示（辅助阅读）",
+          "default": "Swipe horizontally to explore more."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "图片 1"
+        },
+        {
+          "type": "textarea",
+          "id": "caption_1",
+          "label": "文案 1",
+          "default": "No More Fighting\nOver the Thermostat"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "图片 2"
+        },
+        {
+          "type": "textarea",
+          "id": "caption_2",
+          "label": "文案 2",
+          "default": "Less Seasonal Hassle.\nMore Living."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "图片 3"
+        },
+        {
+          "type": "textarea",
+          "id": "caption_3",
+          "label": "文案 3",
+          "default": "Comfort That\nTravels with You"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "图片 4"
+        },
+        {
+          "type": "textarea",
+          "id": "caption_4",
+          "label": "文案 4",
+          "default": "Soft on You.\nLoved by Pets."
+        }
+      ]
+    },
+    {
+      "type": "comparison",
+      "name": "4 产品对比",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "标题",
+          "default": "Breescape comforter comparison"
+        },
+        {
+          "type": "checkbox",
+          "id": "divider",
+          "label": "显示全宽分隔线",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "顶部间距（电脑）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "底部间距（电脑）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_top",
+          "label": "顶部间距（手机）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_bottom",
+          "label": "底部间距（手机）",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "text",
+          "id": "scroll_hint",
+          "label": "滑动提示（辅助阅读）",
+          "default": "Swipe horizontally to explore more."
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "品牌名称",
+          "default": "Breescape"
+        },
+        {
+          "type": "text",
+          "id": "other_name",
+          "label": "其他产品名称",
+          "default": "Others"
+        },
+        {
+          "type": "image_picker",
+          "id": "brand_image",
+          "label": "Breescape 图片"
+        },
+        {
+          "type": "image_picker",
+          "id": "other_image",
+          "label": "其他产品图片"
+        },
+        {
+          "type": "text",
+          "id": "brand_rating_label",
+          "label": "品牌星级说明",
+          "default": "5 out of 5 stars"
+        },
+        {
+          "type": "text",
+          "id": "other_rating_label",
+          "label": "其他产品星级说明",
+          "default": "2 out of 5 stars"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_1",
+          "label": "比较项 1",
+          "default": "Temperature\nRegulation"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_2",
+          "label": "比较项 2",
+          "default": "Breathability"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_3",
+          "label": "比较项 3",
+          "default": "All-Season\nComfort"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_4",
+          "label": "比较项 4",
+          "default": "Versatility"
+        },
+        {
+          "type": "text",
+          "id": "brand_3",
+          "label": "品牌：四季使用",
+          "default": "2-in-1 Design for 4 Seasons"
+        },
+        {
+          "type": "text",
+          "id": "other_3",
+          "label": "其他：四季使用",
+          "default": "Winter Only"
+        },
+        {
+          "type": "text",
+          "id": "brand_4",
+          "label": "品牌：多用途",
+          "default": "1 Comforter, 2 Layers, 3 Ways"
+        },
+        {
+          "type": "text",
+          "id": "other_4",
+          "label": "其他：多用途",
+          "default": "1 Comforter, Fixed Design"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Adjustable Comforter 四板块",
+      "blocks": [
+        {
+          "type": "temperature"
+        },
+        {
+          "type": "seasons"
+        },
+        {
+          "type": "lifestyle"
+        },
+        {
+          "type": "comparison"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

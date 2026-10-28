@@ -1,0 +1,2016 @@
+{%- comment -%}
+  Shop the look 2 —— 多图 + 每图多产品，右侧胶囊行（复用加购模块的视觉风格）。
+  - 左侧：图片舞台，可切换多张场景（图右下角缩略图切换），支持热点。
+  - 右侧：Title + Add to Cart 按钮 + 胶囊行产品列表；勾选多个后 Add to Cart 一次性加购。
+  - 完全自包含（CSS/JS 都在本文件），任意模板可用。
+{%- endcomment -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+    --stl2-image-radius: {{ section.settings.image_radius | default: 40 }}px;
+    --stl2-btn-radius: {{ section.settings.button_radius | default: 30 }}px;
+    --stl2-row-radius: {{ section.settings.row_radius | default: 36 }}px;
+    --stl2-gap: {{ section.settings.columns_gap | default: 64 }}px;
+    --stl2-list-visible: {{ section.settings.list_visible_count | default: 3 }};
+    --stl2-row-h: {{ section.settings.row_height | default: 140 }}px;
+    --stl2-row-gap: {{ section.settings.row_gap | default: 18 }}px;
+    --stl2-row-pad-l: {{ section.settings.row_padding_left | default: 26 }}px;
+    --stl2-row-pad-r: {{ section.settings.row_padding_right | default: 26 }}px;
+    --stl2-header-mb: {{ section.settings.header_margin_bottom | default: 32 }}px;
+    --stl2-header-mt-m: {{ section.settings.header_margin_top_mobile | default: 16 }}px;
+    --stl2-header-mb-m: {{ section.settings.header_margin_bottom_mobile | default: 16 }}px;
+    --stl2-hotspot-color: {{ section.settings.hotspot_color.rgb | default: '255,255,255' }};
+    --stl2-active-color: {{ section.settings.active_color.rgb | default: '16,55,75' }};
+    --stl2-row-border: {{ section.settings.row_border_color.rgb | default: '209,213,219' }};
+  }
+
+  #shopify-section-{{ section.id }} .stl2 { display: grid; gap: clamp(16px, 2vw, 24px); }
+  #shopify-section-{{ section.id }} .stl2__body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--stl2-gap);
+    align-items: start;
+  }
+  @media screen and (min-width: 900px) {
+    #shopify-section-{{ section.id }} .stl2__body { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ================= 左侧舞台 ================= */
+  #shopify-section-{{ section.id }} .stl2__stage {
+    position: relative;
+    border-radius: var(--stl2-image-radius);
+    background: rgb(var(--color-placeholder, 240,240,240));
+  }
+  #shopify-section-{{ section.id }} .stl2__scenes {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ section.settings.aspect_ratio | default: '1 / 1' }};
+  }
+  #shopify-section-{{ section.id }} .stl2__scene {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease;
+  }
+  #shopify-section-{{ section.id }} .stl2__scene[aria-current="true"] {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+  }
+  /* 只裁切图片本身，热点浮层可溢出显示 */
+  #shopify-section-{{ section.id }} .stl2__scene-media {
+    position: absolute; inset: 0;
+    border-radius: var(--stl2-image-radius);
+    overflow: hidden;
+  }
+  #shopify-section-{{ section.id }} .stl2__scene-media picture,
+  #shopify-section-{{ section.id }} .stl2__scene-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* 热点 + 悬停信息卡 */
+  #shopify-section-{{ section.id }} .stl2__hotspot {
+    --stl2-tip-gap: 4px;
+    position: absolute;
+    /* 扩大可点/可悬停热区，视觉圆点仍居中 28px */
+    width: 44px; height: 44px;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  /* 圆点 → 信息卡之间的隐形桥，避免鼠标穿过空隙时 tip 消失 */
+  #shopify-section-{{ section.id }} .stl2__hotspot::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(300px, 80vw);
+    height: calc(50% + var(--stl2-tip-gap) + 96px);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot:has(.stl2__hotspot-tip.with-bottom)::after {
+    top: auto;
+    bottom: 50%;
+    height: calc(50% + var(--stl2-tip-gap) + 96px);
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-dot {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 28px; height: 28px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgb(var(--stl2-hotspot-color));
+    border: 2px solid rgba(255,255,255,0.85);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    display: flex; align-items: center; justify-content: center;
+    animation: stl2-pulse 2.2s ease-out infinite;
+    transition: transform .2s ease;
+    padding: 0;
+    cursor: pointer;
+    appearance: none; -webkit-appearance: none;
+    z-index: 2;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-dot::after {
+    content: '';
+    width: 8px; height: 8px;
+    background: rgb(var(--stl2-active-color));
+    border-radius: 50%;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot:hover,
+  #shopify-section-{{ section.id }} .stl2__hotspot[aria-current="true"] {
+    z-index: 6;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot:hover .stl2__hotspot-dot,
+  #shopify-section-{{ section.id }} .stl2__hotspot[aria-current="true"] .stl2__hotspot-dot {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+  @keyframes stl2-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.55), 0 2px 8px rgba(0,0,0,0.25); }
+    70% { box-shadow: 0 0 0 14px rgba(255,255,255,0), 0 2px 8px rgba(0,0,0,0.25); }
+    100% { box-shadow: 0 0 0 0 rgba(255,255,255,0), 0 2px 8px rgba(0,0,0,0.25); }
+  }
+
+  /* 悬停产品信息卡：三角与卡片同色重叠拼接 + 整体 drop-shadow，无接缝 */
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip {
+    --stl2-tip-bg: #ffffff;
+    --stl2-tip-arrow: 8px;
+    --stl2-tip-inset: 8px; /* 卡片内边距：上下左右一致 */
+    /* 三角紧贴圆点外缘（圆点半径 14px）+ 小间距 */
+    --stl2-tip-pad: calc(14px + var(--stl2-tip-gap));
+    --stl2-tip-card-top: calc(var(--stl2-tip-pad) + var(--stl2-tip-arrow));
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(6px) scale(0.96);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 220px;
+    max-width: 280px;
+    margin: 0;
+    /* 内容区顶部 = 白卡片起点 + 内边距，与底部 inset 对齐 */
+    padding: calc(var(--stl2-tip-card-top) + var(--stl2-tip-inset)) var(--stl2-tip-inset) var(--stl2-tip-inset);
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+    transition-delay: .12s;
+    z-index: 5;
+    text-align: left;
+    cursor: default;
+    filter: drop-shadow(0 8px 18px rgba(16, 55, 75, 0.16));
+  }
+  /* 圆角卡片本体 */
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: var(--stl2-tip-card-top);
+    bottom: 0;
+    background: var(--stl2-tip-bg);
+    border-radius: 12px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  /* 三角：同色并向下嵌入卡片 1px，消除接缝 */
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: calc(var(--stl2-tip-card-top) - var(--stl2-tip-arrow) + 1px);
+    width: calc(var(--stl2-tip-arrow) * 2);
+    height: calc(var(--stl2-tip-arrow) * 2);
+    background: var(--stl2-tip-bg);
+    transform: translateX(-50%) rotate(45deg);
+    border-radius: 1.5px;
+    box-shadow: none;
+    z-index: 0;
+    pointer-events: none;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip.with-left {
+    left: 0; transform: translateX(0) translateY(6px) scale(0.96);
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip.with-left::before {
+    left: 22px;
+    transform: translateX(0) rotate(45deg);
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip.with-right {
+    left: auto; right: 0; transform: translateX(0) translateY(6px) scale(0.96);
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip.with-right::before {
+    left: auto;
+    right: 22px;
+    transform: translateX(0) rotate(45deg);
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip.with-bottom {
+    top: auto;
+    bottom: 50%;
+    padding-top: var(--stl2-tip-inset);
+    padding-bottom: calc(var(--stl2-tip-card-top) + var(--stl2-tip-inset));
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip.with-bottom::after {
+    top: 0;
+    bottom: var(--stl2-tip-card-top);
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip.with-bottom::before {
+    top: auto;
+    bottom: calc(var(--stl2-tip-card-top) - var(--stl2-tip-arrow) + 1px);
+  }
+
+  /* 电脑端：仅 hover 显示信息卡；悬停桥 + 延迟隐藏，保证能移到卡片上 */
+  @media (hover: hover) and (pointer: fine) {
+    #shopify-section-{{ section.id }} .stl2__hotspot:hover::after {
+      pointer-events: auto;
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot:hover .stl2__hotspot-tip,
+    #shopify-section-{{ section.id }} .stl2__hotspot:focus-within .stl2__hotspot-tip {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0) scale(1);
+      transition-delay: 0s; /* 出现立刻 */
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot:hover .stl2__hotspot-tip.with-left,
+    #shopify-section-{{ section.id }} .stl2__hotspot:hover .stl2__hotspot-tip.with-right,
+    #shopify-section-{{ section.id }} .stl2__hotspot:focus-within .stl2__hotspot-tip.with-left,
+    #shopify-section-{{ section.id }} .stl2__hotspot:focus-within .stl2__hotspot-tip.with-right {
+      transform: translateX(0) translateY(0) scale(1);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip-img,
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip-info,
+  #shopify-section-{{ section.id }} .stl2__hotspot-cart {
+    position: relative;
+    z-index: 1;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip-img {
+    flex: 0 0 56px;
+    width: 56px; height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f3f3f3;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip-info {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip-title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: rgb(var(--stl2-active-color));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-tip-price {
+    margin: 0;
+    font-size: 12px;
+    color: rgba(16,55,75,0.7);
+  }
+  /* 圆形购物车按钮（图3风格） */
+  #shopify-section-{{ section.id }} .stl2__hotspot-cart {
+    flex: 0 0 40px;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 0;
+    padding: 0;
+    background: rgb(var(--stl2-active-color));
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-cart:hover {
+    transform: scale(1.06);
+    opacity: .92;
+  }
+  #shopify-section-{{ section.id }} .stl2__hotspot-cart svg {
+    width: 18px; height: 18px;
+    display: block;
+  }
+
+  @media (max-width: 767px) {
+    /* 移动端：点选后显示信息卡（无 hover），避免贴边时被裁切 */
+    #shopify-section-{{ section.id }} .stl2__hotspot-tip {
+      min-width: 200px;
+      max-width: min(260px, calc(100vw - 16px));
+      /* 不过渡 transform，避免切换圆点时量到半路坐标、信息卡滑出屏幕 */
+      transition: opacity .18s ease, visibility .18s ease;
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot[aria-current="true"] .stl2__hotspot-tip {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot[aria-current="true"] .stl2__hotspot-tip.with-left,
+    #shopify-section-{{ section.id }} .stl2__hotspot[aria-current="true"] .stl2__hotspot-tip.with-right {
+      transform: translateX(0) translateY(0) scale(1);
+    }
+
+    /* 移动端：每个圆点单独配置信息卡上方 / 下方 */
+    #shopify-section-{{ section.id }} .stl2__hotspot[data-tip-position="above"] .stl2__hotspot-tip {
+      top: auto;
+      bottom: 50%;
+      padding-top: var(--stl2-tip-inset);
+      padding-bottom: calc(var(--stl2-tip-card-top) + var(--stl2-tip-inset));
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot[data-tip-position="above"] .stl2__hotspot-tip::after {
+      top: 0;
+      bottom: var(--stl2-tip-card-top);
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot[data-tip-position="above"] .stl2__hotspot-tip::before {
+      top: auto;
+      bottom: calc(var(--stl2-tip-card-top) - var(--stl2-tip-arrow) + 1px);
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot[data-tip-position="above"]::after {
+      top: auto;
+      bottom: 50%;
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot[data-tip-position="below"] .stl2__hotspot-tip.with-bottom {
+      top: 50%;
+      bottom: auto;
+      padding-top: calc(var(--stl2-tip-card-top) + var(--stl2-tip-inset));
+      padding-bottom: var(--stl2-tip-inset);
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot[data-tip-position="below"] .stl2__hotspot-tip.with-bottom::after {
+      top: var(--stl2-tip-card-top);
+      bottom: 0;
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot[data-tip-position="below"] .stl2__hotspot-tip.with-bottom::before {
+      top: calc(var(--stl2-tip-card-top) - var(--stl2-tip-arrow) + 1px);
+      bottom: auto;
+    }
+    #shopify-section-{{ section.id }} .stl2__hotspot[data-tip-position="below"]::after {
+      top: 50%;
+      bottom: auto;
+    }
+  }
+
+  /* 缩略图切换（右下角） */
+  #shopify-section-{{ section.id }} .stl2__thumbs {
+    position: absolute;
+    right: 12px; bottom: 12px;
+    display: flex; gap: 8px;
+    padding: 6px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 999px;
+    z-index: 4;
+    max-width: calc(100% - 24px);
+    overflow-x: auto;
+  }
+  #shopify-section-{{ section.id }} .stl2__thumb {
+    flex: 0 0 auto;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: #ddd;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  #shopify-section-{{ section.id }} .stl2__thumb img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  #shopify-section-{{ section.id }} .stl2__thumb[aria-current="true"] {
+    border-color: rgb(var(--stl2-active-color));
+    transform: scale(1.05);
+  }
+
+  /* ================= 右侧面板 ================= */
+  #shopify-section-{{ section.id }} .stl2__panel {
+    display: flex; flex-direction: column;
+    gap: 0;
+    min-width: 0;
+  }
+  #shopify-section-{{ section.id }} .stl2__panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: var(--stl2-header-mb);
+  }
+  #shopify-section-{{ section.id }} .stl2__panel-heading {
+    min-width: 0;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+  }
+  #shopify-section-{{ section.id }} .stl2__title {
+    margin: 0;
+    font-size: clamp(22px, 2.2vw, 32px);
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: rgb(var(--stl2-active-color));
+  }
+  #shopify-section-{{ section.id }} .stl2__cta {
+    flex: 0 0 auto;
+    padding: 12px 22px;
+    border-radius: var(--stl2-btn-radius);
+    background: rgb(var(--stl2-active-color));
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    align-self: center;
+    transition: opacity .15s ease, background-color .15s ease;
+  }
+  #shopify-section-{{ section.id }} .stl2__cta:hover { opacity: .9; }
+  #shopify-section-{{ section.id }} .stl2__cta[aria-busy="true"] { opacity: .6; cursor: wait; }
+  #shopify-section-{{ section.id }} .stl2__cta[disabled] { opacity: .4; cursor: not-allowed; }
+
+  /* 列表：默认可视 N 行，超出滚动 */
+  #shopify-section-{{ section.id }} .stl2__lists {
+    position: relative;
+    max-height: calc(var(--stl2-row-h) * var(--stl2-list-visible) + var(--stl2-row-gap) * (var(--stl2-list-visible) - 1) + 8px);
+    overflow-y: auto;
+    padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--stl2-active-color)) transparent;
+  }
+  #shopify-section-{{ section.id }} .stl2__lists::-webkit-scrollbar { width: 4px; }
+  #shopify-section-{{ section.id }} .stl2__lists::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 999px; }
+  #shopify-section-{{ section.id }} .stl2__lists::-webkit-scrollbar-thumb { background: rgb(var(--stl2-active-color)); border-radius: 999px; }
+  #shopify-section-{{ section.id }} .stl2__list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column;
+    gap: var(--stl2-row-gap);
+  }
+  #shopify-section-{{ section.id }} .stl2__list[hidden] { display: none !important; }
+
+  /* ================= 胶囊行（复用加购模块视觉：标题在上、颜色/尺码/价格在下） ================= */
+  #shopify-section-{{ section.id }} .stl2__row {
+    display: flex; align-items: center;
+    gap: 14px;
+    padding: 10px var(--stl2-row-pad-r) 10px var(--stl2-row-pad-l);
+    min-height: var(--stl2-row-h);
+    background: #fff;
+    border: 1px solid rgb(var(--stl2-row-border));
+    border-radius: var(--stl2-row-radius);
+    cursor: pointer;
+    transition: border-color .15s ease, box-shadow .15s ease;
+    position: relative;
+  }
+  #shopify-section-{{ section.id }} .stl2__row:hover,
+  #shopify-section-{{ section.id }} .stl2__row.is-checked {
+    border-color: rgb(var(--stl2-active-color));
+  }
+  #shopify-section-{{ section.id }} .stl2__row.is-focused {
+    border-color: rgb(var(--stl2-active-color));
+    box-shadow: 0 0 0 3px rgba(var(--stl2-active-color), .18);
+    animation: stl2-row-focus 1.2s ease-out;
+  }
+  @keyframes stl2-row-focus {
+    0%   { box-shadow: 0 0 0 0 rgba(var(--stl2-active-color), .35); }
+    60%  { box-shadow: 0 0 0 8px rgba(var(--stl2-active-color), .12); }
+    100% { box-shadow: 0 0 0 3px rgba(var(--stl2-active-color), .18); }
+  }
+  #shopify-section-{{ section.id }} .stl2__check-wrap {
+    position: relative;
+    flex: 0 0 22px;
+    width: 22px; height: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  #shopify-section-{{ section.id }} .stl2__check {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer; margin: 0;
+    width: 100%; height: 100%;
+  }
+  #shopify-section-{{ section.id }} .stl2__check-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgb(var(--stl2-row-border));
+    display: inline-flex; align-items: center; justify-content: center;
+    color: transparent;
+    background: transparent;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+  #shopify-section-{{ section.id }} .stl2__check:checked + .stl2__check-icon {
+    background: rgb(var(--stl2-active-color));
+    border-color: rgb(var(--stl2-active-color));
+    color: #fff;
+  }
+  #shopify-section-{{ section.id }} .stl2__row-media {
+    flex: 0 0 auto;
+    width: 64px; height: 64px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #F4F4F5;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  #shopify-section-{{ section.id }} .stl2__row-media img {
+    width: 100%; height: 100%; object-fit: cover; display: block; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .stl2__row-body {
+    flex: 1 1 auto; min-width: 0;
+    display: flex; flex-direction: column; gap: 6px;
+    justify-content: center;
+  }
+  #shopify-section-{{ section.id }} .stl2__row-title {
+    margin: 0;
+    color: rgb(var(--stl2-active-color));
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #shopify-section-{{ section.id }} .stl2__row-detail {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+  #shopify-section-{{ section.id }} .stl2__row-pickers {
+    display: inline-flex; align-items: center; gap: 6px;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  #shopify-section-{{ section.id }} .stl2__picker {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 6px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+  }
+  #shopify-section-{{ section.id }} .stl2__picker:hover { background: rgba(16,55,75,.05); }
+  #shopify-section-{{ section.id }} .stl2__picker.is-open {
+    background: rgba(16,55,75,.06);
+    border-color: rgba(16,55,75,.18);
+  }
+  #shopify-section-{{ section.id }} .stl2__picker--color .stl2__trigger-label { display: none; }
+  #shopify-section-{{ section.id }} .stl2__swatch {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.12);
+    box-shadow: inset 0 0 0 2px #fff;
+    background: #888;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    flex: 0 0 22px;
+  }
+  #shopify-section-{{ section.id }} .stl2__swatch.is-img,
+  #shopify-section-{{ section.id }} .stl2__menu-swatch.is-img {
+    box-shadow: inset 0 0 0 1.5px #fff;
+    border: 1.5px solid rgba(15,55,75,.55);
+  }
+  #shopify-section-{{ section.id }} .stl2__trigger {
+    appearance: none; -webkit-appearance: none;
+    border: 0; background: transparent;
+    padding: 0;
+    display: inline-flex; align-items: center; gap: 6px;
+    font: inherit;
+    color: rgb(var(--stl2-active-color));
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    line-height: 1;
+  }
+  #shopify-section-{{ section.id }} .stl2__trigger-label {
+    display: inline-block;
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #shopify-section-{{ section.id }} .stl2__caret {
+    pointer-events: none;
+    color: rgb(var(--stl2-active-color));
+    opacity: .8;
+    display: inline-flex;
+    transition: transform .2s ease;
+  }
+  #shopify-section-{{ section.id }} .stl2__picker.is-open .stl2__caret {
+    transform: rotate(180deg);
+  }
+  #shopify-section-{{ section.id }} .stl2__menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 30;
+    min-width: 140px;
+    max-width: 240px;
+    margin: 0; padding: 6px;
+    list-style: none;
+    background: #fff;
+    border: 1px solid rgba(16,55,75,.12);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(16,55,75,.12), 0 2px 6px rgba(16,55,75,.08);
+    overflow: hidden;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+  #shopify-section-{{ section.id }} .stl2__menu[hidden] { display: none; }
+  /* 挂到 body 后避免被列表 overflow 裁切（样式不能再依赖 section id） */
+  .stl2__menu.stl2__menu--portal {
+    position: fixed !important;
+    z-index: 9999 !important;
+    min-width: 140px;
+    max-width: 240px;
+    margin: 0; padding: 6px;
+    list-style: none;
+    background: #fff;
+    border: 1px solid rgba(16,55,75,.12);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(16,55,75,.12), 0 2px 6px rgba(16,55,75,.08);
+    max-height: 240px;
+    overflow-y: auto;
+    color: #10374B;
+    font-size: 14px;
+  }
+  .stl2__menu.stl2__menu--portal[hidden] { display: none !important; }
+  .stl2__menu.stl2__menu--portal .stl2__menu-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #10374B;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .stl2__menu.stl2__menu--portal .stl2__menu-item:hover { background: rgba(16,55,75,.06); }
+  .stl2__menu.stl2__menu--portal .stl2__menu-item.is-selected { background: rgba(103,210,224,.18); }
+  .stl2__menu.stl2__menu--portal .stl2__menu-item.is-unavailable {
+    color: #B91C1C; opacity: .6; cursor: not-allowed;
+  }
+  .stl2__menu.stl2__menu--portal .stl2__menu-item.is-unavailable .stl2__menu-text {
+    text-decoration: line-through; text-decoration-color: #B91C1C;
+  }
+  .stl2__menu.stl2__menu--portal .stl2__menu-swatch {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.10);
+    box-shadow: inset 0 0 0 2px #fff;
+    display: inline-block; flex: 0 0 18px;
+    background-size: cover; background-position: center;
+  }
+  .stl2__menu.stl2__menu--portal .stl2__menu-swatch.is-img {
+    box-shadow: inset 0 0 0 1.5px #fff;
+    border: 1.5px solid rgba(15,55,75,.55);
+  }
+  .stl2__menu.stl2__menu--portal .stl2__menu-text { flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; }
+  .stl2__menu.stl2__menu--portal .stl2__menu-check { flex: 0 0 auto; color: #10374B; opacity: 0; }
+  .stl2__menu.stl2__menu--portal .stl2__menu-item.is-selected .stl2__menu-check { opacity: 1; }
+  #shopify-section-{{ section.id }} .stl2__menu-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: rgb(var(--stl2-active-color));
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  #shopify-section-{{ section.id }} .stl2__menu-item:hover { background: rgba(16,55,75,.06); }
+  #shopify-section-{{ section.id }} .stl2__menu-item.is-selected { background: rgba(103,210,224,.18); }
+  #shopify-section-{{ section.id }} .stl2__menu-item.is-unavailable {
+    color: #B91C1C;
+    opacity: .6;
+    cursor: not-allowed;
+  }
+  #shopify-section-{{ section.id }} .stl2__menu-item.is-unavailable .stl2__menu-text {
+    text-decoration: line-through;
+    text-decoration-color: #B91C1C;
+  }
+  #shopify-section-{{ section.id }} .stl2__menu-swatch {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.10);
+    box-shadow: inset 0 0 0 2px #fff;
+    display: inline-block;
+    flex: 0 0 18px;
+    background-size: cover;
+    background-position: center;
+  }
+  #shopify-section-{{ section.id }} .stl2__menu-text { flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; }
+  #shopify-section-{{ section.id }} .stl2__menu-check {
+    flex: 0 0 auto;
+    color: rgb(var(--stl2-active-color));
+    opacity: 0;
+    transition: opacity .12s ease;
+  }
+  #shopify-section-{{ section.id }} .stl2__menu-item.is-selected .stl2__menu-check { opacity: 1; }
+
+  #shopify-section-{{ section.id }} .stl2__price {
+    flex: 0 0 auto;
+    display: inline-flex; align-items: baseline; gap: 8px;
+    white-space: nowrap;
+  }
+  #shopify-section-{{ section.id }} .stl2__compare {
+    color: #9CA3AF;
+    font-size: 13px;
+    text-decoration: line-through;
+  }
+  #shopify-section-{{ section.id }} .stl2__compare[hidden] { display: none; }
+  #shopify-section-{{ section.id }} .stl2__sale {
+    color: rgb(var(--stl2-active-color));
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  /* 移动端：圆点 + 大缩略图 +（名称 / 颜色尺码 / 价格），右侧三行高度对齐缩略图 */
+  @media (max-width: 640px) {
+    #shopify-section-{{ section.id }} .stl2__row {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 0;
+      border-radius: 20px;
+      padding: 15px;
+      min-height: 0;
+    }
+    #shopify-section-{{ section.id }} .stl2__check-wrap {
+      order: 3;
+      align-self: center;
+      flex: 0 0 auto;
+      margin-left: 4px;
+      margin-right: 0;
+    }
+    #shopify-section-{{ section.id }} .stl2__row-media {
+      order: 1;
+      width: 88px;
+      height: 88px;
+      flex: 0 0 88px;
+      margin-right: 10px;
+    }
+    #shopify-section-{{ section.id }} .stl2__row-body {
+      order: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 88px;
+      min-height: 88px;
+      gap: 0;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+    #shopify-section-{{ section.id }} .stl2__row-title {
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #shopify-section-{{ section.id }} .stl2__row-detail { display: contents; }
+    #shopify-section-{{ section.id }} .stl2__row-pickers { flex: 0 0 auto; }
+    #shopify-section-{{ section.id }} .stl2__price {
+      margin-left: 0;
+      justify-content: flex-start;
+    }
+    #shopify-section-{{ section.id }} .stl2__lists { max-height: none; overflow: visible; padding-right: 0; }
+    #shopify-section-{{ section.id }} .stl2__body { row-gap: 0; }
+    #shopify-section-{{ section.id }} .stl2__panel-header {
+      flex-wrap: wrap;
+      margin-top: var(--stl2-header-mt-m, 16px);
+      margin-bottom: var(--stl2-header-mb-m, 16px);
+    }
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+    <shop-the-look-2 class="stl2" id="STL2-{{ section.id }}">
+      {%- if section.blocks.size == 0 -%}
+        <p class="text-center">Add a Scene block from the theme editor.</p>
+      {%- else -%}
+      <div class="stl2__body">
+        {%- comment -%} ===== 左侧舞台 ===== {%- endcomment -%}
+        <div class="stl2__stage">
+          <div class="stl2__scenes">
+            {%- for block in section.blocks -%}
+              {%- assign scene_idx = forloop.index0 -%}
+              {%- assign img = block.settings.image -%}
+              {%- assign img_m = block.settings.image_mobile | default: img -%}
+              <div class="stl2__scene" data-scene-index="{{ scene_idx }}" data-block-id="{{ block.id }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>
+                <div class="stl2__scene-media">
+                  <picture>
+                    {%- if img_m != blank -%}
+                      <source media="(max-width: 767px)" srcset="{{ img_m | image_url: width: 800 }} 800w, {{ img_m | image_url: width: 1200 }} 1200w">
+                    {%- endif -%}
+                    {%- if img != blank -%}
+                      {{ img | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '600,900,1200,1600,2000', alt: img.alt | default: 'Shop the look' }}
+                    {%- else -%}
+                      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
+                    {%- endif -%}
+                  </picture>
+                </div>
+
+                {%- comment -%} 热点：scene_idx 用外层保存变量；悬停出信息卡，点击开 Quick View {%- endcomment -%}
+                {%- for i in (1..6) -%}
+                  {%- assign p_key = 'product_' | append: i -%}
+                  {%- assign px_key = 'product_' | append: i | append: '_x' -%}
+                  {%- assign py_key = 'product_' | append: i | append: '_y' -%}
+                  {%- assign p = block.settings[p_key] -%}
+                  {%- if p != blank -%}
+                    {%- assign hx = block.settings[px_key] | default: 50 -%}
+                    {%- assign hy = block.settings[py_key] | default: 50 -%}
+                    {%- assign qv_id = 'Quickview-STL2-' | append: section.id | append: '-' | append: scene_idx | append: '-' | append: i | append: '-' | append: p.id -%}
+                    {%- assign tip_pos = '' -%}
+                    {%- if hx < 20 -%}{%- assign tip_pos = tip_pos | append: ' with-left' -%}{%- endif -%}
+                    {%- if hx > 80 -%}{%- assign tip_pos = tip_pos | append: ' with-right' -%}{%- endif -%}
+                    {%- if hy > 70 -%}{%- assign tip_pos = tip_pos | append: ' with-bottom' -%}{%- endif -%}
+                    {%- assign afv = p.selected_or_first_available_variant -%}
+                    {%- assign tip_color_idx = -1 -%}
+                    {%- for opt in p.options_with_values -%}
+                      {%- assign opt_lc = opt.name | downcase -%}
+                      {%- if tip_color_idx == -1 -%}
+                        {%- if opt_lc contains 'color' or opt_lc contains 'colour' or opt_lc contains '颜色' or opt_lc contains '色' -%}
+                          {%- assign tip_color_idx = forloop.index0 -%}
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- assign tip_default_color_key = 'product_' | append: i | append: '_default_color' -%}
+                    {%- assign tip_configured_color = block.settings[tip_default_color_key] | strip -%}
+                    {%- if tip_configured_color != blank and tip_color_idx >= 0 -%}
+                      {%- assign tip_color_opt = p.options_with_values[tip_color_idx] -%}
+                      {%- assign tip_matched_color = '' -%}
+                      {%- assign tip_cfg_dc = tip_configured_color | downcase | strip -%}
+                      {%- for cv in tip_color_opt.values -%}
+                        {%- assign cv_name = cv.name | default: cv -%}
+                        {%- assign cv_dc = cv_name | downcase | strip -%}
+                        {%- if cv_dc == tip_cfg_dc -%}
+                          {%- assign tip_matched_color = cv_name -%}
+                          {%- break -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                      {%- if tip_matched_color != blank -%}
+                        {%- for v in p.variants -%}
+                          {%- if tip_color_idx == 0 -%}{%- assign v_color = v.option1 -%}
+                          {%- elsif tip_color_idx == 1 -%}{%- assign v_color = v.option2 -%}
+                          {%- else -%}{%- assign v_color = v.option3 -%}
+                          {%- endif -%}
+                          {%- if v_color == tip_matched_color -%}
+                            {%- assign afv = v -%}
+                            {%- if v.available -%}{%- break -%}{%- endif -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                    {%- assign tip_img = afv.featured_media | default: p.featured_media -%}
+                    {%- assign tip_side_key = 'product_' | append: i | append: '_tip_position' -%}
+                    {%- assign tip_side = block.settings[tip_side_key] | default: 'below' -%}
+                    <div
+                      class="stl2__hotspot"
+                      data-scene-index="{{ scene_idx }}"
+                      data-product-index="{{ i }}"
+                      data-quickview-id="{{ qv_id }}"
+                      data-tip-position="{{ tip_side }}"
+                      style="left:{{ hx }}%;top:{{ hy }}%;"
+                    >
+                      <button
+                        type="button"
+                        class="stl2__hotspot-dot"
+                        aria-label="{{ p.title | escape }}"
+                      ></button>
+                      <div class="stl2__hotspot-tip{{ tip_pos }}">
+                        <div class="stl2__hotspot-tip-img">
+                          {%- if tip_img != blank -%}
+                            <img src="{{ tip_img | image_url: width: 160 }}" alt="{{ p.title | escape }}" width="56" height="56" loading="lazy">
+                          {%- endif -%}
+                        </div>
+                        <div class="stl2__hotspot-tip-info">
+                          <p class="stl2__hotspot-tip-title">{{ p.title | escape }}</p>
+                          <p class="stl2__hotspot-tip-price">
+                            {{ afv.price | money }}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          class="stl2__hotspot-cart"
+                          aria-controls="{{ qv_id }}"
+                          aria-expanded="false"
+                          aria-label="{{ 'products.product.quick_view_label' | t: title: p.title | escape }}"
+                          data-stl2-quickview
+                        >
+                          {%- render 'icon', icon: 'cart', size: 'sm' -%}
+                        </button>
+                      </div>
+                      <quick-view
+                        id="{{ qv_id }}"
+                        class="quick-view x-modal drawer z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+                        data-product-url="{{ p.url }}"
+                        role="dialog"
+                        aria-label="{{ 'products.product.choose_product_options' | t: title: p.title | escape }}"
+                        aria-modal="true"
+                        hidden
+                      >
+                        <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="{{ qv_id }}" aria-expanded="false"></overlay-element>
+                        <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                          <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative" tabindex="0">
+                            <button class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0" type="button" is="hover-button" aria-controls="{{ qv_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                              <span class="btn-fill" data-fill></span>
+                              <span class="btn-text">
+                                {%- render 'icon', icon: 'close', size: 'sm' -%}
+                              </span>
+                            </button>
+                          </gesture-element>
+                          <div class="quick-view__content drawer__content opacity-0 invisible flex flex-col h-full grow shrink"></div>
+                        </div>
+                      </quick-view>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {%- if section.blocks.size > 1 -%}
+            <div class="stl2__thumbs" role="tablist" aria-label="Shop the look scenes">
+              {%- for block in section.blocks -%}
+                {%- assign thumb_img = block.settings.image | default: block.settings.image_mobile -%}
+                <button type="button" class="stl2__thumb" role="tab" data-scene-index="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Scene {{ forloop.index }}">
+                  {%- if thumb_img != blank -%}
+                    <img src="{{ thumb_img | image_url: width: 120 }}" alt="" loading="lazy" width="40" height="40">
+                  {%- endif -%}
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} ===== 右侧面板 ===== {%- endcomment -%}
+        <div class="stl2__panel">
+          <div class="stl2__panel-header">
+            <div class="stl2__panel-heading">
+              {%- if section.settings.heading != blank -%}
+                <h2 class="stl2__title">{{ section.settings.heading }}</h2>
+              {%- endif -%}
+            </div>
+            {%- if section.settings.button_label != blank -%}
+              <button type="button" class="stl2__cta" data-stl2-add-all>{{ section.settings.button_label | escape }}</button>
+            {%- endif -%}
+          </div>
+
+          <div class="stl2__lists">
+            {%- for block in section.blocks -%}
+              {%- assign scene_idx = forloop.index0 -%}
+              <ul class="stl2__list" data-scene-index="{{ scene_idx }}"{% unless forloop.first %} hidden{% endunless %} role="list">
+                {%- for i in (1..6) -%}
+                  {%- assign p_key = 'product_' | append: i -%}
+                  {%- assign p = block.settings[p_key] -%}
+                  {%- if p != blank -%}
+                    {%- assign afv = p.selected_or_first_available_variant -%}
+                    {%- assign stl2_amt = p.metafields.custom.discount_amount | default: 0 | plus: 0 -%}
+                    {%- assign stl2_pct = p.metafields.custom.product_discounts | default: 0 | plus: 0 -%}
+
+                    {%- comment %} 自动识别 Color / Size 选项索引 {%- endcomment -%}
+                    {%- assign color_idx = -1 -%}
+                    {%- assign size_idx = -1 -%}
+                    {%- for opt in p.options_with_values -%}
+                      {%- assign opt_lc = opt.name | downcase -%}
+                      {%- if color_idx == -1 -%}
+                        {%- if opt_lc contains 'color' or opt_lc contains 'colour' or opt_lc contains '颜色' or opt_lc contains '色' -%}
+                          {%- assign color_idx = forloop.index0 -%}
+                        {%- endif -%}
+                      {%- endif -%}
+                      {%- if size_idx == -1 -%}
+                        {%- if opt_lc contains 'size' or opt_lc contains '尺寸' or opt_lc contains '尺码' or opt_lc contains '规格' -%}
+                          {%- assign size_idx = forloop.index0 -%}
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+
+                    {%- comment %} 后台默认颜色：仅影响首屏；用户切换后由 JS 以当前选择为准 {%- endcomment -%}
+                    {%- assign default_color_key = 'product_' | append: i | append: '_default_color' -%}
+                    {%- assign configured_color = block.settings[default_color_key] | strip -%}
+                    {%- assign matched_color = '' -%}
+                    {%- if configured_color != blank and color_idx >= 0 -%}
+                      {%- assign color_opt_for_default = p.options_with_values[color_idx] -%}
+                      {%- assign cfg_dc = configured_color | downcase | strip -%}
+                      {%- for cv in color_opt_for_default.values -%}
+                        {%- assign cv_name = cv.name | default: cv -%}
+                        {%- assign cv_dc = cv_name | downcase | strip -%}
+                        {%- if cv_dc == cfg_dc -%}
+                          {%- assign matched_color = cv_name -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                      {%- if matched_color != blank -%}
+                        {%- assign prefer_size = '' -%}
+                        {%- if size_idx == 0 -%}{%- assign prefer_size = afv.option1 -%}
+                        {%- elsif size_idx == 1 -%}{%- assign prefer_size = afv.option2 -%}
+                        {%- elsif size_idx == 2 -%}{%- assign prefer_size = afv.option3 -%}
+                        {%- endif -%}
+                        {%- assign found_avail = false -%}
+                        {%- assign found_any = false -%}
+                        {%- assign candidate_v = afv -%}
+                        {%- for v in p.variants -%}
+                          {%- if color_idx == 0 -%}{%- assign v_color = v.option1 -%}
+                          {%- elsif color_idx == 1 -%}{%- assign v_color = v.option2 -%}
+                          {%- else -%}{%- assign v_color = v.option3 -%}
+                          {%- endif -%}
+                          {%- if v_color == matched_color -%}
+                            {%- assign size_ok = true -%}
+                            {%- if prefer_size != blank and size_idx >= 0 -%}
+                              {%- if size_idx == 0 -%}{%- assign v_size = v.option1 -%}
+                              {%- elsif size_idx == 1 -%}{%- assign v_size = v.option2 -%}
+                              {%- else -%}{%- assign v_size = v.option3 -%}
+                              {%- endif -%}
+                              {%- unless v_size == prefer_size -%}{%- assign size_ok = false -%}{%- endunless -%}
+                            {%- endif -%}
+                            {%- if size_ok -%}
+                              {%- unless found_any -%}
+                                {%- assign candidate_v = v -%}
+                                {%- assign found_any = true -%}
+                              {%- endunless -%}
+                              {%- if v.available and found_avail == false -%}
+                                {%- assign afv = v -%}
+                                {%- assign found_avail = true -%}
+                              {%- endif -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                        {%- if found_avail == false -%}
+                          {%- for v in p.variants -%}
+                            {%- if color_idx == 0 -%}{%- assign v_color = v.option1 -%}
+                            {%- elsif color_idx == 1 -%}{%- assign v_color = v.option2 -%}
+                            {%- else -%}{%- assign v_color = v.option3 -%}
+                            {%- endif -%}
+                            {%- if v_color == matched_color and v.available and found_avail == false -%}
+                              {%- assign afv = v -%}
+                              {%- assign found_avail = true -%}
+                            {%- endif -%}
+                          {%- endfor -%}
+                        {%- endif -%}
+                        {%- if found_avail == false and found_any -%}
+                          {%- assign afv = candidate_v -%}
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- endif -%}
+
+                    {%- comment %} 折扣优先级与加购模块一致：compare_at_price > discount_amount > product_discounts {%- endcomment -%}
+                    {%- assign afv_orig = afv.price -%}
+                    {%- assign afv_compare = afv.compare_at_price | default: 0 -%}
+                    {%- if afv_compare > afv_orig -%}
+                      {%- assign afv_sale = afv_orig -%}
+                      {%- assign afv_cmp = afv_compare -%}
+                    {%- elsif stl2_amt > 0 -%}
+                      {%- assign afv_disc = stl2_amt | times: 100 -%}
+                      {%- assign afv_sale = afv_orig | minus: afv_disc -%}
+                      {%- assign afv_cmp = afv_orig -%}
+                    {%- elsif stl2_pct > 0 -%}
+                      {%- assign afv_disc = afv_orig | times: stl2_pct | divided_by: 100 -%}
+                      {%- assign afv_sale = afv_orig | minus: afv_disc -%}
+                      {%- assign afv_cmp = afv_orig -%}
+                    {%- else -%}
+                      {%- assign afv_sale = afv_orig -%}
+                      {%- assign afv_cmp = 0 -%}
+                    {%- endif -%}
+                    {%- assign afv_show_cmp = false -%}
+                    {%- if afv_cmp > afv_sale -%}{%- assign afv_show_cmp = true -%}{%- endif -%}
+
+                    {%- comment %} 当前变体对应的颜色/尺码文案（有配置默认色时优先用 matched_color） {%- endcomment -%}
+                    {%- assign cur_color_label = '' -%}
+                    {%- assign cur_size_label = '' -%}
+                    {%- if matched_color != blank -%}
+                      {%- assign cur_color_label = matched_color -%}
+                    {%- elsif color_idx == 0 -%}{%- assign cur_color_label = afv.option1 -%}
+                    {%- elsif color_idx == 1 -%}{%- assign cur_color_label = afv.option2 -%}
+                    {%- elsif color_idx == 2 -%}{%- assign cur_color_label = afv.option3 -%}
+                    {%- endif -%}
+                    {%- if size_idx == 0 -%}{%- assign cur_size_label = afv.option1 -%}
+                    {%- elsif size_idx == 1 -%}{%- assign cur_size_label = afv.option2 -%}
+                    {%- elsif size_idx == 2 -%}{%- assign cur_size_label = afv.option3 -%}
+                    {%- endif -%}
+
+                    {%- assign row_img = '' -%}
+                    {%- if afv.featured_image != blank -%}
+                      {%- assign row_img = afv.featured_image | image_url: width: 200 -%}
+                    {%- elsif p.featured_image != blank -%}
+                      {%- assign row_img = p.featured_image | image_url: width: 200 -%}
+                    {%- endif -%}
+
+                    <li>
+                      <div
+                        class="stl2__row"
+                        data-scene-index="{{ scene_idx }}"
+                        data-product-index="{{ i }}"
+                        data-product-id="{{ p.id }}"
+                        data-color-idx="{{ color_idx }}"
+                        data-size-idx="{{ size_idx }}"
+                        data-selected-color="{{ cur_color_label | escape }}"
+                        data-selected-size="{{ cur_size_label | escape }}"
+                        data-discount-amt="{{ stl2_amt }}"
+                        data-discount-pct="{{ stl2_pct }}"
+                      >
+                        <label class="stl2__check-wrap" onclick="event.stopPropagation();">
+                          <input type="checkbox" class="stl2__check" data-stl2-check aria-label="Select {{ p.title | escape }}">
+                          <span class="stl2__check-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                              <path d="M5 12.5L10 17.5L19 7.5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
+                        </label>
+
+                        <span class="stl2__row-media">
+                          {%- if row_img != blank -%}
+                            <img data-stl2-img data-stl2-default-img="{{ row_img }}" src="{{ row_img }}" alt="{{ p.title | escape }}" loading="lazy" width="60" height="60">
+                          {%- endif -%}
+                        </span>
+
+                        <span class="stl2__row-body">
+                          <a class="stl2__row-title" href="{{ p.url }}" onclick="event.stopPropagation();">{{ p.title | escape }}</a>
+
+                          <span class="stl2__row-detail">
+                          <span class="stl2__row-pickers">
+                            {%- if color_idx >= 0 -%}
+                              {%- assign color_opt = p.options_with_values[color_idx] -%}
+                              {%- if cur_color_label == blank -%}
+                                {%- assign first_color = color_opt.values.first -%}
+                                {%- assign cur_color_label = first_color.name | default: first_color -%}
+                              {%- endif -%}
+                              {%- comment %} 与加购模块一致：优先 Theme → Color swatches (swatch_config) {%- endcomment -%}
+                              {%- assign cur_color_hex = '' -%}
+                              {%- for cv in color_opt.values -%}
+                                {%- assign cv_name = cv.name | default: cv -%}
+                                {%- if cv_name == cur_color_label -%}
+                                  {%- assign cur_color_hex = cv.swatch.color | default: '' -%}
+                                  {%- break -%}
+                                {%- endif -%}
+                              {%- endfor -%}
+                              {%- if cur_color_hex == blank -%}{%- assign cur_color_hex = cur_color_label -%}{%- endif -%}
+                              {%- capture cur_color_bg -%}{%- render 'addon-color-bg', color_label: cur_color_label, fallback_hex: cur_color_hex -%}{%- endcapture -%}
+                              {%- assign cur_is_img = false -%}
+                              {%- if cur_color_bg contains 'url(' -%}{%- assign cur_is_img = true -%}{%- endif -%}
+                              <div class="stl2__picker stl2__picker--color" data-stl2-picker="color">
+                                <span class="stl2__swatch{% if cur_is_img %} is-img{% endif %}" data-stl2-swatch style="background: #888; background: {{ cur_color_bg }};"></span>
+                                <button type="button" class="stl2__trigger" data-stl2-trigger aria-haspopup="listbox" aria-expanded="false">
+                                  <span class="stl2__trigger-label" data-stl2-label>{{ cur_color_label | escape }}</span>
+                                  <span class="stl2__caret" aria-hidden="true">
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                  </span>
+                                </button>
+                                <ul class="stl2__menu" role="listbox" hidden>
+                                  {%- for v in color_opt.values -%}
+                                    {%- assign v_name = v.name | default: v -%}
+                                    {%- assign v_hex = v.swatch.color | default: '' -%}
+                                    {%- if v_hex == blank -%}{%- assign v_hex = v_name -%}{%- endif -%}
+                                    {%- capture menu_bg -%}{%- render 'addon-color-bg', color_label: v_name, fallback_hex: v_hex -%}{%- endcapture -%}
+                                    {%- assign menu_is_img = false -%}
+                                    {%- if menu_bg contains 'url(' -%}{%- assign menu_is_img = true -%}{%- endif -%}
+                                    <li class="stl2__menu-item{% if v_name == cur_color_label %} is-selected{% endif %}" role="option" data-value="{{ v_name | escape }}" data-color="{{ menu_bg | escape }}">
+                                      <span class="stl2__menu-swatch{% if menu_is_img %} is-img{% endif %}" style="background: #888; background: {{ menu_bg }};"></span>
+                                      <span class="stl2__menu-text">{{ v_name | escape }}</span>
+                                      <span class="stl2__menu-check" aria-hidden="true">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                      </span>
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              </div>
+                            {%- endif -%}
+
+                            {%- if size_idx >= 0 -%}
+                              {%- assign size_opt = p.options_with_values[size_idx] -%}
+                              {%- if cur_size_label == blank -%}
+                                {%- assign first_size = size_opt.values.first -%}
+                                {%- assign cur_size_label = first_size.name | default: first_size -%}
+                              {%- endif -%}
+                              <div class="stl2__picker stl2__picker--size" data-stl2-picker="size">
+                                <button type="button" class="stl2__trigger" data-stl2-trigger aria-haspopup="listbox" aria-expanded="false">
+                                  <span class="stl2__trigger-label" data-stl2-label>{{ cur_size_label | escape }}</span>
+                                  <span class="stl2__caret" aria-hidden="true">
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                  </span>
+                                </button>
+                                <ul class="stl2__menu" role="listbox" hidden>
+                                  {%- for v in size_opt.values -%}
+                                    {%- assign v_name = v.name | default: v -%}
+                                    <li class="stl2__menu-item{% if v_name == cur_size_label %} is-selected{% endif %}" role="option" data-value="{{ v_name | escape }}">
+                                      <span class="stl2__menu-text">{{ v_name | escape }}</span>
+                                      <span class="stl2__menu-check" aria-hidden="true">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                      </span>
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              </div>
+                            {%- endif -%}
+                          </span>
+
+                          <span class="stl2__price" data-stl2-price-wrap>
+                            <span class="stl2__sale" data-stl2-sale>{{ afv_sale | money }}</span>
+                            <s class="stl2__compare" data-stl2-compare{% unless afv_show_cmp %} hidden{% endunless %}>{{ afv_cmp | money }}</s>
+                          </span>
+                          </span>{%- comment %} /.stl2__row-detail {%- endcomment -%}
+                        </span>
+
+                        {%- comment %} 变体数据（含与加购一致的折扣价，供 JS 匹配）{%- endcomment -%}
+                        <script type="application/json" data-stl2-variants>
+                          {
+                            "default_variant_id": {{ afv.id }},
+                            "discount_amt": {{ stl2_amt }},
+                            "discount_pct": {{ stl2_pct }}
+                            {%- for v in p.variants -%}
+                              {%- assign v_orig = v.price -%}
+                              {%- assign v_compare = v.compare_at_price | default: 0 -%}
+                              {%- if v_compare > v_orig -%}
+                                {%- assign v_sale = v_orig -%}
+                                {%- assign v_cmp = v_compare -%}
+                              {%- elsif stl2_amt > 0 -%}
+                                {%- assign v_disc = stl2_amt | times: 100 -%}
+                                {%- assign v_sale = v_orig | minus: v_disc -%}
+                                {%- assign v_cmp = v_orig -%}
+                              {%- elsif stl2_pct > 0 -%}
+                                {%- assign v_disc = v_orig | times: stl2_pct | divided_by: 100 -%}
+                                {%- assign v_sale = v_orig | minus: v_disc -%}
+                                {%- assign v_cmp = v_orig -%}
+                              {%- else -%}
+                                {%- assign v_sale = v_orig -%}
+                                {%- assign v_cmp = 0 -%}
+                              {%- endif -%}
+                              {%- assign v_show_cmp = false -%}
+                              {%- if v_cmp > v_sale -%}{%- assign v_show_cmp = true -%}{%- endif -%}
+                              {%- assign v_img = '' -%}
+                              {%- if v.featured_image != blank -%}
+                                {%- assign v_img = v.featured_image | image_url: width: 240 -%}
+                              {%- elsif v.image != blank -%}
+                                {%- assign v_img = v.image | image_url: width: 240 -%}
+                              {%- endif -%}
+                              ,"{{ v.id }}":{"options":[{{ v.option1 | json }},{{ v.option2 | json }},{{ v.option3 | json }}],"available":{{ v.available | json }},"price":{{ v_sale | money | json }},"compare":{{ v_cmp | money | json }},"raw_compare_gt_price":{{ v_show_cmp | json }},"image":{{ v_img | json }}}
+                            {%- endfor -%}
+                          }
+                        </script>
+                      </div>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+      {%- endif -%}
+    </shop-the-look-2>
+  </div>
+</div>
+
+<script>
+  (function () {
+    if (customElements.get('shop-the-look-2')) return;
+
+    class ShopTheLook2 extends HTMLElement {
+      constructor() {
+        super();
+        this._onClick = this._onClick.bind(this);
+        this._onDocClick = this._onDocClick.bind(this);
+        this._onPortalMenuClick = this._onPortalMenuClick.bind(this);
+        this._onReposition = this._onReposition.bind(this);
+        this._onEditorBlockSelect = this._onEditorBlockSelect.bind(this);
+      }
+
+      connectedCallback() {
+        if (window.Shopify && window.Shopify.designMode) {
+          document.addEventListener('shopify:block:select', this._onEditorBlockSelect);
+          // 编辑设置后 section 会重新渲染，恢复到之前选中的 Scene
+          const savedId = (window.__stl2SelectedBlock || {})[this.id];
+          if (savedId) this._switchToBlock(savedId);
+        }
+        this.addEventListener('click', this._onClick);
+        document.addEventListener('click', this._onDocClick, true);
+        // 菜单 portal 到 body 后，点击不会冒泡到本组件，需单独监听
+        document.addEventListener('click', this._onPortalMenuClick);
+        window.addEventListener('scroll', this._onReposition, true);
+        window.addEventListener('resize', this._onReposition);
+        // 初始化每一行：根据默认选项匹配变体、更新价格
+        this.querySelectorAll('.stl2__row').forEach((row) => this._syncRow(row));
+      }
+      disconnectedCallback() {
+        document.removeEventListener('shopify:block:select', this._onEditorBlockSelect);
+        this.removeEventListener('click', this._onClick);
+        document.removeEventListener('click', this._onDocClick, true);
+        document.removeEventListener('click', this._onPortalMenuClick);
+        window.removeEventListener('scroll', this._onReposition, true);
+        window.removeEventListener('resize', this._onReposition);
+        this.querySelectorAll('.stl2__picker.is-open').forEach((p) => this._closePicker(p));
+      }
+
+      _onPortalMenuClick(event) {
+        const item = event.target.closest('.stl2__menu-item');
+        if (!item) return;
+        const menu = item.closest('.stl2__menu');
+        if (!menu || !menu.classList.contains('stl2__menu--portal')) return;
+        const picker = menu._stl2Picker;
+        if (!picker || !this.contains(picker)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        this._selectOption(item);
+      }
+
+      _onReposition() {
+        this.querySelectorAll('.stl2__picker.is-open').forEach((picker) => {
+          const menu = this._findPickerMenu(picker);
+          if (menu && menu.classList.contains('stl2__menu--portal')) {
+            this._positionMenu(picker, menu);
+          }
+        });
+      }
+
+      _onClick(event) {
+        const thumb = event.target.closest('.stl2__thumb');
+        if (thumb) { this._switchScene(parseInt(thumb.dataset.sceneIndex, 10)); return; }
+
+        const hotspot = event.target.closest('.stl2__hotspot');
+        if (hotspot) {
+          const s = parseInt(hotspot.dataset.sceneIndex, 10);
+          const idx = parseInt(hotspot.dataset.productIndex, 10);
+          // 只在当前场景内定位高亮，绝不切换图片
+          this._focusRow(s, idx, hotspot);
+          // 仅购物车图标打开 Quick View（aria-controls）；点圆点 / 信息卡其它区域不弹窗
+          const viaCart = event.target.closest('[data-stl2-quickview]');
+          if (!viaCart) {
+            event.preventDefault();
+            // 电脑端点击后去掉焦点，避免 tip 因 focus 残留；信息卡只靠 hover
+            if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+              const active = document.activeElement;
+              if (active && hotspot.contains(active) && typeof active.blur === 'function') active.blur();
+            }
+          }
+          return;
+        }
+
+        // 点图片其它区域：关闭移动端信息卡
+        const stage = event.target.closest('.stl2__stage');
+        if (stage && this.contains(stage) && !event.target.closest('.stl2__thumb')) {
+          this._clearHotspotTips();
+          return;
+        }
+
+        const menuItem = event.target.closest('.stl2__menu-item');
+        if (menuItem) {
+          event.preventDefault();
+          event.stopPropagation();
+          this._selectOption(menuItem);
+          return;
+        }
+
+        // 点颜色/尺码区域（含色圆、箭头、触发按钮）→ 展开下拉，不勾选产品
+        const picker = event.target.closest('.stl2__picker');
+        if (picker && this.contains(picker)) {
+          event.preventDefault();
+          event.stopPropagation();
+          // 点在已打开菜单空白处不重复 toggle
+          if (!event.target.closest('.stl2__menu')) {
+            this._togglePicker(picker);
+          }
+          return;
+        }
+
+        const addAll = event.target.closest('[data-stl2-add-all]');
+        if (addAll) { event.preventDefault(); this._addAll(addAll); return; }
+
+        // 点行其它区域（勾选区除外）：切换勾选
+        const row = event.target.closest('.stl2__row');
+        if (row && this.contains(row) && !event.target.closest('.stl2__check-wrap') && !event.target.closest('a')) {
+          const cb = row.querySelector('[data-stl2-check]');
+          if (cb) {
+            cb.checked = !cb.checked;
+            this._syncCheckedClass(row);
+          }
+        }
+      }
+
+      _onDocClick(event) {
+        // 点击下拉外区域时关闭（菜单可能已 portal 到 body）
+        const path = typeof event.composedPath === 'function' ? event.composedPath() : [];
+        const inPicker = path.some((n) => n && n.classList && n.classList.contains('stl2__picker'))
+          || event.target.closest?.('.stl2__picker');
+        const inMenu = path.some((n) => n && n.classList && n.classList.contains('stl2__menu'))
+          || event.target.closest?.('.stl2__menu');
+        if (!inPicker && !inMenu) {
+          this.querySelectorAll('.stl2__picker.is-open').forEach((p) => this._closePicker(p));
+        }
+      }
+
+      _onEditorBlockSelect(event) {
+        if (!this.contains(event.target)) return;
+        const scene = event.target.closest('.stl2__scene');
+        if (!scene) return;
+        const blockId = scene.dataset.blockId;
+        window.__stl2SelectedBlock = window.__stl2SelectedBlock || {};
+        window.__stl2SelectedBlock[this.id] = blockId;
+        this._switchToBlock(blockId);
+      }
+
+      _switchToBlock(blockId) {
+        const scene = this.querySelector(`.stl2__scene[data-block-id="${blockId}"]`);
+        if (scene) this._switchScene(parseInt(scene.dataset.sceneIndex, 10));
+      }
+
+      _switchScene(index) {
+        if (Number.isNaN(index)) return;
+        if (window.Shopify && window.Shopify.designMode) {
+          const target = this.querySelector(`.stl2__scene[data-scene-index="${index}"]`);
+          if (target) {
+            window.__stl2SelectedBlock = window.__stl2SelectedBlock || {};
+            window.__stl2SelectedBlock[this.id] = target.dataset.blockId;
+          }
+        }
+        this.querySelectorAll('.stl2__scene').forEach((el) => {
+          el.setAttribute('aria-current', String(parseInt(el.dataset.sceneIndex, 10) === index));
+        });
+        this.querySelectorAll('.stl2__thumb').forEach((el) => {
+          el.setAttribute('aria-current', String(parseInt(el.dataset.sceneIndex, 10) === index));
+        });
+        this.querySelectorAll('.stl2__list').forEach((el) => {
+          el.hidden = !(parseInt(el.dataset.sceneIndex, 10) === index);
+        });
+      }
+
+      /** 未勾选时：仅高亮第一个产品（不勾选），引导用户自己选择 */
+      _highlightFirstIfNoneSelected() {
+        const activeList = this.querySelector('.stl2__list:not([hidden])');
+        if (!activeList) return false;
+        const rows = Array.from(activeList.querySelectorAll('.stl2__row'));
+        if (!rows.length) return false;
+        const anyChecked = rows.some((row) => {
+          const cb = row.querySelector('[data-stl2-check]');
+          return cb && cb.checked;
+        });
+        if (anyChecked) return false;
+        this.querySelectorAll('.stl2__row.is-focused').forEach((r) => r.classList.remove('is-focused'));
+        rows[0].classList.add('is-focused');
+        rows[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        return true;
+      }
+
+      _isMobile() {
+        return window.matchMedia('(max-width: 767px)').matches;
+      }
+
+      _clearHotspotTips() {
+        this.querySelectorAll('.stl2__hotspot[aria-current="true"]').forEach((h) => {
+          h.setAttribute('aria-current', 'false');
+        });
+      }
+
+      _fitHotspotTip(hotspot) {
+        if (!hotspot) return;
+        const tip = hotspot.querySelector('.stl2__hotspot-tip');
+        if (!tip) return;
+        const pad = 8;
+        const stage = this.querySelector('.stl2__stage') || this;
+        const stageRect = stage.getBoundingClientRect();
+        const hotRect = hotspot.getBoundingClientRect();
+        const hotCx = hotRect.left + hotRect.width / 2;
+        const tipWidth = Math.min(tip.offsetWidth || 220, window.innerWidth - pad * 2);
+        const viewLeft = Math.max(stageRect.left, pad);
+        const viewRight = Math.min(stageRect.right, window.innerWidth - pad);
+
+        tip.classList.remove('with-left', 'with-right', 'with-bottom');
+        if ((hotspot.dataset.tipPosition || 'below') === 'above') {
+          tip.classList.add('with-bottom');
+        }
+        if (hotCx - tipWidth / 2 < viewLeft) tip.classList.add('with-left');
+        else if (hotCx + tipWidth / 2 > viewRight) tip.classList.add('with-right');
+      }
+
+      _moveRowToTop(row) {
+        const item = row.closest('li') || row;
+        const list = item.parentElement;
+        if (!list || item === list.firstElementChild) return;
+        const items = Array.from(list.children);
+        const firstRects = new Map(items.map((el) => [el, el.getBoundingClientRect()]));
+        list.insertBefore(item, list.firstElementChild);
+        items.forEach((el) => {
+          const last = el.getBoundingClientRect();
+          const first = firstRects.get(el);
+          if (!first) return;
+          const dx = first.left - last.left;
+          const dy = first.top - last.top;
+          if (!dx && !dy) return;
+          el.animate(
+            [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'translate(0, 0)' }],
+            { duration: 320, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+          );
+        });
+      }
+
+      _focusRow(sceneIndex, productIndex, hotspotEl) {
+        // 清除之前的高亮（仅当前组件内）
+        this.querySelectorAll('.stl2__row.is-focused').forEach((r) => r.classList.remove('is-focused'));
+        this.querySelectorAll('.stl2__hotspot[aria-current="true"]').forEach((h) => h.setAttribute('aria-current', 'false'));
+
+        const row = this.querySelector(`.stl2__row[data-scene-index="${sceneIndex}"][data-product-index="${productIndex}"]`);
+        if (hotspotEl) {
+          if (this._isMobile()) this._fitHotspotTip(hotspotEl);
+          hotspotEl.setAttribute('aria-current', 'true');
+        }
+        if (!row) return;
+
+        void row.offsetWidth;
+        row.classList.add('is-focused');
+
+        const list = row.closest('.stl2__list');
+        const listRows = list ? Array.from(list.querySelectorAll('.stl2__row')) : [];
+        const checkedCount = listRows.filter((r) => {
+          const cb = r.querySelector('[data-stl2-check]');
+          return cb && cb.checked;
+        }).length;
+        // 0/1 个勾选：圆点按单选切换勾选；已多选（≥2）：不取消其它勾选，但仍勾上当前定位产品
+        const isSingleSelect = checkedCount <= 1;
+        if (isSingleSelect) {
+          listRows.forEach((r) => {
+            const cb = r.querySelector('[data-stl2-check]');
+            if (!cb) return;
+            cb.checked = (r === row);
+            this._syncCheckedClass(r);
+          });
+        } else {
+          const cb = row.querySelector('[data-stl2-check]');
+          if (cb) {
+            cb.checked = true;
+            this._syncCheckedClass(row);
+          }
+        }
+
+        if (this._isMobile() && isSingleSelect) this._moveRowToTop(row);
+
+        // 移动端点圆点：列表勾选/置顶逻辑照常，但不滚动页面
+        if (this._isMobile() && hotspotEl) return;
+
+        const scrollBox = list ? list.parentElement : null;
+        if (scrollBox && scrollBox.scrollHeight > scrollBox.clientHeight) {
+          const rowRect = row.getBoundingClientRect();
+          const boxRect = scrollBox.getBoundingClientRect();
+          const offset = rowRect.top - boxRect.top - (boxRect.height / 2) + (rowRect.height / 2);
+          scrollBox.scrollTo({ top: scrollBox.scrollTop + offset, behavior: 'smooth' });
+        } else {
+          row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+
+      _openQuickView(quickviewId, sourceEl) {
+        if (!quickviewId) return;
+        const qv = document.getElementById(quickviewId);
+        if (!qv) return;
+        try {
+          if (typeof qv.show === 'function') {
+            qv.show(sourceEl);
+          } else {
+            qv.setAttribute('open', '');
+            qv.removeAttribute('hidden');
+          }
+        } catch (e) {
+          console.error('[shop-the-look-2] open quick view failed', e);
+        }
+      }
+
+      _findPickerMenu(picker) {
+        if (!picker) return null;
+        return picker._stl2Menu || picker.querySelector('.stl2__menu');
+      }
+
+      _togglePicker(picker) {
+        if (!picker) return;
+        const isOpen = picker.classList.contains('is-open');
+        this.querySelectorAll('.stl2__picker.is-open').forEach((p) => this._closePicker(p));
+        if (!isOpen) this._openPicker(picker);
+      }
+      _openPicker(picker) {
+        picker.classList.add('is-open');
+        const menu = this._findPickerMenu(picker);
+        if (!menu) return;
+        picker._stl2Menu = menu;
+        menu._stl2Picker = picker;
+        menu.classList.add('stl2__menu--portal');
+        menu.hidden = false;
+        if (menu.parentElement !== document.body) {
+          document.body.appendChild(menu);
+        }
+        this._positionMenu(picker, menu);
+        const trigger = picker.querySelector('[data-stl2-trigger]');
+        if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      }
+      _positionMenu(picker, menu) {
+        const anchor = picker.querySelector('[data-stl2-trigger]') || picker;
+        const rect = anchor.getBoundingClientRect();
+        const menuWidth = Math.max(140, Math.min(240, rect.width + 40));
+        let left = rect.left;
+        let top = rect.bottom + 6;
+        // 防止超出视口右侧
+        if (left + menuWidth > window.innerWidth - 8) {
+          left = Math.max(8, window.innerWidth - menuWidth - 8);
+        }
+        // 下方空间不够则向上展开
+        const estimatedH = Math.min(240, menu.scrollHeight || 180);
+        if (top + estimatedH > window.innerHeight - 8 && rect.top > estimatedH) {
+          top = rect.top - estimatedH - 6;
+        }
+        menu.style.left = `${Math.round(left)}px`;
+        menu.style.top = `${Math.round(top)}px`;
+        menu.style.minWidth = `${Math.round(menuWidth)}px`;
+      }
+      _closePicker(picker) {
+        if (!picker) return;
+        picker.classList.remove('is-open');
+        const menu = this._findPickerMenu(picker);
+        if (menu) {
+          menu.hidden = true;
+          menu.classList.remove('stl2__menu--portal');
+          menu.style.left = '';
+          menu.style.top = '';
+          menu.style.minWidth = '';
+          // 收回 picker 内，保持 DOM 结构
+          if (menu.parentElement !== picker) {
+            picker.appendChild(menu);
+          }
+        }
+        const trigger = picker.querySelector('[data-stl2-trigger]');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      _selectOption(item) {
+        if (item.classList.contains('is-unavailable')) return;
+        const menu = item.closest('.stl2__menu');
+        const picker = (menu && menu._stl2Picker) || item.closest('.stl2__picker');
+        if (!picker || !menu) return;
+        const row = picker.closest('.stl2__row');
+        const value = item.dataset.value || '';
+        menu.querySelectorAll('.stl2__menu-item').forEach((li) => li.classList.remove('is-selected'));
+        item.classList.add('is-selected');
+        const label = picker.querySelector('[data-stl2-label]');
+        if (label) label.textContent = value;
+        // 用户选择写入 row，作为切换后的唯一真相（默认色只用于首屏 Liquid）
+        if (row) {
+          if (picker.dataset.stl2Picker === 'color') row.dataset.selectedColor = value;
+          if (picker.dataset.stl2Picker === 'size') row.dataset.selectedSize = value;
+        }
+        // 若是颜色，同步 swatch 背景（优先菜单色圆，避免 data-color 转义导致不更新）
+        if (picker.dataset.stl2Picker === 'color') {
+          const sw = picker.querySelector('[data-stl2-swatch]');
+          if (sw) {
+            const menuSw = item.querySelector('.stl2__menu-swatch');
+            if (menuSw) {
+              sw.style.background = menuSw.style.background || getComputedStyle(menuSw).background;
+              sw.classList.toggle('is-img', menuSw.classList.contains('is-img'));
+            } else {
+              const bg = item.getAttribute('data-color') || '';
+              if (bg) {
+                sw.style.background = bg;
+                sw.classList.toggle('is-img', bg.indexOf('url(') !== -1);
+              }
+            }
+          }
+        }
+        this._closePicker(picker);
+        this._syncRow(row);
+      }
+
+      _readSelected(row, which) {
+        const idx = parseInt(row.dataset[which + 'Idx'], 10);
+        if (Number.isNaN(idx) || idx < 0) return null;
+        // 优先用 row 上缓存的选择（用户切换后不再回落到 default_variant）
+        const cached = which === 'color' ? row.dataset.selectedColor : row.dataset.selectedSize;
+        if (cached) return { idx, value: cached };
+        const picker = row.querySelector(`[data-stl2-picker="${which}"]`);
+        if (!picker) return null;
+        const menu = this._findPickerMenu(picker) || picker.querySelector('.stl2__menu');
+        const selected = menu && menu.querySelector('.stl2__menu-item.is-selected');
+        return selected ? { idx, value: selected.dataset.value } : null;
+      }
+
+      _getVariantMap(row) {
+        const scriptEl = row.querySelector('[data-stl2-variants]');
+        if (!scriptEl) return null;
+        try { return JSON.parse(scriptEl.textContent); } catch (e) { return null; }
+      }
+
+      _matchVariant(row) {
+        const data = this._getVariantMap(row);
+        if (!data) return null;
+        const color = this._readSelected(row, 'color');
+        const size = this._readSelected(row, 'size');
+        const chosen = [null, null, null];
+        if (color) chosen[color.idx] = color.value;
+        if (size) chosen[size.idx] = size.value;
+        const hasChoice = !!(color || size);
+
+        let fallback = null;
+        for (const key of Object.keys(data)) {
+          if (key === 'default_variant_id' || key === 'discount_amt' || key === 'discount_pct') continue;
+          const v = data[key];
+          if (!v || !Array.isArray(v.options)) continue;
+          const ok = v.options.every((opt, i) => chosen[i] == null || chosen[i] === opt);
+          if (!ok) continue;
+          const matched = { id: Number(key), ...v };
+          if (v.available) return matched;
+          if (!fallback) fallback = matched;
+        }
+        if (fallback) return fallback;
+
+        // 已选颜色/尺码时：不再回退到后台默认色变体，避免切换后被“锁回”Default color
+        if (hasChoice && color) {
+          let colorFallback = null;
+          for (const key of Object.keys(data)) {
+            if (key === 'default_variant_id' || key === 'discount_amt' || key === 'discount_pct') continue;
+            const v = data[key];
+            if (!v || !Array.isArray(v.options)) continue;
+            if (v.options[color.idx] !== color.value) continue;
+            const matched = { id: Number(key), ...v };
+            if (v.available) return matched;
+            if (!colorFallback) colorFallback = matched;
+          }
+          if (colorFallback) return colorFallback;
+        }
+
+        // 仅首屏无选择时，才用 Liquid 写入的 default_variant_id
+        if (!hasChoice) {
+          const defId = data.default_variant_id;
+          if (defId && data[defId]) return { id: Number(defId), ...data[defId] };
+          return defId ? { id: Number(defId) } : null;
+        }
+        return null;
+      }
+
+      _refreshAvailability(row) {
+        const data = this._getVariantMap(row);
+        if (!data) return;
+        const color = this._readSelected(row, 'color');
+        const size = this._readSelected(row, 'size');
+        const variants = Object.keys(data)
+          .filter((k) => k !== 'default_variant_id' && k !== 'discount_amt' && k !== 'discount_pct')
+          .map((k) => data[k]);
+
+        // 标记尺码：结合当前颜色，无可用变体则划掉
+        if (size) {
+          const sizePicker = row.querySelector('[data-stl2-picker="size"]');
+          sizePicker && sizePicker.querySelectorAll('.stl2__menu-item').forEach((item) => {
+            const label = item.dataset.value;
+            const hasAvail = variants.some((v) => {
+              if (!v.available) return false;
+              if (color && v.options[color.idx] !== color.value) return false;
+              return v.options[size.idx] === label;
+            });
+            item.classList.toggle('is-unavailable', !hasAvail);
+          });
+        }
+        // 标记颜色：结合当前尺码
+        if (color) {
+          const colorPicker = row.querySelector('[data-stl2-picker="color"]');
+          colorPicker && colorPicker.querySelectorAll('.stl2__menu-item').forEach((item) => {
+            const label = item.dataset.value;
+            const hasAvail = variants.some((v) => {
+              if (!v.available) return false;
+              if (size && v.options[size.idx] !== size.value) return false;
+              return v.options[color.idx] === label;
+            });
+            item.classList.toggle('is-unavailable', !hasAvail);
+          });
+        }
+      }
+
+      _syncRow(row) {
+        if (!row) return;
+        const v = this._matchVariant(row);
+        if (!v) return;
+        row.dataset.currentVariantId = String(v.id);
+        const compare = row.querySelector('[data-stl2-compare]');
+        const sale = row.querySelector('[data-stl2-sale]');
+        if (sale && v.price) sale.textContent = v.price;
+        if (compare) {
+          if (v.raw_compare_gt_price && v.compare) {
+            compare.textContent = v.compare;
+            compare.hidden = false;
+          } else {
+            compare.hidden = true;
+          }
+        }
+        const img = row.querySelector('[data-stl2-img]');
+        if (img) {
+          if (v.image) img.src = v.image;
+          else if (img.dataset.stl2DefaultImg) img.src = img.dataset.stl2DefaultImg;
+        }
+        this._refreshAvailability(row);
+      }
+
+      _syncCheckedClass(row) {
+        const cb = row.querySelector('[data-stl2-check]');
+        if (!cb) return;
+        row.classList.toggle('is-checked', cb.checked);
+      }
+
+      async _addAll(btn) {
+        // 没有勾选时：只高亮第一个，不勾选、不加购、不弹提示
+        if (this._highlightFirstIfNoneSelected()) return;
+
+        const items = [];
+        this.querySelectorAll('.stl2__row').forEach((row) => {
+          const list = row.closest('.stl2__list');
+          if (list && list.hidden) return;
+          const cb = row.querySelector('[data-stl2-check]');
+          if (cb && cb.checked && row.dataset.currentVariantId) {
+            items.push({ id: Number(row.dataset.currentVariantId), quantity: 1 });
+          }
+        });
+        if (items.length === 0) return;
+        btn.setAttribute('aria-busy', 'true');
+        try {
+          await this._postCart(items);
+          this._openCartDrawer(btn);
+        } catch (e) {
+          console.error('[shop-the-look-2]', e);
+          alert(e && e.description ? e.description : 'Failed to add to cart');
+        } finally {
+          btn.removeAttribute('aria-busy');
+        }
+      }
+
+      async _postCart(items) {
+        const res = await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ items })
+        });
+        if (!res.ok) {
+          let err = {};
+          try { err = await res.json(); } catch (e) {}
+          throw err;
+        }
+        return res.json();
+      }
+
+      _openCartDrawer(sourceEl) {
+        try {
+          if (window.theme && theme.pubsub && theme.routes && theme.routes.cart_url) {
+            fetch(theme.routes.cart_url, { headers: { 'Accept': 'application/json' } })
+              .then((r) => r.json())
+              .then((cart) => {
+                theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'shop-the-look-2', cart });
+              })
+              .catch(() => {});
+          }
+        } catch (e) {}
+        document.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true, detail: { open: true } }));
+        const drawer = document.querySelector('cart-drawer');
+        if (drawer && typeof drawer.show === 'function') {
+          try { drawer.show(sourceEl); } catch (e) {}
+        }
+      }
+    }
+
+    customElements.define('shop-the-look-2', ShopTheLook2);
+
+    // 监听 checkbox change，切换 is-checked
+    document.addEventListener('change', function (e) {
+      const cb = e.target.closest('[data-stl2-check]');
+      if (!cb) return;
+      const row = cb.closest('.stl2__row');
+      if (row) row.classList.toggle('is-checked', cb.checked);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Shop the look 2",
+  "tag": "section",
+  "class": "shop-the-look-2-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "header", "content": "Heading" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Shop The Look" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Cart", "info": "留空则不显示按钮" },
+    { "type": "range", "id": "header_margin_bottom", "label": "Heading/Button 与产品列表间距", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "header_margin_top_mobile", "label": "标题栏上间距（移动端）", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 16, "info": "仅移动端：Shop The Look / ATC 整行距上方图片的间距" },
+    { "type": "range", "id": "header_margin_bottom_mobile", "label": "标题栏下间距（移动端）", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 16, "info": "仅移动端：Shop The Look / ATC 整行距下方产品列表的间距" },
+
+    { "type": "header", "content": "Layout & spacing" },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        { "value": "1 / 1", "label": "1:1 (square)" },
+        { "value": "4 / 5", "label": "4:5 (portrait)" },
+        { "value": "3 / 4", "label": "3:4" },
+        { "value": "4 / 3", "label": "4:3" },
+        { "value": "16 / 10", "label": "16:10" },
+        { "value": "16 / 9", "label": "16:9" }
+      ],
+      "default": "1 / 1"
+    },
+    { "type": "range", "id": "image_radius", "label": "左图圆角", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "button_radius", "label": "Button 圆角", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 30, "info": "30 = 完全胶囊；0 = 直角" },
+    { "type": "range", "id": "row_radius", "label": "产品行圆角", "min": 0, "max": 70, "step": 2, "unit": "px", "default": 36, "info": "≥ 一半行高 = 完全胶囊；0 = 直角矩形" },
+    { "type": "range", "id": "row_padding_left", "label": "产品行左侧内边距", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 26 },
+    { "type": "range", "id": "row_padding_right", "label": "产品行右侧内边距", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 26 },
+    { "type": "range", "id": "columns_gap", "label": "左右两列间距", "min": 8, "max": 96, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "list_visible_count", "label": "默认显示行数（超出滚动）", "min": 1, "max": 8, "step": 1, "default": 3 },
+    { "type": "range", "id": "row_height", "label": "每行高度", "min": 60, "max": 140, "step": 4, "unit": "px", "default": 140 },
+    { "type": "range", "id": "row_gap", "label": "行间距", "min": 0, "max": 32, "step": 2, "unit": "px", "default": 18 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "hotspot_color", "label": "Hotspot color", "default": "#ffffff" },
+    { "type": "color", "id": "active_color", "label": "选中/主色（选中框、按钮、标题）", "default": "#10374B" },
+    { "type": "color", "id": "row_border_color", "label": "行默认边框颜色", "default": "#D1D5DB" },
+
+    { "type": "header", "content": "Section" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 },
+    { "type": "checkbox", "id": "divider", "label": "Show divider", "default": false },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false },
+    { "type": "checkbox", "id": "rounded", "label": "Rounded corners", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "scene",
+      "name": "Scene (image + products)",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (desktop)" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Image (mobile, optional)" },
+
+        { "type": "header", "content": "Product 1" },
+        { "type": "product", "id": "product_1", "label": "Product 1" },
+        { "type": "text", "id": "product_1_default_color", "label": "Default color", "info": "Initial color only (exact name, e.g. Twilight Blue). Customers can still switch." },
+        { "type": "range", "id": "product_1_x", "label": "Hotspot X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 20 },
+        { "type": "range", "id": "product_1_y", "label": "Hotspot Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 30 },
+        { "type": "select", "id": "product_1_tip_position", "label": "移动端信息卡位置", "options": [{ "value": "below", "label": "圆点下方" }, { "value": "above", "label": "圆点上方" }], "default": "below" },
+
+        { "type": "header", "content": "Product 2" },
+        { "type": "product", "id": "product_2", "label": "Product 2" },
+        { "type": "text", "id": "product_2_default_color", "label": "Default color", "info": "Initial color only (exact name, e.g. Twilight Blue). Customers can still switch." },
+        { "type": "range", "id": "product_2_x", "label": "Hotspot X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 40 },
+        { "type": "range", "id": "product_2_y", "label": "Hotspot Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 55 },
+        { "type": "select", "id": "product_2_tip_position", "label": "移动端信息卡位置", "options": [{ "value": "below", "label": "圆点下方" }, { "value": "above", "label": "圆点上方" }], "default": "below" },
+
+        { "type": "header", "content": "Product 3" },
+        { "type": "product", "id": "product_3", "label": "Product 3" },
+        { "type": "text", "id": "product_3_default_color", "label": "Default color", "info": "Initial color only (exact name, e.g. Twilight Blue). Customers can still switch." },
+        { "type": "range", "id": "product_3_x", "label": "Hotspot X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 60 },
+        { "type": "range", "id": "product_3_y", "label": "Hotspot Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 40 },
+        { "type": "select", "id": "product_3_tip_position", "label": "移动端信息卡位置", "options": [{ "value": "below", "label": "圆点下方" }, { "value": "above", "label": "圆点上方" }], "default": "below" },
+
+        { "type": "header", "content": "Product 4" },
+        { "type": "product", "id": "product_4", "label": "Product 4" },
+        { "type": "text", "id": "product_4_default_color", "label": "Default color", "info": "Initial color only (exact name, e.g. Twilight Blue). Customers can still switch." },
+        { "type": "range", "id": "product_4_x", "label": "Hotspot X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 75 },
+        { "type": "range", "id": "product_4_y", "label": "Hotspot Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 65 },
+        { "type": "select", "id": "product_4_tip_position", "label": "移动端信息卡位置", "options": [{ "value": "below", "label": "圆点下方" }, { "value": "above", "label": "圆点上方" }], "default": "below" },
+
+        { "type": "header", "content": "Product 5" },
+        { "type": "product", "id": "product_5", "label": "Product 5" },
+        { "type": "text", "id": "product_5_default_color", "label": "Default color", "info": "Initial color only (exact name, e.g. Twilight Blue). Customers can still switch." },
+        { "type": "range", "id": "product_5_x", "label": "Hotspot X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 30 },
+        { "type": "range", "id": "product_5_y", "label": "Hotspot Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 75 },
+        { "type": "select", "id": "product_5_tip_position", "label": "移动端信息卡位置", "options": [{ "value": "below", "label": "圆点下方" }, { "value": "above", "label": "圆点上方" }], "default": "below" },
+
+        { "type": "header", "content": "Product 6" },
+        { "type": "product", "id": "product_6", "label": "Product 6" },
+        { "type": "text", "id": "product_6_default_color", "label": "Default color", "info": "Initial color only (exact name, e.g. Twilight Blue). Customers can still switch." },
+        { "type": "range", "id": "product_6_x", "label": "Hotspot X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "product_6_y", "label": "Hotspot Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 85 },
+        { "type": "select", "id": "product_6_tip_position", "label": "移动端信息卡位置", "options": [{ "value": "below", "label": "圆点下方" }, { "value": "above", "label": "圆点上方" }], "default": "below" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Shop the look 2", "category": "Products", "blocks": [ { "type": "scene" } ] }
+  ],
+  "disabled_on": { "templates": ["password"] }
+}
+{% endschema %}

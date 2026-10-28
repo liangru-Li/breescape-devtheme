@@ -1,0 +1,53 @@
+{%- doc -%}
+  Outputs the reward points amount for the current product variant.
+  Formula matches Reward points: final sale price (cents) / 100.
+
+  @param {object} product
+  @param {boolean} [enable_clearance_override]
+  @param {object} [section]
+{%- enddoc -%}
+{%- assign sale_rule_match = '' -%}
+{%- assign sale_rule_percent = 0 -%}
+{%- if enable_clearance_override -%}
+  {%- capture sale_rule_match -%}
+    {%- render 'clearance-ivory-comforter-check', product: product, variant: product.selected_or_first_available_variant, section: section -%}
+  {%- endcapture -%}
+  {%- assign sale_rule_match = sale_rule_match | strip -%}
+  {%- if sale_rule_match != blank -%}
+    {%- assign sale_rule_percent = sale_rule_match | split: ':::' | first | plus: 0 -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- liquid
+  assign parent_product = product
+  assign base_price = product.selected_or_first_available_variant.price
+  assign compare_at = product.selected_or_first_available_variant.compare_at_price | default: 0
+  assign discount_amount = parent_product.metafields.custom.discount_amount | default: 0 | plus: 0
+  assign percent = parent_product.metafields.custom.product_discounts | default: 0 | plus: 0
+
+  if sale_rule_percent > 0
+    if compare_at > base_price
+      assign regular_price = compare_at
+    else
+      assign regular_price = base_price
+    endif
+    assign discount = regular_price | times: sale_rule_percent | divided_by: 100
+    assign final_price = regular_price | minus: discount
+  elsif compare_at > base_price
+    assign final_price = base_price
+  elsif discount_amount > 0
+    assign discount = discount_amount | times: 100
+    assign final_price = base_price | minus: discount
+  elsif percent > 0
+    assign discount = base_price | times: percent | divided_by: 100
+    assign final_price = base_price | minus: discount
+  else
+    assign final_price = base_price
+  endif
+
+  if final_price < 0
+    assign final_price = 0
+  endif
+
+  echo final_price | divided_by: 100
+-%}

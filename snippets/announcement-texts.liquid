@@ -1,0 +1,27 @@
+{%- comment -%}
+  Desktop + mobile announcement copy.
+  Mobile uses text_mobile when set; otherwise desktop text, with a line break after SALE:.
+{%- endcomment -%}
+{%- liquid
+  assign _ann_desktop = block.settings.text
+  assign _ann_mobile = block.settings.text_mobile
+  if _ann_mobile == blank
+    assign _ann_mobile = _ann_desktop
+  endif
+  unless _ann_mobile contains '<br'
+    assign _ann_mobile = _ann_mobile | replace: 'SALE:', 'SALE:<br>'
+    assign _ann_mobile = _ann_mobile | replace: 'Sale:', 'Sale:<br>'
+  endunless
+-%}
+{%- if _ann_mobile != _ann_desktop -%}
+  <div class="announcement-text announcement-text--mobile leading-tight md:hidden">
+    {%- render 'highlighted-text', content: _ann_mobile, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+  </div>
+  <p class="announcement-text announcement-text--desktop leading-tight hidden md:block">
+    {%- render 'highlighted-text', content: _ann_desktop, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+  </p>
+{%- else -%}
+  <p class="announcement-text leading-tight">
+    {%- render 'highlighted-text', content: _ann_desktop, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+  </p>
+{%- endif -%}

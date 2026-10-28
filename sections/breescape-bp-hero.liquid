@@ -1,0 +1,252 @@
+{{ 'breescape-bodypillow.css' | asset_url | stylesheet_tag }}
+<div id="bodypillow-{{ section.id }}" class="breescape-bp{% unless section.settings.show_divider %} bp-no-divider{% endunless %}" style="--bp-bg: {{ section.settings.background }};--bp-text: {{ section.settings.text_color }};--bp-width: {{ section.settings.content_width }}px;--bp-top: {{ section.settings.padding_top }};--bp-bottom: {{ section.settings.padding_bottom }};--bp-side: {{ section.settings.padding_horizontal }};--bp-mobile-top: {{ section.settings.mobile_padding_top }};--bp-mobile-bottom: {{ section.settings.mobile_padding_bottom }};--bp-mobile-side: {{ section.settings.mobile_padding_horizontal }};--bp-heading-size: {{ section.settings.heading_size }};--bp-mobile-heading-size: {{ section.settings.mobile_heading_size }};--bp-heading-align: {{ section.settings.heading_alignment }};--bp-mobile-heading-align: {{ section.settings.mobile_heading_alignment }};--bp-heading-gap: {{ section.settings.heading_gap }};--bp-mobile-heading-gap: {{ section.settings.mobile_heading_gap }}"><div class="bp-shell">
+{% liquid
+  assign desktop_image = section.settings.image_desktop
+  assign mobile_image = section.settings.image_mobile | default: desktop_image
+%}
+<section class="bp-hero" aria-labelledby="bp-title-{{ section.id }}"><div class="bp-hero-tile"><div class="bp-hero-canvas">
+{% if desktop_image != blank or mobile_image != blank %}
+{% assign hero_image = desktop_image | default: mobile_image %}
+<picture>
+{% if mobile_image != blank %}<source media="(max-width: 767px)" srcset="{{ mobile_image | image_url: width: 400 }} 400w, {{ mobile_image | image_url: width: 800 }} 800w, {{ mobile_image | image_url: width: 1200 }} 1200w" sizes="calc(100vw - 40px)">{% endif %}
+{{ hero_image | image_url: width: 2400 | image_tag: widths: '600, 1200, 1800, 2400', sizes: '(min-width: 1536px) 1280px, calc(100vw - 40px)', class: 'bp-hero-responsive', alt: section.settings.image_alt, loading: 'eager', decoding: 'async', fetchpriority: 'high' }}
+</picture>
+{% endif %}
+<h2 id="bp-title-{{ section.id }}" class="bp-hero-title">{{ section.settings.heading | escape | newline_to_br }}</h2>
+<div class="bp-badges{% if section.settings.show_badges_mobile %} bp-badges-on-mobile{% endif %}">
+{% for block in section.blocks %}<div class="bp-badge" style="--badge-index:{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+{% assign icon_source = '' %}{% if block.settings.icon != blank %}{% assign icon_source = block.settings.icon | image_url: width: 90 %}{% endif %}
+{% if icon_source contains 'body-pillow-d954f' %}<img src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/body-pillow-b39a4.svg?v=1791868946" class="bp-badge-background" width="148.13" height="148.366" alt="" loading="lazy" decoding="async">{% elsif icon_source contains 'body-pillow-06fb8' %}<img src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/body-pillow-07ac0.svg?v=1791868960" class="bp-badge-background" width="148.13" height="148.13" alt="" loading="lazy" decoding="async">{% else %}<img src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/body-pillow-9dabd.svg?v=1791868940" class="bp-badge-background" width="148.13" height="148.366" alt="" loading="lazy" decoding="async">{% endif %}
+{% if block.settings.icon != blank %}
+{% assign icon_source = block.settings.icon | image_url: width: 90 %}
+{% if icon_source contains 'body-pillow-d954f' %}<img src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/body-pillow-d954f.svg?v=1791868953" class="bp-badge-icon" width="32.9581" height="27.325" alt="" loading="lazy" decoding="async" style="--badge-icon-top:32.9px">
+{% elsif icon_source contains 'body-pillow-breathable-icon' %}<img src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/body-pillow-breathable-icon.svg?v=1791868720" class="bp-badge-icon" width="44.496" height="32.2304" alt="" loading="lazy" decoding="async" style="--badge-icon-top:31.125px">
+{% elsif icon_source contains 'body-pillow-06fb8' %}<img src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/body-pillow-06fb8.svg?v=1791868967" class="bp-badge-icon" width="34" height="24" alt="" loading="lazy" decoding="async" style="--badge-icon-top:35.002px">
+{% else %}{{ block.settings.icon | image_url: width: 1200 | image_tag: class: 'bp-badge-icon bp-badge-icon-generic', alt: '', loading: 'lazy', decoding: 'async' }}{% endif %}{% endif %}
+<span class="bp-badge-label">{{ block.settings.label | escape }}</span></div>{% endfor %}</div>
+</div></div></section>
+</div></div>
+
+{% schema %}
+{
+  "name": "Body Pillow 主图",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "标题",
+      "default": "Breescape\nErgonomic Body Pillow"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "标题字号（电脑）",
+      "min": 18,
+      "max": 64,
+      "step": 1,
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "标题字号（手机）",
+      "min": 18,
+      "max": 44,
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "标题对齐（电脑）",
+      "options": [
+        {
+          "value": "left",
+          "label": "左对齐"
+        },
+        {
+          "value": "center",
+          "label": "居中"
+        },
+        {
+          "value": "right",
+          "label": "右对齐"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "mobile_heading_alignment",
+      "label": "标题对齐（手机）",
+      "options": [
+        {
+          "value": "left",
+          "label": "左对齐"
+        },
+        {
+          "value": "center",
+          "label": "居中"
+        },
+        {
+          "value": "right",
+          "label": "右对齐"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "板块背景色",
+      "default": "#ededed"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "文字颜色",
+      "default": "#0f374b"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "内容最大宽度",
+      "min": 960,
+      "max": 1600,
+      "step": 20,
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "顶部间距（电脑）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 63
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "底部间距（电脑）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 91
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "左右间距（电脑）",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "顶部间距（手机）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "底部间距（手机）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_horizontal",
+      "label": "左右间距（手机）",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "heading_gap",
+      "label": "标题下方间距（电脑）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 37
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_gap",
+      "label": "标题下方间距（手机）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "显示顶部细线",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "主图（电脑）"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "主图（手机）"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "图片说明",
+      "default": "Breescape ergonomic body pillow"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges_mobile",
+      "label": "手机端显示卖点图标",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Body Pillow 主图"
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "卖点图标",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "卖点文字",
+          "default": "Comfort"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "图标"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3
+}
+{% endschema %}
+

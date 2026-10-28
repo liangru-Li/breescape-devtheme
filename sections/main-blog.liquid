@@ -1,0 +1,631 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections-wrapper {
+    position: sticky;
+    top: var(--sticky-header-height, 0px);
+    z-index: 5;
+    background-color: rgb(var(--color-background));
+    padding-block: 30px;
+    margin-top: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    padding: 4px;
+    margin: 0;
+    list-style: none;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections li + li::before {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections li {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections .subcollection {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background-color: rgba(16, 55, 75, 0.06);
+    color: #10374B;
+    opacity: 1;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background-color .2s ease, color .2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections li:first-child .subcollection {
+    padding-inline: 28px;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections .subcollection .btn-text::after {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections .active .subcollection,
+  #shopify-section-{{ section.id }} .subcollections .active .subcollection:hover {
+    background-color: #10374B;
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  @media screen and (pointer: fine) {
+    #shopify-section-{{ section.id }} .subcollections .subcollection:hover {
+      background-color: rgba(16, 55, 75, 0.12);
+      color: #10374B;
+      opacity: 1;
+    }
+
+    #shopify-section-{{ section.id }} .subcollections:hover .subcollection {
+      opacity: 1;
+    }
+
+    #shopify-section-{{ section.id }} .subcollections:hover .subcollection .btn-text::after {
+      transform: none;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .subcollections-scrollbar {
+    display: none;
+    position: relative;
+    width: calc(100% - 8px);
+    height: 4px;
+    margin: 8px auto 0;
+    background-color: rgba(16, 55, 75, 0.15);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .subcollections-scrollbar__thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    min-width: 24px;
+    background-color: #10374B;
+    border-radius: 999px;
+    transition: width .1s ease-out;
+    will-change: left, width;
+  }
+
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .subcollections-wrapper {
+      top: max(var(--sticky-header-height, 0px), 59px);
+    }
+
+    #shopify-section-{{ section.id }} .subcollections {
+      gap: 8px;
+    }
+
+    #shopify-section-{{ section.id }} .subcollections .subcollection {
+      padding: 10px 20px;
+      font-size: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .subcollections-scrollbar {
+      display: block;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .badges.badges--bottom-left {
+    inset-block-start: var(--sp-3);
+    inset-block-end: auto;
+    inset-inline-start: auto;
+    inset-inline-end: var(--sp-3);
+  }
+
+  @media screen and (min-width: 768px) {
+    #shopify-section-{{ section.id }} .badges.badges--bottom-left {
+      inset-block-start: var(--sp-5);
+      inset-inline-end: var(--sp-5);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .badges .badge {
+    --badge-background: #B3E9EF !important;
+    --badge-foreground: #10374B !important;
+    background-color: #B3E9EF !important;
+    color: #10374B !important;
+    padding: var(--sp-0d5) var(--sp-2);
+    font-size: var(--text-3xs);
+    line-height: 1.2;
+  }
+
+  @media screen and (min-width: 768px) {
+    #shopify-section-{{ section.id }} .badges .badge {
+      padding: var(--sp-1) var(--sp-2d5);
+      font-size: var(--text-3xs);
+    }
+  }
+</style>
+
+{{ 'blog.css' | asset_url | stylesheet_tag }}
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'collection.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign primary_tags_str = '|||'
+  for block in section.blocks
+    if block.type == 'tag_order'
+      assign btag = block.settings.tag | strip
+      if btag != blank
+        assign check = btag | prepend: '|||' | append: '|||'
+        unless primary_tags_str contains check
+          assign primary_tags_str = primary_tags_str | append: btag | append: '|||'
+        endunless
+      endif
+    endif
+  endfor
+-%}
+
+{%- paginate blog.articles by section.settings.per_page -%}
+  <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+    <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+      <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} {{ section.settings.heading_alignment }} flex flex-col gap-4">
+        {%- if section.settings.subheading != blank -%}
+          {%- liquid
+            if section.settings.heading_size == 'title-sm'
+              assign subtext_size = 'subtext-md'
+            else
+              assign subtext_size = 'subtext-lg'
+            endif
+          -%}
+          <p class="heading normal-case font-medium {{ subtext_size }} leading-none tracking-none">
+            {{- section.settings.subheading | escape -}}
+          </p>
+        {%- endif -%}
+
+        <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
+          {%- render 'heading-content', content: blog.title, style: 'none' -%}
+        </{{ section.settings.heading_tag }}>
+
+        {%- if section.settings.description != blank -%}
+          {%- liquid
+            if section.settings.heading_size == 'title-sm' or section.settings.heading_size == 'title-md'
+              assign subtext_size = 'subtext-md'
+            else
+              assign subtext_size = 'subtext-lg'
+            endif
+          -%}
+          <div class="inline-flex justify-center rte">
+            <div class="page-width--narrow rte leading-normal {{ subtext_size }}">{{ section.settings.description }}</div>
+          </div>
+        {%- endif -%}
+
+      </div>
+
+      {%- if section.settings.show_tag_filter and blog.all_tags.size > 0 -%}
+        {%- liquid
+          assign ordered = '|||'
+          for block in section.blocks
+            if block.type == 'tag_order'
+              assign btag = block.settings.tag | strip
+              if btag != blank and blog.all_tags contains btag
+                assign check = btag | prepend: '|||' | append: '|||'
+                unless ordered contains check
+                  assign ordered = ordered | append: btag | append: '|||'
+                endunless
+              endif
+            endif
+          endfor
+          assign ordered_tags = ordered | remove_first: '|||' | split: '|||'
+        -%}
+        {%- if ordered_tags.size > 0 -%}
+          <div class="subcollections-wrapper text-left" data-subcollections-scroll>
+            <ul class="subcollections max-w-full">
+              {%- for tag in ordered_tags -%}
+                {%- if tag == blank -%}{%- continue -%}{%- endif -%}
+                {%- assign is_active = false -%}
+                {%- if current_tags contains tag -%}
+                  {%- assign is_active = true -%}
+                {%- elsif current_tags == blank and forloop.first -%}
+                  {%- assign is_active = true -%}
+                {%- endif -%}
+                <li class="flex items-center justify-center relative{% if is_active %} active{% endif %}">
+                  <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="subcollection flex items-center relative leading-tight text-lg-2xl" aria-label="{{ 'blogs.article.view_posts_tagged' | t: tag: tag | escape }}">
+                    <span class="btn-text">{{ tag }}</span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+            <div class="subcollections-scrollbar" aria-hidden="true">
+              <span class="subcollections-scrollbar__thumb"></span>
+            </div>
+          </div>
+
+          <script>
+            (function () {
+              var wrapper = document.querySelector('#shopify-section-{{ section.id }} [data-subcollections-scroll]');
+              if (!wrapper) return;
+              var list = wrapper.querySelector('.subcollections');
+              var bar = wrapper.querySelector('.subcollections-scrollbar');
+              var thumb = wrapper.querySelector('.subcollections-scrollbar__thumb');
+              if (!list) return;
+
+              function scrollActiveIntoView() {
+                var active = list.querySelector('li.active');
+                if (!active) return;
+                var listWidth = list.clientWidth;
+                var maxScroll = list.scrollWidth - listWidth;
+                if (maxScroll <= 0) return;
+                var target = active.offsetLeft - (listWidth / 2) + (active.offsetWidth / 2);
+                target = Math.max(0, Math.min(maxScroll, target));
+                var prev = list.style.scrollBehavior;
+                list.style.scrollBehavior = 'auto';
+                list.scrollLeft = target;
+                list.style.scrollBehavior = prev || '';
+              }
+
+              function update() {
+                if (!bar || !thumb) return;
+                var scrollWidth = list.scrollWidth;
+                var clientWidth = list.clientWidth;
+                var overflow = scrollWidth - clientWidth;
+                if (overflow <= 1) {
+                  bar.style.visibility = 'hidden';
+                  return;
+                }
+                bar.style.visibility = 'visible';
+                var ratio = clientWidth / scrollWidth;
+                var trackWidth = bar.clientWidth;
+                var thumbWidth = Math.max(24, trackWidth * ratio);
+                var maxLeft = trackWidth - thumbWidth;
+                var progress = list.scrollLeft / overflow;
+                var left = Math.min(maxLeft, Math.max(0, maxLeft * progress));
+                thumb.style.width = thumbWidth + 'px';
+                thumb.style.left = left + 'px';
+              }
+
+              function syncAll() {
+                scrollActiveIntoView();
+                update();
+              }
+
+              list.addEventListener('scroll', update, { passive: true });
+              window.addEventListener('resize', syncAll);
+              if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(syncAll);
+              }
+              requestAnimationFrame(syncAll);
+              setTimeout(syncAll, 300);
+              setTimeout(syncAll, 800);
+            })();
+          </script>
+        {%- endif -%}
+      {%- endif -%}
+
+      <div class="blog flex flex-col gap-12">
+        <motion-list class="blog-grid{% if section.settings.layout == 'collage' %} blog-collage{% if blog.articles_count == 1 %} with-only1{% endif %}{% endif %} card-grid card-grid--3 mobile:card-grid--1 grid">
+          {%- for article in blog.articles -%}
+            {%- if section.settings.layout == 'collage' and forloop.first -%}
+              {%- capture sizes -%}100vw{%- endcapture -%}
+            {%- else -%}
+              {%- capture sizes -%}(max-width: 639px) 100vw, (max-width: 767px) 74vw, {{ settings.page_width | divided_by: 3 }}px{%- endcapture -%}
+            {%- endif -%}
+
+            {%- render 'article-card',
+              article: article,
+              blog: blog,
+              sizes: sizes,
+              image_ratio: section.settings.image_ratio,
+              show_tags: section.settings.show_tags,
+              show_date: section.settings.show_date,
+              show_author: section.settings.show_author,
+              show_comments: section.settings.show_comments,
+              show_excerpt: section.settings.show_excerpt,
+              primary_tags: primary_tags_str,
+            -%}
+          {%- endfor -%}
+        </motion-list>
+
+        {%- liquid
+          if paginate.pages > 1
+            render 'pagination', paginate: paginate
+          endif
+        -%}
+      </div>
+    </div>
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-xl tracking-heading",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left justify-start",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center justify-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right justify-end",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-center justify-center"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tag_filter",
+      "label": "t:sections.main-blog.settings.show_tag_filter.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "min": 6,
+      "max": 48,
+      "step": 3,
+      "label": "t:sections.main-blog.settings.per_page.label",
+      "default": 9
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__post.content"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.main-blog.settings.layout.options__1.label"
+        },
+        {
+          "value": "collage",
+          "label": "t:sections.main-blog.settings.layout.options__2.label"
+        }
+      ],
+      "default": "collage",
+      "label": "t:sections.main-blog.settings.layout.label",
+      "info": "t:sections.main-blog.settings.layout.info"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.global.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.global.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.global.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.global.settings.image_ratio.options__4.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.global.settings.image_ratio.options__5.label"
+        }
+      ],
+      "default": "landscape",
+      "label": "t:sections.global.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "t:sections.main-blog.settings.show_tags.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:sections.main-blog.settings.show_date.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comments",
+      "label": "t:sections.main-blog.settings.show_comments.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "t:sections.main-blog.settings.show_author.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "t:sections.main-blog.settings.show_excerpt.label",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-blog.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 120
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tag_order",
+      "name": "Tag order item",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Add one block per tag to control the tab order. Drag blocks in the sidebar to reorder. Any tag from articles that is not listed here will be appended to the end automatically."
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag name",
+          "info": "Enter the tag name exactly as it appears in the article's Tags field (case-sensitive, spaces and symbols must match, e.g. Inside Breescape®)."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 50
+}
+{% endschema %}

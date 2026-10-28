@@ -1,0 +1,35 @@
+.product-reward-points__cart {
+  display: block;
+  text-align: center;
+  font-size: var(--rp-font-size-mobile, 13px);
+  font-weight: var(--rp-font-weight, 400);
+  color: var(--rp-text-color, #10374b);
+  line-height: 1.2;
+}
+
+.product-reward-points__count {
+  display: inline;
+}
+
+.product-reward-points__dot {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.45em;
+  border-radius: 50%;
+  background-color: currentColor;
+  vertical-align: 0.1em;
+  animation: product-reward-points-dot-blink 1.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes product-reward-points-dot-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}
+
+@media screen and (min-width: 768px) {
+  .product-reward-points__cart {
+    font-size: var(--rp-font-size-desktop, 14px);
+  }
+}

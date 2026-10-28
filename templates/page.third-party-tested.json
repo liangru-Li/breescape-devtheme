@@ -1,0 +1,122 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "custom_css": [
+        ".title-wrapper .heading {display: none !important; }"
+      ],
+      "settings": {
+        "heading_size": "title-sm",
+        "heading_alignment": "text-center",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "rich_text_QVynfF": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_BHLRrX": {
+          "type": "heading",
+          "settings": {
+            "heading": "{{ page.title }}",
+            "heading_size": "title-md",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_VWqemB": {
+          "type": "text",
+          "settings": {
+            "text": "<p>BlendTek™ Fabric</p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BHLRrX",
+        "text_VWqemB"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 48,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "custom_liquid_Nf89Xj": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.name",
+      "settings": {
+        "liquid": "<div class=\"xo-cert-card grid gap-4\" id=\"xoCertCard\">\n\n  <div class=\"xo-cert-dropdown\">\n    <button class=\"xo-cert-dropdown-btn flex gap-4 items-center justify-between w-full rounded-full bg-white\"\n      id=\"xoCertDropdownBtn\" type=\"button\" aria-expanded=\"false\" aria-controls=\"xoCertDropdownMenu\">\n      <span id=\"xoCertDropdownLabel\" class=\" text-lg font-medium leading-tight\">√ Coolness Test (Q-Max)</span>\n      {%- render 'icon', icon: 'chevron-menu', class: 'xo-cert-chevron' size:'xs' -%}\n    </button>\n\n    <div class=\"xo-cert-dropdown-menu\" id=\"xoCertDropdownMenu\" role=\"listbox\" aria-hidden=\"true\">\n      <button class=\"xo-cert-option is-active\" type=\"button\" role=\"option\" data-panel=\"qmax\" aria-selected=\"true\">\n        √ Coolness Test (Q-Max)\n      </button>\n      <button class=\"xo-cert-option\" type=\"button\" role=\"option\" data-panel=\"breathability\" aria-selected=\"false\">\n        √ Breathability Test\n      </button>\n      <button class=\"xo-cert-option\" type=\"button\" role=\"option\" data-panel=\"oekotex\" aria-selected=\"false\">\n        √ OEKO-TEX® Certification\n      </button>\n    </div>\n  </div>\n\n  <div class=\"xo-cert-panels\">\n    <!-- Q-Max -->\n    <section class=\"xo-cert-panel gap-2 is-active\" data-panel=\"qmax\">\n      <div class=\"xo-pill-card bg-white\">\n        <div class=\"xo-metric-grid grid gap-2\">\n          <div class=\"xo-metric-grid-items grid\">\n            <div class=\"xo-grid-head md:text-base text-sm\">Cotton</div>\n            <div class=\"xo-grid-head md:text-base text-sm\">Bamboo Rayon</div>\n            <div class=\"xo-grid-head md:text-base text-sm\">Silk</div>\n            <div class=\"xo-grid-head md:text-lg text-base font-medium xo-grid-brand italic\">BlendTek™</div>\n          </div>\n          <div class=\"xo-value-row items-center xo-metric-grid-items\" aria-label=\"Q-Max comparison values\">\n            <div class=\"xo-grid-val md:text-base text-sm\">0.11</div>\n            <div class=\"xo-grid-val md:text-base text-sm\">0.15</div>\n            <div class=\"xo-grid-val md:text-base text-sm\">0.19</div>\n            <div class=\"xo-grid-val xo-grid-highlight md:text-base text-sm font-medium\">Q-Max &gt; <strong>0.46</strong>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"xo-info-card bg-white grid gap-2\">\n        <h3 class=\"text-2xl leading-normal\">What is Q-Max?</h3>\n        <p>\n          Qmax measures how cool a fabric feels instantly when it touches your skin.\n          The higher the score, the cooler the fabric feels.\n        </p>\n      </div>\n\n      <div class=\"xo-logo-note grid gap-4 items-center\">\n        <div class=\"xo-logo\">\n          <img class=\"h-full w-full object-cover\"\n            src=\"{{ 'testedpage_certified_logo_sgs_image_202602_v1.png' | file_url }}\"\n            alt=\"{{ img_alt | default: 'Cooler, cozier, better sleep for everyone!' }}\" />\n        </div>\n        <p>\n          BlendTek™ fabric has been rigorously tested by SGS SA, a globally recognized\n          testing organization, because cooling comfort should always come with uncompromised safety.\n        </p>\n      </div>\n    </section>\n\n    <!-- Breathability -->\n    <section class=\"xo-cert-panel gap-2\" data-panel=\"breathability\">\n      <div class=\"xo-pill-card bg-white\">\n        <div class=\"xo-metric-grid\">\n          <div class=\"xo-metric-grid-items grid\">\n            <div class=\"xo-grid-head md:text-base text-sm\">Silk</div>\n            <div class=\"xo-grid-head md:text-base text-sm\">Cotton</div>\n            <div class=\"xo-grid-head md:text-base text-sm\">Bamboo Rayon</div>\n            <div class=\"xo-grid-head md:text-lg text-sm font-bold xo-grid-brand italic\">Air Permeability</div>\n          </div>\n          <div class=\"xo-value-row xo-metric-grid-items items-center\" aria-label=\"Air permeability comparison values\">\n            <div class=\"xo-grid-val md:text-base text-sm\">20-80</div>\n            <div class=\"xo-grid-val md:text-base text-sm\">100-400</div>\n            <div class=\"xo-grid-val md:text-base text-sm\">250-600</div>\n            <div class=\"xo-grid-val xo-grid-highlight md:text-base text-sm font-medium\">1320 <span>mm/s</span></div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"xo-info-card bg-white grid gap-2\">\n        <h3 class=\"text-2xl leading-normal\">What is Air Permeability?</h3>\n        <p>\n          Air Permeability indicates how quickly air can pass through a fabric. A higher mm/s rating means enhanced\n          airflow for cooler, drier comfort.\n        </p>\n      </div>\n\n      <div class=\"xo-logo-note grid gap-4 items-center\">\n        <div class=\"xo-logo xo-logo-sgs\">\n          <img class=\"h-full w-full object-cover\"\n            src=\"{{ 'testedpage_certified_logo_sgs_image_202602_v1.png' | file_url }}\"\n            alt=\"{{ img_alt | default: 'Cooler, cozier, better sleep for everyone!' }}\" />\n        </div>\n        <p>\n          BlendTek™ fabric has been rigorously tested by SGS SA, a globally recognized\n          testing organization, because cooling comfort should always come with uncompromised safety.\n        </p>\n      </div>\n    </section>\n\n    <!-- OEKO-TEX -->\n    <section class=\"xo-cert-panel gap-2\" data-panel=\"oekotex\">\n      <div class=\"xo-pill-row bg-white\">\n        <span class=\"xo-dot\"></span>\n        <span class=\"text-lg leading-normal\">&nbsp;II (products with direct contact to skin)</span>\n      </div>\n\n      <div class=\"xo-info-card bg-white grid gap-2\">\n        <h3 class=\"text-2xl leading-normal\">What is OEKO-TEX® STANDARD 100?</h3>\n        <p class=\"text-base\">\n          OEKO‑TEX® Standard 100 is a label for textiles tested for harmful substances and sets the benchmark for\n          textile safety. It tests against a comprehensive list of over 1,000 harmful substances to ensure safety for\n          products with direct skin contact.\n        </p>\n      </div>\n\n      <div class=\"xo-info-card xo-list-card bg-white\">\n        <h3 class=\"text-2xl leading-normal\">No Detectable Levels of the Following Substances</h3>\n        <ul class=\"text-base leading-normal\">\n          <li>× Formaldehyde</li>\n          <li>× Heavy metals</li>\n          <li>× Pesticides</li>\n          <li>× Glyphosate and salts</li>\n          <li>× Chlorinated phenols</li>\n          <li>× Plasticizer/phthalates</li>\n          <li>× Organic tin compounds</li>\n          <li>× Bisphenols</li>\n          <li>× Carcinogenic arylamines</li>\n          <li>× Dyestuffs and pigments classified as carcinogenic</li>\n          <li>× Dyestuffs classified as allergenic</li>\n          <li>× Michler's ketone/base</li>\n          <li>× PFAS / per- and polyfluorinated compounds</li>\n          <li>× Polycyclic aromatic hydrocarbons (PAH)</li>\n          <li>× Chlorinated benzenes and toluenes</li>\n          <li>× Forbidden flame retardant substances</li>\n          <li>× Solvent residues</li>\n          <li>× Surfactant, wetting agent residues, alkyl phenols</li>\n          <li>× Flame retardants, certain pesticide residues</li>\n          <li>...</li>\n        </ul>\n      </div>\n\n      <div class=\"xo-logo-note xo-logo-note-oeko grid gap-4 items-center\">\n        <div class=\"xo-logo xo-logo-oeko\">\n          <img class=\"h-full w-full object-cover\"\n            src=\"{{ 'testedpage_certified_logo_oekotex_image_202602_v1.png' | file_url }}\"\n            alt=\"{{ img_alt | default: 'Cooler, cozier, better sleep for everyone!' }}\" />\n        </div>\n        <p>\n          BlendTek™ fabric is certified by OEKO-TEX®, a globally recognized textile testing organization,\n          meeting strict safety standards for skin use.\n        </p>\n      </div>\n    </section>\n  </div>\n</div>\n\n<style>\n  .xo-cert-dropdown {\n    position: relative;\n    margin-bottom: 16px;\n  }\n\n  .xo-cert-dropdown-btn {\n    border: none;\n    padding: 14px 18px;\n    cursor: pointer;\n    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);\n  }\n\n  .xo-cert-dropdown-btn:hover {\n    background: #f6f6f6;\n  }\n\n  .xo-cert-dropdown-btn[aria-expanded=\"true\"] .xo-cert-chevron {\n    transform: rotate(180deg);\n  }\n\n  .xo-cert-dropdown-menu {\n    position: absolute;\n    top: calc(100% + 8px);\n    left: 0;\n    right: 0;\n    background: #f8f8f8;\n    border-radius: 14px;\n    padding: 8px;\n    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);\n    display: none;\n    z-index: 20;\n    border: 1px solid rgba(21, 62, 90, 0.06);\n  }\n\n  .xo-cert-dropdown-menu.is-open {\n    display: block;\n  }\n\n  .xo-cert-option {\n    width: 100%;\n    border: none;\n    background: transparent;\n    color: var(--text);\n    text-align: left;\n    padding: 10px 12px;\n    border-radius: 10px;\n    font-size: 15px;\n    line-height: 1.35;\n    cursor: pointer;\n  }\n\n  .xo-cert-option:hover {\n    background: rgba(89, 197, 216, 0.12);\n  }\n\n  .xo-cert-option.is-active {\n    background: rgba(89, 197, 216, 0.16);\n    font-weight: 600;\n  }\n\n  /* Panels */\n  .xo-cert-panel {\n    display: none;\n    animation: xoFadeIn 0.22s ease;\n  }\n\n  .xo-cert-panel.is-active {\n    display: grid;\n  }\n\n  @keyframes xoFadeIn {\n    from {\n      opacity: 0;\n      transform: translateY(4px);\n    }\n\n    to {\n      opacity: 1;\n      transform: translateY(0);\n    }\n  }\n\n  .xo-pill-card,\n  .xo-info-card,\n  .xo-pill-row {\n    border-radius: var(--rounded-block);\n    padding: 18px 18px;\n    margin-bottom: 14px;\n    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);\n  }\n\n  /* 上方标题行 + 下方连续胶囊值行 */\n  .xo-metric-grid {\n    align-items: center;\n    text-align: center;\n  }\n\n  .xo-metric-grid .xo-metric-grid-items {\n    grid-template-columns: 25% 25% 25% 25%;\n  }\n\n  /* 核心：连续渐变胶囊 */\n  .xo-value-row {\n    grid-column: 1 / -1;\n    display: grid;\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n    border-radius: 999px;\n    overflow: hidden;\n    background: linear-gradient(90deg,\n        #eef4f6 0%,\n        #dbeff4 18%,\n        #c4ebf1 42%,\n        #a7e4ed 68%,\n        #89dbe7 100%);\n    box-shadow:\n      inset 0 1px 0 rgba(255, 255, 255, 0.72),\n      inset 0 -1px 0 rgba(255, 255, 255, 0.36);\n  }\n\n  .xo-value-row .xo-grid-val {\n    background: transparent;\n    padding: 10px 8px;\n    position: relative;\n    z-index: 1;\n  }\n\n  .xo-grid-highlight {\n    font-weight: 700;\n    color: var(--accent-deep);\n  }\n\n  .xo-grid-highlight strong {\n    font-size: 18px;\n    line-height: 1;\n  }\n\n  .xo-grid-highlight span {\n    font-size: 14px;\n    font-weight: 600;\n  }\n\n  /* OEKO row */\n  .xo-pill-row {\n    display: flex;\n    align-items: center;\n    font-weight: 600;\n    border-radius: 20px;\n  }\n\n  .xo-dot {\n    width: 14px;\n    height: 14px;\n    border-radius: 50%;\n    background: #64cddd;\n    flex: 0 0 auto;\n  }\n\n  .xo-list-card ul {\n    margin: 0;\n    padding-left: 0;\n    list-style: none;\n  }\n\n  /* Logos */\n  .xo-logo-note {\n    margin-top: 8px;\n    grid-template-columns: 120px 1fr;\n  }\n\n  .xo-logo {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    min-height: 54px;\n    border-radius: 10px;\n    font-weight: 700;\n    letter-spacing: 0.5px;\n  }\n\n\n  .xo-logo-note-oeko {\n    align-items: center;\n    grid-template-columns: 100px 1fr;\n    margin-top: 10px;\n  }\n\n\n  /* Mobile */\n  @media (max-width: 767px) {\n\n    .xo-pill-card,\n    .xo-info-card,\n    .xo-pill-row {\n      padding: 24px 16px;\n    }\n\n    .xo-metric-grid .xo-metric-grid-items {\n      grid-template-columns: 15% 30% 20% 35%;\n    }\n\n    .xo-cert-panel[data-panel=\"breathability\"] .xo-metric-grid .xo-metric-grid-items {\n      grid-template-columns: 20% 20% 30% 30%;\n    }\n\n    .xo-value-row .xo-grid-val {\n      padding: 8px 6px;\n    }\n\n    .xo-logo-note {\n      grid-template-columns: 90px 1fr;\n      gap: 10px;\n      align-items: center;\n    }\n\n    .xo-logo-sgs {\n      font-size: 26px;\n      min-height: 34px;\n    }\n\n    .xo-logo-oeko {\n      width: 54px;\n      height: 54px;\n      font-size: 12px;\n    }\n  }\n</style>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 24,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "rich_text_QVynfF",
+    "custom_liquid_Nf89Xj"
+  ]
+}

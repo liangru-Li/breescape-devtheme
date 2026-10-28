@@ -1,0 +1,448 @@
+{%- comment -%}
+  产品详情页固定顶部快速导航
+  滚动到设定阈值后固定显示在顶部，覆盖 header，中间显示 4 个 Tab 锚点：
+    Add to Cart / Overview / Reviews / FAQ
+  仅在 product 模板启用。
+{%- endcomment -%}
+
+{%- assign nav_bg          = section.settings.nav_bg          | default: '#FFFFFF' -%}
+{%- assign nav_text_color  = section.settings.nav_text_color  | default: '#10374B' -%}
+{%- assign nav_active      = section.settings.nav_active      | default: '#0F374B' -%}
+{%- assign nav_height      = section.settings.nav_height      | default: 60 -%}
+{%- assign nav_font_size   = section.settings.nav_font_size   | default: 15 -%}
+{%- assign nav_tab_gap     = section.settings.nav_tab_gap     | default: 40 -%}
+{%- assign show_threshold  = section.settings.show_threshold  | default: 400 -%}
+{%- assign hide_sticky_atc = section.settings.hide_sticky_atc -%}
+
+{%- assign label_atc      = section.settings.label_atc      | default: 'Add to Cart' -%}
+{%- assign label_overview = section.settings.label_overview | default: 'Overview' -%}
+{%- assign label_reviews  = section.settings.label_reviews  | default: 'Reviews' -%}
+{%- assign label_faq      = section.settings.label_faq      | default: 'FAQ' -%}
+
+<style>
+  .pdp-sticky-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 35;
+    background: {{ nav_bg }};
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transform: translateY(-100%);
+    transition: transform .32s ease;
+    pointer-events: none;
+    color: {{ nav_text_color }};
+  }
+  .pdp-sticky-nav[data-visible="true"] {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  body.pdp-sticky-nav-visible .shopify-section-header,
+  body.pdp-sticky-nav-visible header.header,
+  body.pdp-sticky-nav-visible sticky-header,
+  body.pdp-sticky-nav-visible custom-header {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .pdp-sticky-nav__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+    min-height: {{ nav_height }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pdp-sticky-nav__tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: {{ nav_tab_gap }}px;
+    width: 100%;
+  }
+  .pdp-sticky-nav__tab {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 8px 2px;
+    cursor: pointer;
+    font-size: {{ nav_font_size }}px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+    position: relative;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+  .pdp-sticky-nav__tab::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: {{ nav_active }};
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform .2s ease;
+  }
+  .pdp-sticky-nav__tab:hover,
+  .pdp-sticky-nav__tab[data-active="true"] {
+    color: {{ nav_active }};
+    font-weight: 600;
+  }
+  .pdp-sticky-nav__tab[data-active="true"]::after {
+    transform: scaleX(1);
+  }
+
+  @media (max-width: 767px) {
+    .pdp-sticky-nav__inner { padding: 0 12px; min-height: 48px; }
+    .pdp-sticky-nav__tabs {
+      gap: 8px;
+      justify-content: space-between;
+    }
+    .pdp-sticky-nav__tab {
+      font-size: 13px;
+      padding: 8px 0;
+      flex: 1 1 0;
+      text-align: center;
+      min-width: 0;
+    }
+  }
+
+  {%- if hide_sticky_atc -%}
+  /* 隐藏 main-product 的 sticky_buy_button block 输出的底部小 ATC */
+  product-sticky-form,
+  .product-sticky-form {
+    display: none !important;
+  }
+  {%- endif -%}
+</style>
+
+<div
+  class="pdp-sticky-nav"
+  id="PdpStickyNav-{{ section.id }}"
+  data-visible="false"
+  data-show-threshold="{{ show_threshold }}"
+  role="navigation"
+  aria-label="Product quick navigation"
+>
+  <div class="pdp-sticky-nav__inner">
+    <nav class="pdp-sticky-nav__tabs">
+      <button type="button" class="pdp-sticky-nav__tab" data-anchor="atc">{{ label_atc }}</button>
+      <button type="button" class="pdp-sticky-nav__tab" data-anchor="overview">{{ label_overview }}</button>
+      <button type="button" class="pdp-sticky-nav__tab" data-anchor="reviews">{{ label_reviews }}</button>
+      <button type="button" class="pdp-sticky-nav__tab" data-anchor="faq">{{ label_faq }}</button>
+    </nav>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var nav = document.getElementById('PdpStickyNav-{{ section.id }}');
+    if (!nav) return;
+    var showThreshold = parseInt(nav.getAttribute('data-show-threshold'), 10) || 500;
+    var tabs = Array.prototype.slice.call(nav.querySelectorAll('.pdp-sticky-nav__tab'));
+
+    function closestSection(el) {
+      if (!el) return null;
+      return el.closest('[id^="shopify-section-"]') || el.closest('.shopify-section') || el;
+    }
+
+    /* 通过 <product-info> custom element 定位 main-product 所在的整个 shopify-section。
+       main-product section 内除了 product-info，还有 product-info 外的 mobile yotpo rating widget，
+       它们都要在选评论区锚点时被排除。 */
+    function getMainProductSection() {
+      var pi = document.querySelector('product-info');
+      if (pi) return closestSection(pi);
+      var form = document.querySelector('form[action*="/cart/add"]');
+      if (form) return closestSection(form);
+      return null;
+    }
+
+    function isVisible(el) {
+      if (!el) return false;
+      if (el.offsetParent === null && el !== document.body) return false;
+      var rect = el.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0;
+    }
+
+    function pickReviewsAnchor() {
+      var mainSection = getMainProductSection();
+
+      /* 1) 优先匹配当前 store 硬编码的 apps section id（宽松匹配前缀差异） */
+      var hardcoded = document.querySelector('[id*="ae6d898f7ba8cc43d381"]');
+      if (hardcoded && (!mainSection || !mainSection.contains(hardcoded))) {
+        return closestSection(hardcoded);
+      }
+
+      /* 2) 找不在 main-product section 内的 yotpo widget，取其 shopify-section 祖先 */
+      var els = document.querySelectorAll('.yotpo-widget-instance, [class*="yotpo-main-widget"], [class*="yotpo-reviews"]');
+      for (var i = 0; i < els.length; i++) {
+        if (mainSection && mainSection.contains(els[i])) continue;
+        var section = closestSection(els[i]);
+        if (section && section !== mainSection && isVisible(section)) return section;
+      }
+
+      /* 3) 兜底：非 main-product 内含 "Customer Reviews" 文本的 shopify-section */
+      var sections = document.querySelectorAll('.shopify-section, [id^="shopify-section-"]');
+      for (var j = 0; j < sections.length; j++) {
+        var sec = sections[j];
+        if (mainSection && sec === mainSection) continue;
+        var snippet = (sec.textContent || '').substring(0, 500);
+        if (/Customer\s+Reviews?/i.test(snippet) && isVisible(sec)) return sec;
+      }
+      return null;
+    }
+
+    function pickBySelector(selectors) {
+      for (var i = 0; i < selectors.length; i++) {
+        var el = document.querySelector(selectors[i]);
+        if (el && isVisible(el)) return el;
+      }
+      return null;
+    }
+
+    function findAnchor(name) {
+      switch (name) {
+        case 'atc': {
+          return pickBySelector([
+            'product-info .product-form__buttons',
+            'product-info [name="add"]',
+            'form[action*="/cart/add"] .product-form__buttons',
+            'form[action*="/cart/add"] [name="add"]',
+            '.product-form__buttons'
+          ]);
+        }
+        case 'overview': {
+          /* 1) 优先使用用户手动放置的 Overview 锚点 section（sections/product-overview-anchor.liquid） */
+          var anchor = document.querySelector('[data-pdp-overview-anchor]');
+          if (anchor) {
+            var anchorSection = closestSection(anchor);
+            if (anchorSection) return anchorSection;
+            return anchor;
+          }
+          /* 2) 兜底：视频/媒体区域 */
+          var el = pickBySelector([
+            '#shopify-section-video_yKdygM',
+            '.shopify-section .video-hero',
+            '.shopify-section iframe[src*="youtube"]',
+            '.shopify-section iframe[src*="vimeo"]',
+            '.shopify-section video'
+          ]);
+          return closestSection(el);
+        }
+        case 'reviews': {
+          return pickReviewsAnchor();
+        }
+        case 'faq': {
+          var mainSection = getMainProductSection();
+          var el = pickBySelector([
+            '[id*="faq_Fb7GVR"]',
+            '.shopify-section .faqs',
+            '.shopify-section [class*="faq"]'
+          ]);
+          if (el && (!mainSection || !mainSection.contains(el))) return closestSection(el);
+          var heads = document.querySelectorAll('h1, h2, h3');
+          for (var i = 0; i < heads.length; i++) {
+            if (mainSection && mainSection.contains(heads[i])) continue;
+            var t = (heads[i].textContent || '').trim();
+            if (/^FAQs?$/i.test(t)) return closestSection(heads[i]);
+          }
+          return null;
+        }
+      }
+      return null;
+    }
+
+    function scrollTo(el) {
+      if (!el) return;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - (nav.offsetHeight + 12);
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+
+    tabs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var name = btn.getAttribute('data-anchor');
+        var el = findAnchor(name);
+        if (!el) return;
+        scrollTo(el);
+      });
+    });
+
+    function updateVisibility() {
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var visible = y > showThreshold;
+      nav.setAttribute('data-visible', visible ? 'true' : 'false');
+      document.body.classList.toggle('pdp-sticky-nav-visible', visible);
+    }
+
+    function updateActive() {
+      var offset = nav.offsetHeight + 40;
+      var current = null;
+      ['atc', 'overview', 'reviews', 'faq'].forEach(function (name) {
+        var el = findAnchor(name);
+        if (!el) return;
+        var rect = el.getBoundingClientRect();
+        /* 元素还没渲染时 top=0 且 height=0，跳过避免误命中 */
+        if (rect.height === 0 && rect.top === 0) return;
+        if (rect.top - offset <= 0) current = name;
+      });
+      tabs.forEach(function (btn) {
+        btn.setAttribute('data-active', btn.getAttribute('data-anchor') === current ? 'true' : 'false');
+      });
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        updateVisibility();
+        updateActive();
+        ticking = false;
+      });
+    }
+
+    function refresh() {
+      onScroll();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', refresh, { passive: true });
+    document.addEventListener('shopify:section:load', refresh);
+    document.addEventListener('shopify:section:unload', refresh);
+    document.addEventListener('DOMContentLoaded', refresh);
+    window.setTimeout(refresh, 800);
+    window.setTimeout(refresh, 2500);
+    window.setTimeout(refresh, 6000);
+    refresh();
+
+    window.__pdpGoToNav = function (name) {
+      var el = findAnchor(name);
+      if (!el) return false;
+      scrollTo(el);
+      return true;
+    };
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "产品页顶部导航",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tab 文案"
+    },
+    {
+      "type": "text",
+      "id": "label_atc",
+      "label": "Tab 1 - 加购",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "label_overview",
+      "label": "Tab 2 - Overview",
+      "default": "Overview"
+    },
+    {
+      "type": "text",
+      "id": "label_reviews",
+      "label": "Tab 3 - Reviews",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "label_faq",
+      "label": "Tab 4 - FAQ",
+      "default": "FAQ"
+    },
+    {
+      "type": "header",
+      "content": "样式"
+    },
+    {
+      "type": "color",
+      "id": "nav_bg",
+      "label": "背景色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "nav_text_color",
+      "label": "文字颜色",
+      "default": "#10374B"
+    },
+    {
+      "type": "color",
+      "id": "nav_active",
+      "label": "选中/hover 颜色",
+      "default": "#0F374B"
+    },
+    {
+      "type": "range",
+      "id": "nav_height",
+      "label": "导航栏高度",
+      "min": 48,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "nav_font_size",
+      "label": "Tab 字号",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "nav_tab_gap",
+      "label": "Tab 之间间距（PC）",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "触发"
+    },
+    {
+      "type": "range",
+      "id": "show_threshold",
+      "label": "滚动多少 px 后显示",
+      "min": 100,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_sticky_atc",
+      "label": "隐藏底部小加购（PC + 移动端）",
+      "info": "启用后隐藏 main-product 的 sticky_buy_button block（页面右下角/底部小卡）",
+      "default": true
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "presets": [
+    {
+      "name": "产品页顶部导航"
+    }
+  ]
+}
+{% endschema %}

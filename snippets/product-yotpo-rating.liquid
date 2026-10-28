@@ -1,0 +1,208 @@
+{%- comment -%}
+  ============================================================================
+  Product Yotpo Rating (reusable)
+
+  在产品页星级 widget 上叠加：
+    · 只给 "N Reviews" 部分加下划线（4.9 分数与括号不划线）
+
+  可选参数：
+    instance_id (string)  —— yotpo widget instance id，默认 989160
+    product     (object)  —— 商品对象，默认自动取当前上下文中的 product
+    visibility  (string)  —— 显隐范围：'desktop' | 'mobile' | 'all'，默认 'desktop'
+                             desktop: 仅 >=768px 显示（桌面 + iPad 横屏）
+                             mobile : 仅 <768px 显示（手机）
+                             all    : 全部显示
+    class       (string)  —— 额外追加的外层类名，默认空
+
+  用法：
+    {%- render 'product-yotpo-rating' -%}
+    {%- render 'product-yotpo-rating', visibility: 'mobile' -%}
+    {%- render 'product-yotpo-rating', visibility: 'all' -%}
+
+  CSS 与 JS 都做了幂等保护，同一页面 render 多次也不会重复执行。
+  ============================================================================
+{%- endcomment -%}
+
+{%- assign yr_instance_id = instance_id | default: '989160' -%}
+{%- assign yr_product     = product     | default: product -%}
+{%- assign yr_visibility  = visibility  | default: 'desktop' -%}
+{%- assign yr_extra_class = class       | default: '' -%}
+
+{%- comment -%} 只在整个页面首次 render 时输出 CSS / JS，避免重复 {%- endcomment -%}
+{%- unless yr_assets_rendered -%}
+  {%- assign yr_assets_rendered = true -%}
+  <style>
+    .be-review-yotpo-wrap {
+      position: relative;
+      display: inline-block;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    /* 用自带 media query 控制显隐，不依赖 tailwind 的 hidden / md:xxx */
+    .be-review-yotpo-wrap[data-yr-visibility="mobile"]  { display: inline-block; }
+    .be-review-yotpo-wrap[data-yr-visibility="desktop"] { display: none; }
+    .be-review-yotpo-wrap[data-yr-visibility="all"]     { display: inline-block; }
+    @media (min-width: 768px) {
+      .be-review-yotpo-wrap[data-yr-visibility="mobile"]  { display: none; }
+      .be-review-yotpo-wrap[data-yr-visibility="desktop"] { display: inline-block; }
+    }
+
+    /* ==== 统一 yotpo widget 内 4.9 分数 与 (N Reviews) 的视觉呈现 ====
+       yotpo 会给 .score / .text 各自加独立的 inline
+         font-size / line-height / padding-top
+       导致：
+         a) 大小不一致  b) 垂直位置偏差（一个高一点一个低一点）
+       用精准 class 选择器覆盖 inline style（!important 优先级高于 inline）
+       ⚠ 只清 padding-top / padding-bottom（垂直方向），保留左右 padding 维持水平间距 */
+    .be-review-yotpo-wrap .yotpo-sr-bottom-line-score,
+    .be-review-yotpo-wrap .yotpo-sr-bottom-line-text,
+    .be-review-yotpo-wrap .yotpo-sr-bottom-line-left-panel,
+    .be-review-yotpo-wrap .yotpo-sr-bottom-line-right-panel,
+    .be-review-yotpo-wrap .be-review-yotpo-count {
+      font-size: inherit !important;
+      line-height: 1.1 !important;
+      font-family: inherit !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      vertical-align: baseline !important;
+    }
+
+    /* 让整行 flex 容器居中对齐，防止基线错位造成 (N Reviews) 位置偏下 */
+    .be-review-yotpo-wrap .yotpo-sr-bottom-line-summary,
+    .be-review-yotpo-wrap .yotpo-sr-bottom-line-scroll-panel,
+    .be-review-yotpo-wrap .yotpo-sr-bottom-line-button {
+      align-items: center !important;
+    }
+
+    /* (N Reviews) 整体视觉微调：向上偏移 1px，与 4.9 视觉基线更齐 */
+    .be-review-yotpo-wrap .yotpo-sr-bottom-line-text {
+      transform: translateY(-1px);
+    }
+
+    /* 兜底：其他 yotpo 内的文字元素也一律继承 wrapper 的字号 / 字体 */
+    .be-review-yotpo-wrap .yotpo-widget-instance,
+    .be-review-yotpo-wrap .yotpo-widget-instance a,
+    .be-review-yotpo-wrap .yotpo-widget-instance span,
+    .be-review-yotpo-wrap .yotpo-widget-instance div,
+    .be-review-yotpo-wrap .yotpo-widget-instance p {
+      font-size: 14px !important;
+      font-family: inherit !important;
+    }
+
+    /* 下划线目标：
+       1) JS 精准拆出来的 "N Reviews" 文本段
+       2) yotpo 常见评论链接类名兜底（防 JS 失效或被 yotpo 覆盖时也有下划线） */
+    .be-review-yotpo-wrap .be-review-yotpo-count,
+    .be-review-yotpo-wrap .yotpo-widget-instance a[class*="reviews-link"],
+    .be-review-yotpo-wrap .yotpo-widget-instance a[class*="review-link"],
+    .be-review-yotpo-wrap .yotpo-widget-instance [class*="total-reviews"],
+    .be-review-yotpo-wrap .yotpo-widget-instance [class*="review-count"],
+    .be-review-yotpo-wrap .yotpo-widget-instance [class*="reviews-count"] {
+      text-decoration: underline !important;
+      text-decoration-thickness: 0.5px !important;
+      text-underline-offset: 1px !important;
+      text-decoration-color: currentColor !important;
+    }
+    .be-review-yotpo-wrap .yotpo-widget-instance svg,
+    .be-review-yotpo-wrap .yotpo-widget-instance img {
+      text-decoration: none !important;
+    }
+  </style>
+
+  <script>
+    (function () {
+      if (window.__beReviewYotpoInit) return;
+      window.__beReviewYotpoInit = true;
+
+      /* 匹配 "(N Reviews)"，$1=左括号 $2=数字+Reviews $3=右括号 */
+      var REGEX = /(\(\s*)([\d,]+\s+Reviews?)(\s*\))/i;
+
+      function processNode(textNode) {
+        if (!textNode || !textNode.parentElement) return false;
+        var parentEl = textNode.parentElement;
+        if (parentEl.classList && parentEl.classList.contains('be-review-yotpo-count')) return false;
+        var text = textNode.nodeValue || '';
+        var match = text.match(REGEX);
+        if (!match) return false;
+
+        var openParen = match[1], target = match[2], closeParen = match[3];
+        var idx = match.index;
+        var before = text.substring(0, idx) + openParen;
+        var after  = closeParen + text.substring(idx + match[0].length);
+
+        try {
+          var parent = textNode.parentNode;
+          if (before) parent.insertBefore(document.createTextNode(before), textNode);
+          var span = document.createElement('span');
+          span.className = 'be-review-yotpo-count';
+          span.textContent = target;
+          parent.insertBefore(span, textNode);
+          if (after) parent.insertBefore(document.createTextNode(after), textNode);
+          parent.removeChild(textNode);
+          return true;
+        } catch (err) { return false; }
+      }
+
+      function walkAndMark(widget) {
+        if (!widget) return;
+        try {
+          var walker = document.createTreeWalker(widget, NodeFilter.SHOW_TEXT, null);
+          var nodes = [], n;
+          while ((n = walker.nextNode())) nodes.push(n);
+          nodes.forEach(processNode);
+        } catch (err) {}
+      }
+
+      function initWidget(widget) {
+        if (widget._beReviewObs) return;
+        var pending = false;
+        function run() {
+          if (pending) return;
+          pending = true;
+          window.requestAnimationFrame(function () {
+            pending = false;
+            walkAndMark(widget);
+          });
+        }
+        run();
+        var obs = new MutationObserver(run);
+        obs.observe(widget, { childList: true, subtree: true, characterData: true });
+        widget._beReviewObs = obs;
+        window.setTimeout(function () {
+          try { obs.disconnect(); } catch (e) {}
+        }, 30000);
+      }
+
+      function scanAll() {
+        document.querySelectorAll('.be-review-yotpo-wrap .yotpo-widget-instance').forEach(initWidget);
+      }
+      function init() {
+        scanAll();
+        [500, 1500, 3000, 6000].forEach(function (ms) {
+          window.setTimeout(scanAll, ms);
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+      /* Shopify 编辑器：section 重新加载后重新扫描 */
+      document.addEventListener('shopify:section:load', function () {
+        window.setTimeout(scanAll, 100);
+      });
+    })();
+  </script>
+{%- endunless -%}
+
+<div class="be-review-yotpo-wrap {{ yr_extra_class }}"
+     data-yr-visibility="{{ yr_visibility }}">
+  <div class="yotpo-widget-instance"
+       data-yotpo-instance-id="{{ yr_instance_id }}"
+       data-yotpo-product-id="{{ yr_product.id }}"
+       data-yotpo-cart-product-id="{{ yr_product.id }}"
+       data-yotpo-section-id="{{ template.name }}"></div>
+</div>

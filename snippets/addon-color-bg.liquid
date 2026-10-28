@@ -1,0 +1,44 @@
+{%- doc -%}
+  根据颜色名 (color_label) 解析出 CSS background 完整值, 用于 xy-addon swatch.
+  优先级:
+    1) settings.swatch_config 自定义配置 (Theme Editor → Color swatches)
+       - '#xxx' → 输出 hex
+       - cdn.shopify.com URL 或完整 http URL → 输出 'url(...) center/cover no-repeat'
+       - Theme Assets 文件名 → 解析成 image_url 后 'url(...) center/cover no-repeat'
+    2) fallback_hex 兜底 (调用方传, 通常是 value.swatch.color 或 '#888')
+
+  @param {string} color_label - 颜色显示名 (如 'Ashley Stripe')
+  @param {string} [fallback_hex] - 调用方提供的默认 hex 值, 默认 '#888'
+
+  使用方式:
+    {%- capture _bg -%}{%- render 'addon-color-bg', color_label: _name, fallback_hex: _hex -%}{%- endcapture -%}
+    <span style="background: {{ _bg }};" data-color="{{ _bg }}"></span>
+{%- enddoc -%}
+{%- liquid
+  assign result_bg = fallback_hex | default: '#888'
+  if settings.swatch_config != blank and color_label != blank
+    assign label_dc = color_label | downcase | strip
+    assign sc_arr = settings.swatch_config | newline_to_br | split: '<br />'
+    for sc in sc_arr
+      assign sp = sc | strip | split: ':'
+      assign sn = sp.first | downcase | strip
+      if sn == label_dc
+        assign sv = sc | strip | remove_first: sp.first | remove_first: ':' | strip
+        if sv contains '#'
+          assign result_bg = sv
+        elsif sv contains 'cdn.shopify.com/'
+          assign result_bg = 'url(' | append: sv | append: ') center/cover no-repeat'
+        elsif sv contains 'http'
+          assign result_bg = 'url(' | append: sv | append: ') center/cover no-repeat'
+        else
+          assign img = images[sv]
+          if img != blank
+            assign img_url = img | image_url: width: 128
+            assign result_bg = 'url(' | append: img_url | append: ') center/cover no-repeat'
+          endif
+        endif
+        break
+      endif
+    endfor
+  endif
+-%}{{ result_bg }}

@@ -1,0 +1,1849 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-sm",
+        "heading_alignment": "text-center",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
+    "image_with_text_overlay_cR7i6H": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_GcCfrD": {
+          "type": "heading",
+          "settings": {
+            "heading": "Backed by Experts, Proven to Sleep Through",
+            "heading_size": "title-xl tracking-heading",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_GcCfrD"
+      ],
+      "custom_css": [
+        "h1 {font-family: \"GillSans\" !important; letter-spacing: -1px !important;}",
+        "@media screen and (min-width: 960px) {h1 {font-size: 60px; }}",
+        "@media screen and (min-width: 1280px) {.banner__box--large {max-width: 100%; } h1 {font-size: 72px; }}",
+        "@media screen and (max-width: 767px) {h1 {font-size: 30px !important; }}"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/pc-1_2.jpg",
+        "image_height": "adapt",
+        "content_width": "large",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_mobile": "shopify://shop_images/Mobile-1_2.jpg",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 32,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "rich_text_H6bYNA": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_QgAFBz": {
+          "type": "heading",
+          "settings": {
+            "heading": "Inside Human Cycle",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_nacRT7": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Sleep doesn’t begin with darkness. It begins with temperature.</p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "liquid_6tFyng": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<hr style=\"width: 120px; border: none; border-top: 2px solid currentColor; margin: 10px auto;\">"
+          }
+        },
+        "text_xhGHjY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>As your core body temperature drops, your body receives the signal that it’s time to rest. A cooler sleep environment helps initiate deeper, more restorative sleep cycles.<br/><br/>Breescape is designed around this biological principle — helping your skin cool down, releasing trapped heat, and maintaining airflow so you can sleep through the night.</p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_QgAFBz",
+        "text_nacRT7",
+        "liquid_6tFyng",
+        "text_xhGHjY"
+      ],
+      "custom_css": [],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "breescape_experts_say_VTBNDr": {
+      "type": "breescape-experts-say",
+      "blocks": {
+        "testimonial_qH7jtT": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group.png",
+            "alt": "",
+            "quote": "“Many women don’t realize that waking up hot or sweaty isn’t just uncomfortable, it fragments their sleep architecture… That's why optimizing your sleep environment for temperature regulation by lowering your thermostat and investing in bedding with cooling technology can be just as important as addressing internal factors.”",
+            "name": "Kelly Murray",
+            "role": "Certified Adult Sleep Coach, Functional Diagnostic Nutrition Practitioner (FDN-P), and Certified Midlife Health Coach",
+            "layout": "image_left",
+            "bg_color": "",
+            "back_text": "Kelly Murray, is a Certified Adult Sleep Coach, Functional Diagnostic Nutrition Practitioner (FDN-P), and Certified Midlife Health Coach who specializes in helping women in perimenopause and menopause reclaim their sleep. After conquering her own decade-long battle with chronic insomnia through functional health testing, Kelly now combines science-backed approaches with personalized protocols to help exhausted midlife women finally get the restorative sleep they deserve.",
+            "back_bg_color": "#9fe0e9",
+            "back_color": "#10374b",
+            "back_size_pc_px": 16,
+            "back_size_mobile_px": 9,
+            "image_width_pc": 0,
+            "image_width_mobile": 0,
+            "quote_size_pc_px": 20,
+            "name_size_pc_px": 25,
+            "role_size_pc_px": 13,
+            "quote_size_mobile_px": 10,
+            "name_size_mobile_px": 14,
+            "role_size_mobile_px": 10,
+            "meta_pad_top_m": 0,
+            "meta_pad_right_m": 0,
+            "meta_pad_bottom_m": 14,
+            "meta_pad_left_m": 8
+          }
+        },
+        "testimonial_aWAjaP": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_1.png",
+            "alt": "",
+            "quote": "\"The necessary prerequisite for sleep is to allow the body to cool down to around 93°F, triggering increased blood flow to the skin and enabling heat dissipation. BlendTek™ facilitates this process by cooling you down and allowing heat to escape.\"",
+            "name": "Dr. Dusan Roncevic",
+            "role": "Neurologist",
+            "layout": "image_right",
+            "bg_color": "",
+            "back_text": "",
+            "back_bg_color": "#9fe0e9",
+            "back_color": "#10374b",
+            "back_size_pc_px": 16,
+            "back_size_mobile_px": 9,
+            "image_width_pc": 0,
+            "image_width_mobile": 0,
+            "quote_size_pc_px": 20,
+            "name_size_pc_px": 25,
+            "role_size_pc_px": 13,
+            "quote_size_mobile_px": 10,
+            "name_size_mobile_px": 14,
+            "role_size_mobile_px": 10,
+            "meta_pad_top_m": 0,
+            "meta_pad_right_m": 0,
+            "meta_pad_bottom_m": 9,
+            "meta_pad_left_m": 8
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_qH7jtT",
+        "testimonial_aWAjaP"
+      ],
+      "name": "Experts Say",
+      "settings": {
+        "background_color": "rgba(0,0,0,0)",
+        "max_width": 1280,
+        "heading": "What Experts Say",
+        "heading_color": "#10374b",
+        "section_padding_top_pc": 76,
+        "section_padding_bottom_pc": 80,
+        "section_padding_x_pc": 0,
+        "heading_margin_bottom_pc": 48,
+        "card_gap_pc": 45,
+        "item_radius_pc": 0,
+        "item_padding_x_pc": 0,
+        "item_padding_y_pc": 0,
+        "pc_photo_ratio": 3,
+        "photo_aspect_pc": "425 / 503",
+        "photo_card_bg": "#ffffff",
+        "photo_card_radius_pc": 48,
+        "photo_inner_padding_pc": 22,
+        "photo_image_radius_pc": 48,
+        "pc_quote_ratio": 7,
+        "quote_card_bg": "#ffffff",
+        "quote_card_radius_pc": 50,
+        "quote_card_padding_x_pc": 70,
+        "quote_card_padding_y_pc": 60,
+        "quote_to_name_pc": 36,
+        "name_to_role_pc": 7,
+        "section_padding_top_mobile": 40,
+        "section_padding_bottom_mobile": 40,
+        "section_padding_x_mobile": 16,
+        "heading_margin_bottom_mobile": 24,
+        "card_gap_mobile": 25,
+        "item_radius_mobile": 0,
+        "item_padding_x_mobile": 0,
+        "item_padding_y_mobile": 0,
+        "mobile_photo_ratio": 4,
+        "mobile_photo_image_width": 100,
+        "photo_aspect_mobile": "1 / 1",
+        "photo_card_radius_mobile": 17,
+        "photo_inner_padding_mobile": 6,
+        "photo_image_radius_mobile": 22,
+        "quote_to_name_mobile": 6,
+        "name_to_role_mobile": 4,
+        "mobile_quote_ratio": 5,
+        "quote_card_radius_mobile": 16,
+        "quote_card_padding_x_mobile": 16,
+        "quote_card_padding_y_mobile": 16,
+        "quote_size": "subtext-lg",
+        "quote_weight": "",
+        "quote_color": "#10374b",
+        "quote_line_height": 1.6,
+        "name_size": "subtext-lg",
+        "name_weight": "600",
+        "name_color": "#10374b",
+        "name_line_height": 1.3,
+        "role_size": "subtext-sm",
+        "role_weight": "",
+        "role_color": "#10374b",
+        "role_line_height": 1.3,
+        "flip_back_bg": "#9fe0e9",
+        "flip_back_color": "#10374b",
+        "flip_back_padding_pc": 32,
+        "flip_back_padding_mobile": 16,
+        "flip_back_size_pc": 18,
+        "flip_back_size_mobile": 13,
+        "flip_back_line_height": 1.5,
+        "flip_btn_bg": "#ffffff",
+        "flip_btn_color": "#10374b",
+        "flip_btn_size_pc": 44,
+        "flip_btn_size_mobile": 32,
+        "flip_btn_offset_pc": 16,
+        "flip_btn_offset_mobile": 8
+      }
+    },
+    "rich_text_VAgctN": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EUVbLP": {
+          "type": "heading",
+          "settings": {
+            "heading": "What Experts Say",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_ffLJLt": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_6LpbDm": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_EUVbLP",
+        "text_ffLJLt",
+        "button_6LpbDm"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 60,
+        "padding_bottom": 24,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "image_with_text_JnMqV4": {
+      "type": "image-with-text",
+      "blocks": {
+        "text_HyKKpF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>“Many women don’t realize that waking up hot or sweaty isn’t just uncomfortable, it fragments their sleep architecture… That's why optimizing your sleep environment for temperature regulation by lowering your thermostat and investing in bedding with cooling technology can be just as important as addressing internal factors.”</p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "liquid_xCK8Tp": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div class=\"text-left text-xl\">\n  <div class=\"text-2xl font-bold\">Kelly Murray</div>\n  <div class=\"font-medium text-base\">\n    Adult Sleep Coach, Midlife Health Coach & Functional Diagnostic Nutrition Practitioner\n  </div>\n</div>"
+          }
+        }
+      },
+      "block_order": [
+        "text_HyKKpF",
+        "liquid_xCK8Tp"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "image": "shopify://shop_images/Mask_group_3_1.png",
+        "image_height": "adapt",
+        "image_width": "small",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/Group_801.png",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_background_2": "#ffffff",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "custom_section_kq8pif": {
+      "type": "custom-section",
+      "blocks": {
+        "group_KAfAqY": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "group_custom_class": "",
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": true,
+            "color_text": "",
+            "color_background": "rgba(0,0,0,0)",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_RdHayw": {
+              "type": "group",
+              "name": "t:blocks.group.name",
+              "settings": {
+                "link": "",
+                "accessibility_info": "",
+                "open_in_new_tab": false,
+                "group_custom_class": "",
+                "content_direction": "row",
+                "vertical_on_mobile": true,
+                "content_wrap": false,
+                "horizontal_alignment": "start",
+                "vertical_alignment": "center",
+                "horizontal_alignment_flex_direction_column": "start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 0,
+                "width": "custom",
+                "custom_width": 33,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "custom_colors": false,
+                "color_text": "",
+                "color_background": "",
+                "gradient_background": "",
+                "color_button_text": "",
+                "color_button_background": "",
+                "color_button_gradient": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "group_jkhtNd": {
+                  "type": "group",
+                  "name": "t:blocks.group.name",
+                  "settings": {
+                    "link": "",
+                    "accessibility_info": "",
+                    "open_in_new_tab": false,
+                    "group_custom_class": "",
+                    "content_direction": "col",
+                    "vertical_on_mobile": true,
+                    "content_wrap": false,
+                    "horizontal_alignment": "start",
+                    "vertical_alignment": "center",
+                    "horizontal_alignment_flex_direction_column": "start",
+                    "vertical_alignment_flex_direction_column": "center",
+                    "gap": 12,
+                    "width": "fill",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "background_media": "none",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "custom_colors": false,
+                    "color_text": "",
+                    "color_background": "",
+                    "gradient_background": "",
+                    "color_button_text": "",
+                    "color_button_background": "",
+                    "color_button_gradient": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "image_a7BRiV": {
+                      "type": "image",
+                      "name": "t:blocks.image.name",
+                      "settings": {
+                        "image": "shopify://shop_images/Group_801_4d75283b-a18a-4159-9b48-aff60a362a7b.png",
+                        "aspect_ratio": "adapt",
+                        "link": "",
+                        "accessibility_info": "",
+                        "external": false,
+                        "aspect_ratio_mobile": "adapt",
+                        "width": "fill",
+                        "custom_width": 100,
+                        "width_mobile": "fill",
+                        "custom_width_mobile": 100,
+                        "border": "none",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_radius": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "image_a7BRiV"
+                  ]
+                }
+              },
+              "block_order": [
+                "group_jkhtNd"
+              ]
+            },
+            "group_aHDbc3": {
+              "type": "group",
+              "name": "t:blocks.group.name",
+              "settings": {
+                "link": "",
+                "accessibility_info": "",
+                "open_in_new_tab": false,
+                "group_custom_class": "xo-custom-color",
+                "content_direction": "col",
+                "vertical_on_mobile": true,
+                "content_wrap": false,
+                "horizontal_alignment": "start",
+                "vertical_alignment": "center",
+                "horizontal_alignment_flex_direction_column": "start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "custom",
+                "custom_width": 66,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100,
+                "height": "fill",
+                "custom_height": 100,
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 50,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "custom_colors": true,
+                "color_text": "",
+                "color_background": "#ffffff",
+                "gradient_background": "",
+                "color_button_text": "",
+                "color_button_background": "",
+                "color_button_gradient": "",
+                "padding-block-start": 40,
+                "padding-block-end": 40,
+                "padding-inline-start": 60,
+                "padding-inline-end": 60
+              },
+              "blocks": {
+                "group_tY9fR4": {
+                  "type": "group",
+                  "name": "t:blocks.group.name",
+                  "settings": {
+                    "link": "",
+                    "accessibility_info": "",
+                    "open_in_new_tab": false,
+                    "group_custom_class": "",
+                    "content_direction": "col",
+                    "vertical_on_mobile": true,
+                    "content_wrap": false,
+                    "horizontal_alignment": "start",
+                    "vertical_alignment": "center",
+                    "horizontal_alignment_flex_direction_column": "start",
+                    "vertical_alignment_flex_direction_column": "center",
+                    "gap": 12,
+                    "width": "fill",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "background_media": "none",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "custom_colors": false,
+                    "color_text": "",
+                    "color_background": "",
+                    "gradient_background": "",
+                    "color_button_text": "",
+                    "color_button_background": "",
+                    "color_button_gradient": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "text_ELCGcP": {
+                      "type": "text",
+                      "name": "t:blocks.text.name",
+                      "settings": {
+                        "text": "<p><em>“Many women don’t realize that waking up hot or sweaty isn’t just uncomfortable, it fragments their sleep architecture… That's why optimizing your sleep environment for temperature regulation by lowering your thermostat and investing in bedding with cooling technology can be just as important as addressing internal factors.”</em></p>",
+                        "text_font": "body",
+                        "text_size": "text-base lg:text-lg",
+                        "text_max_size": 32,
+                        "text_line_height": 1.6,
+                        "text_letter_spacing": 0,
+                        "text_capitalize": false,
+                        "secondary_color": false,
+                        "width": "fit-content",
+                        "custom_width": 100,
+                        "alignment": "left",
+                        "width_mobile": "fit-content",
+                        "custom_width_mobile": 100,
+                        "alignment_mobile": "left",
+                        "effects": "none",
+                        "highlighted_text": "text",
+                        "highlighted_scribble": "circle"
+                      },
+                      "blocks": {}
+                    },
+                    "spacer_QCTdfi": {
+                      "type": "spacer",
+                      "name": "t:blocks.spacer.name",
+                      "settings": {
+                        "size": "pixel",
+                        "percent_size": 100,
+                        "pixel_size": 20,
+                        "custom_mobile_size": true,
+                        "size_mobile": "pixel",
+                        "percent_size_mobile": 100,
+                        "pixel_size_mobile": 20
+                      },
+                      "blocks": {}
+                    },
+                    "custom_liquid_WjQyKD": {
+                      "type": "custom-liquid",
+                      "name": "t:sections.custom-liquid.name",
+                      "settings": {
+                        "liquid": "<div class=\"text-left text-xl\">\n  <div class=\"text-2xl font-bold\">Kelly Murray</div>\n  <div class=\"font-medium text-xs\">\n    Adult Sleep Coach, Midlife Health Coach & <br>Functional Diagnostic Nutrition Practitioner\n  </div>\n</div>"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_ELCGcP",
+                    "spacer_QCTdfi",
+                    "custom_liquid_WjQyKD"
+                  ]
+                }
+              },
+              "block_order": [
+                "group_tY9fR4"
+              ]
+            }
+          },
+          "block_order": [
+            "group_RdHayw",
+            "group_aHDbc3"
+          ]
+        }
+      },
+      "block_order": [
+        "group_KAfAqY"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".xo-custom-color {background-color: rgb(var(--color-background) / 0.5) !important;}"
+      ],
+      "name": "t:sections.custom-section.name",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "content_wrap": false,
+        "horizontal_alignment": "start",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page",
+        "section_height": "auto",
+        "section_height_custom": 50,
+        "section_height_mobile": "auto",
+        "section_height_custom_mobile": 50,
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 12,
+        "padding_bottom": 48,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "custom_section_pz37At": {
+      "type": "custom-section",
+      "blocks": {
+        "group_cBGemf": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "group_custom_class": "md:flex md:flex-row-reverse",
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": true,
+            "color_text": "",
+            "color_background": "rgba(0,0,0,0)",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_dJrJTX": {
+              "type": "group",
+              "name": "t:blocks.group.name",
+              "settings": {
+                "link": "",
+                "accessibility_info": "",
+                "open_in_new_tab": false,
+                "group_custom_class": "",
+                "content_direction": "row",
+                "vertical_on_mobile": true,
+                "content_wrap": false,
+                "horizontal_alignment": "start",
+                "vertical_alignment": "center",
+                "horizontal_alignment_flex_direction_column": "start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 0,
+                "width": "custom",
+                "custom_width": 33,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "custom_colors": false,
+                "color_text": "",
+                "color_background": "",
+                "gradient_background": "",
+                "color_button_text": "",
+                "color_button_background": "",
+                "color_button_gradient": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "group_wmKTVd": {
+                  "type": "group",
+                  "name": "t:blocks.group.name",
+                  "settings": {
+                    "link": "",
+                    "accessibility_info": "",
+                    "open_in_new_tab": false,
+                    "group_custom_class": "",
+                    "content_direction": "col",
+                    "vertical_on_mobile": true,
+                    "content_wrap": false,
+                    "horizontal_alignment": "start",
+                    "vertical_alignment": "center",
+                    "horizontal_alignment_flex_direction_column": "start",
+                    "vertical_alignment_flex_direction_column": "center",
+                    "gap": 12,
+                    "width": "fill",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "background_media": "none",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "custom_colors": false,
+                    "color_text": "",
+                    "color_background": "",
+                    "gradient_background": "",
+                    "color_button_text": "",
+                    "color_button_background": "",
+                    "color_button_gradient": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "image_cWJzQL": {
+                      "type": "image",
+                      "name": "t:blocks.image.name",
+                      "settings": {
+                        "image": "shopify://shop_images/Group_802_ca9d5cd5-a27b-4f44-8ba9-c42a087526a9.png",
+                        "aspect_ratio": "adapt",
+                        "link": "",
+                        "accessibility_info": "",
+                        "external": false,
+                        "aspect_ratio_mobile": "adapt",
+                        "width": "fill",
+                        "custom_width": 100,
+                        "width_mobile": "fill",
+                        "custom_width_mobile": 100,
+                        "border": "none",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_radius": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "image_cWJzQL"
+                  ]
+                }
+              },
+              "block_order": [
+                "group_wmKTVd"
+              ]
+            },
+            "group_3ymkxY": {
+              "type": "group",
+              "name": "t:blocks.group.name",
+              "settings": {
+                "link": "",
+                "accessibility_info": "",
+                "open_in_new_tab": false,
+                "group_custom_class": "xo-custom-color",
+                "content_direction": "col",
+                "vertical_on_mobile": true,
+                "content_wrap": false,
+                "horizontal_alignment": "start",
+                "vertical_alignment": "center",
+                "horizontal_alignment_flex_direction_column": "start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "custom",
+                "custom_width": 66,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100,
+                "height": "fill",
+                "custom_height": 100,
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 50,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "custom_colors": true,
+                "color_text": "",
+                "color_background": "#ffffff",
+                "gradient_background": "",
+                "color_button_text": "",
+                "color_button_background": "",
+                "color_button_gradient": "",
+                "padding-block-start": 40,
+                "padding-block-end": 40,
+                "padding-inline-start": 60,
+                "padding-inline-end": 60
+              },
+              "blocks": {
+                "group_7kxNkG": {
+                  "type": "group",
+                  "name": "t:blocks.group.name",
+                  "settings": {
+                    "link": "",
+                    "accessibility_info": "",
+                    "open_in_new_tab": false,
+                    "group_custom_class": "",
+                    "content_direction": "col",
+                    "vertical_on_mobile": true,
+                    "content_wrap": false,
+                    "horizontal_alignment": "start",
+                    "vertical_alignment": "center",
+                    "horizontal_alignment_flex_direction_column": "start",
+                    "vertical_alignment_flex_direction_column": "center",
+                    "gap": 12,
+                    "width": "fill",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "background_media": "none",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "custom_colors": false,
+                    "color_text": "",
+                    "color_background": "",
+                    "gradient_background": "",
+                    "color_button_text": "",
+                    "color_button_background": "",
+                    "color_button_gradient": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "text_4zt8Yb": {
+                      "type": "text",
+                      "name": "t:blocks.text.name",
+                      "settings": {
+                        "text": "<p><em>\"The necessary prerequisite for sleep is to allow the body to cool down to around 93°F, triggering increased blood flow to the skin and enabling heat dissipation. BlendTek™ facilitates this process by cooling you down and allowing heat to escape.\"</em></p>",
+                        "text_font": "body",
+                        "text_size": "text-base lg:text-lg",
+                        "text_max_size": 32,
+                        "text_line_height": 1.6,
+                        "text_letter_spacing": 0,
+                        "text_capitalize": false,
+                        "secondary_color": false,
+                        "width": "fit-content",
+                        "custom_width": 100,
+                        "alignment": "left",
+                        "width_mobile": "fit-content",
+                        "custom_width_mobile": 100,
+                        "alignment_mobile": "left",
+                        "effects": "none",
+                        "highlighted_text": "text",
+                        "highlighted_scribble": "circle"
+                      },
+                      "blocks": {}
+                    },
+                    "spacer_8WpdHw": {
+                      "type": "spacer",
+                      "name": "t:blocks.spacer.name",
+                      "settings": {
+                        "size": "pixel",
+                        "percent_size": 100,
+                        "pixel_size": 20,
+                        "custom_mobile_size": true,
+                        "size_mobile": "pixel",
+                        "percent_size_mobile": 100,
+                        "pixel_size_mobile": 20
+                      },
+                      "blocks": {}
+                    },
+                    "custom_liquid_9tccm7": {
+                      "type": "custom-liquid",
+                      "name": "t:sections.custom-liquid.name",
+                      "settings": {
+                        "liquid": "<div class=\"text-left text-xl\">\n  <div class=\"text-2xl font-bold\">Dr. Dusan Roncevic</div>\n  <div class=\"font-medium text-xs\">\n    Neurologist\n  </div>\n</div>"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_4zt8Yb",
+                    "spacer_8WpdHw",
+                    "custom_liquid_9tccm7"
+                  ]
+                }
+              },
+              "block_order": [
+                "group_7kxNkG"
+              ]
+            }
+          },
+          "block_order": [
+            "group_dJrJTX",
+            "group_3ymkxY"
+          ]
+        }
+      },
+      "block_order": [
+        "group_cBGemf"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".xo-custom-color {background-color: rgb(var(--color-background) / 0.5) !important;}"
+      ],
+      "name": "t:sections.custom-section.name",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "content_wrap": false,
+        "horizontal_alignment": "start",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page",
+        "section_height": "auto",
+        "section_height_custom": 50,
+        "section_height_mobile": "auto",
+        "section_height_custom_mobile": 50,
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 12,
+        "padding_bottom": 48,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_TNyMfK": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.name",
+      "settings": {
+        "liquid": "<div class=\"be-cool\" role=\"region\" aria-label=\"Staying Cool at Night Shouldn't Be a Struggle\">\n  <div class=\"be-cool__inner\">\n    <h2 class=\"be-cool__title\">\n      Staying Cool at Night Shouldn&rsquo;t<br class=\"be-cool__br-pc\"> Be a Struggle\n    </h2>\n    <p class=\"be-cool__text\">\n      Most cooling fabrics lose their effectiveness too quickly, trap heat, or wear out over time. We&rsquo;re dedicated to creating something that truly works. It&rsquo;s not just about feeling cool for a moment&mdash;it&rsquo;s about staying comfortable for uninterrupted sleep all night long.\n    </p>\n  </div>\n</div>\n\n<style>\n  .be-cool,\n  .be-cool *,\n  .be-cool *::before,\n  .be-cool *::after { box-sizing: border-box; }\n\n  /* 用 100vw + 负边距突破父级 .page-width 的 padding-inline，\n     让本区域始终铺满整屏宽 */\n  .be-cool {\n    position: relative;\n    width: 100vw;\n    max-width: 100vw;\n    margin-left: calc(50% - 50vw);\n    margin-right: calc(50% - 50vw);\n    background-image: url(\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/group11.jpg?v=1777368622\");\n    background-repeat: no-repeat;\n    background-position: center center;\n    background-size: cover;\n    /* PC 背景图比例（按 Figma 1920×884） */\n    aspect-ratio: 1920 / 884;\n    color: #10374B;\n    font-family: Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n  }\n\n  /* 内容浮层：一个严格 1516×520 比例的透明虚拟框，绝对居中\n     在背景图里的白色面板上；内部用 flex 让标题 + 正文垂直居中\n     PC 比例：1516/1920 = 79.17% 宽 / 520/884 = 58.82% 高 */\n  .be-cool__inner {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    width: 79.17%;\n    height: 58.82%;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    /* 透明（隐藏但存在），仅做布局参考 */\n  }\n\n  /* ---- 标题（PC 端）：仅设 italic / letter-spacing / 颜色 / 居中宽度\n     字体 / 字重 / 字号 / 行高 全部跟随主题 H2 默认 ---- */\n  .be-cool .be-cool__title {\n    margin: 0 auto !important;\n    max-width: 1442px;\n    font-style: italic !important;\n    letter-spacing: -0.02em !important;\n    color: #10374B !important;\n  }\n\n  /* ---- 正文（PC 端）：font-size 20 / line-height 43 / letter-spacing 0.01em\n     字体 / 字重 跟随主题 ---- */\n  .be-cool .be-cool__text {\n    margin: 33px auto 0 !important;\n    max-width: 1311px;\n    font-size: 20px !important;\n    line-height: 43px !important;\n    letter-spacing: 0.01em !important;\n    color: #10374B !important;\n  }\n\n  /* ---------- 移动端 ---------- */\n  @media (max-width: 768px) {\n    .be-cool {\n      /* 移动端换图，比例按移动端 Figma（标题 top 106 / 容器约 430 宽）估算 */\n      background-image: url(\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/grou1.jpg?v=1777368622\");\n      aspect-ratio: 430 / 475;\n    }\n\n    /* 移动端虚拟框：311×205，绝对居中\n       移动比例：311/430 = 72.33% 宽 / 205/475 = 43.16% 高 */\n    .be-cool__inner {\n      width: 72.33%;\n      height: 43.16%;\n    }\n\n    /* 移动端隐藏 PC 用的强制换行，靠 max-width 自然折行 */\n    .be-cool .be-cool__br-pc { display: none; }\n\n    /* 标题：Gill Sans 600 SemiBold Italic / 28 / 32 / -2%\n       max-width 332 让 \"Staying Cool at Night / Shouldn't Be a Struggle\" 自然换两行 */\n    .be-cool .be-cool__title {\n      max-width: 332px;\n      font-size: 28px !important;\n      line-height: 32px !important;\n      letter-spacing: -0.02em !important;\n    }\n\n    /* 正文：Inter 300 Light / 10 / 14 / 0.5%；与标题底部间距 13px（按 Figma） */\n    .be-cool .be-cool__text {\n      max-width: 272px;\n      margin-top: 13px !important;\n      font-size: 10px !important;\n      line-height: 14px !important;\n      letter-spacing: 0.005em !important;\n    }\n  }\n</style>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_HHKY3R": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_pYNaa9": {
+          "type": "heading",
+          "settings": {
+            "heading": "Staying Cool at Night Shouldn’t Be a Struggle",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_di6hUp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Most cooling fabrics lose their effectiveness too quickly, trap heat, or wear out over time. We’re dedicated to creating something that truly works. It’s not just about feeling cool for a moment—it’s about staying comfortable for uninterrupted sleep all night long.</p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_pYNaa9",
+        "text_di6hUp"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "t:sections.image-with-text-overlay.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/8bddd7dab40e89e3b2d771b70501e39d425ac01e.jpg",
+        "image_height": "650px",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 20,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "custom_section_XnDFXj": {
+      "type": "custom-section",
+      "blocks": {
+        "custom_liquid_jUqDNE": {
+          "type": "custom-liquid",
+          "name": "t:sections.custom-liquid.name",
+          "settings": {
+            "liquid": "<div class=\"be-ctww\">\n  <h2 class=\"be-ctww__title\">Breescape: Cooling That Truly Works</h2>\n  <p class=\"be-ctww__desc\">\n    Our advanced BlendTek&trade; technology helps regulate your body temperature, so you can fall\n    asleep faster, stay asleep longer, and wake up refreshed from truly uninterrupted sleep.\n  </p>\n\n  <div class=\"be-ctww__table\" role=\"region\" aria-label=\"Cooling comparison\">\n    <!-- 外部标题行：无背景 -->\n    <div class=\"be-ctww__heads\">\n      <div class=\"be-ctww__head be-ctww__head--left\">Feature</div>\n      <div class=\"be-ctww__head be-ctww__head--right\">Others</div>\n    </div>\n\n    <!-- 白色圆角表格：只放左右两列数据 -->\n    <div class=\"be-ctww__card\">\n      <div class=\"be-ctww__row\">\n        <div class=\"be-ctww__cell be-ctww__cell--left\">Cooler to the Touch</div>\n        <div class=\"be-ctww__cell be-ctww__cell--right\">Q-Max 0.4</div>\n      </div>\n      <div class=\"be-ctww__row\">\n        <div class=\"be-ctww__cell be-ctww__cell--left\">More Breathable (vs. Cotton)</div>\n        <div class=\"be-ctww__cell be-ctww__cell--right\">0.29X</div>\n      </div>\n      <div class=\"be-ctww__row\">\n        <div class=\"be-ctww__cell be-ctww__cell--left\">More Moisture-Wicking (vs. Cotton)</div>\n        <div class=\"be-ctww__cell be-ctww__cell--right\">0.9X</div>\n      </div>\n      <div class=\"be-ctww__row\">\n        <div class=\"be-ctww__cell be-ctww__cell--left\">Larger</div>\n        <div class=\"be-ctww__cell be-ctww__cell--right\">Standard</div>\n      </div>\n      <div class=\"be-ctww__row\">\n        <div class=\"be-ctww__cell be-ctww__cell--left\">More Advanced</div>\n        <div class=\"be-ctww__cell be-ctww__cell--right\">/</div>\n      </div>\n    </div>\n\n    <!-- 中间蓝色高亮列：绝对定位，覆盖在上方 -->\n    <div class=\"be-ctww__highlight\" aria-label=\"Breescape\">\n      <div class=\"be-ctww__highlight-head\">Breescape</div>\n      <div class=\"be-ctww__highlight-list\">\n        <div>Q-Max 0.46</div>\n        <div>4.5X</div>\n        <div>1.4X</div>\n        <div>13.8% Larger</div>\n        <div>1 Year of R&amp;D, 23 Iterations</div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n  .be-ctww,\n  .be-ctww *,\n  .be-ctww *::before,\n  .be-ctww *::after { box-sizing: border-box; }\n\n  /* 整体宽度跟随父级 .page-width；字体跟主题 */\n  .be-ctww {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    width: 100%;\n    padding-top: 137px;\n    padding-bottom: 100px;\n    text-align: center;\n    color: #10374B;\n  }\n\n  /* ---- 标题（PC 端）：仅设 italic / line-height / letter-spacing / 颜色 / 居中宽度\n     字体 / 字重 / 字号 全部跟主题 H2 ---- */\n  .be-ctww .be-ctww__title {\n    margin: 0 auto 30px !important;\n    max-width: 1046px;\n    font-style: italic !important;\n    line-height: 1 !important;\n    letter-spacing: -0.02em !important;\n    color: #10374B !important;\n  }\n\n  /* ---- 描述（PC 端）：Inter 300 / 21 / 38 / 0.01em / 居中宽度 1139 ---- */\n  .be-ctww .be-ctww__desc {\n    margin: 0 auto 60px !important;\n    max-width: 1139px;\n    font-family: Inter, sans-serif !important;\n    font-weight: 300 !important;\n    font-size: 21px !important;\n    line-height: 38px !important;\n    letter-spacing: 0.01em !important;\n    color: #10374B !important;\n  }\n\n  /* ---- 外层容器：宽度由父级控制，给中间蓝块提供相对定位参考 ---- */\n  .be-ctww__table {\n    position: relative;\n    width: 100%;\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n  /* ---- 白卡外的标题（Feature / Others）无背景 ----\n     三列：左 | 蓝色区域占位（blue width 280 + 右偏移 100 ≈ 380） | 右\n     Figma：白卡左右内边距 ~70 */\n  .be-ctww__heads {\n    display: grid;\n    grid-template-columns: 1fr 380px 1fr;\n    padding: 0 70px;\n    margin-bottom: 16px;\n  }\n\n  .be-ctww__head {\n    color: #67D2E0;\n  }\n\n  .be-ctww__head--left { grid-column: 1; text-align: left; }\n  .be-ctww__head--right { grid-column: 3; text-align: center; }\n\n  /* ---- 白色圆角表格：只放左右两列数据 ---- */\n  .be-ctww__card {\n    position: relative;\n    z-index: 1;\n    border-radius: 20px;\n    background: #ffffff;\n    box-shadow: 0 2.96px 11.82px 0 rgba(0, 0, 0, 0.08);\n    padding: 36px 70px; /* Figma：左右 70（约 69/70），上下 36 让整体高度接近 357 */\n    display: grid;\n    row-gap: 28px;     /* 5 行 × ~17 + 4 × 28 + 36×2 ≈ 269；与蓝块上下溢出后总高 ~297；\n                          叠加上方 heads ~14 + 16 mb = 30 → 总 ~327，靠近 357 */\n  }\n\n  .be-ctww__row {\n    display: grid;\n    grid-template-columns: 1fr 380px 1fr; /* 与 .be-ctww__heads 保持一致 */\n    align-items: center;\n  }\n\n  .be-ctww__cell {\n    color: rgba(16, 55, 75, 0.85);\n  }\n\n  .be-ctww__cell--left { grid-column: 1; text-align: left; }\n  .be-ctww__cell--right { grid-column: 3; text-align: center; }\n\n  /* ---- 中间蓝色高亮列：绝对定位叠在上面，与左右列对齐 ---- */\n  .be-ctww__highlight {\n    position: absolute;\n    /* 整体向右偏移 100px */\n    left: calc(50% + 100px);\n    transform: translateX(-50%);\n    /* 向上延伸 14px，使顶部突出白卡；padding-top 与该数值一致，\n       保证 Breescape 与 Feature/Others 同一水平线 */\n    top: -14px;\n    bottom: -14px;\n    width: 280px;\n    max-width: 28%;\n    z-index: 2;\n    border-radius: 22px;\n    background: #9FE0E9;\n    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);\n    padding: 14px 18px;\n    text-align: center;\n  }\n\n  .be-ctww__highlight-head {\n    margin: 0 0 52px; /* = 白卡外标题的 margin-bottom 16 + 白卡 padding-top 36，\n                         让蓝色内的第一行数据与卡内第一行数据对齐 */\n    font-family: Inter, sans-serif;\n    font-weight: 700;\n    font-size: 14px;\n    line-height: 1.2;\n    letter-spacing: 0.02em;\n    color: #10374B;\n  }\n\n  .be-ctww__highlight-list {\n    display: grid;\n    row-gap: 28px; /* 与白卡 .be-ctww__card 的 row-gap 完全一致 */\n    font-family: Inter, sans-serif;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 1.2;\n    color: #10374B;\n  }\n\n  /* ---------- 响应式（中等屏：仅调表格内边距，title / desc 保持 PC 样式） ---------- */\n  @media (max-width: 1024px) {\n    .be-ctww__heads { padding: 0 32px; }\n    .be-ctww__card { padding: 24px 32px; }\n  }\n\n  @media (max-width: 768px) {\n    /* Figma 移动端 frame：375 宽\n       Title 距 frame 顶 31 → padding-top: 31 */\n    .be-ctww {\n      padding-top: 31px;\n      padding-bottom: 56px;\n    }\n\n    /* ---- 标题（移动端，图1）：字体跟系统/主题 body（去除主题 h2 的 GillSans）；\n       仅设字号 / 行高 / letter-spacing 与外边距 ---- */\n    .be-ctww .be-ctww__title {\n      margin: 0 auto 11px !important;\n      max-width: 286px;\n      font-size: 28px !important;\n      line-height: 28px !important;\n      letter-spacing: -0.01em !important;\n    }\n\n    /* ---- 描述（图2）：Inter 300 Light / 10 / 16 / 1% / 333×71\n       desc bottom (105+71=176) → table top 173 ⇒ 几乎贴着，给一个最小的视觉间距 ---- */\n    .be-ctww .be-ctww__desc {\n      max-width: 333px;\n      margin-bottom: 25px !important;\n      font-size: 10px !important;\n      line-height: 16px !important;\n      letter-spacing: 0.01em !important;\n    }\n\n    /* ---- 表格容器（图3：311 × 118，frame 左右各留 32） ---- */\n    .be-ctww__table {\n      max-width: 311px;\n    }\n\n    .be-ctww__heads {\n      padding: 0 14px;\n      margin-bottom: 6px;\n      grid-template-columns: 1fr 118px 1fr;\n    }\n\n    /* Feature / Others：与 cell 同一字号档（按 Figma ≈ 6-7） */\n    .be-ctww__head { font-size: 7px; letter-spacing: 0.04em; }\n\n    /* 表格总高度 ≈ 118：\n       heads(7 line-height:1 + mb 6) + card_pt 12 + 5 rows × 12 + 4 gaps × 6 + card_pb 12 ≈ 121\n       关键：grid-auto-rows: 12 让所有 row 严格 12px 高\n            （= 双行 6px × line-height 1 = 12，单行 cell 在 row 内 flex 居中） */\n    .be-ctww__card {\n      padding: 12px 14px;\n      row-gap: 6px;\n      border-radius: 16px;\n      grid-auto-rows: 12px;\n    }\n\n    .be-ctww__row {\n      grid-template-columns: 2fr 61px 1fr;\n      align-items: center;\n    }\n\n    /* Cell：Inter 300 Light / 6 / 100% / 0.25px（图2 Figma 实测最小值 6px）\n       用 flex 让单行 cell 在 12px row 内垂直居中，\n       双行 cell 自然填满 12px（6 + 6） */\n    .be-ctww__cell {\n      font-size: 6px;\n      line-height: 1;\n      letter-spacing: 0.04em; /* ≈ 0.25/6 */\n      display: flex;\n      align-items: center;\n    }\n    .be-ctww__cell--left  { justify-content: flex-start; }\n    .be-ctww__cell--right { justify-content: center; }\n\n    /* ---- 蓝色高亮（图4 / 5 / 6：118 × 76）\n       顶溢出 9.05 ≈ 9，底溢出 12.63 ≈ 13 ---- */\n    .be-ctww__highlight {\n      left: 58%;\n      width: 118px;\n      top: -5px;\n      bottom: -13px;\n      border-radius: 12px;\n      padding: 6px 6px;\n    }\n\n    /* Breescape：Inter 700 Bold / 6.55 ≈ 7 / 100% / 0.25px\n       margin-bottom 精确算：\n       list 起点 = 蓝块顶 (-9) + padding 6 + Breescape (7) + margin (8) = card.top + 12\n                 = 白卡 card_pt → row1 起点严格对齐 ✓ */\n    .be-ctww__highlight-head {\n      font-size: 7px;\n      line-height: 1;\n      letter-spacing: 0.04em;\n      margin: 0 0 19px;\n    }\n\n    /* highlight-list 也用 grid-auto-rows: 12 + row-gap: 6 与白卡完全同步\n       → row1/2/3/4/5 与白卡同一水平线 */\n    .be-ctww__highlight-list {\n      row-gap: 7px;\n      grid-auto-rows: 12px;\n      font-size: 6px;\n      line-height: 1;\n      letter-spacing: 0.04em;\n    }\n    .be-ctww__highlight-list > div {\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      text-align: center;\n    }\n  }\n</style>"
+          },
+          "blocks": {}
+        },
+        "group_yaxVCq": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "disabled": true,
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "group_custom_class": "",
+            "content_direction": "col",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 33,
+            "width_mobile": "custom",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": false,
+            "color_text": "",
+            "color_background": "",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "heading_V6jcPJ": {
+              "type": "heading",
+              "name": "t:blocks.heading.name",
+              "settings": {
+                "heading": "Breescape: Cooling That Truly Works",
+                "heading_size": "title-lg tracking-heading",
+                "heading_tag": "h2",
+                "width": "fill",
+                "custom_width": 100,
+                "alignment": "center",
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "alignment_mobile": "center",
+                "effects": "none",
+                "highlighted_text": "text",
+                "highlighted_scribble": "circle",
+                "highlighted_reveal": false
+              },
+              "blocks": {}
+            },
+            "text_a9hQxq": {
+              "type": "text",
+              "name": "t:blocks.text.name",
+              "settings": {
+                "text": "<p>Our advanced BlendTek™ technology helps regulate your body temperature, so you can fall asleep faster, stay asleep longer, and wake up refreshed.</p>",
+                "text_font": "body",
+                "text_size": "text-base lg:text-lg",
+                "text_max_size": 32,
+                "text_line_height": 1.6,
+                "text_letter_spacing": 0,
+                "text_capitalize": false,
+                "secondary_color": false,
+                "width": "fit-content",
+                "custom_width": 100,
+                "alignment": "left",
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100,
+                "alignment_mobile": "left",
+                "effects": "none",
+                "highlighted_text": "text",
+                "highlighted_scribble": "circle"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading_V6jcPJ",
+            "text_a9hQxq"
+          ]
+        },
+        "group_RpAWYC": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "disabled": true,
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "group_custom_class": "",
+            "content_direction": "col",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 66,
+            "width_mobile": "custom",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": false,
+            "color_text": "",
+            "color_background": "",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "custom_liquid_bG3pU4": {
+              "type": "custom-liquid",
+              "name": "t:sections.custom-liquid.name",
+              "settings": {
+                "liquid": "<div class=\"relative bg-gray-100 s__expert-page__blendtek__table__content w-full\">\n    <div class=\"s__expert-page__blendtek__table w-full\">\n        <div class=\"flex\">\n            <div class=\"shawn-tb__col\">\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">Feature\n                    </div>\n\n                </div>\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">Cooler to\n                        the Touch\n                    </div>\n\n                </div>\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">More\n                        Breathable <br>(vs. Cotton)\n\n                    </div>\n                </div>\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">More\n                        Moisture-Wicking <br>(vs. Cotton)</div>\n                </div>\n\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">Larger\n\n                    </div>\n                </div>\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">More\n                        Advanced</div>\n\n                </div>\n            </div>\n            <div class=\"shawn-tb__col\">\n                <div\n                    class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4 bg-highlight text-xl font-bold text-white\">\n                    <div class=\"text-left lg:text-lg text-base font-medium\">Breescape</div>\n                </div>\n                <div\n                    class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4 bg-highlight text-white\">\n                    <div class=\"flex flex-col items-start justify-center self-auto gap-2\">\n\n                        <div class=\"text-left lg:text-lg md:text-base text-sm font-medium\">\n                            Q-Max 0.46</div>\n\n                    </div>\n                </div>\n                <div\n                    class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4 bg-highlight text-white\">\n                    <div class=\"flex flex-col items-start justify-center self-auto gap-2\">\n\n                        <div class=\"text-left lg:text-lg md:text-base text-sm font-medium\">\n                            4.5X</div>\n                    </div>\n                </div>\n                <div\n                    class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4 bg-highlight text-white\">\n                    <div class=\"flex flex-col items-start justify-center self-auto gap-2\">\n\n                        <div class=\"text-left lg:text-lg md:text-base text-sm font-medium\">\n                            1.5X</div>\n                    </div>\n                </div>\n                <div\n                    class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4 bg-highlight text-white\">\n                    <div class=\"flex flex-col items-start justify-center self-auto gap-2\">\n\n                        <div class=\"text-left lg:text-lg md:text-base text-sm font-medium\">\n                            13.8% Larger</div>\n                    </div>\n                </div>\n                <div\n                    class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4 bg-highlight text-white\">\n                    <div class=\"flex flex-col items-start justify-center self-auto gap-2\">\n\n                        <div class=\"text-left lg:text-lg md:text-base text-sm font-medium\">\n                            1 Year of R&D, 23 Iterations </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"shawn-tb__col\">\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">\n                        Others\n                    </div>\n                </div>\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">\n                        Q-Max 0.4\n                    </div>\n                </div>\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">\n                        0.29X\n                    </div>\n                </div>\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">\n                        0.9X\n                    </div>\n                </div>\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">\n                        Standard\n                    </div>\n                </div>\n                <div class=\"flex flex-col items-start justify-center self-auto border-b border-gray-200 py-4 px-4\">\n                    <div class=\"text-left lg:text-lg md:text-base text-sm\">\n                        /\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<style>\n    .s__expert-page__blendtek__table__content {\n        border-radius: var(--rounded-block);\n        background: #f3f3f3;\n    }\n\n\n    .shawn-tb__col:first-child {\n        padding: 60px 0px 60px 0px;\n    }\n\n\n    .shawn-tb__col:nth-child(2) {\n        padding: 60px 0px;\n        background-color: rgb(var(--color-base-highlight));\n        border-radius: var(--rounded-block);\n    }\n\n    .shawn-tb__col:nth-child(3) {\n        padding: 60px 0px 60px 0px;\n    }\n\n    .shawn-tb__col:nth-child(3)>div {\n        padding-left: 30px;\n    }\n\n    .bg-highlight {\n        background-color: rgb(var(--color-base-highlight));\n    }\n\n    .text-white {\n        color: #fff\n    }\n\n    @media screen and (min-width: 768px) {\n        .shawn-tb__col {\n            flex: 1;\n            display: grid;\n            grid-auto-rows: 1fr;\n            grid-auto-flow: row;\n        }\n\n        .shawn-tb__col>div {\n            height: 60px;\n        }\n\n        .shawn-tb__col:first-child>div {\n            padding-left: 60px;\n        }\n\n        .shawn-tb__col:nth-child(3)>div {\n            padding-left: 30px;\n        }\n\n    }\n\n    @media (max-width: 767px) {\n        .shawn-tb__col>div {\n            height: 60px;\n        }\n\n        .shawn-tb__col:first-child {\n            padding: 20px 0;\n        }\n\n        .shawn-tb__col:nth-child(2) {\n            padding: 20px 0;\n        }\n\n        .shawn-tb__col:nth-child(3) {\n            padding: 20px 0;\n        }\n\n        .shawn-tb__col:first-child>div {\n            width: 140px;\n            padding: 10px 15px;\n        }\n\n        .shawn-tb__col:nth-child(2)>div {\n            width: 110px;\n            padding: 10px 15px;\n        }\n\n        .shawn-tb__col:nth-child(3)>div {\n            width: 85px;\n            padding: 10px 15px;\n        }\n    }\n</style>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "custom_liquid_bG3pU4"
+          ]
+        }
+      },
+      "block_order": [
+        "custom_liquid_jUqDNE",
+        "group_yaxVCq",
+        "group_RpAWYC"
+      ],
+      "name": "t:sections.custom-section.name",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "content_wrap": false,
+        "horizontal_alignment": "start",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 24,
+        "section_width": "page",
+        "section_height": "auto",
+        "section_height_custom": 50,
+        "section_height_mobile": "auto",
+        "section_height_custom_mobile": 50,
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_xJCKq3": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".xo__third-party-tested {background: transparent !important;}",
+        ".xo__cert-title {text-align: center; font-size: 45px; font-weight: 600; margin-bottom: 8px; font-style: italic;}",
+        ".xo__third-party-tested .rte details:nth-of-type(n + 2) {display: none;}",
+        "@media (max-width: 768px) {.xo__cert-title {font-size: 25px; }}"
+      ],
+      "name": "t:sections.custom-liquid.name",
+      "settings": {
+        "liquid": "{%- liquid\nassign cert_page_handle = 'third-party-tested'\nassign cert_page = pages[cert_page_handle]\n-%}\n\n<div class=\"xo__third-party-tested w-full bg-zinc-100\">\n  <div class=\"container mx-auto py-10\">\n\n    {%- if cert_page != blank -%}\n\n      <h1 class=\"xo__cert-title\">\n        Third-Party Tested Cooling\n      </h1>\n\n\n      <div class=\"rte text-base md:text-lg\">\n        {{ cert_page.content }}\n      </div>\n\n    {%- else -%}\n      <p class=\"text-sm opacity-70\">\n        Page not found: <strong>{{ cert_page_handle }}</strong>\n      </p>\n    {%- endif -%}\n\n  </div>\n</div>\n\n<style>\n  .xo__third-party-tested .rte h1 {\n    display: none;\n  }\n</style>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "breescape_comfort_guaranteed_bPMEAQ": {
+      "type": "breescape-comfort-guaranteed",
+      "blocks": {
+        "card_8rEJXy": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_6.png",
+            "name": "Brittany Carsey",
+            "alt": "",
+            "description": "\"Breescape's cooling product regulates temperature and gets better the longer you're under it. You won't wake up hot and you'll sleep longer.\""
+          }
+        },
+        "card_rY6nWB": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_7.png",
+            "name": "Colby Vermillion",
+            "alt": "",
+            "description": "\"This is unlike anything else out there—this is a cooling product that truly works, delivering a refreshing, almost freeing sensation.\""
+          }
+        },
+        "card_NKnCtD": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_8.png",
+            "name": "Kristine Kryzymalski",
+            "alt": "",
+            "description": "\"It's not just cooling—it's soft, comfortable, and gentle on sensitive skin, with no brittle or scratchy feel.\""
+          }
+        },
+        "card_e8Tce7": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/gemini-20260408034439537_3.png",
+            "name": "Dr. Dusan Roncevic",
+            "alt": "",
+            "description": "\"I would recommend Breescape due to its hybrid ability. The heat generated by the body is dissipated through the breathable fabric, preventing it from being trapped.\""
+          }
+        }
+      },
+      "block_order": [
+        "card_8rEJXy",
+        "card_rY6nWB",
+        "card_NKnCtD",
+        "card_e8Tce7"
+      ],
+      "name": "Comfort Guaranteed",
+      "settings": {
+        "background_image": "shopify://shop_images/zhuanji2.jpg",
+        "background_image_mobile": "shopify://shop_images/zhuanji1.jpg",
+        "background_color": "#ffffff",
+        "background_dim": 0,
+        "max_width": 1520,
+        "section_padding_top_pc": 80,
+        "section_padding_bottom_pc": 80,
+        "section_padding_top_mobile": 40,
+        "section_padding_bottom_mobile": 40,
+        "heading": "The Comfort is Guaranteed",
+        "heading_color": "#10374b",
+        "heading_size_pc": 56,
+        "heading_size_mobile": 28,
+        "heading_margin_bottom_pc": 50,
+        "heading_margin_bottom_mobile": 24,
+        "card_gap_pc": 24,
+        "card_gap_mobile": 12,
+        "card_radius_pc": 30,
+        "card_radius_mobile": 16,
+        "name_color": "#ffffff",
+        "name_bg_rgb": "16,55,75",
+        "name_bg_opacity": 0,
+        "name_radius": 30,
+        "name_padding_x": 3,
+        "name_padding_y": 6,
+        "name_size_pc": 16,
+        "name_size_mobile": 10,
+        "desc_color": "#ffffff",
+        "desc_size_pc": 14,
+        "desc_size_mobile": 8,
+        "desc_line_height": 1.4,
+        "desc_margin_top_pc": 12,
+        "desc_margin_top_mobile": 8,
+        "desc_min_height_pc": 96,
+        "desc_min_height_mobile": 96,
+        "overlay_pad_x_pc": 14,
+        "overlay_pad_x_mobile": 10,
+        "overlay_pad_bottom_pc": 16,
+        "overlay_pad_bottom_mobile": 10
+      }
+    },
+    "blocks_7QABfn": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b6546b0_6jtMQR": {
+          "type": "ai_gen_block_b6546b0",
+          "settings": {
+            "columns_desktop": 4,
+            "columns_mobile": "2",
+            "column_gap": 20,
+            "desktop_width_percent": 100,
+            "image_ratio": "portrait",
+            "border_radius": 10,
+            "placeholder_bg_color": "#f4f4f4",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "text_position": "bottom",
+            "text_padding": 20,
+            "text_color": "#ffffff",
+            "title_size": 18,
+            "description_size": 12,
+            "text_spacing": 5,
+            "show_column_1": true,
+            "image_1": "shopify://shop_images/Mask_group_6.png",
+            "title_1": "Brittany Carsey",
+            "description_1": "\"Breescape's cooling product regulates temperature and gets better the longer you're under it. You won't wake up hot and you'll sleep longer.\"",
+            "link_1": "",
+            "show_column_2": true,
+            "image_2": "shopify://shop_images/Mask_group_7.png",
+            "title_2": "Colby Vermillion",
+            "description_2": "\"This is unlike anything else out there—this is a cooling product that truly works, delivering a refreshing, almost freeing sensation.\"",
+            "link_2": "",
+            "show_column_3": true,
+            "image_3": "shopify://shop_images/Mask_group_8.png",
+            "title_3": "Kristine Kryzymalski",
+            "description_3": "\"It's not just cooling—it's soft, comfortable, and gentle on sensitive skin, with no brittle or scratchy feel.\"",
+            "link_3": "",
+            "show_column_4": true,
+            "image_4": "shopify://shop_images/gemini-20260408034439537_3.png",
+            "title_4": "Dr. Dusan Roncevic",
+            "description_4": "\"The heat generated by the body is dissipated through the breathable fabric, preventing it from being trapped.\"",
+            "link_4": "",
+            "show_column_5": false,
+            "title_5": "标题 5",
+            "description_5": "在此添加描述文字",
+            "link_5": "",
+            "show_column_6": false,
+            "title_6": "标题 6",
+            "description_6": "在此添加描述文字",
+            "link_6": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b6546b0_6jtMQR"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "图片文字叠加列",
+      "settings": {}
+    },
+    "video_with_text_FAXTw3": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_7iCyjX": {
+          "type": "heading",
+          "settings": {
+            "heading": "Don’t Just Take Our Word for It",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_VmmGQQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>From real reactions to real science—discover why Breescape is built to sleep through.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_7iCyjX",
+        "text_VmmGQQ"
+      ],
+      "custom_css": [
+        "h2 {font-size: 44px !important;}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 30px !important; }}"
+      ],
+      "settings": {
+        "video": "shopify://files/videos/expertpage-launch-videos-lg-202505-v1.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "The Launch Recap",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "video_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "#ffffff",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": true,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "rich_text_6gWjff": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_XQQnJY": {
+          "type": "heading",
+          "settings": {
+            "heading": "How Does Breescape Power Your Cooler Sleep?",
+            "heading_size": "title-md",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_XQQnJY"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "h1 {font-size: 44px;}",
+        "@media screen and (max-width: 767px) {h1 {font-size: 30px; }}"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 12,
+        "divider": true,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "featured_collection_rEDcQn": {
+      "type": "featured-collection",
+      "custom_css": [
+        "h2 {font-size: 44px !important;}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 30px !important; }}"
+      ],
+      "settings": {
+        "collection": "",
+        "products": [
+          "cooling-sheet-set",
+          "cooling-comforter",
+          "cooling-comforter-set",
+          "cooling-pillowcases",
+          "cooling-eye-mask"
+        ],
+        "product_limit": 5,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Ready to Sleep Through the Night?",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": true,
+        "full_width": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "image_with_text_overlay_cR7i6H",
+    "rich_text_H6bYNA",
+    "breescape_experts_say_VTBNDr",
+    "rich_text_VAgctN",
+    "image_with_text_JnMqV4",
+    "custom_section_kq8pif",
+    "custom_section_pz37At",
+    "custom_liquid_TNyMfK",
+    "image_with_text_overlay_HHKY3R",
+    "custom_section_XnDFXj",
+    "custom_liquid_xJCKq3",
+    "breescape_comfort_guaranteed_bPMEAQ",
+    "blocks_7QABfn",
+    "video_with_text_FAXTw3",
+    "rich_text_6gWjff",
+    "featured_collection_rEDcQn"
+  ]
+}

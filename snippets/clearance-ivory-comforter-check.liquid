@@ -1,0 +1,160 @@
+{%- doc -%}
+  按 section 里配置的促销规则匹配当前变体。
+
+  mode 默认 match：命中时输出 percent:::badge，未命中输出空。
+  mode 为 colors：输出已配置规则的颜色列表（逗号分隔，小写），供色块角标使用。
+  mode 为 sizes：输出指定颜色对应的尺码列表（逗号分隔，小写）。
+  mode 为 size_map：输出 color:size,size; 映射，供换色时同步角标。
+
+  @param {object} product
+  @param {object} [variant]
+  @param {object} section
+  @param {string} [mode] - 'match' | 'colors' | 'sizes' | 'size_map'
+  @param {string} [match_color] - sizes 模式下只返回该颜色的尺码
+{%- enddoc -%}
+{%- liquid
+  assign out_mode = mode | default: 'match'
+
+  if section == blank
+    echo ''
+  else
+    if out_mode == 'colors'
+      for i in (1..4)
+        assign color_key = 'sale_rule_' | append: i | append: '_color'
+        assign rule_color = section.settings[color_key] | default: '' | downcase | strip
+        if rule_color != blank
+          echo rule_color
+          echo ','
+        endif
+      endfor
+    elsif out_mode == 'sizes'
+      assign filter_color = match_color | default: '' | downcase | strip
+      for i in (1..4)
+        assign color_key = 'sale_rule_' | append: i | append: '_color'
+        assign sizes_key = 'sale_rule_' | append: i | append: '_sizes'
+        assign rule_color = section.settings[color_key] | default: '' | downcase | strip
+        assign rule_sizes = section.settings[sizes_key] | default: ''
+        if rule_color == blank or rule_sizes == blank
+          continue
+        endif
+        if filter_color != blank and rule_color != filter_color
+          continue
+        endif
+        if filter_color == blank
+          continue
+        endif
+        assign sizes_norm = rule_sizes | downcase | replace: '，', ',' | replace: '/', ',' | replace: '|', ','
+        echo sizes_norm
+        echo ','
+      endfor
+    elsif out_mode == 'size_map'
+      for i in (1..4)
+        assign color_key = 'sale_rule_' | append: i | append: '_color'
+        assign sizes_key = 'sale_rule_' | append: i | append: '_sizes'
+        assign rule_color = section.settings[color_key] | default: '' | downcase | strip
+        assign rule_sizes = section.settings[sizes_key] | default: ''
+        if rule_color == blank or rule_sizes == blank
+          continue
+        endif
+        assign sizes_norm = rule_sizes | downcase | replace: '，', ',' | replace: '/', ',' | replace: '|', ','
+        echo rule_color
+        echo ':'
+        echo sizes_norm
+        echo ';'
+      endfor
+    else
+      assign target_product = product
+      if product.product != blank
+        assign target_product = product.product
+      endif
+
+      assign target_variant = variant
+      if target_variant == blank
+        if product.selected_or_first_available_variant != blank
+          assign target_variant = product.selected_or_first_available_variant
+        elsif target_product.selected_or_first_available_variant != blank
+          assign target_variant = target_product.selected_or_first_available_variant
+        endif
+      endif
+
+      assign color_val = ''
+      assign size_val = ''
+      if target_variant != blank and target_product.options_with_values != blank
+        for opt in target_product.options_with_values
+          assign name_l = opt.name | downcase
+          assign option_key = 'option' | append: forloop.index
+          assign option_val = target_variant[option_key] | default: '' | downcase | strip
+          if name_l contains 'color' or name_l contains 'colour' or name_l contains '颜色'
+            assign color_val = option_val
+          endif
+          if name_l contains 'size' or name_l contains '尺码' or name_l contains '尺寸'
+            assign size_val = option_val
+          endif
+        endfor
+      endif
+
+      assign title_l = target_variant.title | default: '' | downcase
+      assign matched_percent = 0
+      assign matched_badge = ''
+
+      for i in (1..4)
+        assign color_key = 'sale_rule_' | append: i | append: '_color'
+        assign sizes_key = 'sale_rule_' | append: i | append: '_sizes'
+        assign badge_key = 'sale_rule_' | append: i | append: '_badge'
+        assign percent_key = 'sale_rule_' | append: i | append: '_percent'
+        assign rule_color = section.settings[color_key] | default: '' | downcase | strip
+        assign rule_sizes = section.settings[sizes_key] | default: ''
+        if rule_color == blank or rule_sizes == blank
+          continue
+        endif
+
+        assign color_hit = false
+        if color_val != blank
+          if color_val == rule_color
+            assign color_hit = true
+          endif
+        elsif title_l contains rule_color
+          assign color_hit = true
+        endif
+        unless color_hit
+          continue
+        endunless
+
+        assign sizes_norm = rule_sizes | downcase | replace: '，', ',' | replace: '/', ',' | replace: '|', ','
+        assign size_list = sizes_norm | split: ','
+        assign size_hit = false
+        for sz in size_list
+          assign sz_s = sz | strip
+          if sz_s == blank
+            continue
+          endif
+          if size_val != blank
+            if size_val == sz_s
+              assign size_hit = true
+              break
+            endif
+          elsif title_l contains sz_s
+            assign size_hit = true
+            break
+          endif
+        endfor
+        unless size_hit
+          continue
+        endunless
+
+        assign matched_percent = section.settings[percent_key] | default: 50 | plus: 0
+        assign matched_badge = section.settings[badge_key] | default: 'Flash Sale 50%' | strip
+        if matched_badge == blank
+          assign matched_badge = 'Flash Sale ' | append: matched_percent | append: '%'
+        endif
+        break
+      endfor
+
+      if matched_percent > 0
+        echo matched_percent
+        echo ':::'
+        echo matched_badge
+      endif
+    endif
+  endif
+-%}

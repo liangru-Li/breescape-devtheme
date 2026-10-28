@@ -1,0 +1,97 @@
+{%- doc -%}
+  Renders the cart social-proof line on the product page.
+  Icon + Earn {points} text now lives in the Price block.
+
+  @param {object} block - Block settings and configuration
+  @param {object} product - Shopify product object
+  @param {string} product_id - Product identifier for component IDs
+  @param {string} section_id - Section identifier for component IDs
+{%- enddoc -%}
+
+{%- liquid
+  assign spacing_top = block.settings.margin_top | default: 12
+  assign spacing_bottom = block.settings.margin_bottom | default: 12
+  assign text_color = block.settings.text_color | default: '#10374b'
+  assign font_size_mobile = block.settings.font_size_mobile | default: 13
+  assign font_size_desktop = block.settings.font_size_desktop | default: 14
+  assign font_weight = block.settings.font_weight | default: '400'
+
+  assign cart_text = block.settings.cart_text
+  assign count_min = block.settings.count_min | default: 50
+  assign count_max = block.settings.count_max | default: 150
+  if count_max < count_min
+    assign count_max = count_min
+  endif
+  assign count_span = '<span class="product-reward-points__count" data-min="' | append: count_min | append: '" data-max="' | append: count_max | append: '">' | append: count_min | append: '</span>'
+  assign dot_span = '<span class="product-reward-points__dot" aria-hidden="true"></span>'
+  assign cart_html = cart_text | replace: '{count}', count_span
+  assign cart_html = dot_span | append: cart_html
+-%}
+
+{%- if cart_text != blank -%}
+  {%- assign rp_id = 'RewardPoints-' | append: section_id | append: '-' | append: product_id -%}
+  <div
+    id="{{ rp_id }}"
+    class="product-reward-points"
+    {{ block.shopify_attributes }}
+    style="
+      padding-top: {{ spacing_top }}px;
+      padding-bottom: {{ spacing_bottom }}px;
+      --rp-font-size-desktop: {{ font_size_desktop }}px;
+      --rp-font-size-mobile: {{ font_size_mobile }}px;
+      --rp-font-weight: {{ font_weight }};
+      --rp-text-color: {{ text_color }};
+    "
+  >
+    {{ 'product-reward-points.css' | asset_url | stylesheet_tag }}
+    <style>
+      #{{ rp_id }} .product-reward-points__cart {
+        display: block;
+        text-align: center;
+        font-size: {{ font_size_mobile }}px;
+        font-weight: {{ font_weight }};
+        color: {{ text_color }};
+        line-height: 1.2;
+      }
+      #{{ rp_id }} .product-reward-points__dot {
+        display: inline-block;
+        width: 0.5em;
+        height: 0.5em;
+        margin-right: 0.45em;
+        border-radius: 50%;
+        background-color: currentColor;
+        vertical-align: 0.1em;
+        animation: product-reward-points-dot-blink 1.2s ease-in-out infinite;
+        pointer-events: none;
+      }
+      @keyframes product-reward-points-dot-blink {
+        0%, 100% { opacity: 1; }
+        50%      { opacity: 0.2; }
+      }
+      @media screen and (min-width: 768px) {
+        #{{ rp_id }} .product-reward-points__cart {
+          font-size: {{ font_size_desktop }}px !important;
+        }
+      }
+    </style>
+    <div
+      class="product-reward-points__cart"
+      style="font-size: {{ font_size_mobile }}px; font-weight: {{ font_weight }}; color: {{ text_color }};"
+    >{{ cart_html }}</div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById({{ rp_id | json }});
+      if (!root) return;
+      var els = root.querySelectorAll('.product-reward-points__count');
+      if (!els.length) return;
+      var min = parseInt(els[0].getAttribute('data-min'), 10);
+      var max = parseInt(els[0].getAttribute('data-max'), 10);
+      if (isNaN(min)) min = 50;
+      if (isNaN(max) || max < min) max = min;
+      var n = Math.floor(Math.random() * (max - min + 1)) + min;
+      els.forEach(function (el) { el.textContent = n; });
+    })();
+  </script>
+{%- endif -%}

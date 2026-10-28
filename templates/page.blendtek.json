@@ -1,0 +1,896 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-sm",
+        "heading_alignment": "text-center",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
+    "video_with_text_overlay_YmCpBP": {
+      "type": "video-with-text-overlay",
+      "blocks": {
+        "heading_Gwgdpb": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Science Behind BlendTek™",
+            "heading_size": "title-md",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Gwgdpb"
+      ],
+      "custom_css": [
+        "h1 {font-family: \"GillSans\" !important; letter-spacing: -1px !important;}"
+      ],
+      "settings": {
+        "transparent_header": true,
+        "video": "shopify://files/videos/blendtekpage-banner-video-lg-202503-v2.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "image_height": "700px",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "video_mobile": "shopify://files/videos/blendtekpage-banner-video-sm-202503_456a8c32-730e-4f14-ad81-7946a432e296.mp4",
+        "video_url_mobile": "",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false
+      }
+    },
+    "rich_text_ndyNd4": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_b6bXVW": {
+          "type": "heading",
+          "settings": {
+            "heading": "When 'Sleep Through' Materializes",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_mV6d87": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Rooted in science, Breescape designs sleep solutions not for fleeting comfort, but to help you stay asleep — night after night, with nothing pulling you awake and nothing to start over. Experience a night built to sleep straight through.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_b6bXVW",
+        "text_mV6d87"
+      ],
+      "custom_css": [
+        "h2 {font-size: 44px;}",
+        "@media screen and (max-width: 749px) {h2 {font-size: 30px; }}"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 32,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "video_with_text_LLXmYL": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_HXbcWK": {
+          "type": "heading",
+          "settings": {
+            "heading": "What is BlendTek™?",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_JWjktp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>To ensure you sleep through the night, we balance performance in every detail. Our BlendTek™ patented technology blends multiple fibers in a precise golden ratio to enhance breathability, cooling performance, moisture-wicking, hypoallergenic softness, and more.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HXbcWK",
+        "text_JWjktp"
+      ],
+      "custom_css": [
+        "h2 {font-size: 44px;}",
+        "@media screen and (max-width: 749px) {h2 {font-size: 30px; }}"
+      ],
+      "settings": {
+        "video": "shopify://files/videos/blendtekpage-what-is-blendtek-video-lg-v1.mp4",
+        "video_url": "",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_background_2": "#ffffff",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_overlay_PHffVB": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_iNmyPy": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "In-House Innovation",
+            "subheading_size": "subtitle-md",
+            "secondary_color": true
+          }
+        },
+        "heading_4YdUYA": {
+          "type": "heading",
+          "settings": {
+            "heading": "A Precisely Balanced Blend of High-Performance Fibers",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_9MjWNC": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>High Thermal Conductivity Fibers</strong> – Draws heat away fast.</p><p><strong>Polygonal Fiber Structure</strong> – Maximizes surface area to wick away sweat.</p><p><strong>High-Porosity Fibers</strong> – Enhances airflow, releasing heat and moisture.</p>",
+            "text_font": "body",
+            "text_size": "subtext-sm",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_RGFBmQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>*These are just a few of the advanced fibers in BlendTek™. Our patented formula combines multiple components to achieve the ideal balance of cooling, breathability, and long-lasting comfort.</em></p>",
+            "text_font": "body",
+            "text_size": "subtext-sm",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_iNmyPy",
+        "heading_4YdUYA",
+        "text_9MjWNC",
+        "text_RGFBmQ"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 767px) {.banner__title {font-size: 24px !important; } .rte p {margin-block: 0; font-size: 12px; line-height: 1.2; } .body p em {font-size: 10px; line-height: 1.1; }}",
+        "@media screen and (min-width: 1280px) {.banner__box--small {max-width: 30rem !important; }}"
+      ],
+      "name": "t:sections.image-with-text-overlay.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/blendtekpage_high-performance_banner_image_lg_202603_v1.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-end",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/blendtekpage_high-performance_banner_image_md_202603_v2.jpg",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#0f374b",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#67d2df",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": true,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "video_with_text_wfmF6V": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_PAa8tq": {
+          "type": "heading",
+          "settings": {
+            "heading": "Instantly Cool to the Touch",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_Kxz7wX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>BlendTek™ leads with <strong>Q-Max &gt; 0.46</strong>, outperforming cotton, bamboo, and silk.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PAa8tq",
+        "text_Kxz7wX"
+      ],
+      "custom_css": [
+        "h2 {font-size: 44px;}",
+        "@media screen and (max-width: 749px) {h2 {font-size: 30px; }}"
+      ],
+      "name": "Cool to the Touch",
+      "settings": {
+        "video": "shopify://files/videos/blendtekpage_cool-to-the-touch_video_lg_202603_v1.mp4",
+        "video_url": "",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_background_2": "#ffffff",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "video_with_text_GpkCnr": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_i67NJ9": {
+          "type": "heading",
+          "settings": {
+            "heading": "Breathable",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_xLcq7D": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Breathable fiber gaps and knitted fabric work together to create open airflow channels, releasing heat & moisture faster for a fresher sleep.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_i67NJ9",
+        "text_xLcq7D"
+      ],
+      "custom_css": [
+        "h2 {font-size: 44px;}",
+        "@media screen and (max-width: 749px) {h2 {font-size: 30px; }}"
+      ],
+      "name": "Breathable",
+      "settings": {
+        "video": "shopify://files/videos/blendtekpage_breathable_video_lg_202603_v1.mp4",
+        "video_url": "",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "video_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_background_2": "#ededed",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "video_with_text_Va3QFr": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_mkpF4x": {
+          "type": "heading",
+          "settings": {
+            "heading": "Moisture-Wicking",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_agiV8b": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Polygonal fiber structure expands surface area for faster moisture absorption & quick evaporation.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_mkpF4x",
+        "text_agiV8b"
+      ],
+      "custom_css": [
+        "h2 {font-size: 44px;}",
+        "@media screen and (max-width: 749px) {h2 {font-size: 30px; }}"
+      ],
+      "settings": {
+        "video": "shopify://files/videos/blendtekpage_moisture-wicking_video_lg_202603_v1.mp4",
+        "video_url": "",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_background_2": "#ffffff",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "video_with_text_kxzDVc": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_TgXRde": {
+          "type": "heading",
+          "settings": {
+            "heading": "Silky Soft",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_JrqqDr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Softer fabric starts with finer fibers. BlendTek™ uses ultra-fine fibers to soothe your skin and wrap you in comforting softness all night long.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_TgXRde",
+        "text_JrqqDr"
+      ],
+      "custom_css": [
+        "h2 {font-size: 44px;}",
+        "@media screen and (max-width: 749px) {h2 {font-size: 30px; }}"
+      ],
+      "name": "Silky Soft",
+      "settings": {
+        "video": "shopify://files/videos/blendtekpage_silky-soft_video_lg_202603_v1.mp4",
+        "video_url": "",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "video_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_background_2": "#ededed",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "video_with_text_4HztJt": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_ErEhba": {
+          "type": "heading",
+          "settings": {
+            "heading": "Gentle on Skin",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_QgPR7K": {
+          "type": "text",
+          "settings": {
+            "text": "<p>BlendTek™ is OEKO-TEX® 100 certified, blocking over 1,000 harmful substances to ensure safety and direct contact with your skin.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "image_a8PjLQ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/blendtekpage_hypoallergenic_oekotex_icon_sm_202603_v1.png",
+            "image_width": "custom",
+            "image_max_width": 100,
+            "image_max_width_mobile": 70
+          }
+        }
+      },
+      "block_order": [
+        "heading_ErEhba",
+        "text_QgPR7K",
+        "image_a8PjLQ"
+      ],
+      "custom_css": [
+        "h2 {font-size: 44px;}",
+        "@media screen and (max-width: 749px) {h2 {font-size: 30px; }}"
+      ],
+      "name": "Gentle on Skin",
+      "settings": {
+        "video": "shopify://files/videos/blendtekpage_hypoallergenic_video_lg_202603_v1.mp4",
+        "video_url": "",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_background_2": "#ffffff",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "rich_text_KLB86w": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_fwAEwj": {
+          "type": "heading",
+          "settings": {
+            "heading": "Third-Party Tested, Globally Certified",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_xAjtp8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>BlendTek™ Fabric</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "liquid_jei4J6": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div class=\"xo-cert-card grid gap-4\" id=\"xoCertCard\">\n  <div class=\"xo-cert-dropdown\">\n    <button class=\"xo-cert-dropdown-btn flex gap-4 items-center justify-between w-full rounded-full bg-white\" id=\"xoCertDropdownBtn\" type=\"button\" aria-expanded=\"false\" aria-controls=\"xoCertDropdownMenu\">\n      <span id=\"xoCertDropdownLabel\" class=\"text-lg font-medium leading-tight\">✓ Coolness Test (Q-Max)</span>\n      <svg class=\"icon icon-chevron-menu icon-xs xo-cert-chevron\" viewbox=\"0 0 10 7\" stroke=\"currentColor\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" role=\"presentation\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m1 1 4 4 4-4\"></path>\n      </svg>\n    </button>\n\n    <div class=\"xo-cert-dropdown-menu\" id=\"xoCertDropdownMenu\" role=\"listbox\" aria-hidden=\"true\">\n      <button class=\"xo-cert-option is-active\" type=\"button\" role=\"option\" data-panel=\"qmax\" aria-selected=\"true\">\n        ✓ Coolness Test (Q-Max)\n      </button>\n      <button class=\"xo-cert-option\" type=\"button\" role=\"option\" data-panel=\"breathability\" aria-selected=\"false\">\n        ✓ Breathability Test\n      </button>\n      <button class=\"xo-cert-option\" type=\"button\" role=\"option\" data-panel=\"oekotex\" aria-selected=\"false\">\n        ✓ OEKO-TEX® Certification\n      </button>\n    </div>\n  </div>\n\n  <div class=\"xo-cert-panels\">\n    <section class=\"xo-cert-panel gap-2 is-active\" data-panel=\"qmax\">\n      <div class=\"xo-pill-card \">\n        <div class=\"xo-metric-grid grid gap-2\">\n          <div class=\"xo-metric-grid-items grid items-center\">\n            <div class=\"xo-grid-head md:text-base text-sm\">Cotton</div>\n            <div class=\"xo-grid-head md:text-base text-sm\">Bamboo Rayon</div>\n            <div class=\"xo-grid-head md:text-base text-sm\">Silk</div>\n            <div class=\"xo-grid-head md:text-lg text-base font-medium xo-grid-brand italic\">BlendTek™</div>\n          </div>\n          <div class=\"xo-value-row items-center xo-metric-grid-items\" aria-label=\"Q-Max comparison values\">\n            <div class=\"xo-grid-val md:text-base text-sm\">0.11</div>\n            <div class=\"xo-grid-val md:text-base text-sm\">0.15</div>\n            <div class=\"xo-grid-val md:text-base text-sm\">0.19</div>\n            <div class=\"xo-grid-val xo-grid-highlight md:text-base text-sm font-bold\">Q-Max &gt; <strong>0.46</strong>\n            </div>\n          </div>\n\n          <div class=\"xo-bars\" aria-hidden=\"true\">\n            <div class=\"xo-bar-track-row\">\n              <div class=\"xo-bar-name\">Cotton</div>\n              <div class=\"xo-bar-track\">\n                <div class=\"xo-bar-fill\" style=\"width:24%\"></div>\n              </div>\n              <div class=\"xo-bar-val\">0.11</div>\n            </div>\n            <div class=\"xo-bar-track-row\">\n              <div class=\"xo-bar-name\">Bamboo Rayon</div>\n              <div class=\"xo-bar-track\">\n                <div class=\"xo-bar-fill\" style=\"width:33%\"></div>\n              </div>\n              <div class=\"xo-bar-val\">0.15</div>\n            </div>\n            <div class=\"xo-bar-track-row\">\n              <div class=\"xo-bar-name\">Silk</div>\n              <div class=\"xo-bar-track\">\n                <div class=\"xo-bar-fill\" style=\"width:41%\"></div>\n              </div>\n              <div class=\"xo-bar-val\">0.19</div>\n            </div>\n            <div class=\"xo-bar-track-row\">\n              <div class=\"xo-bar-name is-brand\">BlendTek™</div>\n              <div class=\"xo-bar-track\">\n                <div class=\"xo-bar-fill is-brand\" style=\"width:100%\"></div>\n              </div>\n              <div class=\"xo-bar-val is-brand\">&gt; 0.46</div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"xo-info-card  grid gap-2\">\n        <div class=\"text-lg font-medium leading-tight text-left\">What is Q-Max?</div>\n        <p class=\"leading-tight text-left\">\n          Qmax measures how cool a fabric feels instantly when it touches your skin.\n          The higher the score, the cooler the fabric feels.\n        </p>\n      </div>\n\n      <div class=\"xo-logo-note grid gap-4 items-center\">\n        <div class=\"xo-logo\">\n          <img class=\"h-full w-full object-cover\" src=\"//cdn.shopify.com/s/files/1/0640/6779/7070/files/testedpage_certified_logo_sgs_image_202602_v1.png?v=17008517165451635606\" alt=\"Cooler, cozier, better sleep for everyone!\">\n        </div>\n        <p class=\"xo-logo-note-text text-sm leading-tight text-left\">\n          BlendTek™ fabric has been rigorously tested by SGS SA, a globally recognized\n          testing organization, because cooling comfort should always come with uncompromised safety.\n        </p>\n      </div>\n    </section>\n\n    <section class=\"xo-cert-panel gap-2\" data-panel=\"breathability\">\n      <div class=\"xo-pill-card \">\n        <div class=\"xo-metric-grid\">\n          <div class=\"xo-metric-grid-items grid items-center\">\n            <div class=\"xo-grid-head md:text-base text-sm\">Silk</div>\n            <div class=\"xo-grid-head md:text-base text-sm\">Cotton</div>\n            <div class=\"xo-grid-head md:text-base text-sm\">Bamboo Rayon</div>\n            <div class=\"xo-grid-head md:text-lg text-sm font-bold xo-grid-brand italic\">Air Permeability</div>\n          </div>\n          <div class=\"xo-value-row xo-metric-grid-items items-center\" aria-label=\"Air permeability comparison values\">\n            <div class=\"xo-grid-val md:text-base text-sm\">20-80</div>\n            <div class=\"xo-grid-val md:text-base text-sm\">100-400</div>\n            <div class=\"xo-grid-val md:text-base text-sm\">250-600</div>\n            <div class=\"xo-grid-val xo-grid-highlight md:text-base text-sm font-medium\">1320 <span>mm/s</span>\n            </div>\n          </div>\n        </div>\n        <div class=\"xo-bars\" aria-hidden=\"true\">\n          <div class=\"xo-bar-track-row\">\n            <div class=\"xo-bar-name\">Silk</div>\n            <div class=\"xo-bar-track\">\n              <div class=\"xo-bar-fill\" style=\"width:4%\"></div>\n            </div>\n            <div class=\"xo-bar-val\">20–80</div>\n          </div>\n          <div class=\"xo-bar-track-row\">\n            <div class=\"xo-bar-name\">Cotton</div>\n            <div class=\"xo-bar-track\">\n              <div class=\"xo-bar-fill\" style=\"width:19%\"></div>\n            </div>\n            <div class=\"xo-bar-val\">100–400</div>\n          </div>\n          <div class=\"xo-bar-track-row\">\n            <div class=\"xo-bar-name\">Bamboo Rayon</div>\n            <div class=\"xo-bar-track\">\n              <div class=\"xo-bar-fill\" style=\"width:38%\"></div>\n            </div>\n            <div class=\"xo-bar-val\">250–600</div>\n          </div>\n          <div class=\"xo-bar-track-row\">\n            <div class=\"xo-bar-name is-brand\">BlendTek™</div>\n            <div class=\"xo-bar-track\">\n              <div class=\"xo-bar-fill is-brand\" style=\"width:100%\"></div>\n            </div>\n            <div class=\"xo-bar-val is-brand\">1320 mm/s</div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"xo-info-card  grid gap-2\">\n        <div class=\"text-lg font-medium leading-tight text-left\">What is Air Permeability?</div>\n        <p class=\"leading-tight text-left\">\n          Air Permeability indicates how quickly air can pass through a fabric. A higher mm/s rating means enhanced\n          airflow for cooler, drier comfort.\n        </p>\n      </div>\n\n      <div class=\"xo-logo-note grid gap-4 items-center\">\n        <div class=\"xo-logo xo-logo-sgs\">\n          <img class=\"h-full w-full object-cover\" src=\"//cdn.shopify.com/s/files/1/0640/6779/7070/files/testedpage_certified_logo_sgs_image_202602_v1.png?v=17008517165451635606\" alt=\"Cooler, cozier, better sleep for everyone!\">\n        </div>\n        <p class=\"xo-logo-note-text text-sm leading-tight text-left\">\n          BlendTek™ fabric has been rigorously tested by SGS SA, a globally recognized\n          testing organization, because cooling comfort should always come with uncompromised safety.\n        </p>\n      </div>\n    </section>\n\n\n    <section class=\"xo-cert-panel gap-2\" data-panel=\"oekotex\">\n      <div class=\"xo-pill-row \">\n        <span class=\"xo-dot\"></span>\n        <span class=\"text-lg font-medium leading-tight text-left\"> II (products with direct contact to skin)</span>\n      </div>\n\n      <div class=\"xo-info-card  grid gap-2\">\n        <div class=\"text-lg font-medium leading-tight text-left\">What is OEKO-TEX® STANDARD 100?</div>\n        <p class=\"text-base leading-tight text-left\">\n          OEKO‑TEX® Standard 100 is a label for textiles tested for harmful substances and sets the benchmark for\n          textile safety. It tests against a comprehensive list of over 1,000 harmful substances to ensure safety for\n          products with direct skin contact.\n        </p>\n      </div>\n\n      <div class=\"xo-info-card xo-list-card grid gap-2\">\n        <div class=\"text-lg font-medium leading-tight text-left\">No Detectable Levels of the Following Substances</div>\n        <ul class=\"text-base leading-normal text-left\">\n          <li>× Formaldehyde</li>\n          <li>× Heavy metals</li>\n          <li>× Pesticides</li>\n          <li>× Glyphosate and salts</li>\n          <li>× Chlorinated phenols</li>\n          <li>× Plasticizer/phthalates</li>\n          <li>× Organic tin compounds</li>\n          <li>× Bisphenols</li>\n          <li>× Carcinogenic arylamines</li>\n          <li>× Dyestuffs and pigments classified as carcinogenic</li>\n          <li>× Dyestuffs classified as allergenic</li>\n          <li>× Michler's ketone/base</li>\n          <li>× PFAS / per- and polyfluorinated compounds</li>\n          <li>× Polycyclic aromatic hydrocarbons (PAH)</li>\n          <li>× Chlorinated benzenes and toluenes</li>\n          <li>× Forbidden flame retardant substances</li>\n          <li>× Solvent residues</li>\n          <li>× Surfactant, wetting agent residues, alkyl phenols</li>\n          <li>× Flame retardants, certain pesticide residues</li>\n          <li>...</li>\n        </ul>\n      </div>\n\n      <div class=\"xo-logo-note xo-logo-note-oeko grid gap-4 items-center\">\n        <div class=\"xo-logo xo-logo-oeko\">\n          <img class=\"h-full w-full object-cover\" src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/testedpage_certified_logo_oekotex_image_202602_v1.png?v=1772004415\" alt=\"BlendTek™ fabric is certified by OEKO-TEX®, a globally recognized textile testing organization, meeting strict safety standards for skin use.\">\n        </div>\n        <p class=\"xo-logo-note-text text-sm leading-tight text-left\">\n          BlendTek™ fabric is certified by OEKO-TEX®, a globally recognized textile testing organization,\n          meeting strict safety standards for skin use.\n        </p>\n      </div>\n    </section>\n  </div>\n</div>\n\n<style>\n  #xoCertCard {\n    margin: 0 auto;\n  }\n\n  .xo-cert-dropdown {\n    position: relative;\n    margin-bottom: 16px;\n  }\n\n  .xo-logo-note-text {\n    font-weight: 300;\n  }\n\n  .xo-cert-dropdown-btn {\n    border: none;\n    padding: 14px 18px;\n    cursor: pointer;\n    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);\n  }\n\n  .xo-cert-dropdown-btn:hover {\n    background: #f6f6f6;\n  }\n\n  .xo-cert-dropdown-btn[aria-expanded=\"true\"] .xo-cert-chevron {\n    transform: rotate(180deg);\n  }\n\n  .xo-cert-dropdown-menu {\n    position: absolute;\n    top: calc(100% + 8px);\n    left: 0;\n    right: 0;\n    background: #f8f8f8;\n    border-radius: 14px;\n    padding: 8px;\n    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);\n    display: none;\n    z-index: 20;\n    border: 1px solid rgba(21, 62, 90, 0.06);\n  }\n\n  .xo-cert-dropdown-menu.is-open {\n    display: block;\n  }\n\n  .xo-cert-option {\n    width: 100%;\n    border: none;\n    background: transparent;\n    color: var(--text);\n    text-align: left;\n    padding: 10px 12px;\n    border-radius: 10px;\n    font-size: 15px;\n    line-height: 1.35;\n    cursor: pointer;\n  }\n\n  .xo-cert-option:hover {\n    background: rgba(89, 197, 216, 0.12);\n  }\n\n  .xo-cert-option.is-active {\n    background: rgba(89, 197, 216, 0.16);\n    font-weight: 600;\n  }\n\n  .xo-cert-panel {\n    display: none;\n    animation: xoFadeIn 0.22s ease;\n  }\n\n  .xo-cert-panel.is-active {\n    display: grid;\n  }\n\n  @keyframes xoFadeIn {\n    from {\n      opacity: 0;\n      transform: translateY(4px);\n    }\n\n    to {\n      opacity: 1;\n      transform: translateY(0);\n    }\n  }\n\n  .xo-pill-card,\n  .xo-info-card,\n  .xo-pill-row {\n    border-radius: var(--rounded-block);\n    padding: 18px 18px;\n    margin-bottom: 14px;\n    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);\n    background-color: rgb(255 255 255 / 80%);\n  }\n\n  .xo-metric-grid {\n    align-items: center;\n    text-align: center;\n  }\n\n  .xo-metric-grid .xo-metric-grid-items {\n    grid-template-columns: 25% 25% 25% 25%;\n  }\n\n  .xo-value-row {\n    grid-column: 1 / -1;\n    display: grid;\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n    border-radius: 999px;\n    overflow: hidden;\n    background: linear-gradient(90deg,\n        #eef4f6 0%,\n        #dbeff4 18%,\n        #c4ebf1 42%,\n        #a7e4ed 68%,\n        #89dbe7 100%);\n    box-shadow:\n      inset 0 1px 0 rgba(255, 255, 255, 0.72),\n      inset 0 -1px 0 rgba(255, 255, 255, 0.36);\n  }\n\n  .xo-value-row .xo-grid-val {\n    background: transparent;\n    padding: 10px 8px;\n    position: relative;\n    z-index: 1;\n  }\n\n  .xo-grid-highlight strong {\n    font-size: 18px;\n    line-height: 1;\n  }\n\n  .xo-grid-highlight span {\n    font-size: 14px;\n    font-weight: 600;\n  }\n\n  .xo-bars {\n    margin-top: 18px;\n    display: grid;\n    gap: 10px;\n  }\n\n  .xo-bar-track-row {\n    display: grid;\n    grid-template-columns: 110px 1fr 56px;\n    align-items: center;\n    gap: 10px;\n  }\n\n  .xo-bar-name {\n    font-size: 12px;\n    color: #7a94a1;\n    text-align: right;\n    white-space: nowrap;\n  }\n\n  .xo-bar-name.is-brand {\n    color: #1ca4b5;\n    font-weight: 600;\n    font-style: italic;\n    font-size: 13px;\n  }\n\n  .xo-bar-track {\n    height: 8px;\n    background: #f0f6f8;\n    border-radius: 100px;\n    overflow: hidden;\n  }\n\n  .xo-bar-fill {\n    height: 100%;\n    border-radius: 100px;\n    background: #c6eef5;\n    transform-origin: left;\n    animation: barGrow 0.6s cubic-bezier(.4, 0, .2, 1) both;\n    display: block!important;\n  }\n\n  .xo-bar-fill.is-brand {\n    background: linear-gradient(90deg, #3bbfce, #1ca4b5);\n    display: block;\n  }\n\n  @keyframes barGrow {\n    from {\n      transform: scaleX(0);\n    }\n\n    to {\n      transform: scaleX(1);\n    }\n  }\n\n  .xo-bar-fill:nth-child(1) {\n    animation-delay: 0.05s;\n  }\n\n  .xo-bar-fill:nth-child(2) {\n    animation-delay: 0.10s;\n  }\n\n  .xo-bar-fill:nth-child(3) {\n    animation-delay: 0.15s;\n  }\n\n  .xo-bar-fill:nth-child(4) {\n    animation-delay: 0.20s;\n  }\n\n  .xo-bar-val {\n    font-size: 12px;\n    color: #475c6b;\n    font-weight: 400;\n  }\n\n  .xo-bar-val.is-brand {\n    color: #1ca4b5;\n    font-weight: 600;\n  }\n\n  .xo-pill-row {\n    display: flex;\n    align-items: center;\n    font-weight: 600;\n    border-radius: 20px;\n  }\n\n  .xo-dot {\n    width: 14px;\n    height: 14px;\n    border-radius: 50%;\n    background: #64cddd;\n    flex: 0 0 auto;\n  }\n\n  .xo-list-card ul {\n    margin: 0;\n    padding-left: 0;\n    list-style: none;\n  }\n\n  .xo-logo-note {\n    margin-top: 8px;\n    grid-template-columns: 120px 1fr;\n  }\n\n  .xo-logo {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    min-height: 54px;\n  }\n\n\n  .xo-logo-note-oeko {\n    align-items: center;\n    grid-template-columns: 100px 1fr;\n    margin-top: 10px;\n  }\n\n  .xo-logo img {\n    margin-block: var(--sp-4);\n  }\n\n  @media (max-width: 767px) {\n    .xo-cert-header h1 {\n      font-size: 20px !important;\n    }\n\n    .xo-cert-header p {\n      font-size: 14px !important;\n    }\n\n\n    .xo-pill-card,\n    .xo-info-card,\n    .xo-pill-row {\n      padding: 24px 16px;\n    }\n\n    .xo-metric-grid .xo-metric-grid-items {\n      grid-template-columns: 15% 30% 20% 35%;\n    }\n\n    .xo-cert-panel[data-panel=\"breathability\"] .xo-metric-grid .xo-metric-grid-items {\n      grid-template-columns: 20% 20% 30% 30%;\n    }\n\n    .xo-value-row .xo-grid-val {\n      padding: 8px 6px;\n    }\n\n    .xo-logo-note {\n      grid-template-columns: 90px 1fr;\n      gap: 10px;\n      align-items: center;\n    }\n\n    .xo-logo-sgs {\n      font-size: 26px;\n      min-height: 34px;\n    }\n\n    .xo-logo-oeko {\n      width: 54px;\n      height: 54px;\n      font-size: 12px;\n    }\n  }\n</style>\n\n<script>\n  (function () {\n    const root = document.getElementById(\"xoCertCard\");\n    if (!root) return;\n\n    const btn = root.querySelector(\"#xoCertDropdownBtn\");\n    const label = root.querySelector(\"#xoCertDropdownLabel\");\n    const menu = root.querySelector(\"#xoCertDropdownMenu\");\n    const options = Array.from(root.querySelectorAll(\".xo-cert-option\"));\n    const panels = Array.from(root.querySelectorAll(\".xo-cert-panel\"));\n\n    function openMenu() {\n      btn.setAttribute(\"aria-expanded\", \"true\");\n      menu.classList.add(\"is-open\");\n      menu.setAttribute(\"aria-hidden\", \"false\");\n    }\n\n    function closeMenu() {\n      btn.setAttribute(\"aria-expanded\", \"false\");\n      menu.classList.remove(\"is-open\");\n      menu.setAttribute(\"aria-hidden\", \"true\");\n    }\n\n    function switchPanel(panelKey, optionText) {\n      panels.forEach((panel) => {\n        panel.classList.toggle(\"is-active\", panel.dataset.panel === panelKey);\n      });\n\n      options.forEach((opt) => {\n        const active = opt.dataset.panel === panelKey;\n        opt.classList.toggle(\"is-active\", active);\n        opt.setAttribute(\"aria-selected\", active ? \"true\" : \"false\");\n      });\n\n      label.textContent = optionText;\n      closeMenu();\n    }\n\n    btn.addEventListener(\"click\", function (e) {\n      e.stopPropagation();\n      const expanded = btn.getAttribute(\"aria-expanded\") === \"true\";\n      if (expanded) closeMenu();\n      else openMenu();\n    });\n\n    options.forEach((opt) => {\n      opt.addEventListener(\"click\", function () {\n        switchPanel(opt.dataset.panel, opt.textContent.trim());\n      });\n    });\n\n    document.addEventListener(\"click\", function (e) {\n      if (!root.contains(e.target)) closeMenu();\n    });\n\n    document.addEventListener(\"keydown\", function (e) {\n      if (e.key === \"Escape\") closeMenu();\n    });\n  })();\n</script>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_fwAEwj",
+        "text_xAjtp8",
+        "liquid_jei4J6"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 100,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_ETxpjt": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_x3t6rY": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tested on 1,000+ hot sleepers",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "heading_WWwpAY": {
+          "type": "heading",
+          "settings": {
+            "heading": "over 4 weeks before launch",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "spacing_AC87Yh": {
+          "type": "spacing",
+          "settings": {
+            "height": 40,
+            "height_mobile": 28
+          }
+        },
+        "liquid_BXdXeQ": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<style>\n    .percentage {\n        font-size: 28px;\n        font-weight: 600;\n        padding: 10px 20px;\n        display: inline-block;\n    }\n\n    @media screen and (max-width: 767px) {\n        .percentage {\n            font-size: 24px;\n            background-color: transparent;\n            color: rgb(var(--color-foreground));\n        }\n\n\n    }\n\n    .mt-1 {\n        margin-top: 0.25rem;\n    }\n\n    .mt-2 {\n        margin-top: 0.5rem;\n    }\n</style>\n\n\n<div class=\"xo__verdict__stars flex items-start justify-between\">\n    <div class=\"text-center text-md\">\n        <div class=\"percentage title-md font-bold leading-none\">91%</div>\n        <div class=\"md:text-base text-xs\">Felt Noticeably <br>Cooler</div>\n    </div>\n\n    <div class=\"text-center text-md\">\n        <div class=\"percentage title-md font-bold leading-none\">89%</div>\n        <div class=\"md:text-base text-xs\">Stayed Dry & <br>Fresh</div>\n    </div>\n\n    <div class=\"text-center text-md\">\n        <div class=\"percentage title-md font-bold leading-none\">93%</div>\n        <div class=\"md:text-base text-xs \">Enjoyed All-Night <br>Breathability</div>\n    </div>\n</div>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_x3t6rY",
+        "heading_WWwpAY",
+        "spacing_AC87Yh",
+        "liquid_BXdXeQ"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 767px) {h2 {font-size: 24px !important; }}"
+      ],
+      "name": "t:sections.image-with-text-overlay.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/blendtekpage_tested_banner_image_lg_202603_v1.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_mobile": "shopify://shop_images/blendtekpage_tested_banner_image_md_202603_v1.webp",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#0f374b",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": true,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "featured_collection_tcLAwj": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "",
+        "products": [
+          "cooling-sheet-set",
+          "cooling-comforter",
+          "cooling-pillow",
+          "cooling-pillowcases",
+          "cooling-comforter-set",
+          "cooling-eye-mask"
+        ],
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Experience the BlendTek™ Difference Tonight!",
+        "heading_size": "title-sm",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "video_with_text_overlay_YmCpBP",
+    "rich_text_ndyNd4",
+    "video_with_text_LLXmYL",
+    "image_with_text_overlay_PHffVB",
+    "video_with_text_wfmF6V",
+    "video_with_text_GpkCnr",
+    "video_with_text_Va3QFr",
+    "video_with_text_kxzDVc",
+    "video_with_text_4HztJt",
+    "rich_text_KLB86w",
+    "image_with_text_overlay_ETxpjt",
+    "featured_collection_tcLAwj"
+  ]
+}

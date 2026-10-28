@@ -1,0 +1,46 @@
+{% render 'xo-style', position: 'primary-button' %}
+
+{% if request.page_type != 'policy' and request.page_type != 'article' and request.page_type != 'account' %}
+  <style>
+    h2 {
+      font-family: 'GillSans' !important;
+      letter-spacing: -1px !important;
+      font-size: 44px !important;
+    }
+
+    @media screen and (max-width: 767px) {
+      h2 {
+        font-size: 30px !important;
+      }
+    }
+  </style>
+{% endif %}
+
+<style>
+    :root {
+      --topbar-height: var(--sp-9);
+    }
+
+    b, strong {
+      font-weight: 600!important;
+    }
+</style>
+
+{% if template contains 'product' %}
+  <style>
+    h1 {
+      letter-spacing: -.2px !important;
+      font-weight: 400 !important;
+      font-size: 24px !important;
+    }
+
+    .product__accordion {
+      padding-inline: 0;
+    }
+
+    .product__title .heading {
+      font-weight:500;
+    }
+  </style>
+{% endif %}
+

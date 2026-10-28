@@ -1,0 +1,803 @@
+{% doc %}
+  @prompt
+    Create a new Shopify section called "Blog Category Hero".
+    
+    Layout:
+    - Full-width section with a maximum content width of 1400px.
+    - Light gray background (#F7F7F7).
+    - Large rounded container with generous padding (40px top/bottom, 32px left/right).
+    
+    Top Row:
+    - Left side:
+      - Heading (H2): "Your Guide to Sleeping Through the Night"
+      - Font size: 48px desktop, 30px mobile.
+      - Font weight: 600.
+      - Dark navy text (#233B5D).
+    
+    - Under the heading:
+      - A short description.
+      - Font size: 16px.
+      - Weight: 400.
+      - Color: #5F6C7B.
+    
+    - Right side:
+      - A rounded outline button.
+      - Text: "Explore Our Blog"
+      - Arrow icon on the right.
+      - Border color #233B5D.
+      - Transparent background.
+      - Height about 52px.
+      - Border radius: 999px.
+      - On mobile, place the button below the text.
+    
+    Bottom Row:
+    Display blog categories as pill buttons.
+    
+    Categories:
+    - Night Sweats
+    - Menopause
+    - Sensitive Skin
+    - Shared Sleep
+    - Stress & Anxiety
+    - Inside Breescape®
+    - Newsroom
+    
+    Each category should:
+    - Be a rounded pill.
+    - Light gray background (#ECEFF3).
+    - Dark navy text.
+    - Horizontal padding 24px.
+    - Height about 42px.
+    - Border radius: 999px.
+    - Wrap to multiple lines on smaller screens.
+    - Change to dark navy background with white text on hover.
+    
+    Theme Settings:
+    - Editable heading.
+    - Editable description.
+    - Editable button text.
+    - Editable button link.
+    - Category blocks that can be added, removed and reordered.
+    - Each category should have its own text and link.
+    
+    Responsive:
+    - Desktop: heading and button aligned horizontally.
+    - Mobile: stacked layout with full-width button.
+    - Category pills wrap naturally.
+    
+    Use Shopify OS 2.0 schema and blocks so all content is editable from the Theme Editor.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-blog-hero-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+  }
+
+  .ai-blog-hero-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    background-color: {{ block.settings.container_background }};
+    border-radius: {{ block.settings.container_border_radius }}px;
+    padding: {{ block.settings.container_padding_vertical }}px {{ block.settings.container_padding_horizontal }}px;
+  }
+
+  .ai-blog-hero-top-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: {{ block.settings.spacing_between_rows }}px;
+  }
+
+  .ai-blog-hero-content-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .ai-blog-hero-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size_desktop }}px;
+    font-weight: {{ block.settings.heading_weight }};
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 {{ block.settings.spacing_heading_description }}px 0;
+    line-height: 1.2;
+  }
+
+  .ai-blog-hero-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    font-weight: {{ block.settings.description_weight }};
+    color: {{ block.settings.description_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .ai-blog-hero-button-wrapper-{{ ai_gen_id }} {
+    flex-shrink: 0;
+  }
+
+  .ai-blog-hero-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 {{ block.settings.button_padding_horizontal }}px;
+    height: {{ block.settings.button_height }}px;
+    background-color: {{ block.settings.button_background }};
+    border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    color: {{ block.settings.button_text_color }};
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: {{ block.settings.button_font_weight }};
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-blog-hero-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  .ai-blog-hero-button-icon-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-blog-hero-categories-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: {{ block.settings.category_gap }}px;
+  }
+
+  .ai-blog-hero-category-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 {{ block.settings.category_padding_horizontal }}px;
+    height: {{ block.settings.category_height }}px;
+    background-color: {{ block.settings.category_background }};
+    color: {{ block.settings.category_text_color }};
+    border-radius: {{ block.settings.category_border_radius }}px;
+    font-size: {{ block.settings.category_font_size }}px;
+    font-weight: {{ block.settings.category_font_weight }};
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .ai-blog-hero-category-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.category_hover_background }};
+    color: {{ block.settings.category_hover_text_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-blog-hero-top-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .ai-blog-hero-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_mobile }}px;
+    }
+
+    .ai-blog-hero-button-wrapper-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-blog-hero-button-{{ ai_gen_id }} {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+{% endstyle %}
+
+<blog-category-hero-{{ ai_gen_id }} class="ai-blog-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-blog-hero-container-{{ ai_gen_id }}">
+    <div class="ai-blog-hero-top-{{ ai_gen_id }}">
+      <div class="ai-blog-hero-content-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-blog-hero-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.description != blank %}
+          <p class="ai-blog-hero-description-{{ ai_gen_id }}">{{ block.settings.description }}</p>
+        {% endif %}
+      </div>
+      {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+        <div class="ai-blog-hero-button-wrapper-{{ ai_gen_id }}">
+          <a href="{{ block.settings.button_link }}" class="ai-blog-hero-button-{{ ai_gen_id }}">
+            {{ block.settings.button_text }}
+            <span class="ai-blog-hero-button-icon-{{ ai_gen_id }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </span>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-blog-hero-categories-{{ ai_gen_id }}">
+      {% for i in (1..10) %}
+        {% liquid
+          assign category_text_key = 'category_' | append: i | append: '_text'
+          assign category_link_key = 'category_' | append: i | append: '_link'
+          assign category_text = block.settings[category_text_key]
+          assign category_link = block.settings[category_link_key]
+        %}
+        {% if category_text != blank and category_link != blank %}
+          <a href="{{ category_link }}" class="ai-blog-hero-category-{{ ai_gen_id }}">
+            {{ category_text }}
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</blog-category-hero-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BlogCategoryHero{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('blog-category-hero-{{ ai_gen_id }}', BlogCategoryHero{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Blog category hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F7F7F7"
+    },
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1400
+    },
+    {
+      "type": "color",
+      "id": "container_background",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "container_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "container_padding_vertical",
+      "label": "Vertical padding",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "container_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "spacing_between_rows",
+      "label": "Spacing between rows",
+      "min": 20,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Guide to Sleeping Through the Night"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Desktop font size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Mobile font size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color",
+      "default": "#233B5D"
+    },
+    {
+      "type": "range",
+      "id": "spacing_heading_description",
+      "label": "Spacing to description",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Explore expert tips and insights to help you achieve better sleep and wake up refreshed."
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "description_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Color",
+      "default": "#5F6C7B"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Explore Our Blog"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_height",
+      "label": "Height",
+      "min": 40,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Border width",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background color",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#233B5D"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border color",
+      "default": "#233B5D"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background color",
+      "default": "#233B5D"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border color",
+      "default": "#233B5D"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Category style"
+    },
+    {
+      "type": "range",
+      "id": "category_height",
+      "label": "Height",
+      "min": 32,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "category_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "category_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "category_gap",
+      "label": "Gap between pills",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "category_background",
+      "label": "Background color",
+      "default": "#ECEFF3"
+    },
+    {
+      "type": "color",
+      "id": "category_text_color",
+      "label": "Text color",
+      "default": "#233B5D"
+    },
+    {
+      "type": "color",
+      "id": "category_hover_background",
+      "label": "Hover background color",
+      "default": "#233B5D"
+    },
+    {
+      "type": "color",
+      "id": "category_hover_text_color",
+      "label": "Hover text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "category_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "category_font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Category 1"
+    },
+    {
+      "type": "text",
+      "id": "category_1_text",
+      "label": "Text",
+      "default": "Night Sweats"
+    },
+    {
+      "type": "url",
+      "id": "category_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 2"
+    },
+    {
+      "type": "text",
+      "id": "category_2_text",
+      "label": "Text",
+      "default": "Menopause"
+    },
+    {
+      "type": "url",
+      "id": "category_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 3"
+    },
+    {
+      "type": "text",
+      "id": "category_3_text",
+      "label": "Text",
+      "default": "Sensitive Skin"
+    },
+    {
+      "type": "url",
+      "id": "category_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 4"
+    },
+    {
+      "type": "text",
+      "id": "category_4_text",
+      "label": "Text",
+      "default": "Shared Sleep"
+    },
+    {
+      "type": "url",
+      "id": "category_4_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 5"
+    },
+    {
+      "type": "text",
+      "id": "category_5_text",
+      "label": "Text",
+      "default": "Stress & Anxiety"
+    },
+    {
+      "type": "url",
+      "id": "category_5_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 6"
+    },
+    {
+      "type": "text",
+      "id": "category_6_text",
+      "label": "Text",
+      "default": "Inside Breescape®"
+    },
+    {
+      "type": "url",
+      "id": "category_6_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 7"
+    },
+    {
+      "type": "text",
+      "id": "category_7_text",
+      "label": "Text",
+      "default": "Newsroom"
+    },
+    {
+      "type": "url",
+      "id": "category_7_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 8"
+    },
+    {
+      "type": "text",
+      "id": "category_8_text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "category_8_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 9"
+    },
+    {
+      "type": "text",
+      "id": "category_9_text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "category_9_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 10"
+    },
+    {
+      "type": "text",
+      "id": "category_10_text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "category_10_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog category hero"
+    }
+  ]
+}
+{% endschema %}

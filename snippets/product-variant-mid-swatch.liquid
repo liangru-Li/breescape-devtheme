@@ -1,0 +1,92 @@
+{%- doc -%}
+  Decorative collection swatch shown between Color and Size in the variant picker.
+  Not a real product option — display only.
+
+  @param {object} block - Variant picker block with mid-swatch settings
+{%- enddoc -%}
+
+{%- if block != blank and block.settings.show_mid_swatch -%}
+  {%- liquid
+    assign mid_text = block.settings.mid_swatch_text | strip
+    if mid_text == blank
+      assign mid_text = "Ashley's Collection: Ashley Stripe"
+    endif
+
+    assign mid_label = mid_text
+    assign mid_value = ''
+    if mid_text contains ':'
+      assign mid_parts = mid_text | split: ':'
+      assign mid_label = mid_parts.first | strip | append: ':'
+      assign mid_value = mid_text | remove_first: mid_parts.first | remove_first: ':' | strip
+    endif
+
+    assign mid_color = block.settings.mid_swatch_color | default: '#D6C4A8'
+    assign mid_image = block.settings.mid_swatch_image
+    assign mid_link = block.settings.mid_swatch_link
+    assign mid_space_top = block.settings.mid_swatch_space_top | default: 0
+    assign mid_space_bottom = block.settings.mid_swatch_space_bottom | default: 0
+    assign mid_label_weight = block.settings.label_weight
+    assign mid_value_weight = block.settings.value_weight
+    assign mid_link_path = mid_link | split: '?' | first | remove: shop.url
+    assign mid_is_current = false
+    if mid_link_path != blank and mid_link_path != '/' and mid_link_path == request.path
+      assign mid_is_current = true
+    endif
+  -%}
+
+  <div
+    class="variant-picker__mid-swatch-module"
+    style="margin-top: {{ mid_space_top }}px; margin-bottom: {{ mid_space_bottom }}px;"
+    aria-hidden="false"
+  >
+    <div class="form__label flex items-center gap-2 w-full">
+      <span
+        class="variant-picker__mid-swatch-label"
+        style="{% if mid_label_weight and mid_label_weight != 'default' %}font-weight: {{ mid_label_weight }} !important;{% endif %}"
+      >{{- mid_label -}}</span>
+      {%- if mid_value != blank -%}
+        <span
+          class="variant-picker__mid-swatch-value font-medium"
+          style="{% if mid_value_weight and mid_value_weight != 'default' %}font-weight: {{ mid_value_weight }} !important;{% endif %}"
+        >{{- mid_value -}}</span>
+      {%- endif -%}
+    </div>
+    <ul class="swatches swatches--{{ settings.rounded_swatch }} flex items-start flex-wrap gap-4">
+      <li>
+        {%- if mid_link != blank -%}
+          <a
+            href="{{ mid_link }}"
+            class="color-swatch variant-picker__mid-swatch variant-picker__mid-swatch--link block relative{% if mid_image != blank %} with-image{% endif %}{% if mid_is_current %} is-selected{% endif %}"
+            title="{{ mid_value | default: mid_label | escape }}"
+            style="--swatch-background: {{ mid_color }};{% if mid_image != blank %}--swatch-background-image: url({{ mid_image | image_url: width: 128 }});{% endif %}"
+          >
+            <span class="sr-only">{{ mid_text | escape }}</span>
+          </a>
+        {%- else -%}
+          <button
+            type="button"
+            class="color-swatch variant-picker__mid-swatch block relative{% if mid_image != blank %} with-image{% endif %}"
+            title="{{ mid_value | default: mid_label | escape }}"
+            style="--swatch-background: {{ mid_color }};{% if mid_image != blank %}--swatch-background-image: url({{ mid_image | image_url: width: 128 }});{% endif %}"
+          >
+            <span class="sr-only">{{ mid_text | escape }}</span>
+          </button>
+        {%- endif -%}
+      </li>
+    </ul>
+  </div>
+  <script>
+    (function () {
+      if (window.__midSwatchSelectBound) return;
+      window.__midSwatchSelectBound = true;
+      document.addEventListener('click', function (event) {
+        var swatch = event.target.closest && event.target.closest('.variant-picker__mid-swatch');
+        if (!swatch) return;
+        document.querySelectorAll('.variant-picker__mid-swatch.is-selected').forEach(function (el) {
+          el.classList.remove('is-selected');
+        });
+        swatch.classList.add('is-selected');
+      });
+    })();
+  </script>
+{%- endif -%}

@@ -1,0 +1,292 @@
+{{ 'breescape-bodypillow.css' | asset_url | stylesheet_tag }}
+<div id="bodypillow-{{ section.id }}" class="breescape-bp{% unless section.settings.show_divider %} bp-no-divider{% endunless %}" style="--bp-bg: {{ section.settings.background }};--bp-text: {{ section.settings.text_color }};--bp-width: {{ section.settings.content_width }}px;--bp-top: {{ section.settings.padding_top }};--bp-bottom: {{ section.settings.padding_bottom }};--bp-side: {{ section.settings.padding_horizontal }};--bp-mobile-top: {{ section.settings.mobile_padding_top }};--bp-mobile-bottom: {{ section.settings.mobile_padding_bottom }};--bp-mobile-side: {{ section.settings.mobile_padding_horizontal }};--bp-heading-size: {{ section.settings.heading_size }};--bp-mobile-heading-size: {{ section.settings.mobile_heading_size }};--bp-heading-align: {{ section.settings.heading_alignment }};--bp-mobile-heading-align: {{ section.settings.mobile_heading_alignment }};--bp-heading-gap: {{ section.settings.heading_gap }};--bp-mobile-heading-gap: {{ section.settings.mobile_heading_gap }};--bp-cover-size: {{ section.settings.cover_title_size }};--bp-mobile-cover-size: {{ section.settings.mobile_cover_title_size }};--bp-note-size: {{ section.settings.note_size }};--bp-radius: {{ section.settings.image_radius }}"><div class="bp-shell">
+<section class="bp-section bp-seasons" aria-labelledby="bp-heading-{{ section.id }}"><h2 id="bp-heading-{{ section.id }}" class="bp-heading">{{ section.settings.heading | escape }}</h2><div class="bp-season-tile"><div class="bp-season-canvas">
+{% if section.settings.image_desktop != blank %}{{ section.settings.image_desktop | image_url: width: 2400 | image_tag: widths: '600, 1200, 1800, 2400', sizes: '(min-width: 1536px) 1280px, calc(100vw - 40px)', class: 'bp-season-desktop', alt: section.settings.heading, loading: 'lazy', decoding: 'async' }}{% endif %}
+<div class="bp-season-mobile">{% if section.settings.mobile_background != blank %}{% assign background_source = section.settings.mobile_background | image_url: width: 900 %}
+{% if background_source contains 'body-pillow-a1963' %}<div class="bp-mobile-bg-left">{{ section.settings.mobile_background | image_url: width: 1200 | image_tag: class: 'bp-season-mobile-bg', alt: '', loading: 'lazy', decoding: 'async' }}</div><div class="bp-mobile-bg-right">{{ section.settings.mobile_background | image_url: width: 1200 | image_tag: class: 'bp-season-mobile-bg', alt: '', loading: 'lazy', decoding: 'async' }}</div>{% else %}{{ section.settings.mobile_background | image_url: width: 1200 | image_tag: class: 'bp-season-mobile-bg bp-season-mobile-bg-generic', alt: '', loading: 'lazy', decoding: 'async' }}{% endif %}{% endif %}
+{% if section.settings.soft_image_mobile != blank %}{% assign soft_source = section.settings.soft_image_mobile | image_url: width: 600 %}{% if soft_source contains 'body-pillow-92e13' %}{{ section.settings.soft_image_mobile | image_url: width: 600 | image_tag: class: 'bp-mobile-soft', alt: section.settings.soft_label, loading: 'lazy', decoding: 'async' }}{% else %}{{ section.settings.soft_image_mobile | image_url: width: 600 | image_tag: class: 'bp-mobile-soft bp-mobile-cutout-generic', alt: section.settings.soft_label, loading: 'lazy', decoding: 'async' }}{% endif %}{% endif %}
+{% if section.settings.cooling_image_mobile != blank %}{% assign cooling_source = section.settings.cooling_image_mobile | image_url: width: 600 %}{% if cooling_source contains 'body-pillow-01183' %}{{ section.settings.cooling_image_mobile | image_url: width: 600 | image_tag: class: 'bp-mobile-cool', alt: section.settings.cooling_label, loading: 'lazy', decoding: 'async' }}{% else %}{{ section.settings.cooling_image_mobile | image_url: width: 600 | image_tag: class: 'bp-mobile-cool bp-mobile-cutout-generic', alt: section.settings.cooling_label, loading: 'lazy', decoding: 'async' }}{% endif %}{% endif %}
+{% if section.settings.show_bonus %}<img src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/body-pillow-d3f1e.svg?v=1791869051" class="bp-mobile-bonus" width="38.8361" height="38.8361" alt="" loading="lazy" decoding="async">{% endif %}</div>
+<h3 class="bp-cover-label bp-cover-label--cool">{{ section.settings.cooling_label | escape }}</h3><p class="bp-cover-note bp-cover-note--cool">{{ section.settings.cooling_note | escape }}</p><h3 class="bp-cover-label bp-cover-label--soft">{{ section.settings.soft_label | escape }}</h3><p class="bp-cover-note bp-cover-note--soft">{{ section.settings.soft_note | escape }}</p><h3 class="bp-insert-label">{{ section.settings.insert_label | escape }}</h3>
+{% if section.settings.show_bonus %}<img src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/body-pillow-aca07.svg?v=1791869005" class="bp-bonus-circle" width="70.9811" height="70.9811" alt="" loading="lazy" decoding="async"><span class="bp-bonus-label">{{ section.settings.bonus_label | escape }}</span>{% endif %}</div></div></section>
+</div></div>
+
+{% schema %}
+{
+  "name": "Body Pillow 四季枕套",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Sleep Through Every Season"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "标题字号（电脑）",
+      "min": 18,
+      "max": 64,
+      "step": 1,
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "标题字号（手机）",
+      "min": 18,
+      "max": 44,
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "标题对齐（电脑）",
+      "options": [
+        {
+          "value": "left",
+          "label": "左对齐"
+        },
+        {
+          "value": "center",
+          "label": "居中"
+        },
+        {
+          "value": "right",
+          "label": "右对齐"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_heading_alignment",
+      "label": "标题对齐（手机）",
+      "options": [
+        {
+          "value": "left",
+          "label": "左对齐"
+        },
+        {
+          "value": "center",
+          "label": "居中"
+        },
+        {
+          "value": "right",
+          "label": "右对齐"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "板块背景色",
+      "default": "#ededed"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "文字颜色",
+      "default": "#0f374b"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "内容最大宽度",
+      "min": 960,
+      "max": 1600,
+      "step": 20,
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "顶部间距（电脑）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "底部间距（电脑）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "左右间距（电脑）",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "顶部间距（手机）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "底部间距（手机）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_horizontal",
+      "label": "左右间距（手机）",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "heading_gap",
+      "label": "标题下方间距（电脑）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_gap",
+      "label": "标题下方间距（手机）",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 21
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "显示顶部细线",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "电脑端整体展示图"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background",
+      "label": "手机端背景图"
+    },
+    {
+      "type": "image_picker",
+      "id": "cooling_image_mobile",
+      "label": "手机端凉感枕套图片"
+    },
+    {
+      "type": "image_picker",
+      "id": "soft_image_mobile",
+      "label": "手机端柔软枕套图片"
+    },
+    {
+      "type": "text",
+      "id": "cooling_label",
+      "label": "凉感枕套标题",
+      "default": "Cooling Cover"
+    },
+    {
+      "type": "text",
+      "id": "cooling_note",
+      "label": "凉感枕套说明",
+      "default": "For warmer seasons"
+    },
+    {
+      "type": "text",
+      "id": "soft_label",
+      "label": "柔软枕套标题",
+      "default": "Ultra Soft Cover"
+    },
+    {
+      "type": "text",
+      "id": "soft_note",
+      "label": "柔软枕套说明",
+      "default": "For colder seasons"
+    },
+    {
+      "type": "text",
+      "id": "insert_label",
+      "label": "枕芯标题",
+      "default": "Pillow Insert"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bonus",
+      "label": "显示赠品标记",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "bonus_label",
+      "label": "赠品标记文案",
+      "default": "BONUS"
+    },
+    {
+      "type": "range",
+      "id": "cover_title_size",
+      "label": "枕套标题字号（电脑）",
+      "min": 18,
+      "max": 44,
+      "step": 1,
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "mobile_cover_title_size",
+      "label": "枕套标题字号（手机）",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "note_size",
+      "label": "枕套说明字号",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "图片圆角",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "default": 28
+    }
+  ],
+  "presets": [
+    {
+      "name": "Body Pillow 四季枕套"
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  }
+}
+{% endschema %}
+

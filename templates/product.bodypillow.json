@@ -1,0 +1,1181 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "product_sticky_nav": {
+      "type": "product-sticky-nav",
+      "settings": {
+        "label_atc": "Details",
+        "label_overview": "Overview",
+        "label_reviews": "Reviews",
+        "label_faq": "FAQ",
+        "nav_bg": "#ffffff",
+        "nav_text_color": "#10374b",
+        "nav_active": "#0f374b",
+        "nav_height": 60,
+        "nav_font_size": 15,
+        "nav_tab_gap": 40,
+        "show_threshold": 400,
+        "hide_sticky_atc": false
+      }
+    },
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "yotpo_rating_promo_DQTXgy": {
+          "type": "yotpo_rating_promo",
+          "settings": {
+            "visibility": "all",
+            "instance_id": "989160",
+            "margin_bottom": 8,
+            "show_left_badge": true,
+            "left_text": "Halloween Sale",
+            "separator_text": "I",
+            "separator_weight": "400",
+            "badge_bg": "#b3e9ef",
+            "badge_text_color": "#10374b",
+            "badge_font_size": 14,
+            "badge_font_size_mobile": 12,
+            "badge_weight": "700",
+            "badge_letter_spacing": 0,
+            "badge_padding_x": 10,
+            "badge_padding_x_mobile": 6,
+            "badge_padding_y": 6,
+            "badge_padding_y_mobile": 6,
+            "badge_radius": 8,
+            "star_color": "#67d2e0",
+            "rating_text_color": "#10374b",
+            "rating_font_size": 14,
+            "rating_font_size_mobile": 12
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "product-title-sm",
+            "title_size_mobile": "product-title-md",
+            "title_tag": "h1",
+            "title_weight": "600",
+            "show_price": false,
+            "show_rating": false
+          }
+        },
+        "product_intro_features_BkHJ9C": {
+          "type": "product_intro_features",
+          "settings": {
+            "visibility": "pc",
+            "show_intro": true,
+            "intro_color": "#10374b",
+            "intro_size": 14,
+            "intro_line_height": 1.2,
+            "intro_weight": "400",
+            "show_tooltip": false,
+            "tooltip_text": "If any product that bears our limited warranty Seal proves to be deffective within two years from the date it was first sold to a consumer by an authorized retailer, we, Good Houseekeeping, will refund the purchase price or $2,000, whichever is less or, at Good Housekeeping's sole discretion, repair or replace the product.",
+            "tooltip_color": "#10374b",
+            "tooltip_bg": "#ffffff",
+            "tooltip_radius": 12,
+            "tooltip_max_width": 360,
+            "tooltip_text_size": 13,
+            "tooltip_icon_size": 16,
+            "show_features": true,
+            "features_margin_top": 7,
+            "feature_gap": 8,
+            "feature_bg": "#ffffff",
+            "feature_text_color": "#10374b",
+            "feature_radius": 4,
+            "feature_padding_x": 0,
+            "feature_padding_y": 0,
+            "feature_inner_gap": 4,
+            "feature_icon_size": 16,
+            "feature_text_size": 13,
+            "show_divider": true,
+            "divider_color": "#ffffff",
+            "divider_width": 1,
+            "divider_margin_top": 13,
+            "divider_margin_bottom": 0
+          }
+        },
+        "price_4UmVjm": {
+          "type": "price",
+          "settings": {
+            "use_custom_layout": true,
+            "price_gap": 6,
+            "regular_price_use_color": false,
+            "regular_price_color": "#9ca3af",
+            "regular_price_size": 18,
+            "regular_price_weight": "400",
+            "sale_price_color": "#10374b",
+            "sale_price_size": 26,
+            "sale_price_weight": "700",
+            "save_format": "percent",
+            "save_bg": "#b3e9ef",
+            "save_text_color": "#10374b",
+            "save_font_size": 14,
+            "save_font_size_mobile": 12,
+            "save_weight": "700",
+            "save_letter_spacing": 1.3,
+            "save_padding_x": 10,
+            "save_padding_y": 6,
+            "save_radius": 8,
+            "show_discount_tip": false,
+            "discount_tip_color": "#71717a",
+            "show_info_bar": true,
+            "info_bar_icon_size": 20,
+            "info_bar_text": "Earn {points} points on this purchase.",
+            "info_bar_text_color": "#10374b",
+            "info_bar_font_size": 13,
+            "info_bar_font_weight": "300",
+            "info_bar_bg": "#ededed",
+            "info_bar_border": "rgba(0,0,0,0)",
+            "info_bar_border_width": 1,
+            "info_bar_radius": 18,
+            "info_bar_padding_x": 12,
+            "info_bar_padding_y": 2,
+            "info_bar_gap": 8,
+            "info_bar_margin_top": 0,
+            "show_taxes_notice": false
+          }
+        },
+        "liquid_DwgLEz": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<hr style=\"border-bottom: 1px solid #f0eeea;margin:30px 0\">"
+          }
+        },
+        "product_variations_DkXkdV": {
+          "type": "product_variations",
+          "disabled": true,
+          "settings": {
+            "option_name": "Choose Your Comfort",
+            "option_value_metafield": "custom.version_sibling",
+            "products": [
+              "cooling-comforter",
+              "blendtek-cooling-comforter",
+              "ashley-graham-x-breescape-cooling-comforter-blanket"
+            ],
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "size_chart": "",
+            "label_weight": "700",
+            "value_weight": "400",
+            "swatch_radius": 41,
+            "swatch_min_width": 128,
+            "swatch_padding_y": 0,
+            "swatch_text_align": "center",
+            "size_guide_font_size": 14
+          }
+        },
+        "liquid_pHPrEz": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<hr style=\"border: 0;margin:11px 0\">"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "enable_dynamic_variants": true,
+            "show_variant_labels": true,
+            "picker_type": "button",
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "show_mid_swatch": false,
+            "mid_swatch_text": "Ashley's Collection: Ashley Stripe",
+            "mid_swatch_color": "#d6c4a8",
+            "mid_swatch_link": "",
+            "mid_swatch_space_top": 0,
+            "mid_swatch_space_bottom": 0,
+            "size_chart": "",
+            "size_liquid": "{{product.metafields.custom.size_guide}}",
+            "label_weight": "700",
+            "value_weight": "400",
+            "swatch_radius": 60,
+            "size_guide_font_size": 14
+          }
+        },
+        "addon_ddA39e": {
+          "type": "addon",
+          "settings": {
+            "heading": "Select Add-ons:",
+            "heading_color": "#10374b",
+            "heading_size": 16,
+            "heading_weight": "700",
+            "product": "cooling-sheet-set",
+            "product_title_override": "",
+            "default_checked": false,
+            "default_variant_id": "",
+            "show_color": true,
+            "color_option_name": "",
+            "color_label": "Color",
+            "color_options": "",
+            "show_size": true,
+            "size_option_name": "",
+            "size_label": "Size",
+            "size_options": "",
+            "compare_color": "#10374b",
+            "compare_size": 12,
+            "sale_color": "#10374b",
+            "sale_size": 12,
+            "sale_weight": "700",
+            "price_offset_x": -10,
+            "card_bg": "#ffffff",
+            "card_border_color": "#d1d5db",
+            "active_color": "#10374b",
+            "checked_shadow": "0 6px 18px rgba(16, 55, 75, 0.14)",
+            "card_radius": 29,
+            "card_padding_x": 24,
+            "card_padding_y": 25,
+            "card_gap": 14,
+            "card_margin_y": 12,
+            "check_size": 20,
+            "check_gap": 14,
+            "check_bg": "#10374b",
+            "check_color": "#ffffff",
+            "image_size": 64,
+            "image_radius": 8,
+            "title_color": "#10374b",
+            "title_size": 12,
+            "title_weight": "700",
+            "picker_font_size": 14,
+            "arrow_color": "#10374b",
+            "arrow_size": 24,
+            "arrow_offset": 0,
+            "arrow_top": 13,
+            "arrow_stroke": 2.5
+          }
+        },
+        "addon_iUDUhz": {
+          "type": "addon",
+          "settings": {
+            "heading": "Select Add-ons:",
+            "heading_color": "#10374b",
+            "heading_size": 16,
+            "heading_weight": "700",
+            "product": "cooling-pillowcases",
+            "product_title_override": "",
+            "default_checked": false,
+            "default_variant_id": "",
+            "show_color": true,
+            "color_option_name": "",
+            "color_label": "Color",
+            "color_options": "",
+            "show_size": true,
+            "size_option_name": "",
+            "size_label": "Size",
+            "size_options": "",
+            "compare_color": "#10374b",
+            "compare_size": 12,
+            "sale_color": "#10374b",
+            "sale_size": 13,
+            "sale_weight": "700",
+            "price_offset_x": -8,
+            "card_bg": "#ffffff",
+            "card_border_color": "#d1d5db",
+            "active_color": "#10374b",
+            "checked_shadow": "0 6px 18px rgba(16, 55, 75, 0.14)",
+            "card_radius": 29,
+            "card_padding_x": 24,
+            "card_padding_y": 25,
+            "card_gap": 14,
+            "card_margin_y": 12,
+            "check_size": 20,
+            "check_gap": 14,
+            "check_bg": "#10374b",
+            "check_color": "#ffffff",
+            "image_size": 64,
+            "image_radius": 8,
+            "title_color": "#10374b",
+            "title_size": 12,
+            "title_weight": "700",
+            "picker_font_size": 14,
+            "arrow_color": "#10374b",
+            "arrow_size": 24,
+            "arrow_offset": 8,
+            "arrow_top": 0,
+            "arrow_stroke": 2.5
+          }
+        },
+        "addon_tmnHNd": {
+          "type": "addon",
+          "settings": {
+            "heading": "Select Add-ons:",
+            "heading_color": "#10374b",
+            "heading_size": 16,
+            "heading_weight": "700",
+            "product": "cooling-fitted-sheet",
+            "product_title_override": "",
+            "default_checked": false,
+            "default_variant_id": "",
+            "show_color": true,
+            "color_option_name": "",
+            "color_label": "Color",
+            "color_options": "",
+            "show_size": true,
+            "size_option_name": "",
+            "size_label": "Size",
+            "size_options": "",
+            "compare_color": "#10374b",
+            "compare_size": 12,
+            "sale_color": "#10374b",
+            "sale_size": 12,
+            "sale_weight": "700",
+            "price_offset_x": -10,
+            "card_bg": "#ffffff",
+            "card_border_color": "#d1d5db",
+            "active_color": "#10374b",
+            "checked_shadow": "0 6px 18px rgba(16, 55, 75, 0.14)",
+            "card_radius": 29,
+            "card_padding_x": 24,
+            "card_padding_y": 25,
+            "card_gap": 14,
+            "card_margin_y": 12,
+            "check_size": 20,
+            "check_gap": 14,
+            "check_bg": "#10374b",
+            "check_color": "#ffffff",
+            "image_size": 64,
+            "image_radius": 8,
+            "title_color": "#10374b",
+            "title_size": 12,
+            "title_weight": "700",
+            "picker_font_size": 14,
+            "arrow_color": "#10374b",
+            "arrow_size": 24,
+            "arrow_offset": 0,
+            "arrow_top": 13,
+            "arrow_stroke": 2.5
+          }
+        },
+        "marquee_rV8gWU": {
+          "type": "marquee",
+          "settings": {
+            "text": "FAST & FREE US SHIPPING · SECURE CHECKOUT · FAST & FREE US SHIPPING",
+            "direction": "rtl",
+            "duration": 25,
+            "repeat": 4,
+            "gap": 32,
+            "text_color": "#10374b",
+            "use_bg_color": false,
+            "bg_color": "#f4f4f5",
+            "font_size": 14,
+            "font_weight": "500",
+            "letter_spacing": 0,
+            "padding_top": 4,
+            "padding_bottom": 0
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_price": true,
+            "buy_button_sale_price_size": 18,
+            "buy_button_sale_price_size_mobile": 17,
+            "buy_button_compare_price_size": 14,
+            "buy_button_compare_price_size_mobile": 13,
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "enable_back_in_stock": false,
+            "show_back_in_stock_name": false,
+            "show_back_in_stock_phone": false
+          }
+        },
+        "reward_points_mUcenA": {
+          "type": "reward_points",
+          "settings": {
+            "cart_text": "{count} people have this in their cart right now",
+            "count_min": 50,
+            "count_max": 150,
+            "text_color": "#10374b",
+            "font_size_mobile": 11,
+            "font_size_desktop": 11,
+            "font_weight": "400",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "free_gift_zPr4yH": {
+          "type": "free_gift",
+          "disabled": true,
+          "settings": {
+            "heading": "Free Gift with $399+ Orders | Auto-Added",
+            "subheading": "",
+            "heading_color": "#10374b",
+            "heading_size": 12,
+            "heading_weight": "700",
+            "subheading_color": "#7b8a93",
+            "subheading_size": 10,
+            "subheading_weight": "400",
+            "show_tooltip": true,
+            "tooltip_text": "The $399 minimum is based on your order subtotal before tax.",
+            "product": "breescape-weighted-cooling-eye-mask",
+            "product_title_override": "Weighted Cooling Eye Mask",
+            "badge_icon": "shopify://shop_images/20260509-111732.png",
+            "badge_size": 34,
+            "badge_offset_x": -10,
+            "badge_offset_y": 0,
+            "title_color": "#10374b",
+            "title_size": 12,
+            "title_weight": "700",
+            "color_color": "#7b8a93",
+            "color_size": 10,
+            "color_weight": "400",
+            "compare_color": "#10374b",
+            "compare_size": 10,
+            "free_color": "#10374b",
+            "free_size": 12,
+            "free_weight": "700",
+            "free_text_override": "$0.00",
+            "card_bg": "#d1f2f6",
+            "card_radius": 29,
+            "card_padding_x": 25,
+            "card_padding_y": 10,
+            "card_margin_y": 23,
+            "top_gap": 14,
+            "card_gap": 14,
+            "image_size": 72,
+            "image_radius": 40
+          }
+        },
+        "liquid_MiUK6f": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<style>\n* {\n  box-sizing: border-box;\n}\n\n.xy-fg-wrap {\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\n.xy-fg__top {\n  display: flex !important;\n  justify-content: space-between !important;\n  align-items: center !important;\n  padding: 4px 0 !important;\n  margin: 0 !important;\n}\n\n.xy-fg__heading {\n  font-size: 14px !important;\n  font-weight: 700;\n  color: #10374B !important;\n  margin: 0 !important;\n  letter-spacing: 0;\n}\n\n.xy-fg__sub {\n  font-size: 10px !important;\n  color: #10374B !important;\n  margin: 0 !important;\n}\n\n.xy-fg__img {\n  width: 100%;\n  height: auto;\n  display: block;\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\n@media (max-width: 767px) {\n\n  .xy-fg-wrap {\n    background: #E1F6F9 !important;\n    border-radius: 16px !important;\n    overflow: hidden !important;\n  }\n\n  .xy-fg__img {\n    padding: 1px 12px 0 !important;\n  }\n\n  .xy-fg__top {\n    flex-direction: column !important;\n    justify-content: center !important;\n    align-items: center !important;\n    text-align: center !important;\n    padding: 8px 15px !important;\n  }\n\n  .xy-fg__heading {\n    display: block !important;\n    margin: 2px 0 !important;\n    font-size: 13px !important;\n    letter-spacing: 0 !important;\n  }\n\n  .xy-fg__sub {\n    display: block !important;\n    margin: 2px 0 !important;\n    font-size: 10px !important;\n  }\n}\n\n.gradient > div,\n.shopify-section--custom-liquid {\n  padding: 0 !important;\n  margin: 0 !important;\n}\n</style>\n\n<div class=\"xy-fg-wrap\">\n  <div class=\"xy-fg__top\">\n    <span class=\"xy-fg__heading\">Spend $399 and unlock both gifts</span>\n    <span class=\"xy-fg__sub\">*Automatically added to cart</span>\n  </div>\n\n  <picture>\n    <!-- 手机端图片 -->\n    <source\n      media=\"(max-width: 767px)\"\n      srcset=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Group_1013_2.png?v=1788859342\">\n\n    <!-- 电脑端图片 -->\n    <img\n      src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Group_1014.png?v=1788857754\"\n      class=\"xy-fg__img\"\n      alt=\"\">\n  </picture>\n</div>"
+          },
+          "disabled": true
+        },
+        "liquid_Y7pQ3f": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<br>"
+          }
+        },
+        "liquid_BUD6Pt": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<div class=\"xo-marquee-wrap overflow-hidden\">\n  <div class=\"xo-marquee-track\">\n    <div class=\"xo-marquee flex items-center\">\n      <div class=\"flex items-center\">\n        <p>Fast &amp; Free US Shipping</p><b>·</b>\n      </div>\n      <div class=\"flex items-center\">\n        <p>Secure Checkout</p><b>·</b>\n      </div>\n    </div>\n    <div class=\"xo-marquee flex items-center\" aria-hidden=\"true\">\n      <div class=\"flex items-center\">\n        <p>Fast &amp; Free US Shipping</p><b>·</b>\n      </div>\n      <div class=\"flex items-center\">\n        <p>Secure Checkout</p><b>·</b>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n  .xo-marquee-wrap {\n    margin-bottom: 10px;\n    border-top: 1px solid #f0eeea;\n    border-bottom: 1px solid #f0eeea;\n    padding: 7px 0;\n  }\n\n  .xo-marquee-track {\n    display: flex;\n    width: max-content;\n    animation: marquee 12s linear infinite;\n  }\n\n  .xo-marquee {\n    flex-shrink: 0;\n    white-space: nowrap;\n  }\n\n  .xo-marquee p {\n    font-size: 12px;\n    color: #aaa;\n    padding: 0 14px;\n  }\n\n  .xo-marquee b {\n    color: #d5d3cf;\n    font-weight: 400;\n  }\n\n  @keyframes marquee {\n    from {\n      transform: translateX(0)\n    }\n\n    to {\n      transform: translateX(-50%)\n    }\n  }\n</style>"
+          }
+        },
+        "collapsible_tab_dXxUFL": {
+          "type": "collapsible_tab",
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Includes",
+            "content": "<p>1 Body Pillow, 1 Bonus Cover</p>",
+            "page": "",
+            "liquid": "",
+            "text_size": "text-base"
+          }
+        },
+        "collapsible_tab_rmVpDh": {
+          "type": "collapsible_tab",
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Details",
+            "content": "<p>Breescape. Built to sleep through.&nbsp;</p><p>An ergonomic body pillow designed for side sleepers and hot sleepers, combining full-body support with a cool-to-the-touch feel.&nbsp;</p><p><strong>Cooling Cover: </strong>Nylon-spandex cooling fabric delivers a refreshing cool-to-the-touch feel from the moment you lie down.</p><p><strong>Bonus Cover: </strong>Ultra soft brushed fabric cover for a buttery-soft, cozy feel.</p><p><strong>Dual-Foam Fill: </strong>Memory foam provides responsive support, while shredded foam adds soft cushioning. Together, they create balanced support that adapts to your body.</p><p><strong>Zipper Design: </strong>Removable cover for easy washing and everyday care.&nbsp;</p><p><strong>Safe & Skin-Friendly:</strong> Every item bearing the OEKO-TEX® STANDARD 100 label is certified as having passed safety tests for harmful substances.</p>",
+            "page": "",
+            "liquid": "",
+            "text_size": "text-base"
+          }
+        },
+        "collapsible_tab_XDeUC8": {
+          "type": "collapsible_tab",
+          "settings": {
+            "opened": false,
+            "style": "with-border",
+            "icon": "none",
+            "heading": "Care",
+            "content": "<p>Machine wash the cover cold on a gentle cycle. Tumble dry low. Do not wash the foam fill. Avoid chlorine bleach and harsh stain removers.</p>",
+            "page": "",
+            "liquid": "",
+            "text_size": "text-base"
+          }
+        },
+        "complementary": {
+          "type": "complementary",
+          "disabled": true,
+          "settings": {
+            "heading": "Pairs well with",
+            "product_limit": 4,
+            "show_vendor": false,
+            "show_price": true
+          }
+        },
+        "google_youtube_automated_discounts_price_pQ67Ma": {
+          "type": "shopify://apps/google-youtube/blocks/automated_discounts_price/14ec7bd0-ac77-49a9-9417-90752398bdff",
+          "settings": {}
+        },
+        "sticky_buy_button_MRhbey": {
+          "type": "sticky_buy_button",
+          "settings": {}
+        },
+        "gift_progress_8UVc8C": {
+          "type": "gift_progress",
+          "settings": {
+            "progress_text": "Add [amount] more to unlock FREE gifts",
+            "complete_text": "You've unlocked all FREE gifts",
+            "suffix_text": "Auto added",
+            "image": "shopify://shop_images/Group_1013_2.png",
+            "tier1_amount": 249,
+            "tier2_amount": 399
+          }
+        }
+      },
+      "block_order": [
+        "yotpo_rating_promo_DQTXgy",
+        "title",
+        "product_intro_features_BkHJ9C",
+        "price_4UmVjm",
+        "liquid_DwgLEz",
+        "product_variations_DkXkdV",
+        "liquid_pHPrEz",
+        "variant_picker",
+        "addon_ddA39e",
+        "addon_iUDUhz",
+        "addon_tmnHNd",
+        "marquee_rV8gWU",
+        "buy_buttons",
+        "reward_points_mUcenA",
+        "gift_progress_8UVc8C",
+        "free_gift_zPr4yH",
+        "liquid_MiUK6f",
+        "liquid_Y7pQ3f",
+        "liquid_BUD6Pt",
+        "collapsible_tab_dXxUFL",
+        "collapsible_tab_rmVpDh",
+        "collapsible_tab_XDeUC8",
+        "complementary",
+        "google_youtube_automated_discounts_price_pQ67Ma",
+        "sticky_buy_button_MRhbey"
+      ],
+      "custom_css": [
+        ".product__accordion {padding-inline: 0;}",
+        ".xo__comfort__input .swatches li {flex: 1;}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "enable_ivory_clearance_50": false,
+        "show_oos_clock": true,
+        "oos_ship_date": "11/11/2026",
+        "oos_ship_message": "Estimated to Ship by [date]",
+        "oos_note_color": "#10374b",
+        "oos_note_spacing": 8,
+        "oos_rule_1_color": "Moonlit Blue",
+        "oos_rule_1_sizes": "Standard",
+        "oos_rule_1_date": "11/11/2026",
+        "oos_rule_2_color": "",
+        "oos_rule_2_sizes": "",
+        "oos_rule_2_date": "",
+        "oos_rule_3_color": "",
+        "oos_rule_3_sizes": "",
+        "oos_rule_3_date": "",
+        "oos_rule_4_color": "",
+        "oos_rule_4_sizes": "",
+        "oos_rule_4_date": "",
+        "sale_rule_1_color": "Ivory",
+        "sale_rule_1_sizes": "Throw, Twin, Queen, King",
+        "sale_rule_1_badge": "Flash Sale 50%",
+        "sale_rule_1_percent": 50,
+        "sale_rule_2_color": "Snow White",
+        "sale_rule_2_sizes": "Queen, King",
+        "sale_rule_2_badge": "Flash Sale 30%",
+        "sale_rule_2_percent": 30,
+        "sale_rule_3_color": "Misty Grey",
+        "sale_rule_3_sizes": "Queen, King",
+        "sale_rule_3_badge": "Flash Sale 30%",
+        "sale_rule_3_percent": 30,
+        "sale_rule_4_color": "",
+        "sale_rule_4_sizes": "",
+        "sale_rule_4_badge": "Flash Sale 30%",
+        "sale_rule_4_percent": 30,
+        "enable_info_card": true,
+        "info_card_bg": "#ffffff",
+        "info_card_shadow": "0 2px 12px rgba(0,0,0,0.04)",
+        "info_card_radius": 16,
+        "info_card_padding": 27,
+        "info_card_padding_y": 28,
+        "info_card_gap": 24,
+        "info_card_radius_mobile": 12,
+        "info_card_padding_mobile": 16,
+        "info_card_padding_y_mobile": 16,
+        "info_card_margin_mobile": 12,
+        "media_size": 60,
+        "gallery_layout": "thumbnail",
+        "thumbnail_position": "beside",
+        "image_ratio": "square",
+        "image_zoom": "none",
+        "hide_variants": false,
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "mobile_layout": "full_width",
+        "image_ratio_mobile": "square",
+        "mobile_thumbnail": true,
+        "padding_top": 28,
+        "padding_bottom": 60,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "help-drawer": {
+      "type": "help-drawer",
+      "disabled": true,
+      "settings": {
+        "heading": "Need help?",
+        "description": "<p>If you have any questions, you are always welcome to contact us. We'll get back to you as soon as possible, within 24 hours on weekdays.</p>"
+      }
+    },
+    "product_overview_anchor_pzaLVq": {
+      "type": "product-overview-anchor",
+      "name": "Overview 锚点",
+      "settings": {}
+    },
+    "bodypillow_hero": {
+      "type": "breescape-bp-hero",
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "label": "Cool",
+            "icon": "shopify://shop_images/body-pillow-d954f.svg"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "label": "Breathable",
+            "icon": "shopify://shop_images/body-pillow-breathable-icon.svg"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "label": "Supportive",
+            "icon": "shopify://shop_images/body-pillow-06fb8.svg"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3"
+      ],
+      "settings": {
+        "heading": "Breescape\nErgonomic Body Pillow",
+        "heading_size": 44,
+        "mobile_heading_size": 30,
+        "heading_alignment": "right",
+        "mobile_heading_alignment": "left",
+        "background": "#ededed",
+        "text_color": "#0f374b",
+        "content_width": 1280,
+        "padding_top": 0,
+        "padding_bottom": 56,
+        "padding_horizontal": 48,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 32,
+        "mobile_padding_horizontal": 20,
+        "heading_gap": 37,
+        "mobile_heading_gap": 24,
+        "show_divider": false,
+        "image_desktop": "shopify://shop_images/image_10-optimized.webp",
+        "image_mobile": "shopify://shop_images/breescape-bp-hero-mobile-optimized.webp",
+        "image_alt": "Breescape ergonomic body pillow",
+        "show_badges_mobile": false
+      }
+    },
+    "bodypillow_positions": {
+      "type": "breescape-bp-positions",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/body-pillow-8d5e5-optimized.webp",
+            "title": "Hug it",
+            "description": "",
+            "image_alt": "Hug it",
+            "image_fit": "original"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/body-pillow-d297e-optimized.webp",
+            "title": "Lean on it",
+            "description": "",
+            "image_alt": "Lean on it",
+            "image_fit": "original"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/body-pillow-9578a-optimized.webp",
+            "title": "Put it between your legs",
+            "description": "",
+            "image_alt": "Put it between your legs",
+            "image_fit": "original"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/body-pillow-7c5a1-optimized.webp",
+            "title": "Find you favorite position",
+            "description": "",
+            "image_alt": "Find you favorite position",
+            "image_fit": "original"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "heading": "Find Your Comfort, Your Way.",
+        "heading_size": 44,
+        "mobile_heading_size": 30,
+        "heading_alignment": "left",
+        "mobile_heading_alignment": "center",
+        "background": "#ededed",
+        "text_color": "#0f374b",
+        "content_width": 1280,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 48,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32,
+        "mobile_padding_horizontal": 20,
+        "heading_gap": 37,
+        "mobile_heading_gap": 24,
+        "show_divider": true,
+        "card_background": "#c4e6ea",
+        "desktop_columns": 4,
+        "card_gap": 13,
+        "mobile_card_width": 286,
+        "card_title_size": 18,
+        "card_description_size": 14
+      }
+    },
+    "bodypillow_seasons": {
+      "type": "breescape-bp-seasons",
+      "settings": {
+        "heading": "Sleep Through Every Season",
+        "heading_size": 44,
+        "mobile_heading_size": 30,
+        "heading_alignment": "left",
+        "mobile_heading_alignment": "center",
+        "background": "#ededed",
+        "text_color": "#0f374b",
+        "content_width": 1280,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 48,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32,
+        "mobile_padding_horizontal": 20,
+        "heading_gap": 50,
+        "mobile_heading_gap": 21,
+        "show_divider": true,
+        "image_desktop": "shopify://shop_images/image_11_1-optimized.webp",
+        "mobile_background": "shopify://shop_images/Group_1108-optimized.webp",
+        "cooling_image_mobile": "shopify://shop_images/image_202610120258481472_1_1_1.png",
+        "soft_image_mobile": "shopify://shop_images/image_20261012065516087-_1_1_1.png",
+        "cooling_label": "Cooling Cover",
+        "cooling_note": "For warmer seasons",
+        "soft_label": "Ultra Soft Cover",
+        "soft_note": "For colder seasons",
+        "insert_label": "Pillow Insert",
+        "show_bonus": true,
+        "bonus_label": "BONUS",
+        "cover_title_size": 34,
+        "mobile_cover_title_size": 18,
+        "note_size": 12,
+        "image_radius": 28
+      }
+    },
+    "bodypillow_details": {
+      "type": "breescape-bp-details",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/body-pillow-3a4a3-optimized.webp",
+            "title": "Additional Leg Support",
+            "description": "Reduces pressure on your knees",
+            "image_alt": "Additional Leg Support",
+            "image_fit": "original"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/body-pillow-388ad-optimized.webp",
+            "title": "Bonus Cover",
+            "description": "An extra soft cover for easy changes",
+            "image_alt": "Bonus Cover",
+            "image_fit": "original"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/gemini-20260327020450956_1_f8d08add-db14-4f03-bdb3-69305cb5413e.png",
+            "title": "Silky-Smooth Touch",
+            "description": "Gentle against sensitive skin",
+            "image_alt": "Silky-Smooth Touch",
+            "image_fit": "original"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/body-pillow-9711a-optimized.webp",
+            "title": "Zipper Design",
+            "description": "Removes easily for machine washing",
+            "image_alt": "Zipper Design",
+            "image_fit": "original"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "heading": "Details That Make the Difference",
+        "heading_size": 44,
+        "mobile_heading_size": 30,
+        "heading_alignment": "left",
+        "mobile_heading_alignment": "center",
+        "background": "#ededed",
+        "text_color": "#0f374b",
+        "content_width": 1280,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 48,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32,
+        "mobile_padding_horizontal": 20,
+        "heading_gap": 37,
+        "mobile_heading_gap": 30,
+        "show_divider": true,
+        "mobile_heading_line_1": "Details That",
+        "mobile_heading_line_2": "Make the Difference",
+        "card_background": "#c4e6ea",
+        "desktop_columns": 4,
+        "card_gap": 13,
+        "mobile_card_width": 286,
+        "card_title_size": 18,
+        "card_description_size": 14
+      }
+    },
+    "lookbook_qJPwTX": {
+      "type": "lookbook",
+      "blocks": {
+        "product_k3rDNp": {
+          "type": "product",
+          "settings": {
+            "product": "cooling-pillowcases",
+            "color_text": "#ffffff",
+            "vertical": 60,
+            "horizontal": 20,
+            "vertical_mobile": 55,
+            "horizontal_mobile": 10
+          }
+        },
+        "product_y6A7Hd": {
+          "type": "product",
+          "settings": {
+            "product": "cooling-comforter",
+            "color_text": "#ffffff",
+            "vertical": 60,
+            "horizontal": 70,
+            "vertical_mobile": 60,
+            "horizontal_mobile": 85
+          }
+        },
+        "product_TfCbYU": {
+          "type": "product",
+          "settings": {
+            "product": "cooling-eye-mask",
+            "color_text": "#ffffff",
+            "vertical": 72,
+            "horizontal": 40,
+            "vertical_mobile": 70,
+            "horizontal_mobile": 24
+          }
+        },
+        "product_Xp6iqX": {
+          "type": "product",
+          "settings": {
+            "product": "cooling-sheet-set",
+            "color_text": "#ffffff",
+            "vertical": 15,
+            "horizontal": 65,
+            "vertical_mobile": 20,
+            "horizontal_mobile": 85
+          }
+        },
+        "product_F8izQy": {
+          "type": "product",
+          "settings": {
+            "product": "breescape-adjustable-all-season-comforter",
+            "color_text": "#ffffff",
+            "vertical": 80,
+            "horizontal": 30,
+            "vertical_mobile": 75,
+            "horizontal_mobile": 10
+          }
+        },
+        "product_bBxPBJ": {
+          "type": "product",
+          "settings": {
+            "product": "breescape-ergonomic-body-pillow",
+            "color_text": "#ffffff",
+            "vertical": 80,
+            "horizontal": 85,
+            "vertical_mobile": 85,
+            "horizontal_mobile": 80
+          }
+        }
+      },
+      "block_order": [
+        "product_k3rDNp",
+        "product_y6A7Hd",
+        "product_TfCbYU",
+        "product_Xp6iqX",
+        "product_F8izQy",
+        "product_bBxPBJ"
+      ],
+      "name": "t:sections.lookbook.name",
+      "settings": {
+        "image": "shopify://shop_images/Group_1105_1.webp",
+        "image_mobile": "shopify://shop_images/Group_1130_1.webp",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "heading_position": "none",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 32,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "ae6d898f7ba8cc43d381": {
+      "type": "apps",
+      "blocks": {
+        "b47c6d88-1a5a-4fa1-9f91-53b9a8293552": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{ product }}"
+          }
+        }
+      },
+      "block_order": [
+        "b47c6d88-1a5a-4fa1-9f91-53b9a8293552"
+      ],
+      "settings": {
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "faq_Fb7GVR": {
+      "type": "faq",
+      "blocks": {
+        "bodypillow_question_1": {
+          "type": "question",
+          "settings": {
+            "title": "What areas does Breescape Ergonomic Body Pillow support?",
+            "text": "<p>It provides ergonomic support for the neck, spine, belly, legs, and feet, helping you find a more comfortable position while you sleep.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "bodypillow_question_2": {
+          "type": "question",
+          "settings": {
+            "title": "Who is the body pillow best for?",
+            "text": "<p>This ergonomic body pillow is ideal for side sleepers, hot sleepers, and anyone looking for full-body support while sleeping, lounging, relaxing, or traveling.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "bodypillow_question_3": {
+          "type": "question",
+          "settings": {
+            "title": "What is the body pillow made of?",
+            "text": "<p>The cooling cover is made with 88% Nylon and 12% Spandex cooling fabric. The pillow is filled with a combination of memory foam and shredded foam for supportive, soft cushioning.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "bodypillow_question_4": {
+          "type": "question",
+          "settings": {
+            "title": "Is the cover removable and washable?",
+            "text": "<p>Yes. The hidden zipper design makes the body pillow cover easy to remove for machine washing, making everyday care simple.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "bodypillow_question_5": {
+          "type": "question",
+          "settings": {
+            "title": "Does the body pillow come with an extra cover?",
+            "text": "<p>Yes. The ergonomic body pillow comes with a BONUS ultra-soft cover, giving you an extra cover to switch between washes or colder seasons.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "bodypillow_question_6": {
+          "type": "question",
+          "settings": {
+            "title": "What size options are available?",
+            "text": "<p>It measures 47” × 15”.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "bodypillow_question_1",
+        "bodypillow_question_2",
+        "bodypillow_question_3",
+        "bodypillow_question_4",
+        "bodypillow_question_5",
+        "bodypillow_question_6"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "style": "with-border",
+        "heading": "FAQs",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#ffffff",
+        "overlay_opacity": 0,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "product_limit": 4,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "heading": "You may also like",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 52,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    }
+  },
+  "order": [
+    "product_sticky_nav",
+    "main-product",
+    "help-drawer",
+    "product_overview_anchor_pzaLVq",
+    "bodypillow_hero",
+    "bodypillow_positions",
+    "bodypillow_seasons",
+    "bodypillow_details",
+    "lookbook_qJPwTX",
+    "ae6d898f7ba8cc43d381",
+    "faq_Fb7GVR",
+    "product-recommendations"
+  ]
+}

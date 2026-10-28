@@ -1,0 +1,38 @@
+{%- comment -%}
+  Overview 锚点占位 section。
+
+  作用：给产品详情页顶部导航的 Overview tab 提供一个"用户可自定义位置"的滚动锚点。
+  不渲染任何可见内容，也几乎不占高度。放到 template 任何位置，点击 Overview 就会滚到这里。
+
+  匹配逻辑：sections/product-sticky-nav.liquid 中 findAnchor('overview')
+  会优先查找 [data-pdp-overview-anchor]，找到后取其外层 .shopify-section 作为滚动目标。
+{%- endcomment -%}
+
+<div
+  class="pdp-overview-anchor"
+  data-pdp-overview-anchor
+  aria-hidden="true"
+  style="height:0;line-height:0;margin:0;padding:0;overflow:hidden;visibility:hidden;pointer-events:none;"
+></div>
+
+{% schema %}
+{
+  "name": "Overview 锚点",
+  "tag": "section",
+  "class": "pdp-overview-anchor-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "这是一个不可见的锚点占位。把它拖到产品页任何位置，点击顶部导航的 Overview 就会滚动到这里。仅在产品页有效。"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Overview 锚点"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,214 @@
+{% doc %}
+  @prompt
+    帮我生成一个Shopify OS2.0 自定义Section代码，功能是放在首页轮播Banner底部的通栏提示条，要求如下：
+    1. 布局：100%全屏通栏，横向居中单行布局，固定悬浮在横幅图片最底部，不遮挡Banner主体画面；
+    2. 后台自定义设置项（全部可视化可改，不用改代码）：
+       - 背景颜色选择器：自定义通栏底色（示例棕色#887c70，支持任意色值修改）
+       - 文字内容文本框：自定义显示文案，示例文本「SoftClub Members: Register & Earn Cozy Coins」，文本可选加粗，文本底下有下划线 
+      - 文字颜色选择器：自定义文案字体颜色
+       - 跳转链接输入框：填写后整行通栏可点击跳转指定页面链接，留空则不可点击
+       - 内边距设置：上下padding数值输入，控制通栏高度
+       - 文字字号设置：单独控制文案大小
+       -手机端文案自动换行
+    3. 样式规范：
+       - 文字水平居中、垂直居中对齐，单行不换行；
+       - 无圆角、无边框，全屏宽度铺满屏幕；
+       - 适配移动端/桌面端，手机端文字自动微调字号，通栏保持全屏；
+       - 点击链接hover轻微加深背景色交互效果；
+    4. 文件输出格式：完整Section代码（包含{% schema %}后台配置 + liquid布局 + 内置css样式），代码分段清晰，注释标注每个自定义设置功能，可直接复制粘贴到Shopify主题新建section使用；
+    5. 额外要求：代码兼容所有Shopify免费/付费主题，不依赖外部JS，纯liquid+css实现，无兼容性报错。
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-banner-strip-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+  }
+
+  .ai-banner-strip-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+    transition: background-color 0.3s ease;
+  }
+
+  {% if block.settings.link != blank %}
+    .ai-banner-strip-wrapper-{{ ai_gen_id }}:hover {
+      background-color: {{ block.settings.background_color | color_darken: 5 }};
+    }
+  {% endif %}
+
+  .ai-banner-strip-content-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    min-height: 1px;
+  }
+
+  .ai-banner-strip-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.font_size }}px;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0 20px;
+    {% if block.settings.text_bold %}
+      font-weight: 700;
+    {% else %}
+      font-weight: 400;
+    {% endif %}
+    {% if block.settings.text_underline %}
+      text-decoration: underline;
+    {% else %}
+      text-decoration: none;
+    {% endif %}
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ai-banner-strip-link-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-banner-strip-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.font_size | times: 0.85 | round }}px;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+  }
+{% endstyle %}
+
+<banner-strip-{{ ai_gen_id }} class="ai-banner-strip-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.link != blank %}
+    <a href="{{ block.settings.link }}" class="ai-banner-strip-link-{{ ai_gen_id }}">
+      <div class="ai-banner-strip-wrapper-{{ ai_gen_id }}">
+        <div class="ai-banner-strip-content-{{ ai_gen_id }}">
+          <p class="ai-banner-strip-text-{{ ai_gen_id }}">{{ block.settings.text }}</p>
+        </div>
+      </div>
+    </a>
+  {% else %}
+    <div class="ai-banner-strip-wrapper-{{ ai_gen_id }}">
+      <div class="ai-banner-strip-content-{{ ai_gen_id }}">
+        <p class="ai-banner-strip-text-{{ ai_gen_id }}">{{ block.settings.text }}</p>
+      </div>
+    </div>
+  {% endif %}
+</banner-strip-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BannerStrip{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+    }
+    customElements.define('banner-strip-{{ ai_gen_id }}', BannerStrip{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Banner strip",
+  "tag": null,
+  "class": "banner-strip-block",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "SoftClub Members: Register & Earn Cozy Coins"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Text style"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "text_bold",
+      "label": "Bold text",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "text_underline",
+      "label": "Underline text",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#887c70"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner strip"
+    }
+  ]
+}
+{% endschema %}

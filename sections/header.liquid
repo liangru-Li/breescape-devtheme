@@ -1,0 +1,2798 @@
+{%- liquid
+  assign header_radius_desktop = section.settings.header_radius | default: 0
+  assign header_inset_x_desktop = section.settings.header_inset_x | default: 0
+  assign header_inset_y = section.settings.header_inset_y | default: 0
+  assign header_radius_mobile = section.settings.header_radius_mobile | default: header_radius_desktop
+  assign header_inset_x_mobile = section.settings.header_inset_x_mobile | default: header_inset_x_desktop
+  assign header_padding_x_mobile = section.settings.header_padding_x_mobile | default: 12
+  assign header_padding_top_mobile = section.settings.header_padding_top_mobile | default: 6
+  assign header_padding_bottom_mobile = section.settings.header_padding_bottom_mobile | default: 6
+  assign header_logo_width_mobile = section.settings.header_logo_width_mobile | default: settings.logo_width_mobile | default: 80
+  assign icons_size_mobile = section.settings.icons_size_mobile | default: 'sm'
+  case icons_size_mobile
+    when 'sm'
+      assign header_icon_size_mobile = '1.25rem'
+      assign header_icon_btn_mobile = '2.25rem'
+    when 'lg'
+      assign header_icon_size_mobile = '1.5rem'
+      assign header_icon_btn_mobile = '2.75rem'
+    else
+      assign header_icon_size_mobile = '1.375rem'
+      assign header_icon_btn_mobile = '2.5rem'
+  endcase
+  assign nav_hover = false
+  if section.settings.nav_dropdown_trigger == 'hover'
+    assign nav_hover = true
+  elsif section.settings.nav_dropdown_trigger == blank and section.settings.hover_menu
+    assign nav_hover = true
+  endif
+-%}
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --color-background: {{ section.settings.color_background.rgb }};
+    --color-foreground: {{ section.settings.color_text.rgb }};
+    --color-transparent: {{ section.settings.transparent_color_text.rgb }};
+    --color-localization: {{ section.settings.color_localization.rgb }};
+    --header-bg-alpha: {{ section.settings.header_bg_opacity | default: 75 | divided_by: 100.0 }};
+    --header-radius: {{ header_radius_desktop }}px;
+    --header-inset-x: {{ header_inset_x_desktop }}px;
+    --header-inset-y: {{ header_inset_y }}px;
+    --header-blur: {{ section.settings.header_blur | default: 25 }}px;
+    --header-radius-bottom: {{ header_radius_desktop }}px;
+    {%- if header_inset_x_desktop > 0 or header_inset_y > 0 -%}
+    --header-radius-top: {{ header_radius_desktop }}px;
+    {%- else -%}
+    --header-radius-top: 0px;
+    {%- endif -%}
+    --header-logo-width-mobile: {{ header_logo_width_mobile }}px;
+    --header-icon-size-mobile: {{ header_icon_size_mobile }};
+    --header-icon-btn-mobile: {{ header_icon_btn_mobile }};
+    --menu-drawer-tab-size: {{ section.settings.menu_drawer_tab_font_size | default: 24 }}px;
+    --nav-first-item-color: {{ section.settings.nav_first_item_color | default: '#AC4D3C' }};
+    --nav-dropdown-tab-bg: {{ section.settings.nav_dropdown_tab_bg | default: '#E8E8E8' }};
+  }
+
+  @media screen and (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .header__menu .menu__item--first {
+      color: var(--nav-first-item-color);
+    }
+
+    #shopify-section-{{ section.id }} .header__menu .menu__item--dropdown .btn-text::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .header__menu .menu__item--dropdown {
+      position: relative;
+    }
+
+    #shopify-section-{{ section.id }} .header__menu .menu__item--dropdown::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 0;
+      width: calc(100% + 1.5rem);
+      height: 2.375rem;
+      border-radius: 999px;
+      background-color: var(--nav-dropdown-tab-bg);
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    #shopify-section-{{ section.id }} .header__menu .menu__item--dropdown .btn-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    #shopify-section-{{ section.id }} .header__menu > ul > li > details > summary[aria-expanded="true"] .menu__item--dropdown::before {
+      opacity: 1;
+    }
+
+    #shopify-section-{{ section.id }} .header__menu > ul.with-block .menu__item--dropdown::before {
+      width: 100%;
+      height: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .header__menu > ul.with-block > li > details > summary[aria-expanded="true"] .menu__item--dropdown .btn-duplicate {
+      opacity: 0;
+      transform: none;
+    }
+
+    #shopify-section-{{ section.id }} .header__menu > ul.with-block > li > details > summary[aria-expanded="true"] .menu__item--dropdown [data-text] {
+      opacity: 1;
+      transform: none;
+    }
+
+    #shopify-section-{{ section.id }} .header__menu > ul > li > details > summary .menu__item .icon {
+      display: none;
+    }
+
+    {%- unless nav_hover -%}
+    #shopify-section-{{ section.id }} .mega-menu[open],
+    #shopify-section-{{ section.id }} .header .dropdown[open] {
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .mega-menu[open] .mega-menu__container,
+    #shopify-section-{{ section.id }} .header .dropdown[open] .dropdown__container {
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .mega-menu[open] .mega-menu__container > *,
+    #shopify-section-{{ section.id }} .header .dropdown[open] .dropdown__container > * {
+      pointer-events: auto;
+    }
+    {%- endunless -%}
+  }
+
+  @media screen and (max-width: 1023px) {
+    #shopify-section-{{ section.id }} {
+      --section-padding-top: {{ header_padding_top_mobile }}px;
+      --section-padding-bottom: {{ header_padding_bottom_mobile }}px;
+      --header-inset-x: {{ header_inset_x_mobile }}px;
+      --header-padding-x-mobile: {{ header_padding_x_mobile }}px;
+      --header-radius-bottom: {{ header_radius_mobile }}px;
+      {%- if header_inset_x_mobile > 0 or header_inset_y > 0 -%}
+      --header-radius-top: {{ header_radius_mobile }}px;
+      {%- else -%}
+      --header-radius-top: 0px;
+      {%- endif -%}
+    }
+  }
+
+  #MenuDrawer {
+    --menu-drawer-tab-size: {{ section.settings.menu_drawer_tab_font_size | default: 24 }}px;
+  }
+</style>
+
+{%- liquid
+  assign header_layout = section.settings.header_layout
+  assign main_menu = section.settings.menu
+  assign link_count = main_menu.links.size
+
+  if header_layout == 'center-split'
+    assign link_count = link_count | divided_by: 2
+  endif
+
+  assign main_menu_class = 'lg:justify-start'
+  case header_layout
+    when 'center-split'
+      assign main_menu_class = 'lg:justify-end'
+
+    when 'center'
+      assign main_menu_class = 'lg:justify-center'
+  endcase
+
+  assign show_toggle = false
+  if header_layout == 'center'
+    assign show_toggle = true
+  endif
+
+  render 'header-drawer', section: section
+-%}
+
+<header data-section-id="{{ section.id }}" class="header header--{{ header_layout }} mobile:header--{{ section.settings.logo_position_mobile }} page-width{% if section.settings.full_width %} page-width--full{% endif %} section{% if section.settings.rounded %} section--rounded{% endif %}{% if section.settings.header_glass %} header--glass{% endif %} section--padding grid items-center z-20 relative w-full"{% if section.settings.sticky_header_type != 'none' %} is="sticky-header" data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %} is="custom-header"{% endif %}>
+  {%- liquid
+    render 'header-icons', section: section, show_search: true, show_hamburger: true, show_toggle: show_toggle, context: 'start'
+
+    if header_layout != 'center-left' and header_layout != 'center-split'
+      render 'header-logo', logo_h1: section.settings.logo_h1
+    endif
+
+    if header_layout == 'center'
+      render 'header-icons', section: section, show_search: true, show_account: true, show_cart: true, show_hamburger: true, context: 'end'
+    endif
+  -%}
+  
+  <div class="header__navigation hidden lg:flex lg:gap-5 {{ main_menu_class }}"{% if header_layout == 'center' %} id="MenuToggle"{% endif %}>
+    <nav class="header__menu hidden lg:flex" role="navigation" aria-label="Primary">
+      {%- render 'header-nav-desktop', section: section, main_menu: main_menu, limit: link_count, context: 'start' -%}
+    </nav>
+  </div>
+
+  {%- liquid
+    if header_layout == 'center-left' or header_layout == 'center-split'
+      render 'header-logo', logo_h1: section.settings.logo_h1
+    endif
+  -%}
+  
+  {%- if header_layout == 'center-split' -%}
+    <div class="header__navigation header__navigation--split hidden lg:flex lg:gap-5 lg:justify-start">
+      <nav class="header__menu hidden lg:flex" role="navigation" aria-label="Secondary">
+        {%- render 'header-nav-desktop', section: section, main_menu: main_menu, offset: link_count, context: 'end' -%}
+      </nav>
+    </div>
+  {%- endif -%}
+
+  {%- liquid
+    if header_layout != 'center'
+      render 'header-icons', section: section, show_search: true, show_account: true, show_cart: true, show_hamburger: true, context: 'end'
+    endif
+  -%}
+
+  {%- if section.settings.rounded -%}
+    {%- render 'corner', dir: 'bottom', border: true, prefix: 'header' -%}
+  {%- else -%}
+    <span class="header__cutout cutout opacity-0 absolute left-0 top-100 w-full pointer-events-none"></span>
+  {%- endif -%}
+</header>
+
+{%- if nav_hover -%}
+  <span class="overlay opacity-0 z-1 fixed left-0 w-full pointer-events-none"></span>
+{%- else -%}
+  <overlay-element class="overlay opacity-0 z-1 fixed left-0 w-full pointer-events-none"></overlay-element>
+{%- endif -%}
+
+{%- if request.design_mode -%}
+  <script>
+    document.documentElement.style.setProperty('--header-height', document.getElementById('shopify-section-{{ section.id }}').getBoundingClientRect().height.toFixed(1) + 'px');
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.header.settings.paragraph__logo_help.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_h1",
+      "default": true,
+      "label": "t:sections.header.settings.logo_h1.label",
+      "info": "t:sections.header.settings.logo_h1.info"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.header.settings.menu.label",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_mobile",
+      "label": "t:sections.header.settings.menu_mobile.label",
+      "info": "t:sections.header.settings.menu_mobile.info"
+    },
+    {
+      "type": "header",
+      "content": "移动端抽屉顶部图片"
+    },
+    {
+      "type": "image_picker",
+      "id": "drawer_promo_image",
+      "label": "抽屉顶部图片",
+      "info": "仅移动端：展开菜单后显示在主导航链接上方。请在 Header 这里上传，不要用 Mega menu 的 Promotion 1。"
+    },
+    {
+      "type": "url",
+      "id": "drawer_promo_link",
+      "label": "图片跳转链接"
+    },
+    {
+      "type": "text",
+      "id": "drawer_promo_heading",
+      "label": "图片标题（可选）"
+    },
+    {
+      "type": "text",
+      "id": "drawer_promo_subtext",
+      "label": "图片副标题（可选）"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_mobile_secondary",
+      "label": "Mobile drawer secondary links",
+      "info": "移动端菜单最下方的文字链接（如 Help & FAQ、Track Your Order 等）。留空则回退使用导航 shawn-main-menu-mobile。"
+    },
+    {
+      "type": "header",
+      "content": "Mobile secondary link icons"
+    },
+    {
+      "type": "paragraph",
+      "content": "按上方次级菜单的链接顺序上传图标（第 1 个图标对应第 1 个链接）。建议使用透明底 SVG/PNG。"
+    },
+    {
+      "type": "range",
+      "id": "menu_mobile_secondary_icon_size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "图标尺寸",
+      "default": 13
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_mobile_secondary_icon_1",
+      "label": "图标 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_mobile_secondary_icon_2",
+      "label": "图标 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_mobile_secondary_icon_3",
+      "label": "图标 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_mobile_secondary_icon_4",
+      "label": "图标 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_mobile_secondary_icon_5",
+      "label": "图标 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_mobile_secondary_icon_6",
+      "label": "图标 6"
+    },
+    {
+      "visible_if": "{{ section.settings.header_layout != 'left-drawer' and section.settings.header_layout != 'center-drawer' }}",
+      "type": "select",
+      "id": "menu_active",
+      "label": "t:sections.header.settings.menu_active.label",
+      "default": "block",
+      "options": [
+        {
+          "value": "dot",
+          "label": "t:sections.header.settings.menu_active.options__1.label"
+        },
+        {
+          "value": "block",
+          "label": "t:sections.header.settings.menu_active.options__2.label"
+        }
+      ]
+    },
+    {
+      "visible_if": "{{ section.settings.header_layout != 'left-drawer' and section.settings.header_layout != 'center-drawer' }}",
+      "type": "select",
+      "id": "nav_dropdown_trigger",
+      "label": "电脑端下拉触发方式",
+      "info": "Hover：鼠标移到菜单上打开。Click：点击菜单才打开。",
+      "options": [
+        { "value": "hover", "label": "Hover（鼠标移入）" },
+        { "value": "click", "label": "Click（点击）" }
+      ],
+      "default": "hover"
+    },
+    {
+      "visible_if": "{{ section.settings.header_layout != 'left-drawer' and section.settings.header_layout != 'center-drawer' }}",
+      "type": "header",
+      "content": "电脑端导航 Tab"
+    },
+    {
+      "visible_if": "{{ section.settings.header_layout != 'left-drawer' and section.settings.header_layout != 'center-drawer' }}",
+      "type": "color",
+      "id": "nav_first_item_color",
+      "label": "第一个菜单字体颜色",
+      "default": "#AC4D3C"
+    },
+    {
+      "visible_if": "{{ section.settings.header_layout != 'left-drawer' and section.settings.header_layout != 'center-drawer' }}",
+      "type": "color",
+      "id": "nav_dropdown_tab_bg",
+      "label": "下拉菜单 Tab 背景色",
+      "default": "#E8E8E8"
+    },
+    {
+      "type": "select",
+      "id": "header_layout",
+      "label": "t:sections.header.settings.header_layout.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.header.settings.header_layout.options__1.label"
+        },
+        {
+          "value": "left-center",
+          "label": "t:sections.header.settings.header_layout.options__2.label"
+        },
+        {
+          "value": "left-drawer",
+          "label": "t:sections.header.settings.header_layout.options__3.label"
+        },
+        {
+          "value": "center-left",
+          "label": "t:sections.header.settings.header_layout.options__4.label"
+        },
+        {
+          "value": "center-split",
+          "label": "t:sections.header.settings.header_layout.options__5.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.header.settings.header_layout.options__6.label"
+        },
+        {
+          "value": "center-drawer",
+          "label": "t:sections.header.settings.header_layout.options__7.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "sticky_header_type",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.header.settings.sticky_header_type.options__1.label"
+        },
+        {
+          "value": "on-scroll-up",
+          "label": "t:sections.header.settings.sticky_header_type.options__2.label"
+        },
+        {
+          "value": "always",
+          "label": "t:sections.header.settings.sticky_header_type.options__3.label"
+        }
+      ],
+      "default": "always",
+      "label": "t:sections.header.settings.sticky_header_type.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__icons.content"
+    },
+    {
+      "type": "select",
+      "id": "icons_size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "t:sections.header.settings.icons_size.options__1.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.header.settings.icons_size.options__2.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.header.settings.icons_size.options__3.label"
+        }
+      ],
+      "default": "lg",
+      "label": "图标大小（电脑端）"
+    },
+    {
+      "type": "select",
+      "id": "icons_size_mobile",
+      "options": [
+        {
+          "value": "sm",
+          "label": "t:sections.header.settings.icons_size.options__1.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.header.settings.icons_size.options__2.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.header.settings.icons_size.options__3.label"
+        }
+      ],
+      "default": "sm",
+      "label": "图标大小（移动端）",
+      "info": "仅影响移动端右侧搜索/账户/购物车/菜单图标。"
+    },
+    {
+      "visible_if": "{{ section.settings.header_layout == 'left-drawer' or section.settings.header_layout == 'center-drawer' }}",
+      "type": "text",
+      "id": "menu_drawer_icon_label",
+      "label": "t:sections.header.settings.menu_drawer_icon_label.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__language_selector.content",
+      "info": "t:sections.header.settings.header__language_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector_desktop",
+      "label": "t:sections.header.settings.enable_language_selector.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__country_selector.content",
+      "info": "t:sections.header.settings.header__country_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector_desktop",
+      "label": "t:sections.header.settings.enable_country_selector.label",
+      "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.enable_country_selector_desktop == true }}",
+      "type": "checkbox",
+      "id": "show_country_name_dekstop",
+      "label": "t:sections.header.settings.show_country_name.label",
+      "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.enable_country_selector_desktop == true }}",
+      "type": "checkbox",
+      "id": "show_country_flag_desktop",
+      "label": "t:sections.header.settings.show_country_flag.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__mobile.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.header.settings.paragraph__logo_help.content"
+    },
+    {
+      "type": "select",
+      "id": "logo_position_mobile",
+      "options": [
+        {
+          "value": "center",
+          "label": "t:sections.header.settings.logo_position_mobile.options__1.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.header.settings.logo_position_mobile.options__2.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.header.settings.logo_position_mobile.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_menu_mobile",
+      "default": false,
+      "label": "t:sections.header.settings.enable_accordion_menu.label"
+    },
+    {
+      "type": "range",
+      "id": "menu_drawer_tab_font_size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile menu tab font size",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.header.settings.show_social.label",
+      "info": "t:sections.header.settings.show_social.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_language_selector.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_country_selector.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__transparent.content",
+      "info": "t:sections.header.settings.header__transparent.info"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.header.settings.paragraph__logo_help.content"
+    },
+    {
+      "type": "color",
+      "id": "transparent_color_text",
+      "label": "t:sections.header.settings.transparent_color_text.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label",
+      "default": "#171717"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "header_bg_opacity",
+      "label": "背景不透明度",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 75,
+      "info": "设计稿：白底 75% 不透明度。降低数值让 header 背景更透明。"
+    },
+    {
+      "type": "header",
+      "content": "Header 外形（电脑端）"
+    },
+    {
+      "type": "range",
+      "id": "header_radius",
+      "label": "外边框圆角（电脑端）",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "给整个 header 外框加圆角。配合下方「左右内缩」可做成悬浮胶囊效果。"
+    },
+    {
+      "type": "range",
+      "id": "header_inset_x",
+      "label": "左右内缩（电脑端）",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "让 header 背景从屏幕左右两侧收进一些，圆角才会明显（悬浮效果）。"
+    },
+    {
+      "type": "header",
+      "content": "Header 外形（移动端）"
+    },
+    {
+      "type": "range",
+      "id": "header_radius_mobile",
+      "label": "外边框圆角（移动端）",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20,
+      "info": "仅移动端生效。配合「左右内缩（移动端）」做成悬浮胶囊。"
+    },
+    {
+      "type": "range",
+      "id": "header_inset_x_mobile",
+      "label": "左右外缩（移动端）",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "info": "header 背景相对屏幕左右收进的距离（悬浮胶囊外边距）。"
+    },
+    {
+      "type": "range",
+      "id": "header_padding_x_mobile",
+      "label": "内部左右内边距（移动端）",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "info": "Logo 左侧、右侧图标相对白色 header 边框的内边距（图中红线位置）。"
+    },
+    {
+      "type": "range",
+      "id": "header_padding_top_mobile",
+      "label": "上下内边距-上（移动端）",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 6,
+      "info": "控制移动端 header 高度（上）。"
+    },
+    {
+      "type": "range",
+      "id": "header_padding_bottom_mobile",
+      "label": "上下内边距-下（移动端）",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 6,
+      "info": "控制移动端 header 高度（下）。"
+    },
+    {
+      "type": "range",
+      "id": "header_logo_width_mobile",
+      "label": "Logo 宽度（移动端）",
+      "min": 40,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 80,
+      "info": "仅移动端缩小 Logo。主题设置里的移动端 Logo 宽度仍作为图片源尺寸。"
+    },
+    {
+      "type": "range",
+      "id": "header_inset_y",
+      "label": "顶部间距（整体下移）",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "电脑端/移动端共用。让整个 header 从顶部往下留出间距（悬浮效果）。>0 时四角都会加圆角。"
+    },
+    {
+      "type": "checkbox",
+      "id": "header_glass",
+      "label": "透明 header 使用半透明背景 + 深色文字（玻璃悬浮）",
+      "default": true,
+      "info": "开启「Transparent header」压图时，header 仍显示半透明背景与深色文字（而非完全透明+白字）。"
+    },
+    {
+      "type": "range",
+      "id": "header_blur",
+      "label": "背景毛玻璃模糊",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 25,
+      "info": "设计稿：背景模糊 25px（backdrop-filter）。配合上方 75% 不透明度即为毛玻璃效果。"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_language_selector_desktop == true or section.settings.enable_country_selector_desktop == true }}",
+      "type": "color",
+      "id": "color_localization",
+      "label": "t:sections.header.settings.color_localization.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 32
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "t:sections.header.blocks.mega_menu.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_title",
+          "label": "t:sections.header.blocks.mega_menu.settings.menu_title.label",
+          "info": "t:sections.header.blocks.mega_menu.settings.menu_title.info"
+        },
+        {
+          "type": "header",
+          "content": "电脑端"
+        },
+        {
+          "type": "select",
+          "id": "layout_style",
+          "label": "布局样式（电脑端）",
+          "options": [
+            {
+              "value": "default",
+              "label": "默认（多列文字 + 促销图）"
+            },
+            {
+              "value": "sidebar_grid",
+              "label": "左侧列表 + 右侧产品网格"
+            },
+            {
+              "value": "images_only",
+              "label": "只支持图片（上传图片 + 左下角 Tag）"
+            }
+          ],
+          "default": "default",
+          "info": "「只支持图片」请在下方「图片卡片」区域自行上传图片；与旧版 Promotion 无关。"
+        },
+        {
+          "type": "link_list",
+          "id": "sidebar_menu",
+          "label": "左侧链接列表（电脑端）",
+          "info": "仅「左侧列表 + 右侧产品网格」布局生效。留空则不显示左侧列表。"
+        },
+        {
+          "type": "product_list",
+          "id": "grid_products",
+          "label": "右侧产品网格（电脑端）",
+          "limit": 20,
+          "info": "仅「左侧列表 + 右侧产品网格」布局生效。请在此选择产品。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'sidebar_grid' }}",
+          "type": "range",
+          "id": "grid_width_percent",
+          "label": "右侧网格总占比（电脑端）",
+          "min": 50,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 70,
+          "info": "右侧产品网格占下拉宽度的比例（有左侧列表时生效）。如 70% / 80%。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'sidebar_grid' or block.settings.layout_style == 'images_only' }}",
+          "type": "range",
+          "id": "grid_columns",
+          "label": "每行图片/产品数（电脑端）",
+          "min": 2,
+          "max": 6,
+          "step": 1,
+          "default": 5,
+          "info": "每行显示几个卡片。配合卡片间距与最大宽度共同决定布局。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'sidebar_grid' or block.settings.layout_style == 'images_only' }}",
+          "type": "range",
+          "id": "grid_gap",
+          "label": "卡片间距（电脑端）",
+          "min": 4,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'sidebar_grid' or block.settings.layout_style == 'images_only' }}",
+          "type": "range",
+          "id": "card_max_width",
+          "label": "单个卡片最大宽度（电脑端）",
+          "min": 120,
+          "max": 320,
+          "step": 10,
+          "unit": "px",
+          "default": 190,
+          "info": "限制单个卡片的最大宽度；卡片会在网格内左对齐排列。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'sidebar_grid' or block.settings.layout_style == 'images_only' }}",
+          "type": "range",
+          "id": "title_bottom",
+          "label": "产品名称距底部（电脑端）",
+          "min": 0,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 12,
+          "info": "名称区固定预留两行（超出省略），此值只调文字区离卡片底边的间距。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'sidebar_grid' or block.settings.layout_style == 'images_only' }}",
+          "type": "range",
+          "id": "badge_size",
+          "label": "角标尺寸（电脑端）",
+          "min": 6,
+          "max": 14,
+          "step": 1,
+          "unit": "px",
+          "default": 8,
+          "info": "产品卡片左上角角标文字大小，内边距会跟着缩放。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "header",
+          "content": "图片卡片（仅「只支持图片」布局）"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "paragraph",
+          "content": "专用于「只支持图片」布局，请在此上传图片。与下方旧版 Promotion 1–5 无关，互不影响。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "color",
+          "id": "io_tag_color",
+          "label": "Tag 文字颜色",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "color",
+          "id": "io_tag_bg",
+          "label": "Tag 背景色",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "range",
+          "id": "io_tag_bg_opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 0,
+          "label": "Tag 背景透明度",
+          "info": "0 为透明背景（仅文字）。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "range",
+          "id": "io_tag_size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 15,
+          "label": "Tag 字号"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "header",
+          "content": "图片 1"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "image_picker",
+          "id": "io_image_1",
+          "label": "图片"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "text",
+          "id": "io_tag_1",
+          "label": "左下角 Tag"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "url",
+          "id": "io_link_1",
+          "label": "链接"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "header",
+          "content": "图片 2"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "image_picker",
+          "id": "io_image_2",
+          "label": "图片"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "text",
+          "id": "io_tag_2",
+          "label": "左下角 Tag"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "url",
+          "id": "io_link_2",
+          "label": "链接"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "header",
+          "content": "图片 3"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "image_picker",
+          "id": "io_image_3",
+          "label": "图片"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "text",
+          "id": "io_tag_3",
+          "label": "左下角 Tag"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "url",
+          "id": "io_link_3",
+          "label": "链接"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "header",
+          "content": "图片 4"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "image_picker",
+          "id": "io_image_4",
+          "label": "图片"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "text",
+          "id": "io_tag_4",
+          "label": "左下角 Tag"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "url",
+          "id": "io_link_4",
+          "label": "链接"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "header",
+          "content": "图片 5"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "image_picker",
+          "id": "io_image_5",
+          "label": "图片"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "text",
+          "id": "io_tag_5",
+          "label": "左下角 Tag"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "url",
+          "id": "io_link_5",
+          "label": "链接"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "header",
+          "content": "图片 6"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "image_picker",
+          "id": "io_image_6",
+          "label": "图片"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "text",
+          "id": "io_tag_6",
+          "label": "左下角 Tag"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'images_only' or block.settings.layout_style_mobile == 'images_only' }}",
+          "type": "url",
+          "id": "io_link_6",
+          "label": "链接"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'default' }}",
+          "type": "select",
+          "id": "menu_width",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:sections.header.blocks.mega_menu.settings.menu_width.options__1.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.header.blocks.mega_menu.settings.menu_width.options__2.label"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.header.blocks.mega_menu.settings.menu_width.options__3.label"
+            }
+          ],
+          "default": "medium",
+          "label": "t:sections.header.blocks.mega_menu.settings.menu_width.label"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style == 'default' }}",
+          "type": "checkbox",
+          "id": "show_menu_image",
+          "default": false,
+          "label": "t:sections.header.blocks.mega_menu.settings.show_menu_image.label"
+        },
+        {
+          "type": "header",
+          "content": "移动端"
+        },
+        {
+          "type": "select",
+          "id": "layout_style_mobile",
+          "label": "布局样式（移动端）",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "与电脑端一致"
+            },
+            {
+              "value": "default",
+              "label": "默认（文字链接 + 促销图）"
+            },
+            {
+              "value": "links_only",
+              "label": "只显示文字链接（不显示图片）"
+            },
+            {
+              "value": "sidebar_grid",
+              "label": "链接列表 + 产品网格"
+            },
+            {
+              "value": "images_only",
+              "label": "只支持图片（使用上方图片卡片）"
+            }
+          ],
+          "default": "inherit",
+          "info": "「只显示文字链接」请配置下方「链接列表（移动端）」；「只支持图片」使用上方「图片卡片」上传的图。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style_mobile == 'inherit' or block.settings.layout_style_mobile == 'sidebar_grid' }}",
+          "type": "checkbox",
+          "id": "hide_mobile_sidebar",
+          "label": "移动端隐藏链接列表",
+          "default": false,
+          "info": "勾选后移动端不显示链接列表；产品网格仍与电脑端一致（移动端产品留空则用电脑端产品）。"
+        },
+        {
+          "type": "link_list",
+          "id": "sidebar_menu_mobile",
+          "label": "链接列表（移动端）",
+          "info": "「只显示文字链接」时必配（显示此菜单文字列表）。「链接列表 + 产品网格」时作左侧列表，留空可回退电脑端左侧列表。"
+        },
+        {
+          "type": "product_list",
+          "id": "grid_products_mobile",
+          "label": "产品网格（移动端）",
+          "limit": 20,
+          "info": "仅「链接列表 + 产品网格」生效。留空则回退电脑端产品；仍为空则不显示图片。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style_mobile == 'sidebar_grid' or block.settings.layout_style_mobile == 'images_only' or block.settings.layout_style_mobile == 'inherit' }}",
+          "type": "range",
+          "id": "grid_columns_mobile",
+          "label": "每行产品数（移动端）",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "default": 2,
+          "info": "移动端每行显示几个产品卡片。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style_mobile == 'sidebar_grid' or block.settings.layout_style_mobile == 'images_only' or block.settings.layout_style_mobile == 'inherit' }}",
+          "type": "range",
+          "id": "grid_gap_mobile",
+          "label": "产品卡片间距（移动端）",
+          "min": 4,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style_mobile == 'sidebar_grid' or block.settings.layout_style_mobile == 'images_only' or block.settings.layout_style_mobile == 'inherit' }}",
+          "type": "range",
+          "id": "card_max_width_mobile",
+          "label": "单个卡片最大宽度（移动端）",
+          "min": 100,
+          "max": 320,
+          "step": 10,
+          "unit": "px",
+          "default": 160,
+          "info": "限制移动端单个产品卡片最大宽度。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style_mobile == 'sidebar_grid' or block.settings.layout_style_mobile == 'images_only' or block.settings.layout_style_mobile == 'inherit' }}",
+          "type": "range",
+          "id": "title_bottom_mobile",
+          "label": "产品名称距底部（移动端）",
+          "min": 0,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 12,
+          "info": "名称区固定预留两行（超出省略），此值只调文字区离卡片底边的间距。"
+        },
+        {
+          "visible_if": "{{ block.settings.layout_style_mobile == 'sidebar_grid' or block.settings.layout_style_mobile == 'images_only' or block.settings.layout_style_mobile == 'inherit' }}",
+          "type": "range",
+          "id": "badge_size_mobile",
+          "label": "角标尺寸（移动端）",
+          "min": 6,
+          "max": 14,
+          "step": 1,
+          "unit": "px",
+          "default": 8,
+          "info": "产品卡片左上角角标文字大小，内边距会跟着缩放。"
+        },
+        {
+          "type": "header",
+          "content": "移动端抽屉顶部图片"
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_promo_image",
+          "label": "抽屉顶部图片",
+          "info": "仅移动端：进入此 Mega menu 后，显示在链接列表上方。"
+        },
+        {
+          "type": "url",
+          "id": "drawer_promo_link",
+          "label": "图片跳转链接"
+        },
+        {
+          "type": "text",
+          "id": "drawer_promo_heading",
+          "label": "图片标题（可选）"
+        },
+        {
+          "type": "text",
+          "id": "drawer_promo_subtext",
+          "label": "图片副标题（可选）"
+        },
+        {
+          "type": "header",
+          "content": "Mobile drawer secondary links"
+        },
+        {
+          "type": "link_list",
+          "id": "drawer_secondary_menu",
+          "label": "Mobile drawer secondary links",
+          "info": "仅移动端：显示在此 Mega menu 最下方的文字链接。留空则不显示。"
+        },
+        {
+          "type": "range",
+          "id": "drawer_secondary_icon_size",
+          "min": 10,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "label": "图标尺寸",
+          "default": 13
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_secondary_icon_1",
+          "label": "图标 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_secondary_icon_2",
+          "label": "图标 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_secondary_icon_3",
+          "label": "图标 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_secondary_icon_4",
+          "label": "图标 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_secondary_icon_5",
+          "label": "图标 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_secondary_icon_6",
+          "label": "图标 6"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:sections.global.settings.button_label.label",
+          "info": "t:sections.global.settings.button_label.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.global.settings.button_link.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_mobile",
+          "label": "按钮文案（移动端，可选）",
+          "info": "留空则使用上方通用按钮文案。"
+        },
+        {
+          "type": "url",
+          "id": "button_link_mobile",
+          "label": "按钮链接（移动端，可选）",
+          "info": "留空则使用上方通用按钮链接。"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_1.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_1",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_1",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.global.settings.image_ratio.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "text",
+          "id": "promo_heading_1",
+          "label": "名称（图片左下角）",
+          "info": "纯图模式下显示在图片左下角，如 Our Story。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_1",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_1",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "url",
+          "id": "promo_link_1",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "text",
+          "id": "promo_tag_1",
+          "label": "Tag（图片左下角）",
+          "info": "优先显示 Tag；为空时回退到上方「名称」。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_1",
+          "label": "Tag 文字颜色",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "color",
+          "id": "promo_tag_bg_1",
+          "label": "Tag 背景颜色",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "range",
+          "id": "promo_tag_bg_opacity_1",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Tag 背景透明度",
+          "default": 0,
+          "info": "0 = 透明背景（如图1白字）；提高可显示底色块。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "range",
+          "id": "promo_tag_size_1",
+          "min": 10,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "label": "Tag 字号",
+          "default": 15
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "select",
+          "id": "promo_tag_weight_1",
+          "label": "Tag 字重",
+          "options": [
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "600"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_1",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_1",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_2.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_2",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_2",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.global.settings.image_ratio.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "text",
+          "id": "promo_heading_2",
+          "label": "名称（图片左下角）",
+          "info": "纯图模式下显示在图片左下角，如 Our Story。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_2",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_2",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "url",
+          "id": "promo_link_2",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "text",
+          "id": "promo_tag_2",
+          "label": "Tag（图片左下角）",
+          "info": "优先显示 Tag；为空时回退到上方「名称」。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_2",
+          "label": "Tag 文字颜色",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "color",
+          "id": "promo_tag_bg_2",
+          "label": "Tag 背景颜色",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "range",
+          "id": "promo_tag_bg_opacity_2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Tag 背景透明度",
+          "default": 0,
+          "info": "0 = 透明背景（如图1白字）；提高可显示底色块。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "range",
+          "id": "promo_tag_size_2",
+          "min": 10,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "label": "Tag 字号",
+          "default": 15
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "select",
+          "id": "promo_tag_weight_2",
+          "label": "Tag 字重",
+          "options": [
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "600"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_2",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_3.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_3",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_3",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.global.settings.image_ratio.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "text",
+          "id": "promo_heading_3",
+          "label": "名称（图片左下角）",
+          "info": "纯图模式下显示在图片左下角，如 Our Story。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_3",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_3",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "url",
+          "id": "promo_link_3",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "text",
+          "id": "promo_tag_3",
+          "label": "Tag（图片左下角）",
+          "info": "优先显示 Tag；为空时回退到上方「名称」。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_3",
+          "label": "Tag 文字颜色",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "color",
+          "id": "promo_tag_bg_3",
+          "label": "Tag 背景颜色",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "range",
+          "id": "promo_tag_bg_opacity_3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Tag 背景透明度",
+          "default": 0,
+          "info": "0 = 透明背景（如图1白字）；提高可显示底色块。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "range",
+          "id": "promo_tag_size_3",
+          "min": 10,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "label": "Tag 字号",
+          "default": 15
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "select",
+          "id": "promo_tag_weight_3",
+          "label": "Tag 字重",
+          "options": [
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "600"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_3",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_4.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_4",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_4",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.global.settings.image_ratio.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "text",
+          "id": "promo_heading_4",
+          "label": "名称（图片左下角）",
+          "info": "纯图模式下显示在图片左下角，如 Our Story。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_4",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_4",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "url",
+          "id": "promo_link_4",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "text",
+          "id": "promo_tag_4",
+          "label": "Tag（图片左下角）",
+          "info": "优先显示 Tag；为空时回退到上方「名称」。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_4",
+          "label": "Tag 文字颜色",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "color",
+          "id": "promo_tag_bg_4",
+          "label": "Tag 背景颜色",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "range",
+          "id": "promo_tag_bg_opacity_4",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Tag 背景透明度",
+          "default": 0,
+          "info": "0 = 透明背景（如图1白字）；提高可显示底色块。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "range",
+          "id": "promo_tag_size_4",
+          "min": 10,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "label": "Tag 字号",
+          "default": 15
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "select",
+          "id": "promo_tag_weight_4",
+          "label": "Tag 字重",
+          "options": [
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "600"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_4",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_4",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_5.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_5",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_5",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.global.settings.image_ratio.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "text",
+          "id": "promo_heading_5",
+          "label": "名称（图片左下角）",
+          "info": "纯图模式下显示在图片左下角，如 Our Story。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_5",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_5",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "url",
+          "id": "promo_link_5",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "text",
+          "id": "promo_tag_5",
+          "label": "Tag（图片左下角）",
+          "info": "优先显示 Tag；为空时回退到上方「名称」。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_5",
+          "label": "Tag 文字颜色",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "color",
+          "id": "promo_tag_bg_5",
+          "label": "Tag 背景颜色",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "range",
+          "id": "promo_tag_bg_opacity_5",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Tag 背景透明度",
+          "default": 0,
+          "info": "0 = 透明背景（如图1白字）；提高可显示底色块。"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "range",
+          "id": "promo_tag_size_5",
+          "min": 10,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "label": "Tag 字号",
+          "default": 15
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "select",
+          "id": "promo_tag_weight_5",
+          "label": "Tag 字重",
+          "options": [
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "600"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_5",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_5",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        }
+      ]
+    },
+    {
+      "type": "mega_menu_tab",
+      "name": "t:sections.header.blocks.mega_menu_tab.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_title",
+          "label": "t:sections.header.blocks.mega_menu.settings.menu_title.label",
+          "info": "t:sections.header.blocks.mega_menu.settings.menu_title.info"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:sections.global.settings.button_label.label",
+          "info": "t:sections.global.settings.button_label.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.global.settings.button_link.label"
+        },
+        {
+          "type": "text",
+          "id": "heading_1",
+          "default": "Collections",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.heading_1.label"
+        },
+        {
+          "type": "text",
+          "id": "heading_2",
+          "default": "Most popular",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.heading_2.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__mobile.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vendor",
+          "label": "t:sections.global.settings.show_product_vendor.label",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "t:sections.global.settings.show_product_price.label",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu_tab.settings.header__tab_1.content"
+        },
+        {
+          "type": "text",
+          "id": "tab_target_1",
+          "default": "Tab heading",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target.label"
+        },
+        {
+          "type": "url",
+          "id": "tab_target_link_1",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target_link.label"
+        },
+        {
+          "type": "product_list",
+          "id": "tab_products_1",
+          "label": "t:sections.global.settings.products.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_product_limit_1",
+          "label": "t:sections.global.settings.product_limit.label",
+          "default": 4,
+          "min": 2,
+          "max": 12,
+          "step": 1
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_icon_1",
+          "label": "t:sections.global.settings.icon_image.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_icon_width_1",
+          "label": "t:sections.global.settings.icon_width.label",
+          "default": 42,
+          "min": 10,
+          "max": 120,
+          "step": 2,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_1.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_1",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_1",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "square",
+          "label": "t:sections.global.settings.image_ratio.label",
+          "info": "t:sections.header.blocks.mega_menu_tab.settings.promo_image_ratio.info"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "text",
+          "id": "promo_heading_1",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_heading.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_1",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_1",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "url",
+          "id": "promo_link_1",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "text",
+          "id": "promo_tag_1",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_tag.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_1",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_1",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_1 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_1",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu_tab.settings.header__tab_2.content"
+        },
+        {
+          "type": "text",
+          "id": "tab_target_2",
+          "default": "Tab heading",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target.label"
+        },
+        {
+          "type": "url",
+          "id": "tab_target_link_2",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target_link.label"
+        },
+        {
+          "type": "product_list",
+          "id": "tab_products_2",
+          "label": "t:sections.global.settings.products.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_product_limit_2",
+          "label": "t:sections.global.settings.product_limit.label",
+          "default": 4,
+          "min": 2,
+          "max": 12,
+          "step": 1
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_icon_2",
+          "label": "t:sections.global.settings.icon_image.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_icon_width_2",
+          "label": "t:sections.global.settings.icon_width.label",
+          "default": 42,
+          "min": 10,
+          "max": 120,
+          "step": 2,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_2.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_2",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_2",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "square",
+          "label": "t:sections.global.settings.image_ratio.label",
+          "info": "t:sections.header.blocks.mega_menu_tab.settings.promo_image_ratio.info"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "text",
+          "id": "promo_heading_2",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_heading.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_2",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_2",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "url",
+          "id": "promo_link_2",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "text",
+          "id": "promo_tag_2",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_tag.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_2",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_2",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_2 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu_tab.settings.header__tab_3.content"
+        },
+        {
+          "type": "text",
+          "id": "tab_target_3",
+          "default": "Tab heading",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target.label"
+        },
+        {
+          "type": "url",
+          "id": "tab_target_link_3",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target_link.label"
+        },
+        {
+          "type": "product_list",
+          "id": "tab_products_3",
+          "label": "t:sections.global.settings.products.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_product_limit_3",
+          "label": "t:sections.global.settings.product_limit.label",
+          "default": 4,
+          "min": 2,
+          "max": 12,
+          "step": 1
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_icon_3",
+          "label": "t:sections.global.settings.icon_image.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_icon_width_3",
+          "label": "t:sections.global.settings.icon_width.label",
+          "default": 42,
+          "min": 10,
+          "max": 120,
+          "step": 2,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_3.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_3",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_3",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "square",
+          "label": "t:sections.global.settings.image_ratio.label",
+          "info": "t:sections.header.blocks.mega_menu_tab.settings.promo_image_ratio.info"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "text",
+          "id": "promo_heading_3",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_heading.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_3",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_3",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "url",
+          "id": "promo_link_3",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "text",
+          "id": "promo_tag_3",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_tag.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_3",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_3",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_3 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu_tab.settings.header__tab_4.content"
+        },
+        {
+          "type": "text",
+          "id": "tab_target_4",
+          "default": "Tab heading",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target.label"
+        },
+        {
+          "type": "url",
+          "id": "tab_target_link_4",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target_link.label"
+        },
+        {
+          "type": "product_list",
+          "id": "tab_products_4",
+          "label": "t:sections.global.settings.products.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_product_limit_4",
+          "label": "t:sections.global.settings.product_limit.label",
+          "default": 4,
+          "min": 2,
+          "max": 12,
+          "step": 1
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_icon_4",
+          "label": "t:sections.global.settings.icon_image.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_icon_width_4",
+          "label": "t:sections.global.settings.icon_width.label",
+          "default": 42,
+          "min": 10,
+          "max": 120,
+          "step": 2,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_4.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_4",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_4",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "square",
+          "label": "t:sections.global.settings.image_ratio.label",
+          "info": "t:sections.header.blocks.mega_menu_tab.settings.promo_image_ratio.info"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "text",
+          "id": "promo_heading_4",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_heading.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_4",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_4",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "url",
+          "id": "promo_link_4",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "text",
+          "id": "promo_tag_4",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_tag.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_4",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_4",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_4 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_4",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu_tab.settings.header__tab_5.content"
+        },
+        {
+          "type": "text",
+          "id": "tab_target_5",
+          "default": "Tab heading",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target.label"
+        },
+        {
+          "type": "url",
+          "id": "tab_target_link_5",
+          "label": "t:sections.header.blocks.mega_menu_tab.settings.target_link.label"
+        },
+        {
+          "type": "product_list",
+          "id": "tab_products_5",
+          "label": "t:sections.global.settings.products.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_product_limit_5",
+          "label": "t:sections.global.settings.product_limit.label",
+          "default": 4,
+          "min": 2,
+          "max": 12,
+          "step": 1
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_icon_5",
+          "label": "t:sections.global.settings.icon_image.label"
+        },
+        {
+          "type": "range",
+          "id": "tab_icon_width_5",
+          "label": "t:sections.global.settings.icon_width.label",
+          "default": 42,
+          "min": 10,
+          "max": 120,
+          "step": 2,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.header__promo_5.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_5",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_image.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "select",
+          "id": "promo_image_ratio_5",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.global.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.global.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.global.settings.image_ratio.options__3.label"
+            },
+            {
+              "value": "landscape",
+              "label": "t:sections.global.settings.image_ratio.options__4.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.global.settings.image_ratio.options__5.label"
+            }
+          ],
+          "default": "square",
+          "label": "t:sections.global.settings.image_ratio.label",
+          "info": "t:sections.header.blocks.mega_menu_tab.settings.promo_image_ratio.info"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "text",
+          "id": "promo_heading_5",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_heading.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "inline_richtext",
+          "id": "promo_subtext_5",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_subtext.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "checkbox",
+          "id": "promo_overlay_content_5",
+          "default": true,
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_overlay_content.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "url",
+          "id": "promo_link_5",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "text",
+          "id": "promo_tag_5",
+          "label": "t:sections.header.blocks.mega_menu.settings.promo_tag.label"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "color",
+          "id": "promo_color_text_5",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "color",
+          "id": "promo_color_overlay_5",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#000000"
+        },
+        {
+          "visible_if": "{{ block.settings.promo_image_5 != blank }}",
+          "type": "range",
+          "id": "promo_overlay_opacity_5",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  }
+}
+{% endschema %}

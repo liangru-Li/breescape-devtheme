@@ -1,0 +1,633 @@
+{%- doc -%}
+  Renders an SVG icon from a comprehensive icon library with customizable size and styling.
+
+  @param {string} icon - Icon name to render (e.g., 'cart', 'search', 'close')
+  @param {string} [size] - Icon size: 'sm', 'md', 'lg'
+  @param {string} [class] - Additional CSS classes
+
+  @example
+  {% render 'icon',
+    icon: 'cart',
+    size: 'lg'
+  %}
+{%- enddoc -%}
+
+{%- capture class -%}icon icon-{{ icon | handle }} icon-{{ size | default: 'md' }}{% if class != blank %} {{ class }}{% endif %}{%- endcapture -%}
+{%- case icon -%}
+  {%- when '3d-model' -%}
+    <svg class="{{ class }}" viewBox="0 0 18 21" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path d="M7.67998 20.629L1.28002 16.723C0.886205 16.4784 0.561675 16.1368 0.337572 15.731C0.113468 15.3251 -0.00274623 14.8686 -1.39464e-05 14.405V6.59497C-0.00238367 6.13167 0.113819 5.6755 0.33751 5.26978C0.561202 4.86405 0.884959 4.52227 1.278 4.27698L7.67796 0.377014C8.07524 0.131403 8.53292 0.000877102 8.99999 9.73346e-08C9.46678 -0.000129605 9.92446 0.129369 10.322 0.374024V0.374024L16.722 4.27399C17.1163 4.51985 17.4409 4.86287 17.6647 5.27014C17.8885 5.67742 18.0039 6.13529 18 6.59998V14.409C18.0026 14.8725 17.8864 15.3289 17.6625 15.7347C17.4386 16.1405 17.1145 16.4821 16.721 16.727L10.321 20.633C9.92264 20.8742 9.46565 21.0012 8.99999 21C8.53428 20.9998 8.07761 20.8714 7.67998 20.629V20.629ZM8.72398 2.078L2.32396 5.97803C2.22303 6.04453 2.14066 6.13551 2.08452 6.24255C2.02838 6.34959 2.00031 6.46919 2.00298 6.59003V14.4C2.00026 14.5205 2.02818 14.6396 2.08415 14.7463C2.14013 14.853 2.22233 14.9438 2.32298 15.01L7.99999 18.48V10.919C8.00113 10.5997 8.08851 10.2867 8.25292 10.0129C8.41732 9.73922 8.65267 9.51501 8.93401 9.36401L15.446 5.841L9.28001 2.08002C9.19614 2.02738 9.09901 1.99962 8.99999 2C8.90251 1.99972 8.8069 2.02674 8.72398 2.078V2.078Z"></path>
+    </svg>
+
+  {%- when 'accept' -%}
+    <svg class="{{ class }}" viewBox="0 0 15 15" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.83301 8.08333L5.74967 11L12.1663 4"></path>
+    </svg>
+
+  {%- when 'account' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <rect width="10.5" height="10.5" x="6.75" y="1.75" rx="5.25"></rect>
+      <path stroke-linecap="round" d="M12 15.5c1.5 0 4 .333 4.5.5.5.167 3.7.8 4.5 2 1 1.5 1 2 1 4m-10-6.5c-1.5 0-4 .333-4.5.5-.5.167-3.7.8-4.5 2-1 1.5-1 2-1 4"></path>
+    </svg>
+
+  {%- when 'account-2' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 17" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <rect width="6.5" height="6.5" x="4.75" y="1.917" rx="3.25"></rect>
+      <path stroke-linecap="round" d="M8 10.834c1 0 2.667.222 3 .333.333.11 2.467.533 3 1.333.667 1 .667 1.334.667 2.667M8 10.834c-1 0-2.667.222-3 .333-.333.11-2.467.533-3 1.333-.667 1-.667 1.334-.667 2.667"></path>
+    </svg>
+
+  {%- when 'alert-circle' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 16V11M12.5 8C12.5 8.27614 12.2761 8.5 12 8.5C11.7239 8.5 11.5 8.27614 11.5 8M12.5 8C12.5 7.72386 12.2761 7.5 12 7.5C11.7239 7.5 11.5 7.72386 11.5 8M12.5 8H11.5M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"></path>
+    </svg>
+
+  {%- when 'alert-circle-filled' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12.75 7C12.75 6.58579 12.4142 6.25 12 6.25C11.5858 6.25 11.25 6.58579 11.25 7V13C11.25 13.4142 11.5858 13.75 12 13.75C12.4142 13.75 12.75 13.4142 12.75 13V7ZM12 15.25C11.3096 15.25 10.75 15.8096 10.75 16.5C10.75 17.1904 11.3096 17.75 12 17.75C12.6904 17.75 13.25 17.1904 13.25 16.5C13.25 15.8096 12.6904 15.25 12 15.25Z"></path>
+    </svg>
+
+  {%- when 'alert-triangle' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 13V9M12.5 16.5C12.5 16.7761 12.2761 17 12 17C11.7239 17 11.5 16.7761 11.5 16.5M12.5 16.5C12.5 16.2239 12.2761 16 12 16C11.7239 16 11.5 16.2239 11.5 16.5M12.5 16.5H11.5M19.3311 10.0912L18.98 9.46437C16.6988 5.39063 15.5581 3.35377 14.0576 2.67625C12.7495 2.08558 11.2505 2.08558 9.94239 2.67625C8.44189 3.35377 7.30124 5.39064 5.01995 9.46438L4.66894 10.0912C2.47606 14.007 1.37961 15.965 1.56302 17.5683C1.72303 18.967 2.46536 20.2335 3.60763 21.0566C4.91688 22 7.16092 22 11.649 22H12.351C16.8391 22 19.0831 22 20.3924 21.0566C21.5346 20.2335 22.277 18.967 22.437 17.5683C22.6204 15.965 21.5239 14.007 19.3311 10.0912Z"></path>
+    </svg>
+
+  {%- when 'arrow-down' -%}
+    <svg class="{{ class }}" viewBox="0 0 12 12" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 1.5L6 10.5M6 10.5L9.5 7M6 10.5L2.5 7"></path>
+    </svg>
+
+  {%- when 'arrow-left' -%}
+    <svg class="{{ class }}" viewBox="0 0 21 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M17.996 10h-15M2.996 10l5.833 5.833M2.996 10l5.833-5.833"></path>
+    </svg>
+
+  {%- when 'arrow-right' -%}
+    <svg class="{{ class }}" viewBox="0 0 21 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3 10H18M18 10L12.1667 4.16675M18 10L12.1667 15.8334"></path>
+    </svg>
+
+  {%- when 'arrow-left-long' -%}
+    <svg class="{{ class }}" viewBox="0 0 37 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10 5L3 11.9999M3 11.9999L10 18.9999M3 11.9999H33.5"></path>
+    </svg>
+
+  {%- when 'arrow-right-long' -%}
+    <svg class="{{ class }}" viewBox="0 0 37 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M26.5 5L33.5 11.9999M33.5 11.9999L26.5 18.9999M33.5 11.9999H3"></path>
+    </svg>
+
+  {%- when 'arrow-top' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21L12 3M12 3L19 10M12 3L5 10"></path>
+    </svg>
+
+  {%- when 'calendar' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5.33325 0.666668V3.40544M10.6666 0.666668V3.40544M14.4999 6.33333H1.49994M6.93325 14.6667H9.06659C11.0268 14.6667 12.0069 14.6667 12.7556 14.2852C13.4141 13.9496 13.9496 13.4142 14.2851 12.7556C14.6666 12.0069 14.6666 11.0269 14.6666 9.06667V7.93334C14.6666 5.97315 14.6666 4.99306 14.2851 4.24437C13.9496 3.5858 13.4141 3.05037 12.7556 2.71481C12.0069 2.33333 11.0268 2.33333 9.06659 2.33333H6.93325C4.97307 2.33333 3.99298 2.33333 3.24429 2.71481C2.58572 3.05037 2.05029 3.5858 1.71473 4.24437C1.33325 4.99306 1.33325 5.97315 1.33325 7.93333V9.06667C1.33325 11.0269 1.33325 12.0069 1.71473 12.7556C2.05029 13.4142 2.58572 13.9496 3.24429 14.2852C3.99298 14.6667 4.97307 14.6667 6.93325 14.6667Z"></path>
+    </svg>
+
+  {%- when 'caret' -%}
+    <svg class="{{ class }}" viewBox="0 0 22 11" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path d="M8.57584 1.32365C9.7741 -0.319412 12.2254 -0.319412 13.4236 1.32365L21.392 12.25H0.607422L8.57584 1.32365Z"></path>
+    </svg>
+
+  {%- when 'cart' -%}
+    {%- case settings.cart_icon -%}
+      {%- when 'bag' -%}
+        <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <path stroke-linecap="round" stroke-miterlimit="10" d="M7.70023 9.14V6.36C7.70023 3.81 9.76023 1.75 12.3002 1.75C14.8402 1.75 16.9102 3.81 16.9102 6.36V9.14M21.8502 19.59L21.1902 9.15C21.1102 7.89 20.0502 6.91 18.7702 6.91H5.83023C4.55023 6.91 3.49023 7.89 3.41023 9.15L2.75023 19.59C2.66023 20.96 3.77023 22.13 5.17023 22.13H19.4402C20.8402 22.13 21.9402 20.97 21.8602 19.59H21.8502Z"></path>
+        </svg>
+
+      {%- when 'minimal-bag' -%}
+        <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.6627 6.21C15.6627 7.05 15.2727 7.85 14.5827 8.44C13.8927 9.03 12.9527 9.36 11.9827 9.36C11.0127 9.36 10.0727 9.03 9.38273 8.44C8.69273 7.85 8.30273 7.05 8.30273 6.21M21.6827 12.06C22.8927 20.73 20.4727 21.98 11.9827 21.98C3.49273 21.98 1.08273 20.73 2.29273 12.05C3.69273 2.03 4.72273 2 11.9927 2C19.2627 2 20.2827 2.03 21.6827 12.06Z"></path>
+        </svg>
+
+      {%- when 'tote-bag' -%}
+        <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <path stroke-miterlimit="10" d="M7.1802 7.58C7.1802 4.36 9.2402 1.75 11.7902 1.75C14.3402 1.75 16.4002 4.36 16.4002 7.58M11.7902 7.58C2.0402 7.58 0.690197 6.97 2.3502 16.18C3.3002 21.48 3.9802 22.22 11.7902 22.22C19.6002 22.22 20.2802 21.47 21.2302 16.18C22.8902 6.97 21.5502 7.58 11.7902 7.58Z"></path>
+        </svg>
+
+      {%- else -%}
+        <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M1 1h.5v0c.226 0 .339 0 .44.007a3 3 0 0 1 2.62 1.976c.034.095.065.204.127.42l.17.597m0 0 1.817 6.358c.475 1.664.713 2.496 1.198 3.114a4 4 0 0 0 1.633 1.231c.727.297 1.592.297 3.322.297h2.285c1.75 0 2.626 0 3.359-.302a4 4 0 0 0 1.64-1.253c.484-.627.715-1.472 1.175-3.161l.06-.221c.563-2.061.844-3.092.605-3.906a3 3 0 0 0-1.308-1.713C19.92 4 18.853 4 16.716 4H4.857ZM12 20a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm8 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"></path>
+        </svg>
+    {%- endcase -%}
+
+  {%- when 'check-circle' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12L11 14L16 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"></path>
+    </svg>
+
+  {%- when 'check-circle-filled' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM17.0303 10.0303C17.3232 9.73744 17.3232 9.26256 17.0303 8.96967C16.7374 8.67678 16.2626 8.67678 15.9697 8.96967L11 13.9393L9.03033 11.9697C8.73744 11.6768 8.26256 11.6768 7.96967 11.9697C7.67678 12.2626 7.67678 12.7374 7.96967 13.0303L10.4697 15.5303C10.6103 15.671 10.8011 15.75 11 15.75C11.1989 15.75 11.3897 15.671 11.5303 15.5303L17.0303 10.0303Z"></path>
+    </svg>
+
+  {%- when 'chevron-down' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 9L12 15L18 9"></path>
+    </svg>
+
+  {%- when 'chevron-up' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 15L12 9L18 15"></path>
+    </svg>
+
+  {%- when 'chevron-left' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M14 6L8 12L14 18"></path>
+    </svg>
+
+  {%- when 'chevron-right' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10 6L16 12L10 18"></path>
+    </svg>
+
+  {%- when 'chevron-menu' -%}
+    <svg class="{{ class }}" viewBox="0 0 10 7" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m1 1 4 4 4-4"></path>
+    </svg>
+
+  {%- when 'close' -%}
+    <svg class="{{ class }}" viewBox="0 0 20 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15L15 5M5 5L15 15"></path>
+    </svg>
+
+  {%- when 'close-2' -%}
+    <svg class="{{ class }}" viewBox="0 0 14 15" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m1 13.5 12-12m-12 0 12 12"></path>
+    </svg>
+
+  {%- when 'close-circle-filled' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12.917 1.25C18.8541 1.25 23.667 6.06294 23.667 12C23.667 17.9371 18.8541 22.75 12.917 22.75C6.97993 22.75 2.16699 17.9371 2.16699 12C2.16699 6.06294 6.97993 1.25 12.917 1.25ZM16.4473 8.46973C16.1544 8.17683 15.6796 8.17683 15.3867 8.46973L12.917 10.9395L10.4473 8.46973C10.1544 8.17683 9.67961 8.17683 9.38672 8.46973C9.09383 8.76262 9.09383 9.23738 9.38672 9.53027L11.8564 12L9.38672 14.4697C9.09383 14.7626 9.09383 15.2374 9.38672 15.5303C9.67961 15.8232 10.1544 15.8232 10.4473 15.5303L12.917 13.0605L15.3867 15.5303C15.6796 15.8232 16.1544 15.8232 16.4473 15.5303C16.7402 15.2374 16.7402 14.7626 16.4473 14.4697L13.9775 12L16.4473 9.53027C16.7402 9.23738 16.7402 8.76262 16.4473 8.46973Z"></path>
+    </svg>
+  
+  {%- when 'comment' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5.33325 6.66665H10.6666M5.33325 9.33331H7.99992M14.6666 7.99998C14.6666 11.6819 11.6818 14.6666 7.99992 14.6666C7.24034 14.6666 6.58895 14.5585 5.9841 14.3421C5.41245 14.1376 5.12661 14.0354 5.01693 14.0096C4.00499 13.7716 3.58519 14.4651 2.71302 14.6105C2.28464 14.6818 1.90348 14.3311 1.93903 13.8983C1.97011 13.5198 2.23184 13.1619 2.33628 12.7985C2.5534 12.0429 2.25878 11.4701 1.94752 10.7982C1.55335 9.94729 1.33325 8.99931 1.33325 7.99998C1.33325 4.31808 4.31802 1.33331 7.99992 1.33331C11.6818 1.33331 14.6666 4.31808 14.6666 7.99998Z"></path>
+    </svg>
+
+  {%- when 'copy' -%}
+    <svg class="{{ class }}" viewBox="0 0 14 14" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.93062 4.66666H10.9334C11.7735 4.66666 12.1935 4.66666 12.5144 4.83015C12.7966 4.97396 13.0261 5.20343 13.1699 5.48567C13.3334 5.80654 13.3334 6.22658 13.3334 7.06666V10.4333C13.3334 11.2734 13.3334 11.6934 13.1699 12.0143C13.0261 12.2966 12.7966 12.526 12.5144 12.6698C12.1935 12.8333 11.7735 12.8333 10.9334 12.8333H7.56673C6.72665 12.8333 6.30661 12.8333 5.98575 12.6698C5.7035 12.526 5.47403 12.2966 5.33022 12.0143C5.16673 11.6934 5.16673 11.2734 5.16673 10.4333V9.43054M4.06673 9.33332H7.4334C8.27348 9.33332 8.69352 9.33332 9.01439 9.16983C9.29663 9.02602 9.5261 8.79655 9.66991 8.51431C9.8334 8.19344 9.8334 7.7734 9.8334 6.93332V3.56666C9.8334 2.72658 9.8334 2.30654 9.66991 1.98567C9.5261 1.70343 9.29663 1.47396 9.01439 1.33015C8.69352 1.16666 8.27348 1.16666 7.4334 1.16666H4.06673C3.22665 1.16666 2.80661 1.16666 2.48575 1.33015C2.2035 1.47396 1.97403 1.70343 1.83022 1.98567C1.66673 2.30654 1.66673 2.72658 1.66673 3.56665V6.93332C1.66673 7.7734 1.66673 8.19344 1.83022 8.51431C1.97403 8.79655 2.2035 9.02602 2.48575 9.16983C2.80661 9.33332 3.22665 9.33332 4.06673 9.33332Z"></path>
+    </svg>
+
+  {%- when 'countdown' -%}
+    <svg class="{{ class }}" viewBox="0 0 32 32" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path class="fill" d="M19.3335 25.3335C24.8503 25.3335 29.3335 20.8503 29.3335 15.3335C29.3335 9.81674 24.8503 5.3335 19.3335 5.3335C13.8167 5.3335 9.3335 9.81674 9.3335 15.3335C9.3335 20.8503 13.8167 25.3335 19.3335 25.3335Z"/>
+      <path stroke-linecap="round" stroke-miterlimit="10" d="M6.63984 16.6135C6.63984 14.3335 7.31984 12.1068 8.5865 10.2002C9.85317 8.30683 11.6532 6.82683 13.7598 5.94683C15.8665 5.08016 18.1865 4.84016 20.4265 5.2935C22.6665 5.7335 24.7198 6.84016 26.3332 8.4535C27.9465 10.0668 29.0398 12.1202 29.4932 14.3602C29.9332 16.6002 29.7065 18.9202 28.8398 21.0268C27.9732 23.1335 26.4932 24.9335 24.5865 26.2002C22.6932 27.4668 20.6665 28.0002 18.1732 28.1468M17.7732 17.3335L23.1065 11.7868M2.6665 21.2268H13.0132M6.17317 25.6002H13.0132M9.35984 29.9735H13.0132M19.7732 1.5735C18.4665 1.2535 17.1065 1.2535 15.7998 1.5735"/>
+    </svg>
+
+  {%- when 'countdown-compact' -%}
+    <svg class="{{ class }}" viewBox="0 0 20 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-miterlimit="10" d="M4.15002 10.3833C4.15002 8.95831 4.57502 7.56665 5.36669 6.37498C6.15835 5.19165 7.28335 4.26665 8.60002 3.71665C9.91669 3.17498 11.3667 3.02498 12.7667 3.30831C14.1667 3.58331 15.45 4.27498 16.4584 5.28331C17.4667 6.29165 18.15 7.57498 18.4334 8.97498C18.7084 10.375 18.5667 11.825 18.025 13.1416C17.4834 14.4583 16.5584 15.5833 15.3667 16.375C14.1834 17.1666 12.9167 17.5 11.3584 17.5916M11.1084 10.8333L14.4417 7.36665M1.66669 13.2666H8.13335M3.85835 16H8.13335M5.85002 18.7333H8.13335M12.3584 0.983313C11.5417 0.783313 10.6917 0.783313 9.87502 0.983313"/>
+    </svg>
+
+  {%- when 'currency' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M0.666687 2.66675V5.33341C0.666687 6.43808 2.45735 7.33341 4.66669 7.33341C6.87602 7.33341 8.66669 6.43808 8.66669 5.33341V2.66675"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M0.666687 5.3335V8.00016C0.666687 9.10483 2.45735 10.0002 4.66669 10.0002C5.69135 10.0002 6.62535 9.80683 7.33335 9.49016"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M0.666687 8V10.6667C0.666687 11.7713 2.45735 12.6667 4.66669 12.6667C5.69135 12.6667 6.62602 12.474 7.33335 12.1573"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.66669 4.66675C6.87583 4.66675 8.66669 3.77132 8.66669 2.66675C8.66669 1.56218 6.87583 0.666748 4.66669 0.666748C2.45755 0.666748 0.666687 1.56218 0.666687 2.66675C0.666687 3.77132 2.45755 4.66675 4.66669 4.66675Z"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M7.33337 8V10.6667C7.33337 11.7713 9.12404 12.6667 11.3334 12.6667C13.5427 12.6667 15.3334 11.7713 15.3334 10.6667V8"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M7.33337 10.6667V13.3334C7.33337 14.4381 9.12404 15.3334 11.3334 15.3334C13.5427 15.3334 15.3334 14.4381 15.3334 13.3334V10.6667"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M11.3334 10C13.5425 10 15.3334 9.10457 15.3334 8C15.3334 6.89543 13.5425 6 11.3334 6C9.12424 6 7.33337 6.89543 7.33337 8C7.33337 9.10457 9.12424 10 11.3334 10Z"></path>
+    </svg>
+
+  {%- when 'decrease' -%}
+    <svg class="{{ class }}" viewBox="0 0 8 6" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M0.5 1.25L4 4.75L7.5 1.25"></path>
+    </svg>
+
+  {%- when 'decline' -%}
+    <svg class="{{ class }}" viewBox="0 0 15 15" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 11L11 4M4 4L11 11"></path>
+    </svg>
+
+  {%- when 'direction' -%}
+    <svg class="{{ class }}" viewBox="0 0 20 20" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path d="M13.3334 0C11.9409 0 10.5309 0.454167 9.3667 1.29167C12.4334 2.33 15 5.10917 15 9.16667C15 11.4042 13.635 13.9367 12.1117 16.0733C12.4134 16.3975 12.6434 16.6342 12.7417 16.7333C12.8984 16.8908 13.1109 16.9792 13.3334 16.9792C13.5559 16.9792 13.7684 16.8908 13.925 16.7333C14.5467 16.1058 20 10.5 20 6.66667C20 2.49333 16.6109 0 13.3334 0Z"></path>
+      <path d="M6.66667 2.5C3.38917 2.5 0 4.99333 0 9.16667C0 13 5.45333 18.6058 6.075 19.2333C6.23167 19.3908 6.44417 19.4792 6.66667 19.4792C6.88917 19.4792 7.10167 19.3908 7.25833 19.2333C7.88 18.6058 13.3333 13 13.3333 9.16667C13.3333 4.99333 9.94417 2.5 6.66667 2.5ZM6.66667 10.8333C5.74583 10.8333 5 10.0875 5 9.16667C5 8.24583 5.74583 7.5 6.66667 7.5C7.5875 7.5 8.33333 8.24583 8.33333 9.16667C8.33333 10.0875 7.5875 10.8333 6.66667 10.8333Z"></path>
+    </svg>
+
+  {%- when 'discount' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3 10.349C3 11.3274 3 11.8166 3.11052 12.2769C3.20851 12.6851 3.37012 13.0753 3.58944 13.4331C3.83681 13.8368 4.18271 14.1827 4.87451 14.8745L8.47452 18.4745C10.0586 20.0586 10.8506 20.8506 11.7639 21.1474C12.5673 21.4084 13.4327 21.4084 14.2361 21.1474C15.1494 20.8506 15.9414 20.0586 17.5255 18.4745L18.4745 17.5255C20.0586 15.9414 20.8506 15.1494 21.1474 14.2361C21.4084 13.4327 21.4084 12.5673 21.1474 11.7639C20.8506 10.8506 20.0586 10.0586 18.4745 8.47452L14.8745 4.87452C14.1827 4.18271 13.8368 3.83681 13.4331 3.58944C13.0753 3.37012 12.6851 3.20851 12.2769 3.11052C11.8166 3 11.3274 3 10.349 3H9.4C7.15979 3 6.03968 3 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3 6.03968 3 7.15979 3 9.4V10.349Z"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 10C12 11.1046 11.1046 12 10 12C8.89543 12 8 11.1046 8 10C8 8.89543 8.89543 8 10 8C11.1046 8 12 8.89543 12 10Z"></path>
+    </svg>
+
+  {%- when 'drag' -%}
+    <svg class="{{ class }}" viewBox="0 0 12 17" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-width="1.5" d="M1 1L0.999999 16"></path>
+      <path stroke-linecap="round" stroke-width="1.5" d="M6 1L6 16"></path>
+      <path stroke-linecap="round" stroke-width="1.5" d="M11 1L11 16"></path>
+    </svg>
+
+  {%- when 'edit' -%}
+    <svg class="{{ class }}" viewBox="0 0 14 14" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8.99984 2.33337C8.99984 3.80613 10.1937 5.00004 11.6665 5.00004M1.6665 12.3334L1.95314 10.9002C2.09439 10.1939 2.16502 9.84078 2.29419 9.51149C2.40883 9.2192 2.55749 8.94143 2.73709 8.68391C2.93944 8.39378 3.19409 8.13913 3.7034 7.62983L9.66659 1.6667C10.403 0.930324 11.5969 0.930339 12.3332 1.66673V1.66673C13.0696 2.4031 13.0696 3.59697 12.3332 4.33333L6.37004 10.2965C5.86075 10.8058 5.6061 11.0604 5.31597 11.2628C5.05845 11.4424 4.78068 11.591 4.4884 11.7057C4.1591 11.8349 3.80597 11.9055 3.0997 12.0467L1.6665 12.3334Z"></path>
+    </svg>
+
+  {%- when 'ellipse' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <circle fill="currentColor" cx="8" cy="8" r="5"></circle>
+      <circle cx="8" cy="8" r="6.5" stroke-opacity="0.3" stroke-width="3"></circle>
+    </svg>
+
+  {%- when 'empty' -%}
+    <svg class="{{ class }}" viewBox="0 0 60 61" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M23.75 25.5a1.25 1.25 0 1 1-2.5 0m2.5 0a1.25 1.25 0 1 0-2.5 0m2.5 0h-2.5m17.5 0a1.25 1.25 0 1 1-2.5 0m2.5 0a1.25 1.25 0 1 0-2.5 0m2.5 0h-2.5m3.75 15c-2.28-3.036-5.91-5-10-5s-7.72 1.964-10.001 5M30 55.5v0c13.807 0 25-11.193 25-25v0c0-13.807-11.193-25-25-25v0c-13.807 0-25 11.193-25 25v0c0 13.807 11.193 25 25 25Z"></path>
+    </svg>
+
+  {%- when 'eye' -%}
+    <svg class="{{ class }}" viewBox="0 0 20 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" d="M18.3334 10C18.3334 12.0833 15.8334 16.6667 10 16.6667C4.16669 16.6667 1.66669 12.0833 1.66669 10C1.66669 7.91668 4.16669 3.33334 10 3.33334C15.8334 3.33334 18.3334 7.91668 18.3334 10Z"></path>
+      <path stroke-linecap="round" d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61931 12.5 7.50002 11.3807 7.50002 10C7.50002 8.6193 8.61931 7.50001 10 7.50001C11.3807 7.50001 12.5 8.6193 12.5 10Z"></path>
+    </svg>
+
+  {%- when 'filter' -%}
+    <svg class="{{ class }}" viewBox="0 0 22 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" d="M1.5 14H4M4 14C4 15.6569 5.34315 17 7 17C8.65685 17 10 15.6569 10 14C10 12.3431 8.65685 11 7 11C5.34315 11 4 12.3431 4 14ZM18 6H20.5M18 6C18 7.65685 16.6569 9 15 9C13.3431 9 12 7.65685 12 6C12 4.34315 13.3431 3 15 3C16.6569 3 18 4.34315 18 6ZM13 14H20.5M1.5 6H9"></path>
+    </svg>
+
+  {%- when 'hamburger' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" d="M3 6H21M3 12H11M3 18H16"></path>
+    </svg>
+
+  {%- when 'home' -%}
+    <svg class="{{ class }}" viewBox="0 0 20 21" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M18.333 14.667v-3.713c0-1.355 0-2.033-.165-2.66a5 5 0 0 0-.818-1.702c-.387-.521-.916-.945-1.974-1.791l-.378-.303h0c-1.784-1.427-2.676-2.14-3.665-2.414a5 5 0 0 0-2.666 0c-.99.274-1.881.987-3.665 2.414h0l-.378.303c-1.058.846-1.587 1.27-1.974 1.79a5 5 0 0 0-.818 1.703c-.165.627-.165 1.305-.165 2.66v3.713a4.167 4.167 0 0 0 4.166 4.166c.92 0 1.667-.746 1.667-1.666v-3.334a2.5 2.5 0 0 1 5 0v3.334c0 .92.746 1.666 1.667 1.666a4.167 4.167 0 0 0 4.166-4.166Z"></path>
+    </svg>
+
+  {%- when 'increase' -%}
+    <svg class="{{ class }}" viewBox="0 0 8 6" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M0.5 4.75L4 1.25L7.5 4.75"></path>
+    </svg>
+
+  {%- when 'info' -%}
+    <svg class="{{ class }}" viewBox="0 0 25 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12.5 16V11M13 8C13 8.27614 12.7761 8.5 12.5 8.5C12.2239 8.5 12 8.27614 12 8M13 8C13 7.72386 12.7761 7.5 12.5 7.5C12.2239 7.5 12 7.72386 12 8M13 8H12M22.5 12C22.5 17.5228 18.0228 22 12.5 22C6.97715 22 2.5 17.5228 2.5 12C2.5 6.47715 6.97715 2 12.5 2C18.0228 2 22.5 6.47715 22.5 12Z"></path>
+    </svg>
+
+  {%- when 'language' -%}
+    <svg class="{{ class }}" viewBox="0 0 18 18" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.46661 13.6167L3.44161 13.025C3.53831 12.9654 3.61815 12.882 3.67358 12.7829C3.729 12.6837 3.75816 12.572 3.75828 12.4584L3.77495 9.45005C3.77628 9.32533 3.81392 9.20371 3.88328 9.10005L5.53328 6.50838C5.58279 6.43181 5.64731 6.36607 5.72293 6.31512C5.79855 6.26416 5.88371 6.22906 5.97327 6.21193C6.06283 6.1948 6.15493 6.19599 6.24402 6.21543C6.33311 6.23487 6.41733 6.27216 6.49161 6.32505L8.12495 7.50838C8.26587 7.60663 8.4374 7.65099 8.60828 7.63338L11.2333 7.27505C11.3925 7.25312 11.538 7.17296 11.6416 7.05005L13.4916 4.91672C13.6013 4.78667 13.6579 4.62 13.6499 4.45005L13.5583 2.42505"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M13.925 15.3083L13.025 14.4083C12.9418 14.3251 12.8384 14.2648 12.725 14.2333L10.9334 13.7666C10.776 13.7235 10.6399 13.6243 10.5508 13.4876C10.4617 13.3509 10.4259 13.1863 10.45 13.025L10.6417 11.675C10.6607 11.5614 10.7081 11.4545 10.7795 11.3642C10.8509 11.2739 10.944 11.203 11.05 11.1583L13.5834 10.1C13.701 10.0509 13.8303 10.0366 13.9558 10.0587C14.0814 10.0809 14.1979 10.1386 14.2917 10.225L16.3667 12.125"></path>
+    </svg>
+
+  {%- when 'loader' -%}
+    <svg class="{{ class }}" viewBox="0 0 18 18" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M0.7,9.9C0.5,5.2,4.1,1.2,8.5,1c4.7-0.3,8.9,3.8,8.8,8.8"></path>
+    </svg>
+
+  {%- when 'location' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" d="M4 20L20 4M20 4V15M20 4H9"></path>
+    </svg>
+
+  {%- when 'lock' -%}
+    <svg class="{{ class }}" viewBox="0 0 20 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" d="M5.83333 6.66675V5.83341C5.83333 4.74781 5.83333 4.205 5.97218 3.76463C6.26651 2.83114 6.99772 2.09993 7.93122 1.8056C8.37159 1.66675 8.91439 1.66675 10 1.66675V1.66675C11.0856 1.66675 11.6284 1.66675 12.0688 1.8056C13.0023 2.09993 13.7335 2.83114 14.0278 3.76463C14.1667 4.205 14.1667 4.74781 14.1667 5.83341V6.66675M10 11.6667V13.3334M8.33333 18.3334H11.6667C13.3741 18.3334 14.2278 18.3334 14.909 18.077C15.9871 17.6713 16.8379 16.8205 17.2436 15.7424C17.5 15.0612 17.5 14.2075 17.5 12.5001V12.5001C17.5 10.7926 17.5 9.93892 17.2436 9.25775C16.8379 8.17969 15.9871 7.32888 14.909 6.92312C14.2278 6.66675 13.3741 6.66675 11.6667 6.66675H8.33333C6.62589 6.66675 5.77218 6.66675 5.091 6.92312C4.01294 7.32888 3.16213 8.17969 2.75638 9.25775C2.5 9.93892 2.5 10.7926 2.5 12.5001V12.5001C2.5 14.2075 2.5 15.0612 2.75638 15.7424C3.16213 16.8205 4.01294 17.6713 5.091 18.077C5.77218 18.3334 6.62589 18.3334 8.33333 18.3334Z"></path>
+    </svg>
+
+  {%- when 'newspaper' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M18 12V2L15.2874 3.20562C14.6759 3.47739 14.3701 3.61328 14.0607 3.64727C13.7214 3.68455 13.3782 3.63437 13.0638 3.50149C12.777 3.38032 12.523 3.16258 12.0149 2.7271V2.7271C11.3403 2.14881 11.0029 1.85966 10.6296 1.73584C10.2208 1.60026 9.77918 1.60026 9.3704 1.73584C8.99706 1.85966 8.65972 2.14881 7.98505 2.7271V2.7271C7.47699 3.16258 7.22295 3.38032 6.93623 3.50149C6.6218 3.63437 6.2786 3.68455 5.93929 3.64727C5.62988 3.61328 5.32414 3.47739 4.71265 3.20562L2 2V15.6C2 17.8402 2 18.9603 2.43597 19.816C2.81947 20.5686 3.43139 21.1805 4.18404 21.564C5.03968 22 6.15979 22 8.4 22H20M18 12H18.8C19.9201 12 20.4802 12 20.908 12.218C21.2843 12.4097 21.5903 12.7157 21.782 13.092C22 13.5198 22 14.0799 22 15.2V20C22 21.1046 21.1046 22 20 22V22C18.8954 22 18 21.1046 18 20V12ZM7 17H13M7 9H11M7 13H13"></path>
+    </svg>
+
+  {%- when 'note' -%}
+    <svg class="{{ class }}" viewBox="0 0 25 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path class="fill" d="M12.9 2H12.1C8.73969 2 7.05953 2 5.77606 2.65396C4.64708 3.2292 3.7292 4.14708 3.15396 5.27606C2.5 6.55953 2.5 8.23969 2.5 11.6V12.4C2.5 15.7603 2.5 17.4405 3.15396 18.7239C3.7292 19.8529 4.64708 20.7708 5.77606 21.346C7.05953 22 8.73969 22 12.1 22H13.5C14.4319 22 14.8978 22 15.2654 21.8478C15.7554 21.6448 16.1448 21.2554 16.3478 20.7654C16.5 20.3978 16.5 19.9319 16.5 19C16.5 18.0681 16.5 17.6021 16.6522 17.2346C16.8552 16.7445 17.2446 16.3552 17.7346 16.1522C18.1022 16 18.5681 16 19.5 16C20.4319 16 20.8978 16 21.2654 15.8477C21.7554 15.6447 22.1448 15.2554 22.3478 14.7653C22.5 14.3978 22.5 13.9319 22.5 13V11.6C22.5 8.23969 22.5 6.55953 21.846 5.27606C21.2708 4.14708 20.3529 3.2292 19.2239 2.65396C17.9405 2 16.2603 2 12.9 2Z"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 21.5V19.2C16.5 18.0799 16.5 17.5198 16.718 17.092C16.9097 16.7157 17.2157 16.4097 17.592 16.218C18.0198 16 18.5799 16 19.7 16H22M7.5 7H15.5M7.5 11H13.5M7.5 15H9.5M15.6716 22H12.1C8.73969 22 7.05953 22 5.77606 21.346C4.64708 20.7708 3.7292 19.8529 3.15396 18.7239C2.5 17.4405 2.5 15.7603 2.5 12.4V11.6C2.5 8.23969 2.5 6.55953 3.15396 5.27606C3.7292 4.14708 4.64708 3.2292 5.77606 2.65396C7.05953 2 8.73969 2 12.1 2H12.9C16.2603 2 17.9405 2 19.2239 2.65396C20.3529 3.2292 21.2708 4.14708 21.846 5.27606C22.5 6.55953 22.5 8.23969 22.5 11.6V15.1716C22.5 15.5088 22.5 15.6774 22.4912 15.8399C22.4171 17.2049 21.8791 18.5036 20.9663 19.5212C20.8577 19.6423 20.7385 19.7615 20.5 20V20C20.2615 20.2385 20.1423 20.3577 20.0212 20.4663C19.0036 21.3791 17.7049 21.9171 16.3399 21.9912C16.1774 22 16.0088 22 15.6716 22Z"></path>
+    </svg>
+
+  {%- when 'package' -%}
+    <svg class="{{ class }}" viewBox="0 0 25 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path class="fill" d="M22.5 14.2825V7.28202C22.5 7.10718 22.4083 6.94515 22.2583 6.8552C22.0995 6.75991 21.9009 6.76067 21.7429 6.85718L15.0012 10.9731C14.0927 11.5278 13.6384 11.8052 13.1525 11.9135C12.7228 12.0092 12.2772 12.0092 11.8475 11.9135C11.3616 11.8052 10.9073 11.5278 9.99878 10.9731L3.25714 6.85718C3.09906 6.76067 2.90048 6.75991 2.74166 6.8552C2.59174 6.94515 2.5 7.10718 2.5 7.28202V14.2825C2.5 15.2735 2.5 15.769 2.64219 16.2143C2.76802 16.6083 2.97396 16.972 3.24708 17.2826C3.55572 17.6336 3.98062 17.8886 4.83042 18.3984L10.0304 21.5184C10.9283 22.0572 11.3773 22.3266 11.8565 22.4318C12.2805 22.5249 12.7195 22.5249 13.1435 22.4318C13.6227 22.3266 14.0717 22.0572 14.9696 21.5184L20.1696 18.3984C21.0194 17.8886 21.4443 17.6336 21.7529 17.2826C22.026 16.972 22.232 16.6083 22.3578 16.2143C22.5 15.769 22.5 15.2735 22.5 14.2825Z"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M7.99988 9.5L17 4M12.5 12.5L21.5 7M12.5 12.5L3.5 7M12.5 12.5V22.5M2.5 9.71771V14.2823C2.5 15.2733 2.5 15.7688 2.64219 16.2141C2.76802 16.6081 2.97396 16.9718 3.24708 17.2824C3.55572 17.6334 3.98062 17.8884 4.83042 18.3983L10.0304 21.5183C10.9283 22.057 11.3773 22.3264 11.8565 22.4316C12.2805 22.5247 12.7195 22.5247 13.1435 22.4316C13.6227 22.3264 14.0717 22.057 14.9696 21.5183L20.1696 18.3983C21.0194 17.8884 21.4443 17.6334 21.7529 17.2824C22.026 16.9718 22.232 16.6081 22.3578 16.2141C22.5 15.7688 22.5 15.2733 22.5 14.2823V9.71771C22.5 8.72669 22.5 8.23117 22.3578 7.78593C22.232 7.39192 22.026 7.02818 21.7529 6.71757C21.4443 6.36657 21.0194 6.11163 20.1696 5.60175L14.9696 2.48175C14.0717 1.94301 13.6227 1.67364 13.1435 1.56839C12.7195 1.4753 12.2805 1.4753 11.8565 1.56839C11.3773 1.67364 10.9283 1.94301 10.0304 2.48175L4.83042 5.60175C3.98062 6.11163 3.55572 6.36657 3.24708 6.71757C2.97396 7.02818 2.76802 7.39192 2.64219 7.78593C2.5 8.23117 2.5 8.72669 2.5 9.71771Z"></path>
+    </svg>
+
+  {%- when 'pause' -%}
+    <svg class="{{ class }}" viewBox="0 0 36 36" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-width="6" d="M9 4V32"></path>
+      <path stroke-linecap="round" stroke-width="6" d="M27 4V32"></path>
+    </svg>
+
+  {%- when 'pin' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M11.3333 9.33337C13.5285 9.79365 14.6667 10.7494 14.6667 11.8538C14.6667 13.4073 11.6819 14.6667 8.00001 14.6667C4.31811 14.6667 1.33334 13.4073 1.33334 11.8538C1.33334 10.7494 2.47154 9.79365 4.66668 9.33337M8.00001 8.00004C9.84096 8.00004 11.3333 6.50766 11.3333 4.66671C11.3333 2.82576 9.84096 1.33337 8.00001 1.33337C6.15906 1.33337 4.66668 2.82576 4.66668 4.66671C4.66668 6.50766 6.15906 8.00004 8.00001 8.00004ZM8.00001 8.00004V12"></path>
+    </svg>
+
+  {%- when 'play' -%}
+    <svg class="{{ class }}" viewBox="0 0 36 36" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path d="M34 17.5006C34 18.3302 33.5707 19.0963 32.8683 19.5206L9.535 33.6629C9.164 33.8869 8.74867 34 8.33333 34C7.93667 34 7.54 33.8986 7.183 33.6936C6.45267 33.274 6 32.4915 6 31.6429V3.35817C6 2.50962 6.45267 1.72708 7.183 1.30752C7.91333 0.885606 8.814 0.899749 9.535 1.33816L32.8683 15.4805C33.5707 15.9048 34 16.6709 34 17.5006"></path>
+    </svg>
+
+  {%- when 'plus' -%}
+    <svg class="{{ class }}" viewBox="0 0 12 12" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.5 6H6M9.5 6H6M6 6V2.5M6 6V9.5"></path>
+    </svg>
+
+  {%- when 'plus-2' -%}
+    <svg class="{{ class }}" viewBox="0 0 14 14" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M7 1V13M13 7H1"></path>
+    </svg>
+
+  {%- when 'plus-3' -%}
+    <svg class="{{ class }}" viewBox="0 0 32 32" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6.66663 16H16M25.3333 16H16M16 16V6.66663M16 16V25.3333"></path>
+    </svg>
+
+  {%- when 'power' -%}
+    <svg class="{{ class }}" viewBox="0 0 18 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 0.833374V10M12.6667 3.52429C15.3832 4.87427 17.25 7.67749 17.25 10.9167C17.25 15.4731 13.5563 19.1667 9 19.1667C4.44365 19.1667 0.75 15.4731 0.75 10.9167C0.75 7.67749 2.61685 4.87427 5.33333 3.52429"></path>
+    </svg>
+
+  {%- when 'printer' -%}
+    <svg class="{{ class }}" viewBox="0 0 14 14" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 10.5V10.5C11.2772 10.5 11.6659 10.5 11.9673 10.3595C12.2869 10.2104 12.5438 9.95353 12.6928 9.63392C12.8333 9.33253 12.8333 8.94391 12.8333 8.16666V7.06666C12.8333 6.22658 12.8333 5.80654 12.6698 5.48567C12.526 5.20343 12.2966 4.97396 12.0143 4.83015C11.6934 4.66666 11.2734 4.66666 10.4333 4.66666H3.56666C2.72659 4.66666 2.30655 4.66666 1.98568 4.83015C1.70344 4.97396 1.47396 5.20343 1.33015 5.48567C1.16666 5.80654 1.16666 6.22658 1.16666 7.06666V8.16666C1.16666 8.94391 1.16666 9.33253 1.3072 9.63392C1.45624 9.95353 1.71312 10.2104 2.03274 10.3595C2.33412 10.5 2.72275 10.5 3.5 10.5V10.5M10.5 4.66666V3.56666C10.5 2.72658 10.5 2.30654 10.3365 1.98567C10.1927 1.70343 9.96323 1.47396 9.68098 1.33015C9.36012 1.16666 8.94008 1.16666 8.1 1.16666H5.9C5.05992 1.16666 4.63988 1.16666 4.31901 1.33015C4.03677 1.47396 3.8073 1.70343 3.66349 1.98567C3.5 2.30654 3.5 2.72658 3.5 3.56666V4.66666M2.91666 6.41666H3.5M5.25 12.8333H8.75C8.98221 12.8333 9.09831 12.8333 9.19579 12.8205C9.86889 12.7319 10.3985 12.2022 10.4872 11.5291C10.5 11.4316 10.5 11.3155 10.5 11.0833V11.0833C10.5 10.8511 10.5 10.735 10.4872 10.6375C10.3985 9.96443 9.86889 9.43477 9.19579 9.34616C9.09831 9.33332 8.98221 9.33332 8.75 9.33332H5.25C5.01779 9.33332 4.90168 9.33332 4.80421 9.34616C4.13111 9.43477 3.60145 9.96443 3.51283 10.6375C3.5 10.735 3.5 10.8511 3.5 11.0833V11.0833C3.5 11.3155 3.5 11.4316 3.51283 11.5291C3.60145 12.2022 4.13111 12.7319 4.80421 12.8205C4.90168 12.8333 5.01779 12.8333 5.25 12.8333Z"></path>
+    </svg>
+
+  {%- when 'question' -%}
+    <svg class="{{ class }}" viewBox="0 0 22 22" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.167 9.625v-.458a1.833 1.833 0 1 1 3.666 0v.11a1.94 1.94 0 0 1-.57 1.376L11 11.917m.458 2.75a.458.458 0 0 1-.916 0m.916 0a.458.458 0 0 0-.916 0m.916 0h-.916M20.167 11a9.167 9.167 0 1 1-18.334 0 9.167 9.167 0 0 1 18.334 0Z"></path>
+    </svg>
+
+  {%- when 'remove' -%}
+    <svg class="{{ class }}" viewBox="0 0 10 10" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m1 9 8-8M1 1l8 8"></path>
+    </svg>
+
+  {%- when 'return' -%}
+    <svg class="{{ class }}" viewBox="0 0 22 10" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M1 9V1M1 9H8.77778M1 9C1 9 6 1 12 1C20 1 21 9 21 9"></path>
+    </svg>
+
+  {%- when 'rotator' -%}
+    <svg class="{{ class }}" viewBox="0 0 66 66" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <circle class="path" stroke-width="6" cx="33" cy="33" r="30"></circle>
+    </svg>
+
+  {%- when 'ruler' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12.5 13.5v-3m-3 3v-3m-3 3v-3M4 6.5c1.933 0 3.5-.895 3.5-2s-1.567-2-3.5-2-3.5.895-3.5 2 1.567 2 3.5 2Z"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M.5 11.5c0 1.105 1.567 2 3.5 2h11.5v-7H4c-1.933 0-3.5-.895-3.5-2v7Z"></path>
+    </svg>
+
+  {%- when 'sale' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path class="fill" d="M7.24012 4.02997H7.09012C6.01012 4.02997 5.47012 4.02997 5.06012 4.23997C4.70012 4.41997 4.40012 4.71997 4.22012 5.07997C4.01012 5.48997 4.01012 6.02997 4.01012 7.10997V7.22997C4.01012 7.64997 4.01012 7.85997 3.97012 8.05997C3.93012 8.23997 3.87012 8.40997 3.78012 8.56997C3.68012 8.74997 3.55012 8.90997 3.28012 9.22997L2.84012 9.74997C2.24012 10.46 1.94012 10.81 1.82012 11.21C1.72012 11.56 1.72012 11.93 1.82012 12.28C1.93012 12.68 2.23012 13.03 2.84012 13.74L3.28012 14.26C3.55012 14.58 3.69012 14.74 3.78012 14.92C3.87012 15.08 3.93012 15.25 3.97012 15.43C4.01012 15.63 4.01012 15.84 4.01012 16.26V16.38C4.01012 17.46 4.01012 18 4.22012 18.41C4.40012 18.77 4.70012 19.07 5.06012 19.25C5.47012 19.46 6.01012 19.46 7.09012 19.46H7.24012C7.66012 19.46 7.87012 19.46 8.07012 19.5C8.25012 19.54 8.42012 19.6 8.58012 19.69C8.76012 19.79 8.92012 19.93 9.24012 20.2L9.74012 20.63C10.4501 21.24 10.8101 21.55 11.2101 21.66C11.5601 21.76 11.9401 21.76 12.2901 21.66C12.6901 21.54 13.0501 21.24 13.7601 20.63L14.2601 20.2C14.5801 19.93 14.7401 19.79 14.9201 19.69C15.0801 19.6 15.2501 19.54 15.4301 19.5C15.6301 19.46 15.8401 19.46 16.2601 19.46H16.3701C17.4501 19.46 17.9901 19.46 18.4001 19.25C18.7601 19.07 19.0601 18.77 19.2401 18.41C19.4501 18 19.4501 17.46 19.4501 16.38V16.27C19.4501 15.85 19.4501 15.64 19.4901 15.44C19.5301 15.26 19.5901 15.09 19.6801 14.93C19.7801 14.75 19.9201 14.59 20.1901 14.27L20.6201 13.77C21.2301 13.06 21.5401 12.7 21.6501 12.3C21.7501 11.95 21.7501 11.57 21.6501 11.22C21.5301 10.82 21.2301 10.46 20.6201 9.74997L20.1901 9.24997C19.9201 8.92997 19.7801 8.76997 19.6801 8.58997C19.5901 8.42997 19.5301 8.25997 19.4901 8.07997C19.4501 7.87997 19.4501 7.66997 19.4501 7.24997V7.13997C19.4501 6.05997 19.4501 5.51997 19.2401 5.10997C19.0601 4.74997 18.7601 4.44997 18.4001 4.26997C17.9901 4.05997 17.4501 4.05997 16.3701 4.05997H16.2601C15.8401 4.05997 15.6301 4.05997 15.4301 4.01997C15.2501 3.97997 15.0801 3.91997 14.9201 3.82997C14.7401 3.72997 14.5801 3.58997 14.2601 3.31997L13.7601 2.88997C13.0501 2.27997 12.6901 1.96997 12.2901 1.85997C11.9401 1.75997 11.5601 1.75997 11.2101 1.85997C10.8101 1.97997 10.4501 2.27997 9.74012 2.88997L9.24012 3.31997C8.92012 3.58997 8.76012 3.72997 8.58012 3.82997C8.42012 3.91997 8.25012 3.97997 8.07012 4.01997C7.87012 4.05997 7.66012 4.05997 7.24012 4.05997V4.02997Z"></path>
+      <path stroke-linecap="round" d="M8.38012 15.36L11.7501 11.74L15.1201 8.11997M14.9201 14.59C14.9201 14.81 14.7401 14.99 14.5201 14.99C14.3001 14.99 14.1201 14.81 14.1201 14.59M14.9201 14.59C14.9201 14.37 14.7401 14.19 14.5201 14.19C14.3001 14.19 14.1201 14.37 14.1201 14.59M14.9201 14.59H14.1201M9.42012 9.00997C9.42012 9.22997 9.24012 9.40997 9.02012 9.40997C8.80012 9.40997 8.62012 9.22997 8.62012 9.00997M9.42012 9.00997C9.42012 8.78997 9.24012 8.60997 9.02012 8.60997C8.80012 8.60997 8.62012 8.78997 8.62012 9.00997M9.42012 9.00997H8.62012M7.24012 4.02997H7.09012C6.01012 4.02997 5.47012 4.02997 5.06012 4.23997C4.70012 4.41997 4.40012 4.71997 4.22012 5.07997C4.01012 5.48997 4.01012 6.02997 4.01012 7.10997V7.22997C4.01012 7.64997 4.01012 7.85997 3.97012 8.05997C3.93012 8.23997 3.87012 8.40997 3.78012 8.56997C3.68012 8.74997 3.55012 8.90997 3.28012 9.22997L2.84012 9.74997C2.24012 10.46 1.94012 10.81 1.82012 11.21C1.72012 11.56 1.72012 11.93 1.82012 12.28C1.93012 12.68 2.23012 13.03 2.84012 13.74L3.28012 14.26C3.55012 14.58 3.69012 14.74 3.78012 14.92C3.87012 15.08 3.93012 15.25 3.97012 15.43C4.01012 15.63 4.01012 15.84 4.01012 16.26V16.38C4.01012 17.46 4.01012 18 4.22012 18.41C4.40012 18.77 4.70012 19.07 5.06012 19.25C5.47012 19.46 6.01012 19.46 7.09012 19.46H7.24012C7.66012 19.46 7.87012 19.46 8.07012 19.5C8.25012 19.54 8.42012 19.6 8.58012 19.69C8.76012 19.79 8.92012 19.93 9.24012 20.2L9.74012 20.63C10.4501 21.24 10.8101 21.55 11.2101 21.66C11.5601 21.76 11.9401 21.76 12.2901 21.66C12.6901 21.54 13.0501 21.24 13.7601 20.63L14.2601 20.2C14.5801 19.93 14.7401 19.79 14.9201 19.69C15.0801 19.6 15.2501 19.54 15.4301 19.5C15.6301 19.46 15.8401 19.46 16.2601 19.46H16.3701C17.4501 19.46 17.9901 19.46 18.4001 19.25C18.7601 19.07 19.0601 18.77 19.2401 18.41C19.4501 18 19.4501 17.46 19.4501 16.38V16.27C19.4501 15.85 19.4501 15.64 19.4901 15.44C19.5301 15.26 19.5901 15.09 19.6801 14.93C19.7801 14.75 19.9201 14.59 20.1901 14.27L20.6201 13.77C21.2301 13.06 21.5401 12.7 21.6501 12.3C21.7501 11.95 21.7501 11.57 21.6501 11.22C21.5301 10.82 21.2301 10.46 20.6201 9.74997L20.1901 9.24997C19.9201 8.92997 19.7801 8.76997 19.6801 8.58997C19.5901 8.42997 19.5301 8.25997 19.4901 8.07997C19.4501 7.87997 19.4501 7.66997 19.4501 7.24997V7.13997C19.4501 6.05997 19.4501 5.51997 19.2401 5.10997C19.0601 4.74997 18.7601 4.44997 18.4001 4.26997C17.9901 4.05997 17.4501 4.05997 16.3701 4.05997H16.2601C15.8401 4.05997 15.6301 4.05997 15.4301 4.01997C15.2501 3.97997 15.0801 3.91997 14.9201 3.82997C14.7401 3.72997 14.5801 3.58997 14.2601 3.31997L13.7601 2.88997C13.0501 2.27997 12.6901 1.96997 12.2901 1.85997C11.9401 1.75997 11.5601 1.75997 11.2101 1.85997C10.8101 1.97997 10.4501 2.27997 9.74012 2.88997L9.24012 3.31997C8.92012 3.58997 8.76012 3.72997 8.58012 3.82997C8.42012 3.91997 8.25012 3.97997 8.07012 4.01997C7.87012 4.05997 7.66012 4.05997 7.24012 4.05997V4.02997Z"></path>
+    </svg>
+
+  {%- when 'search' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" d="m21 21-3.636-3.636m0 0A9 9 0 1 0 4.636 4.636a9 9 0 0 0 12.728 12.728Z"></path>
+    </svg>
+
+  {%- when 'share' -%}
+    <svg class="{{ class }}" viewBox="0 0 20 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m7.218 8.527 5.564-2.782M7.218 11.39l5.564 2.783m-8.509-.9a3.273 3.273 0 1 0 0-6.546 3.273 3.273 0 0 0 0 6.546Zm11.454-5.728a3.273 3.273 0 1 0 0-6.545 3.273 3.273 0 0 0 0 6.545Zm0 11.455a3.273 3.273 0 1 0 0-6.545 3.273 3.273 0 0 0 0 6.545Z"></path>
+    </svg>
+
+  {%- when 'spinner' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2"></path>
+    </svg>
+
+  {%- when 'star' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 16" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path d="M8 0L9.88914 5.81283H16L11.056 9.40604L12.9452 15.2177L8 11.6245L3.05603 15.2177L4.94397 9.40484L0 5.81163H6.11086L8 0Z"></path>
+    </svg>
+
+  {%- when 'thumbs-up' -%}
+    <svg class="{{ class }}" viewBox="0 0 41 41" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M17.486 31.8298C17.486 31.8298 19.6732 33.5701 21.9404 32.5164C23.3536 31.8596 28.2906 29.565 31.8091 27.9298C33.1341 27.3139 33.7966 27.006 34.2191 26.5148C34.5915 26.0818 34.8326 25.5515 34.914 24.9862C35.0063 24.3449 34.8027 23.6431 34.3954 22.2395L32.5204 15.7778C31.9832 13.9266 31.7146 13.0009 31.1459 12.4479C30.6466 11.9626 29.9941 11.6659 29.3002 11.6089C28.5095 11.544 27.6355 11.9502 25.8875 12.7626L24.0932 13.5965C23.3585 13.938 22.9912 14.1087 22.6896 14.0608C22.426 14.0189 22.1901 13.8733 22.0344 13.6566C21.8563 13.4086 21.844 13.0037 21.8196 12.1938L21.7051 8.40173C21.698 8.16642 21.6945 8.04876 21.6844 7.96256C21.5339 6.6814 20.2279 5.87567 19.0154 6.31596C18.9338 6.34559 18.827 6.3952 18.6136 6.49442V6.49442C18.5811 6.50949 18.5649 6.51702 18.5496 6.52482C18.3343 6.63405 18.1658 6.81746 18.0752 7.04121C18.0687 7.05719 18.0626 7.07397 18.0503 7.10755L12.7445 21.6278M12.9518 33.9372L8.21028 23.7352C7.62835 22.4831 8.17162 20.9963 9.42371 20.4144V20.4144C10.6758 19.8325 12.1626 20.3758 12.7445 21.6278L17.486 31.8298C18.0679 33.0819 17.5247 34.5687 16.2726 35.1506V35.1506C15.0205 35.7325 13.5337 35.1893 12.9518 33.9372Z"/>
+    </svg>
+
+  {%- when 'trash' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.66683 3.33337L3.15631 11.6546C3.21868 12.7148 3.24986 13.2449 3.47613 13.6472C3.67533 14.0013 3.97765 14.2864 4.34288 14.4644C4.75775 14.6667 5.28877 14.6667 6.35079 14.6667H9.64953C10.7116 14.6667 11.2426 14.6667 11.6575 14.4644C12.0227 14.2864 12.325 14.0013 12.5242 13.6472C12.7505 13.2449 12.7816 12.7148 12.844 11.6546L13.3335 3.33337M2.66683 3.33337H1.3335M2.66683 3.33337H13.3335M13.3335 3.33337H14.6668M10.6668 3.33337L10.6326 3.23074C10.4636 2.72375 10.3791 2.47025 10.2492 2.26473C9.97328 1.82822 9.53921 1.51536 9.03785 1.39163C8.80179 1.33337 8.53458 1.33337 8.00016 1.33337V1.33337C7.46575 1.33337 7.19854 1.33337 6.96248 1.39163C6.46112 1.51536 6.02705 1.82822 5.75112 2.26473C5.6212 2.47025 5.5367 2.72375 5.36771 3.23074L5.3335 3.33337M6.66683 6.66671V11.3334M9.3335 6.66671V9.33337"></path>
+    </svg>
+
+  {%- when 'zoom' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3 3V9M3 3H9M3 3L9 9M21 21V15M21 21H15M21 21L15 15"></path>
+    </svg>
+
+    {%- when 'cool-touch' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+          d="M12 24C5.38393 24 0 18.6161 0 12C0 5.38395 5.38393 0 12 0C18.616 0 24 5.38395 24 12C24 18.6161 18.6185 24 12 24ZM12 0.995644C5.93154 0.995644 0.995644 5.93155 0.995644 12C0.995644 18.0684 5.93154 23.0043 12 23.0043C18.0684 23.0043 23.0044 18.0684 23.0044 12C23.0044 5.93155 18.0684 0.995644 12 0.995644Z"
+          fill="black" />
+      <path
+          d="M7.82824 15.0965C7.5644 15.2583 7.32049 15.4051 7.07656 15.5569C6.76293 15.7486 6.45428 15.9477 6.13816 16.1294C5.79466 16.3286 5.42128 16.1469 5.37648 15.7635C5.35159 15.5545 5.45613 15.4076 5.62539 15.3031C6.11823 14.9994 6.61358 14.6957 7.10643 14.392C7.16368 14.3572 7.21841 14.3199 7.29557 14.2726C7.08897 14.1954 6.89981 14.1257 6.71313 14.0535C6.6509 14.0311 6.58867 14.0062 6.52644 13.9813C6.25513 13.8693 6.13567 13.6204 6.22776 13.3616C6.31737 13.1077 6.57624 12.9832 6.85502 13.0753C7.25079 13.2097 7.64904 13.3391 8.03237 13.5009C8.27132 13.6005 8.45551 13.5756 8.67455 13.4362C9.4163 12.9633 10.173 12.5128 10.9222 12.0548C10.9446 12.0398 10.967 12.0224 10.9994 12C10.7256 11.8457 10.4592 11.6938 10.1929 11.5445C9.63285 11.2284 9.07031 10.9172 8.51524 10.5986C8.40323 10.5339 8.30866 10.524 8.18669 10.5812C7.77599 10.7704 7.35782 10.9496 6.93965 11.1238C6.85502 11.1612 6.75795 11.1811 6.66585 11.191C6.40947 11.2184 6.24021 11.1089 6.17052 10.8849C6.09833 10.6509 6.18295 10.4194 6.3995 10.3074C6.57374 10.2153 6.75794 10.1456 6.93715 10.066C7.04419 10.0187 7.15371 9.97138 7.28065 9.91413C7.0641 9.79217 6.85999 9.67517 6.65588 9.56068C6.3099 9.36653 5.96144 9.17238 5.61296 8.97823C5.58309 8.9608 5.55073 8.94338 5.52087 8.92346C5.27444 8.75918 5.19974 8.49285 5.33913 8.25638C5.47604 8.01992 5.74488 7.94524 6.00872 8.08214C6.21781 8.19166 6.4244 8.31114 6.62851 8.42564C6.96951 8.6173 7.30803 8.80897 7.64904 8.99814C7.67144 9.01059 7.69635 9.01805 7.7287 9.03299C7.6839 8.74176 7.6366 8.46298 7.60176 8.18171C7.57189 7.94525 7.73367 7.72869 7.97014 7.67144C8.20909 7.61419 8.44555 7.71873 8.52022 7.94275C8.57747 8.11201 8.60238 8.29373 8.63225 8.47045C8.69199 8.81644 8.73927 9.16491 8.80399 9.50841C8.81892 9.58806 8.87865 9.68265 8.94834 9.72247C9.76477 10.1879 10.5862 10.6434 11.4051 11.1014C11.4126 11.1039 11.42 11.1064 11.4424 11.1114C11.4449 11.0765 11.4499 11.0442 11.4499 11.0118C11.4499 9.99378 11.4499 8.97325 11.4524 7.9552C11.4524 7.85315 11.4151 7.78595 11.3379 7.72372C10.977 7.44245 10.6185 7.1562 10.2626 6.87244C10.2078 6.82764 10.1556 6.77785 10.1133 6.72309C9.9664 6.53392 9.96889 6.31239 10.1108 6.13318C10.2576 5.94898 10.4841 5.88675 10.6932 6.00125C10.8575 6.09335 11.0019 6.2178 11.1537 6.3323C11.2483 6.402 11.3379 6.47667 11.4524 6.56628C11.4524 6.50156 11.4524 6.45925 11.4524 6.41694C11.4524 5.91663 11.4499 5.41382 11.4549 4.91351C11.4574 4.64967 11.6192 4.44307 11.8457 4.40324C12.1668 4.34599 12.4257 4.56504 12.4281 4.90605C12.4331 5.4188 12.4306 5.93156 12.4306 6.44681C12.4306 6.48912 12.4306 6.53143 12.4306 6.59864C12.6596 6.4244 12.8712 6.26759 13.0778 6.10828C13.2222 5.99627 13.379 5.91414 13.5681 5.95645C13.7548 5.99877 13.8718 6.12073 13.9266 6.29746C13.9813 6.47667 13.9365 6.63847 13.8046 6.76541C13.6826 6.8824 13.5432 6.97947 13.4088 7.08402C13.1151 7.31053 12.8164 7.53206 12.5252 7.76105C12.4779 7.79839 12.4356 7.87804 12.4356 7.93778C12.4306 8.98072 12.4306 10.0237 12.4306 11.0666C12.4306 11.079 12.4331 11.089 12.4381 11.1214C12.4978 11.0865 12.5501 11.0591 12.6024 11.0268C13.4536 10.5065 14.3024 9.98631 15.1562 9.46858C15.2632 9.40386 15.3055 9.31923 15.318 9.20224C15.3703 8.7318 15.425 8.26137 15.4897 7.79341C15.532 7.48476 15.761 7.32048 16.0697 7.36529C16.3186 7.40013 16.4804 7.63411 16.4505 7.91787C16.4256 8.15433 16.3958 8.38831 16.3684 8.62228C16.3659 8.65215 16.3684 8.68203 16.3684 8.72683C16.7791 8.47294 17.1749 8.22652 17.5731 7.98507C17.6777 7.92285 17.7822 7.85564 17.8942 7.81083C18.1182 7.72371 18.3398 7.80336 18.4617 7.99752C18.5887 8.19913 18.5688 8.43809 18.3895 8.59988C18.285 8.69447 18.1605 8.76665 18.0411 8.83884C17.6826 9.06037 17.3217 9.27941 16.9608 9.50094C16.9284 9.52085 16.8986 9.54325 16.8513 9.57561C17.1325 9.68762 17.3989 9.79216 17.6652 9.89671C17.8818 9.98383 18.0037 10.1456 18.0037 10.3472C18.0037 10.7156 17.6901 10.9421 17.3416 10.8152C16.9683 10.6783 16.5899 10.5464 16.2315 10.3771C15.9303 10.2352 15.6963 10.2551 15.4101 10.4418C14.6335 10.9496 13.832 11.4176 13.0429 11.9004C13.0181 11.9154 12.9932 11.9353 12.9508 11.9627C13.2047 12.1046 13.4462 12.2414 13.6876 12.3783C14.3796 12.7642 15.0716 13.15 15.7635 13.5408C15.8631 13.5955 15.9477 13.603 16.0523 13.5582C16.463 13.3864 16.8737 13.2172 17.2918 13.0604C17.4113 13.0156 17.5457 12.9832 17.6702 12.9932C17.8818 13.0081 18.0436 13.1923 18.0684 13.4014C18.0933 13.6154 17.9888 13.8146 17.7872 13.9017C17.5557 14.0037 17.3217 14.0958 17.0902 14.1929C17.0653 14.2029 17.0429 14.2153 16.9981 14.2352C17.2346 14.3671 17.4511 14.4891 17.6702 14.6111C17.9365 14.7604 18.2053 14.9073 18.4692 15.0616C18.6559 15.1711 18.7455 15.3678 18.7032 15.5769C18.6658 15.771 18.5464 15.9029 18.3522 15.9552C18.1929 15.9975 18.0485 15.9502 17.9116 15.8706C17.4935 15.6341 17.0753 15.3976 16.6546 15.1637C16.6098 15.1388 16.565 15.1164 16.4928 15.079C16.5177 15.2682 16.5377 15.435 16.5601 15.6042C16.5775 15.7362 16.5974 15.8706 16.6098 16.0025C16.6347 16.2738 16.448 16.5028 16.1817 16.5352C15.9129 16.565 15.6864 16.3883 15.6465 16.1145C15.5744 15.6117 15.5022 15.1064 15.4375 14.6036C15.425 14.509 15.3852 14.4543 15.308 14.4095C14.4319 13.9191 13.5532 13.4288 12.6771 12.9384C12.5999 12.8961 12.5202 12.8538 12.4281 12.8015C12.4281 12.8612 12.4281 12.9011 12.4281 12.9384C12.4281 13.8793 12.4281 14.8177 12.4232 15.7586C12.4232 15.8855 12.4679 15.9627 12.565 16.0349C12.9583 16.3261 13.3466 16.6173 13.7324 16.916C14.0486 17.1624 14.0012 17.6204 13.6478 17.7673C13.4487 17.8494 13.2695 17.7872 13.1052 17.6652C12.9085 17.5184 12.7144 17.3715 12.5202 17.2246C12.4953 17.2072 12.4705 17.1898 12.4257 17.1624C12.4257 17.2222 12.4257 17.262 12.4257 17.3043C12.4257 17.9166 12.4256 18.5289 12.4232 19.1413C12.4207 19.3976 12.2738 19.5968 12.0572 19.6466C11.7361 19.7212 11.4549 19.4997 11.4499 19.1587C11.4424 18.6857 11.4474 18.2103 11.4474 17.7374C11.4474 17.5657 11.4474 17.3914 11.4474 17.1898C11.3279 17.2844 11.2259 17.3615 11.1263 17.4387C11.0143 17.5233 10.9023 17.608 10.7878 17.6926C10.5638 17.8594 10.2751 17.832 10.1133 17.6279C9.93653 17.4039 9.97138 17.1101 10.2029 16.9235C10.5588 16.6372 10.9172 16.351 11.2781 16.0722C11.3976 15.9801 11.4499 15.8805 11.4474 15.7262C11.44 14.8251 11.4449 13.9266 11.4449 13.0255C11.4449 12.9882 11.4449 12.9484 11.4449 12.8861C11.2533 13.0006 11.079 13.1052 10.9048 13.2122C10.2701 13.6005 9.63785 13.9938 9.00313 14.3796C8.91601 14.4319 8.87617 14.4991 8.86621 14.5961C8.81892 15.0865 8.76915 15.5769 8.71936 16.0672C8.69198 16.3211 8.56504 16.4729 8.34351 16.5252C8.13442 16.575 7.92783 16.4929 7.81831 16.3186C7.74115 16.1966 7.74363 16.0647 7.75608 15.9303C7.77599 15.7113 7.7984 15.4897 7.81831 15.2707C7.82329 15.2184 7.82575 15.1686 7.82824 15.0965Z"
+          fill="black" />
+    </svg>
+
+  {%- when 'breathable' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+          d="M19.1906 9.44368C19.0561 9.35656 18.8844 9.34162 18.735 9.40634C18.7126 9.4163 17.3436 9.99875 15.2827 10.0635C15.4644 8.78158 15.773 7.91039 15.9746 7.44991C16.1314 7.50964 16.2758 7.56191 16.2758 7.56191C16.3256 7.57933 16.3779 7.58929 16.4301 7.5868C16.4799 7.58431 16.5272 7.57187 16.572 7.54947C16.6143 7.52956 16.6542 7.49969 16.6865 7.46484C16.7189 7.42999 16.7463 7.38767 16.7637 7.34287C16.7811 7.29806 16.7911 7.24829 16.7886 7.1985C16.7861 7.1313 16.7637 7.06409 16.7413 7.00186C16.6915 6.855 16.6243 6.71562 16.5571 6.57623C16.4749 6.40448 16.3953 6.2377 16.2833 6.08338C16.2783 6.0784 16.2758 6.07094 16.2708 6.06596C16.226 6.00871 16.1688 5.9664 16.1041 5.94151C16.0393 5.91662 15.9672 5.91163 15.8975 5.92408C15.89 5.92408 15.8825 5.92657 15.8776 5.92906C15.6909 5.97137 15.5216 6.04356 15.3474 6.11823C15.2055 6.17797 15.0636 6.23771 14.9292 6.31487C14.872 6.34723 14.8097 6.38208 14.7624 6.43186C14.7301 6.46671 14.7027 6.51151 14.6853 6.55632C14.6678 6.60112 14.6604 6.6509 14.6629 6.69819C14.6654 6.74548 14.6753 6.79526 14.6927 6.83758C14.7126 6.88238 14.74 6.9247 14.7749 6.95955C14.8122 6.99689 14.8595 7.02427 14.9093 7.04418C14.9093 7.04418 14.9815 7.07156 15.0785 7.1089C14.8371 7.66646 14.5036 8.64467 14.3194 10.051C13.7892 10.0236 13.2291 9.96142 12.6417 9.84443V7.18854C12.7786 7.18854 12.8931 7.18854 12.8931 7.18854C12.9454 7.18854 12.9977 7.17859 13.0474 7.15618C13.0922 7.13627 13.1346 7.10889 13.1669 7.07156C13.1993 7.03671 13.2266 6.9944 13.2441 6.95208C13.2615 6.90728 13.2714 6.85999 13.2714 6.81269C13.2714 6.76291 13.2615 6.71561 13.2441 6.66832C13.2192 6.60609 13.1719 6.55134 13.1296 6.49906C13.0325 6.37959 12.918 6.27256 12.806 6.16552C12.6691 6.0336 12.5347 5.90666 12.3754 5.80212C12.3704 5.79714 12.3629 5.79464 12.358 5.78967C12.2982 5.75233 12.2285 5.73242 12.1588 5.73242C12.0891 5.73242 12.0194 5.75233 11.9597 5.78967C11.9547 5.79216 11.9473 5.79714 11.9423 5.80212C11.783 5.90666 11.6485 6.03609 11.5116 6.16552C11.3996 6.27256 11.2876 6.37959 11.1881 6.49906C11.1458 6.55134 11.101 6.6036 11.0736 6.66832C11.0537 6.71313 11.0462 6.76291 11.0462 6.81269C11.0462 6.85999 11.0562 6.90977 11.0736 6.95208C11.091 6.99689 11.1184 7.03671 11.1507 7.07156C11.1856 7.1064 11.2254 7.13627 11.2702 7.15618C11.3175 7.1761 11.3723 7.18854 11.4245 7.18854C11.4245 7.18854 11.539 7.18854 11.6759 7.18854V9.61792C11.4992 9.56814 11.3225 9.51337 11.1433 9.45364C10.6753 9.29433 10.2397 9.16988 9.8315 9.06533C9.6473 8.17921 9.41832 7.52955 9.23661 7.11138C9.33369 7.07405 9.40587 7.04667 9.40587 7.04667C9.45565 7.02925 9.50045 6.99937 9.54028 6.96203C9.57513 6.92719 9.605 6.88736 9.62242 6.84007C9.64234 6.79527 9.65229 6.74797 9.65229 6.70068C9.65478 6.65339 9.64482 6.6036 9.62988 6.5588C9.61246 6.51151 9.58757 6.46919 9.55272 6.43434C9.50543 6.38456 9.44569 6.34971 9.38595 6.31736C9.25154 6.24019 9.10966 6.18046 8.96779 6.12072C8.79355 6.04605 8.6218 5.97386 8.4376 5.93155C8.43014 5.92906 8.42267 5.92906 8.41769 5.92657C8.34799 5.91164 8.27582 5.9191 8.2111 5.94399C8.14638 5.96888 8.08912 6.0112 8.04432 6.06845C8.03934 6.07342 8.03686 6.08089 8.03188 6.08587C7.91987 6.2402 7.84022 6.40697 7.75808 6.57872C7.69088 6.71811 7.62367 6.8575 7.57389 7.00435C7.55149 7.06907 7.52909 7.13379 7.5266 7.20099C7.52411 7.25078 7.53406 7.30056 7.55148 7.34536C7.56891 7.39016 7.5938 7.43248 7.62864 7.46732C7.661 7.50217 7.70083 7.53205 7.74315 7.55196C7.78795 7.57436 7.83525 7.58681 7.88503 7.5893C7.9373 7.59178 7.98957 7.58183 8.03935 7.5644C8.03935 7.5644 8.18371 7.50964 8.34053 7.45239C8.46996 7.74859 8.64421 8.21406 8.80102 8.84878C6.01322 8.38332 4.93045 9.24704 4.79354 9.3715C4.69398 9.46111 4.63673 9.58805 4.63424 9.72495L4.58696 15.1164C4.58447 15.2956 4.68402 15.4599 4.84084 15.5445C4.99765 15.6291 5.18931 15.6167 5.33617 15.5171C5.3511 15.5072 6.54588 14.7181 8.98272 14.9944C8.85577 15.8706 8.66909 16.7617 8.42018 17.6553C8.34799 17.9091 8.49735 18.1755 8.75123 18.2452C8.79355 18.2576 8.83836 18.2626 8.88067 18.2626C9.08976 18.2626 9.28141 18.1232 9.34115 17.9141C9.60251 16.9882 9.79666 16.0597 9.92858 15.1462C10.414 15.2458 10.9392 15.3852 11.5042 15.5768C11.5614 15.5968 11.6187 15.6117 11.6759 15.6316V17.7847C11.6759 18.0485 11.89 18.2626 12.1538 18.2626C12.4177 18.2626 12.6317 18.0485 12.6317 17.7847V15.9054C13.3212 16.0747 13.9659 16.1742 14.5633 16.2265C14.6753 16.7865 14.8097 17.3516 14.9665 17.9141C15.0263 18.1257 15.2179 18.2626 15.427 18.2626C15.4693 18.2626 15.5141 18.2576 15.5564 18.2452C15.8103 18.173 15.9597 17.9091 15.8875 17.6553C15.7581 17.1923 15.6486 16.7293 15.5515 16.2663C17.7444 16.2564 19.0611 15.5893 19.1408 15.547C19.2976 15.4648 19.3972 15.3006 19.3972 15.1238V9.8494C19.4096 9.68263 19.3275 9.53328 19.1906 9.44368ZM18.4513 14.8027C17.6797 15.0989 15.2329 15.8183 11.8178 14.6633C11.0089 14.3895 10.2721 14.2153 9.60251 14.1083C9.59753 14.1083 9.59255 14.1058 9.58757 14.1058C9.58508 14.1058 9.5826 14.1058 9.57762 14.1058C8.99766 14.0137 8.46499 13.9763 7.99206 13.9763C6.89934 13.9763 6.09037 14.173 5.5577 14.3647L5.59505 9.98879C5.95597 9.8046 6.97898 9.45364 9.0101 9.86185C9.08228 10.3198 9.13704 10.8301 9.16442 11.4001C9.17687 11.6565 9.38845 11.8556 9.64234 11.8556C9.64981 11.8556 9.65727 11.8556 9.66473 11.8556C9.92858 11.8432 10.1327 11.6192 10.1202 11.3553C10.0978 10.9048 10.0605 10.4916 10.0107 10.1058C10.2746 10.1805 10.5484 10.2626 10.8421 10.3622C11.1258 10.4592 11.4046 10.5389 11.6809 10.6111V11.3777C11.6809 11.6416 11.895 11.8556 12.1588 11.8556C12.4227 11.8556 12.6367 11.6416 12.6367 11.3777V10.8276C13.1893 10.9297 13.717 10.9869 14.2198 11.0168C14.2123 11.1288 14.2024 11.2408 14.1974 11.3578C14.185 11.6216 14.3891 11.8457 14.6529 11.8581C14.6604 11.8581 14.6678 11.8581 14.6753 11.8581C14.9292 11.8581 15.1408 11.659 15.1532 11.4026C15.1582 11.2757 15.1682 11.1562 15.1781 11.0342C16.6243 11.0044 17.7718 10.7355 18.4463 10.5264V14.8027H18.4513Z"
+          fill="black" />
+      <path
+          d="M12 24C5.38395 24 0 18.6161 0 12C0 5.38395 5.38395 0 12 0C18.6161 0 24 5.38395 24 12C24 18.6161 18.6185 24 12 24ZM12 0.995644C5.93155 0.995644 0.995644 5.93155 0.995644 12C0.995644 18.0684 5.93155 23.0043 12 23.0043C18.0684 23.0043 23.0044 18.0684 23.0044 12C23.0044 5.93155 18.0684 0.995644 12 0.995644Z"
+          fill="black" />
+    </svg>
+
+  {%- when 'moisture-wicking' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+      <path
+          d="M12.2672 7.13041C12.1975 7.13041 12.1403 7.13041 12.0806 7.13041C11.9287 7.12792 11.8043 7.07067 11.7346 6.92879C11.6624 6.7894 11.6798 6.6525 11.7794 6.53302C12.0059 6.25424 12.2623 6.00284 12.561 5.79873C12.6879 5.71162 12.8323 5.71908 12.9592 5.80869C13.2405 6.00533 13.4844 6.24678 13.7059 6.50813C13.8105 6.63259 13.8453 6.77198 13.7707 6.9263C13.6985 7.07565 13.5691 7.1329 13.4097 7.13538C13.355 7.13538 13.2977 7.13538 13.233 7.13538C13.233 7.17521 13.233 7.21006 13.233 7.24242C13.233 8.18579 13.233 9.13166 13.233 10.075C13.233 10.2916 13.1559 10.4658 12.9517 10.5579C12.6481 10.6973 12.2971 10.5106 12.2672 10.1497C12.2648 10.1124 12.2648 10.075 12.2648 10.0402C12.2648 9.10925 12.2648 8.17833 12.2648 7.24989C12.2672 7.21006 12.2672 7.1777 12.2672 7.13041Z"
+          fill="black" />
+      <path
+          d="M7.07994 7.13041C7.00029 7.13041 6.93558 7.1329 6.87335 7.13041C6.72401 7.12294 6.60452 7.05822 6.5423 6.91883C6.48256 6.78442 6.495 6.6525 6.5871 6.538C6.81361 6.25922 7.06999 6.00533 7.36868 5.80123C7.5006 5.71162 7.64249 5.71908 7.77441 5.80869C8.05817 6.00782 8.30209 6.25175 8.52611 6.5156C8.63065 6.64005 8.65555 6.78442 8.57839 6.93377C8.5062 7.07316 8.38174 7.13041 8.2299 7.13041C8.17017 7.13041 8.11292 7.13041 8.04571 7.13041C8.04571 7.17272 8.04571 7.20508 8.04571 7.23993C8.04571 8.19575 8.04571 9.15156 8.04571 10.1074C8.04571 10.4534 7.72712 10.6849 7.40353 10.5729C7.2044 10.5032 7.08243 10.3215 7.08243 10.0825C7.08243 9.47764 7.08243 8.87279 7.08243 8.26793C7.08243 7.92195 7.08243 7.57845 7.08243 7.23246C7.07994 7.20259 7.07994 7.17023 7.07994 7.13041Z"
+          fill="black" />
+      <path
+          d="M18.4253 7.13041C18.4253 7.17521 18.4253 7.21255 18.4253 7.2474C18.4253 8.19077 18.4253 9.13663 18.4253 10.08C18.4253 10.3239 18.3033 10.5056 18.0967 10.5729C17.7756 10.6774 17.462 10.4509 17.462 10.1074C17.4595 9.15156 17.462 8.19575 17.462 7.23993C17.462 7.20757 17.462 7.17272 17.462 7.13041C17.3948 7.13041 17.3326 7.13041 17.2728 7.13041C17.116 7.12792 16.9916 7.06569 16.9219 6.92132C16.8547 6.77945 16.8771 6.64255 16.9741 6.52556C17.1982 6.25424 17.4471 6.00782 17.7383 5.8062C17.8702 5.7141 18.0121 5.71411 18.144 5.80372C18.4377 6.00533 18.6867 6.25425 18.9132 6.52805C19.0102 6.64753 19.0277 6.78443 18.963 6.92382C18.8958 7.0657 18.7713 7.12543 18.6195 7.13041C18.5572 7.1329 18.495 7.13041 18.4253 7.13041Z"
+          fill="black" />
+      <path
+          d="M19.6574 13.8958C19.6549 13.8983 19.3438 14.0402 18.7987 14.1845C18.5323 14.2542 18.3755 14.528 18.4452 14.7944C18.505 15.0184 18.7066 15.1653 18.9256 15.1653C18.9679 15.1653 19.0102 15.1603 19.0526 15.1478C19.6947 14.9761 20.0631 14.8043 20.0781 14.7969C20.327 14.6799 20.4315 14.3837 20.317 14.1348C20.2 13.8883 19.9038 13.7813 19.6574 13.8958Z"
+          fill="black" />
+      <path
+          d="M8.52114 14.192C9.0339 14.1796 9.60889 14.2169 10.1889 14.309C10.2162 14.314 10.2411 14.3165 10.2685 14.3165C10.5099 14.3165 10.7215 14.1422 10.7589 13.8983C10.8012 13.627 10.617 13.3706 10.3457 13.3283C9.70595 13.2262 9.06874 13.1839 8.49624 13.1989C8.22244 13.2063 8.00341 13.4353 8.01088 13.7091C8.01835 13.9804 8.23988 14.1945 8.5087 14.1945C8.51368 14.192 8.51617 14.192 8.52114 14.192Z"
+          fill="black" />
+      <path
+          d="M12.2075 14.8193C12.658 14.9711 13.116 15.1005 13.569 15.2001C13.6064 15.2076 13.6412 15.2125 13.6786 15.2125C13.9076 15.2125 14.1117 15.0557 14.1639 14.8242C14.2237 14.5554 14.0544 14.2891 13.7856 14.2293C13.3649 14.1348 12.9418 14.0178 12.5236 13.8759C12.3892 13.8311 12.2573 13.7888 12.1279 13.749C11.8665 13.6693 11.5852 13.8162 11.5056 14.0775C11.4259 14.3389 11.5728 14.6201 11.8341 14.6998C11.9586 14.7371 12.0831 14.777 12.2075 14.8193Z"
+          fill="black" />
+      <path
+          d="M16.2523 15.5013C16.5809 15.5013 16.9094 15.4863 17.2305 15.459C17.5043 15.4366 17.7084 15.1951 17.6836 14.9213C17.6612 14.6475 17.4197 14.4434 17.1459 14.4683C16.5958 14.5156 16.0258 14.5181 15.4608 14.4783C15.1895 14.4583 14.948 14.6649 14.9281 14.9387C14.9082 15.2125 15.1148 15.4515 15.3886 15.4714C15.6748 15.4913 15.9661 15.5013 16.2523 15.5013Z"
+          fill="black" />
+      <path
+          d="M5.85281 14.8442C5.9474 14.8442 6.04449 14.8168 6.12912 14.762C6.1316 14.7595 6.39296 14.5903 6.90572 14.4359C7.16956 14.3563 7.3189 14.08 7.24174 13.8162C7.16209 13.5523 6.8858 13.403 6.62195 13.4801C5.95736 13.6793 5.60889 13.9107 5.56907 13.9356C5.34256 14.09 5.28779 14.3961 5.43963 14.6226C5.53421 14.767 5.69102 14.8442 5.85281 14.8442Z"
+          fill="black" />
+      <path
+          d="M19.6574 11.8348C19.6275 11.8498 16.6307 13.2013 12.5261 11.8149C7.97851 10.2766 5.66365 11.8099 5.56906 11.8771C5.34255 12.0315 5.2853 12.3426 5.43962 12.5691C5.59395 12.7956 5.90508 12.8554 6.13159 12.6985C6.1515 12.6861 8.12537 11.3793 12.2075 12.7608C13.7259 13.2735 15.0998 13.4453 16.2598 13.4453C18.5373 13.4453 19.9885 12.7807 20.0781 12.7384C20.327 12.6214 20.4315 12.3252 20.317 12.0763C20.2 11.8274 19.9038 11.7203 19.6574 11.8348Z"
+          fill="black" />
+      <path
+          d="M19.6574 15.8647C19.6275 15.8796 16.6307 17.2312 12.5261 15.8448C7.97851 14.3065 5.66365 15.8398 5.56906 15.907C5.34255 16.0613 5.2853 16.3725 5.43962 16.599C5.59395 16.8255 5.90508 16.8852 6.13159 16.7284C6.1515 16.716 8.12537 15.4092 12.2075 16.7906C13.7259 17.3034 15.0998 17.4751 16.2598 17.4751C18.5373 17.4751 19.9885 16.8106 20.0781 16.7682C20.327 16.6512 20.4315 16.355 20.317 16.1061C20.2 15.8572 19.9038 15.7502 19.6574 15.8647Z"
+          fill="black" />
+      <path
+          d="M7.06004 20.141C7.29153 20.1111 7.50559 19.9643 7.6176 19.7577C7.69227 19.6208 7.71219 19.4839 7.69725 19.347C7.66987 19.0806 7.5031 18.8242 7.34131 18.6052C7.22432 18.4484 7.09736 18.3015 6.95549 18.1646C6.78125 18.3687 6.58461 18.5529 6.43278 18.7745C6.28094 18.996 6.17641 19.2648 6.22121 19.5287C6.2461 19.673 6.31579 19.8099 6.41784 19.917C6.58461 20.0837 6.82855 20.1708 7.06004 20.141Z"
+          fill="black" />
+      <path
+          d="M10.0146 20.141C10.2461 20.1111 10.4602 19.9643 10.5722 19.7577C10.6468 19.6208 10.6668 19.4839 10.6518 19.347C10.6244 19.0806 10.4577 18.8242 10.2959 18.6052C10.1789 18.4484 10.0519 18.3015 9.91006 18.1646C9.73582 18.3687 9.53919 18.5529 9.38735 18.7745C9.23551 18.996 9.13098 19.2648 9.17578 19.5287C9.20067 19.673 9.27036 19.8099 9.37242 19.917C9.5367 20.0837 9.78312 20.1708 10.0146 20.141Z"
+          fill="black" />
+      <path
+          d="M12.9692 20.141C13.2007 20.1111 13.4147 19.9643 13.5267 19.7577C13.6014 19.6208 13.6213 19.4839 13.6064 19.347C13.579 19.0806 13.4122 18.8242 13.2505 18.6052C13.1335 18.4484 13.0065 18.3015 12.8646 18.1646C12.6904 18.3687 12.4938 18.5529 12.3419 18.7745C12.1901 18.996 12.0855 19.2648 12.1304 19.5287C12.1552 19.673 12.2249 19.8099 12.327 19.917C12.4913 20.0837 12.7377 20.1708 12.9692 20.141Z"
+          fill="black" />
+      <path
+          d="M15.9238 20.141C16.1552 20.1111 16.3693 19.9643 16.4813 19.7577C16.556 19.6208 16.5759 19.4839 16.561 19.347C16.5336 19.0806 16.3668 18.8242 16.205 18.6052C16.088 18.4484 15.9611 18.3015 15.8192 18.1646C15.645 18.3687 15.4483 18.5529 15.2965 18.7745C15.1447 18.996 15.0401 19.2648 15.0849 19.5287C15.1098 19.673 15.1795 19.8099 15.2816 19.917C15.4458 20.0837 15.6898 20.1708 15.9238 20.141Z"
+          fill="black" />
+      <path
+          d="M18.8783 20.141C19.1098 20.1111 19.3239 19.9643 19.4359 19.7577C19.5106 19.6208 19.5305 19.4839 19.5155 19.347C19.4882 19.0806 19.3214 18.8242 19.1596 18.6052C19.0426 18.4484 18.9157 18.3015 18.7738 18.1646C18.5995 18.3687 18.4029 18.5529 18.2511 18.7745C18.0992 18.996 17.9947 19.2648 18.0395 19.5287C18.0644 19.673 18.1341 19.8099 18.2361 19.917C18.4004 20.0837 18.6443 20.1708 18.8783 20.141Z"
+          fill="black" />
+      <path
+          d="M12.8599 24.9399C6.24381 24.9399 0.859863 19.556 0.859863 12.9399C0.859863 6.32388 6.24381 0.939941 12.8599 0.939941C19.4759 0.939941 24.8599 6.32388 24.8599 12.9399C24.8599 19.556 19.4759 24.9399 12.8599 24.9399ZM12.8599 1.93559C6.79142 1.93559 1.85551 6.87149 1.85551 12.9399C1.85551 19.0084 6.79142 23.9443 12.8599 23.9443C18.9283 23.9443 23.8642 19.0084 23.8642 12.9399C23.8642 6.87149 18.9258 1.93559 12.8599 1.93559Z"
+          fill="black" />
+    </svg>
+
+  {%- when 'sale' -%}
+    <svg class="{{ class }}" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+          d="M5.58666 10.24L7.83333 7.82664L10.08 5.41331M9.94666 9.72664C9.94666 9.8733 9.82666 9.9933 9.68 9.9933C9.53333 9.9933 9.41333 9.8733 9.41333 9.72664M9.94666 9.72664C9.94666 9.57997 9.82666 9.45997 9.68 9.45997C9.53333 9.45997 9.41333 9.57997 9.41333 9.72664M9.94666 9.72664H9.41333M6.28 6.00664C6.28 6.15331 6.16 6.2733 6.01333 6.2733C5.86666 6.2733 5.74666 6.15331 5.74666 6.00664M6.28 6.00664C6.28 5.85997 6.16 5.73997 6.01333 5.73997C5.86666 5.73997 5.74666 5.85997 5.74666 6.00664M6.28 6.00664H5.74666M4.82666 2.68664H4.72666C4.00666 2.68664 3.64666 2.68664 3.37333 2.82664C3.13333 2.94664 2.93333 3.14664 2.81333 3.38664C2.67333 3.65997 2.67333 4.01997 2.67333 4.73997V4.81997C2.67333 5.09997 2.67333 5.23997 2.64666 5.37331C2.62 5.49331 2.58 5.60664 2.52 5.71331C2.45333 5.83331 2.36666 5.93997 2.18666 6.1533L1.89333 6.49997C1.49333 6.9733 1.29333 7.20664 1.21333 7.47331C1.14666 7.70664 1.14666 7.9533 1.21333 8.18664C1.28666 8.4533 1.48666 8.68664 1.89333 9.15997L2.18666 9.50664C2.36666 9.71997 2.46 9.82664 2.52 9.94664C2.58 10.0533 2.62 10.1666 2.64666 10.2866C2.67333 10.42 2.67333 10.56 2.67333 10.84V10.92C2.67333 11.64 2.67333 12 2.81333 12.2733C2.93333 12.5133 3.13333 12.7133 3.37333 12.8333C3.64666 12.9733 4.00666 12.9733 4.72666 12.9733H4.82666C5.10666 12.9733 5.24666 12.9733 5.38 13C5.5 13.0266 5.61333 13.0666 5.72 13.1266C5.84 13.1933 5.94666 13.2866 6.16 13.4666L6.49333 13.7533C6.96666 14.16 7.20666 14.3666 7.47333 14.44C7.70666 14.5066 7.96 14.5066 8.19333 14.44C8.46 14.36 8.7 14.16 9.17333 13.7533L9.50666 13.4666C9.72 13.2866 9.82666 13.1933 9.94666 13.1266C10.0533 13.0666 10.1667 13.0266 10.2867 13C10.42 12.9733 10.56 12.9733 10.84 12.9733H10.9133C11.6333 12.9733 11.9933 12.9733 12.2667 12.8333C12.5067 12.7133 12.7067 12.5133 12.8267 12.2733C12.9667 12 12.9667 11.64 12.9667 10.92V10.8466C12.9667 10.5666 12.9667 10.4266 12.9933 10.2933C13.02 10.1733 13.06 10.06 13.12 9.95331C13.1867 9.83331 13.28 9.72664 13.46 9.51331L13.7467 9.17997C14.1533 8.70664 14.36 8.46664 14.4333 8.19997C14.5 7.96664 14.5 7.71331 14.4333 7.47997C14.3533 7.21331 14.1533 6.9733 13.7467 6.49997L13.46 6.16664C13.28 5.95331 13.1867 5.84664 13.12 5.72664C13.06 5.61997 13.02 5.50664 12.9933 5.38664C12.9667 5.25331 12.9667 5.11331 12.9667 4.83331V4.75997C12.9667 4.03997 12.9667 3.67997 12.8267 3.40664C12.7067 3.16664 12.5067 2.96664 12.2667 2.84664C11.9933 2.70664 11.6333 2.70664 10.9133 2.70664H10.84C10.56 2.70664 10.42 2.70664 10.2867 2.67997C10.1667 2.65331 10.0533 2.61331 9.94666 2.55331C9.82666 2.48664 9.72 2.39331 9.50666 2.21331L9.17333 1.92664C8.7 1.51997 8.46 1.31331 8.19333 1.23997C7.96 1.17331 7.70666 1.17331 7.47333 1.23997C7.20666 1.31997 6.96666 1.51997 6.49333 1.92664L6.16 2.21331C5.94666 2.39331 5.84 2.48664 5.72 2.55331C5.61333 2.61331 5.5 2.65331 5.38 2.67997C5.24666 2.70664 5.10666 2.70664 4.82666 2.70664V2.68664Z"
+          stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+
+  {%- when 'cooltotouch' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="51" height="58" fill="none" viewBox="0 0 51 58">
+      <path fill="#0F374B"
+          d="M9.594 40.13c-.99.606-1.904 1.157-2.818 1.726-1.176.719-2.334 1.465-3.519 2.147-1.288.746-2.688.065-2.856-1.372-.093-.784.299-1.335.933-1.727 1.848-1.139 3.706-2.277 5.554-3.416.214-.13.42-.27.709-.448-.775-.29-1.484-.55-2.184-.821-.233-.084-.467-.178-.7-.27-1.017-.42-1.465-1.354-1.12-2.325.336-.952 1.307-1.418 2.352-1.073 1.484.504 2.977.99 4.415 1.596.896.373 1.586.28 2.408-.243 2.78-1.773 5.618-3.462 8.427-5.18.084-.056.168-.121.29-.205-1.027-.579-2.026-1.148-3.024-1.708-2.1-1.185-4.21-2.352-6.29-3.547-.43-.242-.775-.28-1.233-.065-1.54.71-3.108 1.381-4.676 2.035-.317.14-.681.214-1.026.252-.962.102-1.596-.308-1.858-1.148-.27-.878.047-1.746.859-2.166.653-.345 1.344-.606 2.016-.905.401-.177.812-.355 1.288-.57-.812-.457-1.577-.895-2.343-1.325-1.297-.728-2.604-1.456-3.91-2.184-.112-.065-.234-.13-.346-.205-.924-.616-1.204-1.615-.681-2.501.513-.887 1.521-1.167 2.51-.653.785.41 1.56.858 2.325 1.287 1.278.72 2.548 1.438 3.826 2.147.084.047.178.075.299.13-.168-1.091-.345-2.136-.476-3.191-.112-.887.495-1.699 1.381-1.913.896-.215 1.783.177 2.063 1.017.214.635.308 1.316.42 1.979.224 1.297.401 2.603.644 3.891.056.3.28.654.541.803 3.061 1.745 6.141 3.453 9.212 5.17a1.2 1.2 0 0 0 .14.038c.01-.13.028-.252.028-.373 0-3.818 0-7.644.01-11.462 0-.382-.14-.634-.43-.867-1.353-1.055-2.697-2.128-4.032-3.192a3.525 3.525 0 0 1-.56-.56c-.55-.71-.541-1.54-.01-2.212.551-.691 1.4-.934 2.185-.495.616.345 1.157.812 1.726 1.241.355.262.691.542 1.12.878V1.947c0-.989.616-1.764 1.466-1.913 1.204-.215 2.174.607 2.184 1.885.018 1.923 0 3.846 0 5.778v.569c.858-.653 1.652-1.241 2.426-1.839.542-.42 1.13-.728 1.839-.569.7.159 1.139.616 1.344 1.279.205.672.037 1.278-.457 1.754-.458.439-.98.803-1.484 1.195-1.102.85-2.222 1.68-3.314 2.538-.177.14-.336.44-.336.663-.018 3.91-.018 7.821-.018 11.732 0 .047.009.084.028.205.224-.13.42-.233.616-.354 3.192-1.951 6.374-3.902 9.576-5.843.4-.243.56-.56.606-.999.196-1.763.401-3.527.644-5.282.159-1.158 1.017-1.774 2.175-1.606.933.131 1.54 1.008 1.428 2.072-.094.887-.206 1.764-.308 2.642-.01.112 0 .224 0 .392 1.54-.952 3.024-1.876 4.517-2.781.392-.234.784-.486 1.204-.654.84-.326 1.67-.028 2.128.7.476.756.401 1.652-.27 2.259-.393.355-.86.625-1.307.896-1.344.83-2.698 1.652-4.051 2.482-.121.075-.233.16-.41.28 1.054.42 2.053.812 3.051 1.204.812.327 1.27.934 1.27 1.69 0 1.381-1.176 2.23-2.483 1.754-1.4-.513-2.819-1.008-4.163-1.642-1.129-.532-2.006-.458-3.08.242-2.911 1.904-5.917 3.659-8.875 5.47-.094.056-.187.13-.346.233.952.532 1.858 1.045 2.763 1.559 2.595 1.446 5.19 2.893 7.784 4.358.373.206.69.233 1.082.066 1.54-.645 3.08-1.28 4.648-1.867.448-.168.952-.29 1.419-.252.793.056 1.4.746 1.493 1.53.094.803-.298 1.55-1.054 1.877-.868.382-1.746.727-2.614 1.092-.093.037-.177.084-.345.158.887.495 1.699.952 2.52 1.41.999.56 2.007 1.11 2.996 1.689.7.41 1.036 1.148.877 1.932-.14.728-.588 1.222-1.316 1.418-.597.16-1.138-.018-1.652-.317a766.66 766.66 0 0 0-4.713-2.65c-.168-.094-.336-.178-.607-.318.094.71.168 1.335.252 1.97.066.494.14.998.187 1.493a1.814 1.814 0 0 1-1.605 1.997c-1.008.112-1.858-.55-2.007-1.577a393.11 393.11 0 0 1-.784-5.666c-.047-.354-.196-.56-.485-.727-3.285-1.84-6.58-3.678-9.865-5.516-.29-.16-.588-.318-.934-.514v.514c0 3.528 0 7.046-.018 10.574 0 .476.168.765.532 1.036a255.655 255.655 0 0 1 4.377 3.304c1.185.924 1.008 2.641-.317 3.192-.747.308-1.42.075-2.035-.383-.737-.55-1.465-1.101-2.193-1.652a6.024 6.024 0 0 0-.355-.233v7.42c0 .961-.56 1.708-1.372 1.895-1.204.28-2.259-.551-2.277-1.83-.028-1.773 0-3.556-.01-5.329v-2.053c-.448.354-.83.644-1.204.933-.42.317-.84.635-1.269.952-.84.625-1.923.523-2.53-.243-.662-.84-.531-1.941.337-2.641a263.78 263.78 0 0 1 4.032-3.192c.448-.345.644-.719.634-1.297-.028-3.379 0-6.748 0-10.127v-.522c-.718.429-1.372.82-2.025 1.222-2.38 1.456-4.75 2.93-7.13 4.377-.327.197-.476.448-.514.813-.177 1.838-.364 3.677-.55 5.515-.103.952-.58 1.522-1.41 1.718-.784.186-1.558-.122-1.97-.775-.288-.457-.28-.952-.232-1.456.074-.821.158-1.652.233-2.473.019-.187.019-.374.028-.644l.01-.01Z" />
+    </svg>
+
+  {%- when 'supportive' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" id="_图层_2" data-name="图层 2" viewBox="0 0 96.43 96.43">
+      <g id="_图层_1-2" data-name="图层 1">
+        <g>
+          <path d="M48.21,96.43C21.63,96.43,0,74.8,0,48.21S21.63,0,48.21,0s48.21,21.63,48.21,48.21-21.63,48.21-48.21,48.21ZM48.21,4C23.83,4,4,23.83,4,48.21s19.83,44.21,44.21,44.21,44.21-19.83,44.21-44.21S72.59,4,48.21,4Z"/>
+          <g>
+            <path d="M47.97,50.27c9.84,0,17.81-7.97,17.81-17.81s-7.97-17.81-17.81-17.81-17.81,7.97-17.81,17.81,7.97,17.81,17.81,17.81ZM52.36,21.73c.29-.66,1.05-.96,1.71-.67,2.41,1.05,4.47,2.9,5.78,5.17.36.62.15,1.41-.48,1.77-.21.12-.43.17-.65.17-.45,0-.88-.23-1.12-.65-1.05-1.81-2.67-3.26-4.58-4.1-.66-.29-.95-1.05-.67-1.71h0Z"/>
+            <g>
+              <path d="M15.32,43.35h1.15c3.39,0,6.67,1.43,8.99,3.93,5.71,6.11,13.91,9.61,22.5,9.61s16.79-3.5,22.49-9.61c2.33-2.49,5.6-3.93,8.99-3.93h1.15c.72,0,1.3-.58,1.3-1.3s-.58-1.3-1.3-1.3h-1.15c-4.1,0-8.07,1.73-10.88,4.75-5.22,5.59-12.73,8.79-20.6,8.79s-15.38-3.21-20.6-8.79c-2.82-3.02-6.79-4.75-10.88-4.75h-1.15c-.72,0-1.3.58-1.3,1.3s.58,1.3,1.3,1.3Z"/>
+              <path d="M47.96,57.39c-8.73,0-17.06-3.56-22.86-9.77-2.23-2.39-5.37-3.77-8.63-3.77h-1.15c-.99,0-1.8-.81-1.8-1.8s.81-1.8,1.8-1.8h1.15c4.24,0,8.34,1.79,11.25,4.91,5.13,5.49,12.51,8.63,20.24,8.63s15.11-3.15,20.24-8.63c2.91-3.12,7.01-4.91,11.25-4.91h1.15c.99,0,1.8.81,1.8,1.8s-.81,1.8-1.8,1.8h-1.15c-3.25,0-6.39,1.37-8.63,3.77-5.8,6.21-14.13,9.77-22.86,9.77ZM15.32,41.25c-.44,0-.8.36-.8.8s.36.8.8.8h1.15c3.53,0,6.94,1.49,9.36,4.08,5.61,6.01,13.67,9.45,22.13,9.45s16.52-3.45,22.13-9.46c2.42-2.6,5.83-4.08,9.36-4.08h1.15c.44,0,.8-.36.8-.8s-.36-.8-.8-.8h-1.15c-3.96,0-7.8,1.67-10.52,4.59-5.32,5.69-12.96,8.95-20.97,8.95s-15.65-3.26-20.97-8.95c-2.72-2.92-6.56-4.59-10.52-4.59h-1.15Z"/>
+            </g>
+            <g>
+              <path d="M80.6,71.22h-4.94v-16.72l1.12,1.68c.25.37.66.57,1.08.57.25,0,.5-.07.72-.22.6-.4.75-1.2.35-1.8l-3.48-5.19c-.24-.35-.64-.57-1.07-.57s-.83.22-1.07.56l-3.52,5.15c-.41.59-.25,1.4.34,1.8.59.41,1.4.25,1.8-.34l1.13-1.66v16.72h-14.85v-6.98l1.12,1.68c.25.37.66.57,1.08.57.25,0,.5-.07.72-.22.6-.4.75-1.2.35-1.8l-3.48-5.19c-.24-.35-.64-.57-1.07-.57s-.83.22-1.07.56l-3.52,5.15c-.41.59-.25,1.4.34,1.8.59.41,1.4.25,1.8-.34l1.13-1.66v6.99h-14.85v-6.98l1.12,1.68c.25.37.66.57,1.08.57.25,0,.5-.07.72-.22.6-.4.75-1.2.35-1.8l-3.48-5.19c-.24-.35-.64-.57-1.07-.57s-.83.22-1.07.56l-3.52,5.15c-.41.59-.25,1.4.34,1.8.59.41,1.4.25,1.8-.34l1.13-1.66v6.99h-14.85v-16.72l1.12,1.68c.25.37.66.57,1.08.57.25,0,.5-.07.72-.22.6-.4.75-1.2.35-1.8l-3.48-5.19c-.24-.35-.64-.57-1.07-.57s-.83.22-1.07.57l-3.52,5.15c-.41.59-.25,1.4.34,1.8.59.41,1.4.25,1.8-.34l1.13-1.66v16.73h-5.41c-.72,0-1.3.58-1.3,1.3s.58,1.3,1.3,1.3h65.28c.72,0,1.3-.58,1.3-1.3s-.58-1.3-1.3-1.3Z"/>
+              <path d="M80.6,74.32H15.32c-.99,0-1.8-.81-1.8-1.8s.81-1.8,1.8-1.8h4.91v-14.61l-.22.32c-.27.39-.68.66-1.15.75-.48.09-.95-.01-1.35-.28-.39-.27-.66-.67-.75-1.15-.09-.47.01-.95.28-1.34l3.52-5.15c.34-.49.89-.79,1.49-.79s1.15.29,1.49.79l3.48,5.19c.55.83.33,1.94-.49,2.49-.77.52-1.96.3-2.49-.49l-.21-.31v14.58h13.85v-4.87l-.22.32c-.27.39-.68.66-1.15.75-.48.09-.95-.01-1.35-.29-.39-.26-.66-.67-.75-1.15-.09-.47.01-.95.29-1.35l3.52-5.15c.34-.49.9-.78,1.49-.78s1.15.29,1.49.79l3.48,5.19c.27.4.36.88.27,1.35-.09.47-.36.88-.76,1.14-.77.52-1.96.3-2.49-.49l-.21-.31v4.83h13.85v-4.86l-.22.32c-.27.4-.68.66-1.15.75-.47.09-.95-.01-1.34-.29-.39-.26-.66-.67-.75-1.15-.09-.47.01-.95.29-1.35l3.52-5.15c.34-.49.9-.78,1.49-.78s1.15.29,1.49.79l3.48,5.19c.27.4.36.88.27,1.35-.09.47-.36.88-.76,1.14-.76.52-1.95.3-2.49-.49l-.21-.31v4.83h13.85v-14.6l-.22.32c-.27.4-.68.66-1.15.75-.47.09-.95-.01-1.34-.28-.39-.27-.66-.67-.75-1.15s.01-.95.29-1.35l3.52-5.15c.69-.98,2.3-.97,2.97,0l3.48,5.19c.55.83.33,1.94-.49,2.49-.76.52-1.95.3-2.49-.49l-.21-.31v14.58h4.44c.99,0,1.8.81,1.8,1.8s-.81,1.8-1.8,1.8ZM15.32,71.72c-.44,0-.8.36-.8.8s.36.8.8.8h65.28c.44,0,.8-.36.8-.8s-.36-.8-.8-.8h-5.44v-18.87l2.04,3.04c.24.35.77.45,1.1.22.37-.24.46-.74.22-1.11l-3.47-5.19c-.3-.43-1.01-.44-1.32,0l-3.51,5.15c-.12.18-.17.39-.13.6.04.21.16.39.33.51.18.12.38.17.6.13.21-.04.39-.16.51-.33l2.05-3v18.84h-15.85v-9.12l2.04,3.04c.24.35.77.45,1.1.22.18-.12.3-.3.34-.51.04-.21,0-.42-.12-.6l-3.47-5.19c-.3-.43-1.01-.44-1.32,0l-3.51,5.15c-.12.18-.17.39-.13.6.04.21.16.39.33.51.18.12.38.17.6.13.21-.04.39-.16.51-.33l2.05-3v9.11h-15.85v-9.12l2.04,3.04c.24.35.76.45,1.1.22.18-.12.3-.3.34-.51.04-.21,0-.42-.12-.6l-3.47-5.19c-.3-.43-1.01-.44-1.32,0l-3.51,5.15c-.12.18-.17.39-.13.6.04.21.16.39.33.51.18.12.39.17.6.13.21-.04.39-.16.51-.33l2.05-3v9.11h-15.85v-18.87l2.04,3.04c.24.35.77.45,1.1.22.37-.25.46-.74.22-1.11l-3.47-5.19c-.3-.43-1.02-.44-1.32,0l-3.52,5.15c-.12.17-.17.39-.13.59.04.21.16.39.33.51.18.12.38.17.6.13.21-.04.39-.16.51-.33l2.05-3v18.85h-5.91Z"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+
+  {%- when 'breathability' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="56" height="48" fill="none" viewBox="0 0 56 48">
+      <path fill="#0F374B"
+          d="M54.959 14.41a1.819 1.819 0 0 0-1.708-.14c-.084.037-5.217 2.221-12.945 2.464.681-4.807 1.839-8.073 2.595-9.8.587.224 1.129.42 1.129.42.187.066.383.103.578.094.187-.01.364-.056.533-.14a1.464 1.464 0 0 0 .719-.775c.065-.168.102-.355.093-.541 0-.252-.094-.504-.178-.738-.186-.55-.438-1.073-.69-1.596-.309-.644-.607-1.269-1.027-1.848-.019-.018-.028-.046-.047-.065a1.457 1.457 0 0 0-.625-.467 1.455 1.455 0 0 0-.85-.046c-.7.158-1.334.429-1.987.709-.532.224-1.064.448-1.568.737-.215.122-.448.252-.626.439-.121.13-.224.299-.29.467a1.3 1.3 0 0 0-.083.532 1.418 1.418 0 0 0 .42.98c.14.14.317.242.504.317l.635.243c-.906 2.09-2.156 5.758-2.847 11.031a43.6 43.6 0 0 1-6.29-.774V5.954h.942c.196 0 .392-.037.579-.121.168-.075.326-.177.448-.317.121-.131.224-.29.289-.448.065-.168.103-.346.103-.523a1.55 1.55 0 0 0-.103-.541c-.093-.234-.27-.44-.43-.635-.363-.448-.793-.85-1.213-1.25-.513-.495-1.017-.971-1.614-1.363-.019-.019-.047-.028-.066-.047a1.416 1.416 0 0 0-.746-.215c-.262 0-.523.075-.747.215a.281.281 0 0 0-.065.047c-.598.392-1.102.877-1.615 1.362-.42.402-.84.803-1.213 1.251-.159.196-.327.392-.43.635a1.33 1.33 0 0 0-.102.54 1.408 1.408 0 0 0 .392.972c.13.13.28.242.448.317.177.075.383.121.579.121h.942v9.081a44.3 44.3 0 0 1-1.997-.616 65.67 65.67 0 0 0-4.919-1.456c-.69-3.322-1.55-5.758-2.23-7.326l.634-.243c.187-.065.355-.177.504-.317.13-.13.243-.28.308-.457.075-.168.112-.346.112-.523 0-.177-.028-.364-.084-.532a1.268 1.268 0 0 0-.29-.467c-.176-.186-.4-.317-.624-.438-.504-.29-1.036-.514-1.568-.738-.654-.28-1.298-.55-1.988-.709a.175.175 0 0 1-.075-.019 1.368 1.368 0 0 0-.775.066 1.456 1.456 0 0 0-.625.466c-.019.019-.028.047-.047.066-.42.578-.718 1.204-1.026 1.848-.252.522-.504 1.045-.691 1.596-.084.242-.168.485-.177.737 0 .187.028.373.093.541.065.168.159.327.29.458.12.13.27.242.429.317.168.084.345.13.532.14.196.01.392-.028.578-.093 0 0 .542-.206 1.13-.42.485 1.11 1.138 2.856 1.726 5.236C5.55 10.405 1.49 13.645.976 14.111a1.816 1.816 0 0 0-.597 1.325L.2 35.653c0 .672.364 1.287.952 1.605.588.317 1.307.27 1.857-.103.056-.037 4.536-2.996 13.674-1.96a79.96 79.96 0 0 1-2.11 9.977A1.79 1.79 0 0 0 16.3 47.45c.784 0 1.503-.523 1.727-1.307a80.765 80.765 0 0 0 2.202-10.379c1.82.374 3.79.896 5.908 1.615.215.075.43.13.644.205v8.074a1.792 1.792 0 0 0 3.584 0V38.61a47.77 47.77 0 0 0 7.243 1.204c.42 2.1.924 4.219 1.512 6.328a1.792 1.792 0 0 0 2.212 1.241 1.795 1.795 0 0 0 1.24-2.212 81.176 81.176 0 0 1-1.26-5.208c8.223-.037 13.16-2.538 13.46-2.697a1.8 1.8 0 0 0 .96-1.587V15.904c0-.606-.307-1.166-.811-1.502l.037.01Zm-2.772 20.095c-2.893 1.11-12.068 3.807-24.873-.523-3.033-1.027-5.796-1.68-8.306-2.081-.02 0-.038-.01-.056-.01h-.038a38.023 38.023 0 0 0-5.945-.485c-4.097 0-7.13.737-9.128 1.456l.14-16.408c1.353-.69 5.19-2.007 12.805-.476.27 1.717.476 3.63.579 5.768.047.961.84 1.708 1.792 1.708h.084a1.795 1.795 0 0 0 1.708-1.876 59.65 59.65 0 0 0-.41-4.685c.988.28 2.015.588 3.116.961 1.064.364 2.11.663 3.146.933v2.875a1.792 1.792 0 0 0 3.584 0v-2.063a48.33 48.33 0 0 0 5.936.71c-.028.42-.066.84-.084 1.278-.047.99.718 1.83 1.708 1.876h.084c.952 0 1.745-.746 1.792-1.708.018-.476.056-.924.093-1.381 5.422-.112 9.725-1.12 12.254-1.904v16.044l.02-.01Z" />
+    </svg>
+
+  {%- when 'moisture-absorption' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="61" height="50" fill="none" viewBox="0 0 61 50">
+      <path fill="#0F374B"
+          d="M57.46 27.08c-.12.06-12.16 5.49-28.64-.08-18.27-6.18-27.57-.02-27.95.25a1.99 1.99 0 0 0-.52 2.76c.61.91 1.85 1.15 2.77.55.08-.05 8.21-5.25 24.42.24 6.1 2.06 11.62 2.75 16.28 2.75 9.16 0 14.98-2.67 15.34-2.84 1-.47 1.42-1.66.96-2.66-.47-1-1.66-1.43-2.66-.97Zm0 15.54c-.12.06-12.16 5.49-28.64-.08-18.27-6.18-27.57-.02-27.95.25a1.99 1.99 0 0 0-.52 2.76c.61.91 1.85 1.15 2.77.55.08-.05 8.21-5.24 24.42.24 6.1 2.06 11.62 2.75 16.28 2.75 9.16 0 14.98-2.67 15.34-2.84 1-.47 1.42-1.66.96-2.66-.47-1-1.66-1.43-2.66-.97ZM10.21 17.28c.39.47.84.9 1.28 1.32.54.52 1.08 1.03 1.71 1.44.02.02.05.03.07.05.24.15.52.23.79.23a1.483 1.483 0 0 0 .86-.28c.63-.41 1.16-.92 1.71-1.44.44-.42.89-.85 1.28-1.32.17-.21.35-.42.45-.67.07-.18.11-.38.11-.57a1.523 1.523 0 0 0-.42-1.04c-.13-.14-.3-.26-.48-.33-.19-.08-.4-.12-.61-.12h-.91V2c0-1.1-.9-2-2-2s-2 .9-2 2v12.55h-.9c-.21 0-.42.04-.61.12-.18.08-.34.19-.48.33a1.523 1.523 0 0 0-.42 1.04c0 .2.03.39.11.57.1.25.28.46.45.67h.01Zm16.09 0c.39.47.84.9 1.28 1.32.54.52 1.08 1.03 1.71 1.44.02.02.05.03.07.05.24.15.52.23.79.23a1.483 1.483 0 0 0 .86-.28c.63-.41 1.16-.92 1.71-1.44.44-.42.89-.85 1.28-1.32.17-.21.35-.42.45-.67.07-.18.11-.38.11-.57a1.523 1.523 0 0 0-.42-1.04c-.13-.14-.3-.26-.48-.33-.19-.08-.4-.12-.61-.12h-.91V2c0-1.1-.9-2-2-2s-2 .9-2 2v12.55h-.9c-.21 0-.42.04-.61.12-.18.08-.34.19-.48.33a1.523 1.523 0 0 0-.42 1.04c0 .2.03.39.11.57.1.25.28.46.45.67h.01Zm16.36 0c.39.47.84.9 1.28 1.32.54.52 1.08 1.03 1.71 1.44.02.02.05.03.07.05.24.15.52.23.79.23a1.483 1.483 0 0 0 .86-.28c.63-.41 1.16-.92 1.71-1.44.44-.42.89-.85 1.28-1.32.17-.21.35-.42.45-.67.07-.18.11-.38.11-.57A1.523 1.523 0 0 0 50.5 15c-.13-.14-.3-.26-.48-.33-.19-.08-.4-.12-.61-.12h-.9V2c0-1.1-.9-2-2-2s-2 .9-2 2v12.55h-.9c-.21 0-.42.04-.61.12-.18.08-.34.19-.48.33a1.523 1.523 0 0 0-.42 1.04c0 .2.03.39.11.57.1.25.28.46.45.67Z" />
+      <path fill="#0F374B"
+          d="M10.15 38.1c.79-.11 1.52-.6 1.9-1.3.25-.46.32-.93.27-1.39-.1-.9-.66-1.78-1.21-2.52-.39-.53-.83-1.04-1.31-1.5-.59.69-1.26 1.32-1.77 2.07-.51.75-.87 1.67-.72 2.56.08.49.32.96.66 1.32.55.57 1.38.87 2.17.76h.01Zm10.03 0c.79-.11 1.52-.6 1.9-1.3.25-.46.32-.93.27-1.39-.1-.9-.66-1.78-1.21-2.52-.39-.53-.83-1.04-1.31-1.5-.59.69-1.26 1.32-1.77 2.07-.51.75-.87 1.67-.72 2.56.08.49.32.96.66 1.32.55.57 1.38.87 2.17.76h.01Zm10.04 2.21c.79-.11 1.52-.6 1.9-1.3.25-.46.32-.93.27-1.39-.1-.9-.66-1.78-1.21-2.52-.39-.53-.83-1.04-1.31-1.5-.59.69-1.26 1.32-1.77 2.07-.51.75-.87 1.67-.72 2.56.08.49.32.96.66 1.32.55.57 1.38.87 2.17.76h.01Zm10.03 1.46c.79-.11 1.52-.6 1.9-1.3.25-.46.32-.93.27-1.39-.1-.9-.66-1.78-1.21-2.52-.39-.53-.83-1.04-1.31-1.5-.59.69-1.26 1.32-1.77 2.07-.51.75-.87 1.67-.72 2.56.08.49.32.96.66 1.32.55.58 1.38.87 2.17.76h.01Zm10.04.22c.79-.11 1.52-.6 1.9-1.3.25-.46.32-.93.27-1.39-.1-.9-.66-1.78-1.21-2.52-.39-.53-.83-1.04-1.31-1.5-.59.69-1.26 1.32-1.77 2.07-.51.75-.87 1.67-.72 2.56.08.49.32.96.66 1.32.55.57 1.38.87 2.17.76h.01Z" />
+    </svg>
+
+  {%- when 'product-size' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="54" height="51" fill="none" viewBox="0 0 54 51">
+      <path fill="#0F374B"
+          d="M27.034 51h22.464c1.949 0 3.361-1.019 3.796-2.737.092-.361.11-.748.11-1.125.007-14.427.007-28.852.007-43.277 0-2.369-1.51-3.859-3.916-3.859C34.498 0 19.501 0 4.503.002 2.126.002.597 1.486.593 3.803a51227.42 51227.42 0 0 0 0 43.396c0 2.314 1.533 3.798 3.913 3.798 7.51.006 15.019 0 22.525 0l.003.003Zm23.338-2.966H3.878V3.207h46.494v44.827Z" />
+      <path fill="#0F374B"
+          d="M41.039 14.515c0 2.047-.007 3.928.006 5.81 0 .363.033.742.137 1.09.217.71.795 1.092 1.522 1.08.703-.013 1.287-.445 1.473-1.156.092-.35.12-.73.12-1.096.008-2.933.008-5.866.002-8.796-.003-2.138-1.115-3.247-3.242-3.25-3.084 0-6.17-.003-9.253.003-.926 0-1.59.407-1.825 1.065-.327.917.156 1.875 1.11 2.113.388.097.803.11 1.207.11 1.86.009 3.725.006 5.702.006-.18.219-.281.357-.4.479-1.773 1.83-3.542 3.668-5.327 5.49-.953.97-1.946 1.904-2.9 2.874-.587.598-.666 1.34-.415 2.113.238.745.797 1.14 1.534 1.215a2.238 2.238 0 0 0 1.879-.67c2.28-2.279 4.566-4.549 6.86-6.812.547-.538 1.131-1.042 1.816-1.668h-.006Zm-25.566 24.23c.23-.248.367-.403.513-.552 2.114-2.152 4.225-4.303 6.345-6.449.434-.44.92-.828 1.35-1.27.75-.768.778-1.858.103-2.582-.693-.738-1.902-.773-2.665-.03-1.141 1.115-2.253 2.257-3.38 3.39-.947.952-1.881 1.915-2.842 2.853-.646.63-1.325 1.225-2.047 1.888-.018-.224-.038-.388-.038-.553 0-1.586 0-3.17-.003-4.757 0-.233 0-.472-.032-.702-.134-.986-.736-1.545-1.601-1.509-.839.036-1.456.681-1.462 1.659a631.6 631.6 0 0 0 0 9.394c.012 1.282.789 2.11 2.044 2.301.265.042.539.06.807.06 2.821.003 5.646.02 8.467-.015.515-.006 1.069-.165 1.535-.398.917-.46.931-1.837.029-2.312-.428-.224-.938-.392-1.415-.4-1.855-.046-3.71-.019-5.71-.019l.002.003Z" />
+    </svg>
+
+  {%- when 'exquisite-craftsmanship' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="56" height="55" fill="none" viewBox="0 0 56 55">
+      <path stroke="#0F374B" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+          d="M34.316 16.068a2.586 2.586 0 0 1 3.68 0 2.64 2.64 0 0 1 0 3.712" />
+      <path fill="#0F374B" d="M37.997 19.78 2.712 52.193c-.358.324-.86-.182-.538-.543l32.142-35.582" />
+      <path stroke="#0F374B" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+          d="M37.997 19.78 2.712 52.193c-.358.324-.86-.182-.538-.543l32.142-35.582" />
+      <path stroke="#0F374B" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+          d="M35.245 18.884s10.209-.501 10.376 10.464c.12 7.815-10.442 13.072-12.92 9.3-1.96-2.985.802-9.583 7.254-11.415a34.35 34.35 0 0 1 2.639-.636m5.319-.796c1.983-.297 3.498-.719 4.78-2.068 2.851-3.002 1.316-6.961-2.73-10.433m-18.492 5.908s-3.17-.255-5.047-2.11c-2.329-2.304-2.646-6.459-.07-9.081 2.3-2.34 7.459-1.306 8.693-6.017" />
+    </svg>
+
+  {%- when 'silky-soft' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 97 97" height="97" width="97">
+      <path fill="black"
+          d="M76.0601 55.4696C76.0501 55.4796 74.8 56.0496 72.61 56.6296C71.54 56.9096 70.91 58.0096 71.19 59.0796C71.43 59.9796 72.24 60.5696 73.12 60.5696C73.29 60.5696 73.46 60.5496 73.63 60.4996C76.21 59.8096 77.69 59.1196 77.75 59.0896C78.75 58.6196 79.17 57.4296 78.71 56.4296C78.25 55.4396 77.0601 55.0096 76.0601 55.4696Z" />
+      <path fill="black"
+          d="M31.33 56.6599C33.39 56.6099 35.7 56.7599 38.03 57.1299C38.14 57.1499 38.24 57.1599 38.35 57.1599C39.32 57.1599 40.17 56.4599 40.32 55.4799C40.49 54.3899 39.75 53.3599 38.66 53.1899C36.09 52.7799 33.53 52.6099 31.23 52.6699C30.13 52.6999 29.25 53.6199 29.28 54.7199C29.31 55.8099 30.2 56.6699 31.28 56.6699C31.29 56.6599 31.31 56.6599 31.33 56.6599Z" />
+      <path fill="black"
+          d="M46.13 59.18C47.94 59.79 49.78 60.31 51.6 60.71C51.75 60.74 51.89 60.76 52.04 60.76C52.96 60.76 53.78 60.13 53.99 59.2C54.23 58.12 53.55 57.05 52.47 56.81C50.78 56.43 49.08 55.96 47.4 55.39C46.86 55.21 46.33 55.04 45.81 54.88C44.76 54.56 43.63 55.15 43.31 56.2C42.99 57.25 43.58 58.38 44.63 58.7C45.13 58.85 45.63 59.01 46.13 59.18Z" />
+      <path fill="black"
+          d="M62.38 61.92C63.7 61.92 65.02 61.86 66.31 61.75C67.41 61.66 68.23 60.69 68.13 59.59C68.04 58.49 67.0699 57.67 65.9699 57.77C63.7599 57.96 61.4699 57.97 59.1999 57.81C58.1099 57.73 57.14 58.56 57.06 59.66C56.98 60.76 57.81 61.72 58.91 61.8C60.06 61.87 61.23 61.92 62.38 61.92Z" />
+      <path fill="black"
+          d="M20.6 59.2696C20.98 59.2696 21.37 59.1596 21.71 58.9396C21.72 58.9296 22.77 58.2496 24.83 57.6296C25.89 57.3096 26.4901 56.1996 26.1801 55.1396C25.8601 54.0796 24.75 53.4796 23.69 53.7896C21.02 54.5896 19.62 55.5196 19.46 55.6196C18.55 56.2396 18.33 57.4696 18.94 58.3796C19.33 58.9696 19.96 59.2696 20.6 59.2696Z" />
+      <path fill="black"
+          d="M76.0601 46.4098C75.9401 46.4698 63.9 51.8998 47.41 46.3298C29.14 40.1498 19.84 46.3098 19.46 46.5798C18.55 47.1998 18.3199 48.4498 18.9399 49.3598C19.5599 50.2698 20.81 50.5098 21.72 49.8798C21.8 49.8298 29.73 44.5798 46.13 50.1298C52.23 52.1898 57.75 52.8798 62.41 52.8798C71.56 52.8798 77.39 50.2098 77.75 50.0398C78.75 49.5698 79.17 48.3798 78.71 47.3798C78.25 46.3698 77.0601 45.9398 76.0601 46.4098Z" />
+      <path fill="black"
+          d="M76.0601 64.4C75.9401 64.46 63.9 69.89 47.41 64.32C29.14 58.14 19.84 64.3 19.46 64.57C18.55 65.19 18.3199 66.44 18.9399 67.35C19.5599 68.26 20.81 68.5 21.72 67.87C21.8 67.82 29.73 62.57 46.13 68.12C52.23 70.18 57.75 70.87 62.41 70.87C71.56 70.87 77.39 68.2 77.75 68.03C78.75 67.56 79.17 66.37 78.71 65.37C78.25 64.36 77.0601 63.93 76.0601 64.4Z" />
+      <path fill="black"
+          d="M25.03 29.7498C25.52 30.3498 26.09 30.8898 26.65 31.4198C27.34 32.0798 28.0101 32.7298 28.8101 33.2498C28.8401 33.2698 28.87 33.2898 28.9 33.3098C29.21 33.4998 29.56 33.5998 29.9 33.5998C30.25 33.5998 30.6 33.4998 30.9 33.3098C30.93 33.2898 30.96 33.2698 30.99 33.2498C31.79 32.7298 32.47 32.0798 33.15 31.4198C33.71 30.8798 34.28 30.3498 34.77 29.7498C34.98 29.4898 35.21 29.2198 35.34 28.8998C35.43 28.6698 35.48 28.4198 35.48 28.1798C35.48 27.9398 35.43 27.6998 35.34 27.4698C35.25 27.2498 35.12 27.0398 34.95 26.8598C34.78 26.6798 34.57 26.5398 34.35 26.4398C34.11 26.3298 33.84 26.2798 33.58 26.2798C33.58 26.2798 29.91 26.2798 29.9 26.2798C29.89 26.2798 26.22 26.2798 26.22 26.2798C25.95 26.2798 25.69 26.3298 25.45 26.4398C25.22 26.5398 25.02 26.6798 24.85 26.8598C24.68 27.0398 24.55 27.2398 24.46 27.4698C24.37 27.6898 24.3199 27.9298 24.3199 28.1798C24.3199 28.4298 24.36 28.6698 24.46 28.8998C24.59 29.2198 24.81 29.4898 25.03 29.7498Z" />
+      <path fill="black"
+          d="M43.17 29.7498C43.66 30.3498 44.23 30.8898 44.79 31.4198C45.48 32.0798 46.15 32.7298 46.95 33.2498C46.98 33.2698 47.01 33.2898 47.04 33.3098C47.35 33.4998 47.69 33.5998 48.04 33.5998C48.39 33.5998 48.74 33.4998 49.04 33.3098C49.07 33.2898 49.1 33.2698 49.13 33.2498C49.93 32.7298 50.61 32.0798 51.29 31.4198C51.85 30.8798 52.42 30.3498 52.91 29.7498C53.12 29.4898 53.35 29.2198 53.48 28.8998C53.57 28.6698 53.62 28.4198 53.62 28.1798C53.62 27.9398 53.57 27.6998 53.48 27.4698C53.39 27.2498 53.26 27.0398 53.09 26.8598C52.92 26.6798 52.71 26.5398 52.49 26.4398C52.25 26.3298 51.98 26.2798 51.72 26.2798C51.72 26.2798 48.05 26.2798 48.04 26.2798H44.36C44.09 26.2798 43.83 26.3298 43.59 26.4398C43.36 26.5398 43.16 26.6798 42.99 26.8598C42.82 27.0398 42.69 27.2398 42.6 27.4698C42.51 27.6898 42.46 27.9298 42.46 28.1798C42.46 28.4298 42.5 28.6698 42.6 28.8998C42.73 29.2198 42.95 29.4898 43.17 29.7498Z" />
+      <path fill="black"
+          d="M61.3101 29.7498C61.8001 30.3498 62.3701 30.8898 62.9301 31.4198C63.6201 32.0798 64.29 32.7298 65.09 33.2498C65.12 33.2698 65.1501 33.2898 65.1801 33.3098C65.4901 33.4998 65.8301 33.5998 66.1801 33.5998C66.5301 33.5998 66.8801 33.4998 67.1801 33.3098C67.2101 33.2898 67.24 33.2698 67.27 33.2498C68.07 32.7298 68.7501 32.0798 69.4301 31.4198C69.9901 30.8798 70.56 30.3498 71.05 29.7498C71.26 29.4898 71.49 29.2198 71.62 28.8998C71.71 28.6698 71.76 28.4198 71.76 28.1798C71.76 27.9398 71.71 27.6998 71.62 27.4698C71.53 27.2498 71.4 27.0398 71.23 26.8598C71.06 26.6798 70.85 26.5398 70.63 26.4398C70.39 26.3298 70.12 26.2798 69.86 26.2798C69.86 26.2798 66.1901 26.2798 66.1801 26.2798C66.1701 26.2798 62.5 26.2798 62.5 26.2798C62.23 26.2798 61.97 26.3298 61.73 26.4398C61.5 26.5398 61.3 26.6798 61.13 26.8598C60.96 27.0398 60.83 27.2398 60.74 27.4698C60.65 27.6898 60.6 27.9298 60.6 28.1798C60.6 28.4298 60.64 28.6698 60.74 28.8998C60.87 29.2198 61.0901 29.4898 61.3101 29.7498Z" />
+      <path fill="black"
+          d="M48.75 96.7799C22.17 96.7799 0.540039 75.1499 0.540039 48.5699C0.540039 21.9899 22.17 0.359863 48.75 0.359863C75.33 0.359863 96.96 21.9899 96.96 48.5699C96.96 75.1499 75.33 96.7799 48.75 96.7799ZM48.75 4.35986C24.37 4.35986 4.54004 24.1899 4.54004 48.5699C4.54004 72.9499 24.37 92.7799 48.75 92.7799C73.13 92.7799 92.96 72.9499 92.96 48.5699C92.96 24.1899 73.13 4.35986 48.75 4.35986Z" />
+    </svg>
+
+  {%- when 'dui' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="14" height="13" viewBox="0 0 14 13" fill="none">
+      <path d="M13 5.95143V6.50343C12.9993 7.79729 12.5803 9.05624 11.8056 10.0925C11.0309 11.1288 9.94197 11.8869 8.70121 12.2538C7.46046 12.6206 6.13435 12.5766 4.92068 12.1282C3.70701 11.6798 2.67079 10.8511 1.96658 9.76567C1.26236 8.68025 0.927875 7.39627 1.01301 6.10522C1.09814 4.81417 1.59832 3.58523 2.43897 2.60168C3.27961 1.61813 4.41567 0.932664 5.67771 0.647522C6.93975 0.36238 8.26016 0.492836 9.442 1.01943M13 1.70343L7 7.70943L5.2 5.90943" stroke="#0F374B" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+  {%- when 'sound-on' -%}
+    <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M4.15838 13.9306C3.44537 12.7423 3.44537 11.2577 4.15838 10.0694C4.37596 9.70674 4.73641 9.45272 5.1511 9.36978L6.84413 9.03117C6.94499 9.011 7.03591 8.95691 7.10176 8.87788L9.17085 6.39498C10.3534 4.97592 10.9447 4.26638 11.4723 4.45742C12 4.64846 12 5.57207 12 7.41928L12 16.5807C12 18.4279 12 19.3515 11.4723 19.5426C10.9447 19.7336 10.3534 19.0241 9.17085 17.605L7.10176 15.1221C7.03591 15.0431 6.94499 14.989 6.84413 14.9688L5.1511 14.6302C4.73641 14.5473 4.37596 14.2933 4.15838 13.9306Z" fill="#222222"/>
+      <path d="M14.5355 8.46447C15.4684 9.39732 15.9948 10.6611 16 11.9803C16.0052 13.2996 15.4888 14.5674 14.5633 15.5076" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
+      <path d="M18.6569 6.34314C20.1494 7.83572 20.9916 9.85769 20.9999 11.9685C21.0083 14.0793 20.182 16.1078 18.7012 17.6121" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+
+    {%- when 'sound-off' -%}
+    <svg class="{{ class }} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M4.15838 13.9306C3.44537 12.7423 3.44537 11.2577 4.15838 10.0694C4.37596 9.70674 4.73641 9.45272 5.1511 9.36978L6.84413 9.03117C6.94499 9.011 7.03591 8.95691 7.10176 8.87788L9.17085 6.39498C10.3534 4.97592 10.9447 4.26638 11.4723 4.45742C12 4.64846 12 5.57207 12 7.41928L12 16.5807C12 18.4279 12 19.3515 11.4723 19.5426C10.9447 19.7336 10.3534 19.0241 9.17085 17.605L7.10176 15.1221C7.03591 15.0431 6.94499 14.989 6.84413 14.9688L5.1511 14.6302C4.73641 14.5473 4.37596 14.2933 4.15838 13.9306Z" fill="#222222"/>
+      <path d="M15 15L21 9" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
+      <path d="M21 15L15 9" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+
+  {%- when '5reviews' -%}
+    <svg
+      class="{{ class }}"
+      xmlns="http://www.w3.org/2000/svg"
+      width="70"
+      height="14"
+      viewBox="0 0 70 14"
+    >
+      <path
+        d="M6.76224 0.731762C6.83707 0.501435 7.16293 0.501435 7.23776 0.731763L8.51547 4.66414C8.54894 4.76714 8.64493 4.83688 8.75323 4.83688H12.888C13.1302 4.83688 13.2309 5.14678 13.0349 5.28913L9.68985 7.71948C9.60222 7.78314 9.56556 7.89598 9.59903 7.99898L10.8767 11.9314C10.9516 12.1617 10.688 12.3532 10.492 12.2109L7.14695 9.78053C7.05932 9.71686 6.94068 9.71686 6.85305 9.78053L3.50798 12.2109C3.31205 12.3532 3.04843 12.1617 3.12327 11.9314L4.40097 7.99898C4.43444 7.89598 4.39778 7.78314 4.31015 7.71948L0.965078 5.28913C0.76915 5.14678 0.869844 4.83688 1.11202 4.83688H5.24677C5.35507 4.83688 5.45106 4.76714 5.48453 4.66413L6.76224 0.731762Z"
+        fill="currentColor"></path>
+      <path
+        d="M20.7622 0.731762C20.8371 0.501435 21.1629 0.501435 21.2378 0.731763L22.5155 4.66414C22.5489 4.76714 22.6449 4.83688 22.7532 4.83688H26.888C27.1302 4.83688 27.2309 5.14678 27.0349 5.28913L23.6898 7.71948C23.6022 7.78314 23.5656 7.89598 23.599 7.99898L24.8767 11.9314C24.9516 12.1617 24.688 12.3532 24.492 12.2109L21.1469 9.78053C21.0593 9.71686 20.9407 9.71686 20.8531 9.78053L17.508 12.2109C17.312 12.3532 17.0484 12.1617 17.1233 11.9314L18.401 7.99898C18.4344 7.89598 18.3978 7.78314 18.3102 7.71948L14.9651 5.28913C14.7691 5.14678 14.8698 4.83688 15.112 4.83688H19.2468C19.3551 4.83688 19.4511 4.76714 19.4845 4.66413L20.7622 0.731762Z"
+        fill="currentColor"></path>
+      <path
+        d="M34.7622 0.731762C34.8371 0.501435 35.1629 0.501435 35.2378 0.731763L36.5155 4.66414C36.5489 4.76714 36.6449 4.83688 36.7532 4.83688H40.888C41.1302 4.83688 41.2309 5.14678 41.0349 5.28913L37.6898 7.71948C37.6022 7.78314 37.5656 7.89598 37.599 7.99898L38.8767 11.9314C38.9516 12.1617 38.688 12.3532 38.492 12.2109L35.1469 9.78053C35.0593 9.71686 34.9407 9.71686 34.8531 9.78053L31.508 12.2109C31.312 12.3532 31.0484 12.1617 31.1233 11.9314L32.401 7.99898C32.4344 7.89598 32.3978 7.78314 32.3102 7.71948L28.9651 5.28913C28.7691 5.14678 28.8698 4.83688 29.112 4.83688H33.2468C33.3551 4.83688 33.4511 4.76714 33.4845 4.66413L34.7622 0.731762Z"
+        fill="currentColor"></path>
+      <path
+        d="M48.7622 0.731762C48.8371 0.501435 49.1629 0.501435 49.2378 0.731763L50.5155 4.66414C50.5489 4.76714 50.6449 4.83688 50.7532 4.83688H54.888C55.1302 4.83688 55.2309 5.14678 55.0349 5.28913L51.6898 7.71948C51.6022 7.78314 51.5656 7.89598 51.599 7.99898L52.8767 11.9314C52.9516 12.1617 52.688 12.3532 52.492 12.2109L49.1469 9.78053C49.0593 9.71686 48.9407 9.71686 48.8531 9.78053L45.508 12.2109C45.312 12.3532 45.0484 12.1617 45.1233 11.9314L46.401 7.99898C46.4344 7.89598 46.3978 7.78314 46.3102 7.71948L42.9651 5.28913C42.7691 5.14678 42.8698 4.83688 43.112 4.83688H47.2468C47.3551 4.83688 47.4511 4.76714 47.4845 4.66413L48.7622 0.731762Z"
+        fill="currentColor"></path>
+      <path
+        d="M62.7622 0.731762C62.8371 0.501435 63.1629 0.501435 63.2378 0.731763L64.5155 4.66414C64.5489 4.76714 64.6449 4.83688 64.7532 4.83688H68.888C69.1302 4.83688 69.2309 5.14678 69.0349 5.28913L65.6898 7.71948C65.6022 7.78314 65.5656 7.89598 65.599 7.99898L66.8767 11.9314C66.9516 12.1617 66.688 12.3532 66.492 12.2109L63.1469 9.78053C63.0593 9.71686 62.9407 9.71686 62.8531 9.78053L59.508 12.2109C59.312 12.3532 59.0484 12.1617 59.1233 11.9314L60.401 7.99898C60.4344 7.89598 60.3978 7.78314 60.3102 7.71948L56.9651 5.28913C56.7691 5.14678 56.8698 4.83688 57.112 4.83688H61.2468C61.3551 4.83688 61.4511 4.76714 61.4845 4.66413L62.7622 0.731762Z"
+        fill="currentColor"></path>
+    </svg>
+
+
+
+
+{%- endcase -%}

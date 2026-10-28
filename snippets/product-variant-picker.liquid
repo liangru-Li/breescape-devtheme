@@ -1,0 +1,440 @@
+{%- doc -%}
+  Renders product variant selectors as buttons with color swatches or dropdown menus.
+
+  Supports size charts, variant images, and dynamic option display based on availability.
+
+  @param {object} product - Product object with variants and options
+  @param {object} block - Section block with picker settings
+  @param {string} product_form_id - Form ID for variant inputs
+  @param {string} product_id - Product ID for targeting
+  @param {string} section_id - Section ID for uniqueness
+  @param {string} [image_ratio] - Swatch image aspect ratio
+  @param {string} [image_ratio_mobile] - Mobile swatch aspect ratio
+  @param {boolean} [image_fill] - Fill vs contain swatch images
+
+  @example
+  {% render 'product-variant-picker',
+    product: product,
+    block: block,
+    product_form_id: product_form_id,
+    product_id: product.id,
+    section_id: section.id
+  %}
+{%- enddoc -%}
+
+{%- unless product.has_only_default_variant -%}
+  {%- liquid
+    assign vp_label_weight    = block.settings.label_weight
+    assign vp_value_weight    = block.settings.value_weight
+    assign vp_swatch_radius   = block.settings.swatch_radius
+    assign vp_size_guide_size = block.settings.size_guide_font_size
+  -%}
+
+  {%- comment -%}
+    Hide option values whose Color+Size combination does NOT exist in `product.variants` at all
+    (e.g. Calm Beige has no "Twin" configured). Combinations that DO exist but are sold out
+    (e.g. Misty Grey + Twin, inventory 0) must stay visible with the original red-slash style
+    handled by `.disabled` CSS, so they are intentionally NOT targeted here.
+  {%- endcomment -%}
+  <style>
+    .variant-picker .swatches > li[data-variant-missing] {
+      display: none !important;
+    }
+    .label-swatch .stock-clock-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      display: block;
+      line-height: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .label-swatch .stock-clock-badge[hidden] {
+      display: none !important;
+    }
+    .label-swatch .stock-clock-badge img {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+    .label-swatch:has(.stock-clock-badge:not([hidden])) {
+      overflow: visible !important;
+    }
+    fieldset[data-sale-size-option] .swatches,
+    fieldset[data-sale-size-option] .swatches > li {
+      overflow: visible;
+    }
+    .size-oos-note {
+      margin-block: var(--size-oos-space, 8px);
+      font-size: 13px;
+      line-height: 1.45;
+      color: rgb(var(--color-foreground));
+    }
+    .size-oos-note[hidden] {
+      display: none !important;
+    }
+    .size-oos-note p {
+      margin: 0;
+    }
+    .size-oos-note p + p {
+      margin-top: 4px;
+    }
+  </style>
+
+  <script>
+    (function () {
+      if (window.__variantPickerMissingSync) return;
+      window.__variantPickerMissingSync = true;
+
+      function getVariants(vp) {
+        var script = vp.querySelector('script[data-variants]');
+        if (!script) return null;
+        try {
+          var data = JSON.parse(script.textContent);
+          return Array.isArray(data) ? data : null;
+        } catch (e) { return null; }
+      }
+
+      function syncOne(vp) {
+        if (!vp || !vp.isConnected) return;
+        var variants = getVariants(vp);
+        if (!variants) return;
+        var fieldsets = vp.querySelectorAll('fieldset.product-form__input');
+        if (!fieldsets.length) return;
+
+        fieldsets.forEach(function (fs, idx) {
+          if (idx === 0) return;
+
+          var prevValues = [];
+          for (var j = 0; j < idx; j++) {
+            var checked = fieldsets[j].querySelector('input[type="radio"]:checked, select option[selected]');
+            if (!checked) return;
+            prevValues.push(checked.value);
+          }
+
+          var existing = new Set();
+          variants.forEach(function (v) {
+            for (var k = 0; k < prevValues.length; k++) {
+              if (v['option' + (k + 1)] !== prevValues[k]) return;
+            }
+            var val = v['option' + (idx + 1)];
+            if (val != null) existing.add(val);
+          });
+
+          fs.querySelectorAll('.swatches > li').forEach(function (li) {
+            var input = li.querySelector('input[type="radio"], input[type="checkbox"]');
+            if (!input) return;
+            var shouldHide = !existing.has(input.value);
+            if (shouldHide !== li.hasAttribute('data-variant-missing')) {
+              if (shouldHide) {
+                li.setAttribute('data-variant-missing', '');
+              } else {
+                li.removeAttribute('data-variant-missing');
+              }
+            }
+          });
+        });
+
+        syncSaleSizeFlash(vp);
+        syncOosClock(vp);
+      }
+
+      function getStockMap(vp) {
+        var script = vp.querySelector('script[data-variant-stock]');
+        if (!script) return null;
+        try {
+          var data = JSON.parse(script.textContent);
+          return data && typeof data === 'object' ? data : null;
+        } catch (e) { return null; }
+      }
+
+      function isSizeOutOfStock(variant, stockMap) {
+        if (!variant) return false;
+        if (stockMap) {
+          var key = String(variant.id);
+          if (!Object.prototype.hasOwnProperty.call(stockMap, key)) return false;
+          return Number(stockMap[key]) <= 0;
+        }
+        if (variant.inventory_management && variant.inventory_quantity != null && variant.inventory_quantity !== '') {
+          return Number(variant.inventory_quantity) <= 0;
+        }
+        return variant.available === false;
+      }
+
+      function syncOosClock(vp) {
+        if (!vp.hasAttribute('data-oos-clock')) return;
+        var variants = getVariants(vp);
+        if (!variants) return;
+        var stockMap = getStockMap(vp);
+        var fieldsets = vp.querySelectorAll('fieldset.product-form__input');
+        var sizeFs = vp.querySelector('fieldset[data-sale-size-option]');
+        if (!sizeFs) return;
+        var sizeIndex = Array.prototype.indexOf.call(fieldsets, sizeFs);
+        var template = vp.getAttribute('data-oos-template') || '';
+        var note = sizeFs.querySelector('[data-oos-note]');
+        var checkedInput = sizeFs.querySelector('.swatches input[type="radio"]:checked');
+        var colorInput = vp.querySelector('fieldset[data-sale-color-option] input[type="radio"]:checked, fieldset[data-sale-color-option] select');
+        var colorVal = '';
+        if (colorInput && colorInput.tagName === 'SELECT') colorVal = colorInput.value;
+        else if (colorInput) colorVal = colorInput.value;
+        var selectedLine = '';
+
+        sizeFs.querySelectorAll('.swatches > li').forEach(function (li) {
+          var input = li.querySelector('input[type="radio"]');
+          var label = li.querySelector('label');
+          var badge = label && label.querySelector('.stock-clock-badge');
+          if (!input || !badge) return;
+
+          if (li.hasAttribute('data-variant-missing')) {
+            badge.hidden = true;
+            label.classList.remove('label-swatch--oos');
+            return;
+          }
+
+          var selected = [];
+          var complete = true;
+          fieldsets.forEach(function (fs, idx) {
+            if (idx === sizeIndex) {
+              selected[idx] = input.value;
+              return;
+            }
+            var checked = fs.querySelector('input[type="radio"]:checked, select');
+            var val = '';
+            if (checked && checked.tagName === 'SELECT') {
+              val = checked.value;
+            } else if (checked) {
+              val = checked.value;
+            }
+            if (!val) complete = false;
+            selected[idx] = val;
+          });
+
+          var match = null;
+          if (complete) {
+            match = variants.find(function (variant) {
+              for (var i = 0; i < selected.length; i++) {
+                if (variant['option' + (i + 1)] !== selected[i]) return false;
+              }
+              return true;
+            }) || null;
+          }
+
+          var ruleDate = oosRuleDate(vp, colorVal, input.value);
+          var oos = ruleDate !== null && isSizeOutOfStock(match, stockMap);
+          badge.hidden = !oos;
+          label.classList.toggle('label-swatch--oos', oos);
+          if (oos && input === checkedInput && ruleDate && template) {
+            selectedLine = template.replace('[size]', input.value).replace('[date]', ruleDate);
+          }
+        });
+
+        if (note) {
+          if (checkedInput && !vp.dataset.oosDefaultSize) {
+            vp.dataset.oosDefaultSize = checkedInput.value;
+          }
+          var defaultCheckedOos = false;
+          if (checkedInput && vp.dataset.oosDefaultSize === checkedInput.value) {
+            var checkedLi = checkedInput.closest('li');
+            var checkedBadge = checkedLi && checkedLi.querySelector('.stock-clock-badge');
+            defaultCheckedOos = !!(checkedLi && !checkedLi.hasAttribute('data-variant-missing') && checkedBadge && !checkedBadge.hidden);
+          }
+          var remembered = window.__oosNotePick && window.__oosNotePick[vp.id];
+          var armed = vp.dataset.oosNoteArmed === 'true' || !!(remembered && checkedInput && checkedInput.value === remembered) || defaultCheckedOos;
+          note.replaceChildren();
+          if (armed && selectedLine) {
+            var line = document.createElement('p');
+            line.textContent = selectedLine;
+            note.appendChild(line);
+            note.hidden = false;
+          } else {
+            note.hidden = true;
+          }
+        }
+      }
+
+      function parseOosRuleMap(str) {
+        var map = {};
+        if (!str) return map;
+        str.split(';').forEach(function (pair) {
+          pair = pair.trim();
+          if (!pair) return;
+          var idx = pair.indexOf(':');
+          if (idx < 1) return;
+          var color = pair.slice(0, idx).trim().toLowerCase();
+          if (!map[color]) map[color] = {};
+          pair.slice(idx + 1).split(',').forEach(function (part) {
+            part = part.trim();
+            if (!part) return;
+            var at = part.lastIndexOf('@');
+            var size = part;
+            var shipDate = '';
+            if (at !== -1) {
+              size = part.slice(0, at).trim();
+              shipDate = part.slice(at + 1).trim();
+            }
+            size = size.toLowerCase();
+            if (!size) return;
+            map[color][size] = shipDate;
+          });
+        });
+        return map;
+      }
+
+      function oosRuleDate(vp, colorValue, sizeValue) {
+        var mapStr = (vp.getAttribute('data-oos-size-map') || '').trim();
+        if (!mapStr) return (vp.getAttribute('data-oos-date') || '').trim();
+        var map = parseOosRuleMap(mapStr);
+        var color = String(colorValue || '').trim().toLowerCase();
+        var size = String(sizeValue || '').trim().toLowerCase();
+        var sizes = map[color];
+        if (!sizes || !Object.prototype.hasOwnProperty.call(sizes, size)) return null;
+        return sizes[size] || '';
+      }
+
+      function parseSaleSizeMap(str) {
+        var map = {};
+        if (!str) return map;
+        str.split(';').forEach(function (pair) {
+          pair = pair.trim();
+          if (!pair) return;
+          var idx = pair.indexOf(':');
+          if (idx < 1) return;
+          var color = pair.slice(0, idx).trim().toLowerCase();
+          var sizes = pair.slice(idx + 1).split(',').map(function (s) {
+            return s.trim().toLowerCase();
+          }).filter(Boolean);
+          map[color] = sizes;
+        });
+        return map;
+      }
+
+      function syncSaleSizeFlash(vp) {
+        var mapStr = vp.getAttribute('data-sale-size-map') || '';
+        if (!mapStr) return;
+        var map = parseSaleSizeMap(mapStr);
+        var colorInput = vp.querySelector('fieldset[data-sale-color-option] input:checked');
+        var colorVal = colorInput ? String(colorInput.value || '').trim().toLowerCase() : '';
+        var allowed = map[colorVal] || [];
+
+        vp.querySelectorAll('fieldset[data-sale-size-option] .label-swatch').forEach(function (label) {
+          var sizeVal = (label.getAttribute('data-sale-size-value') || '').trim().toLowerCase();
+          var hit = allowed.indexOf(sizeVal) !== -1;
+          label.classList.toggle('label-swatch--clearance', hit);
+          var badge = label.querySelector('.clearance-flash-badge');
+          if (badge) badge.hidden = !hit;
+        });
+      }
+
+      function syncAll() {
+        document.querySelectorAll('variant-picker').forEach(syncOne);
+      }
+
+      var scheduled = false;
+      function scheduleSyncAll() {
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(function () {
+          scheduled = false;
+          syncAll();
+        });
+      }
+
+      function observeProductInfo() {
+        document.querySelectorAll('product-info, product-card-info').forEach(function (host) {
+          if (host.__missingSyncObserved) return;
+          host.__missingSyncObserved = true;
+          new MutationObserver(scheduleSyncAll).observe(host, {
+            childList: true,
+            subtree: true,
+            attributes: false
+          });
+        });
+      }
+
+      function init() {
+        syncAll();
+        observeProductInfo();
+
+        document.addEventListener('click', function (event) {
+          var sizeFs = event.target.closest && event.target.closest('fieldset[data-sale-size-option]');
+          if (!sizeFs) return;
+          var li = event.target.closest('li');
+          if (!li || !sizeFs.contains(li)) return;
+          var vp = sizeFs.closest('variant-picker');
+          if (!vp || !vp.hasAttribute('data-oos-clock')) return;
+          var input = li.querySelector('input[type="radio"]');
+          var badge = li.querySelector('.stock-clock-badge');
+          window.__oosNotePick = window.__oosNotePick || {};
+          if (input && badge && !badge.hidden) {
+            window.__oosNotePick[vp.id] = input.value;
+            vp.dataset.oosNoteArmed = 'true';
+          } else {
+            delete window.__oosNotePick[vp.id];
+            delete vp.dataset.oosNoteArmed;
+          }
+          requestAnimationFrame(function () { syncOosClock(vp); });
+        });
+
+        document.addEventListener('change', function (event) {
+          var vp = event.target.closest && event.target.closest('variant-picker');
+          if (vp) requestAnimationFrame(function () { syncOne(vp); });
+        });
+
+        document.addEventListener('variant:change', scheduleSyncAll);
+
+        document.addEventListener('shopify:section:load', function () {
+          setTimeout(function () {
+            observeProductInfo();
+            syncAll();
+          }, 50);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init, { once: true });
+      } else {
+        init();
+      }
+    })();
+  </script>
+  {%- liquid
+    case block.settings.picker_type
+      when 'button'
+        if block.settings.enable_color_swatches
+          if block.settings.color_swatch_type == 'variant'
+            render 'product-variant-picker-variant', product: product, product_id: product_id, section_id: section_id, enable_dynamic_variants: block.settings.enable_dynamic_variants, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, size_liquid: block.settings.size_liquid, shopify_attributes: block.shopify_attributes, context: 'product', image_ratio: image_ratio, image_ratio_mobile: image_ratio_mobile, image_fill: image_fill, vp_label_weight: vp_label_weight, vp_value_weight: vp_value_weight, vp_swatch_radius: vp_swatch_radius, vp_size_guide_size: vp_size_guide_size, enable_clearance_override: enable_clearance_override, section: section, block: block
+          else
+            render 'product-variant-picker-swatch', product: product, product_id: product_id, section_id: section_id, enable_dynamic_variants: block.settings.enable_dynamic_variants, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, size_liquid: block.settings.size_liquid, shopify_attributes: block.shopify_attributes, context: 'product', vp_label_weight: vp_label_weight, vp_value_weight: vp_value_weight, vp_swatch_radius: vp_swatch_radius, vp_size_guide_size: vp_size_guide_size, enable_clearance_override: enable_clearance_override, section: section, block: block
+          endif
+        else
+          render 'product-variant-picker-button', product: product, product_id: product_id, section_id: section_id, enable_dynamic_variants: block.settings.enable_dynamic_variants, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, size_liquid: block.settings.size_liquid, shopify_attributes: block.shopify_attributes, context: 'product', vp_label_weight: vp_label_weight, vp_value_weight: vp_value_weight, vp_swatch_radius: vp_swatch_radius, vp_size_guide_size: vp_size_guide_size, enable_clearance_override: enable_clearance_override, section: section, block: block
+        endif
+      when 'dropdown'
+        render 'product-variant-picker-dropdown', product: product, product_id: product_id, section_id: section_id, enable_dynamic_variants: block.settings.enable_dynamic_variants, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, size_liquid: block.settings.size_liquid, shopify_attributes: block.shopify_attributes, context: 'product', vp_label_weight: vp_label_weight, vp_value_weight: vp_value_weight, vp_size_guide_size: vp_size_guide_size, block: block
+    endcase
+  -%}
+{%- endunless -%}
+
+<noscript>
+  <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+    <label class="form__label flex gap-2" for="Variants-{{ section_id }}-{{ product_id }}">{{ 'products.product.product_variants' | t }}</label>
+    <div class="field">
+      <select name="id" id="Variants-{{ section_id }}-{{ product_id }}" class="select" form="{{ product_form_id }}">
+        {%- for variant in product.variants -%}
+          <option
+            {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+            {% if variant.available == false %}disabled{% endif %}
+            value="{{ variant.id }}"
+          >
+            {{ variant.title }}
+            {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+            - {{ variant.price | money | strip_html }}
+          </option>
+        {%- endfor -%}
+      </select>
+      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+    </div>
+  </div>
+</noscript>

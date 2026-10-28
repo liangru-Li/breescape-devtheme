@@ -1,0 +1,408 @@
+{%- doc -%}
+  Renders an isolated variant picker form for bundle products with customizable selection interfaces.
+
+  Creates a self-contained form for selecting and adding product variants to bundles with inventory awareness.
+
+  @param {object} product - Shopify product object with variants and option data
+  @param {string} product_id - Unique product identifier for element targeting
+  @param {string} section_id - Section identifier for form namespacing
+  @param {boolean} [enable_dynamic_variants] - Enable dynamic product options
+  @param {boolean} [show_variant_labels] - Show variant label
+  @param {object} [size_chart] - Shopify page object for size chart
+  @param {string} [context] - Context identifier for ID generation
+  @param {string} [shopify_attributes] - Shopify-specific attributes
+
+  @example
+  {% render 'product-variant-picker-swatch',
+    product: product,
+    product_id: product.id,
+    section_id: section.id
+  %}
+{%- enddoc -%}
+
+{%- if enable_clearance_override -%}
+  <style>
+    .color-swatch--clearance { overflow: visible !important; }
+    .color-swatch--clearance .clearance-flash-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #FFE5E1;
+      color: #FF5A4A;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,.10);
+      pointer-events: none;
+      z-index: 3;
+    }
+    .color-swatch--clearance .clearance-flash-badge svg,
+    .label-swatch--clearance .clearance-flash-badge svg {
+      width: 11px;
+      height: 11px;
+      display: block;
+    }
+    .label-swatch--clearance { overflow: visible !important; }
+    .label-swatch--clearance .clearance-flash-badge[hidden] { display: none !important; }
+    .label-swatch--clearance .clearance-flash-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #FFE5E1;
+      color: #FF5A4A;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,.10);
+      pointer-events: none;
+      z-index: 3;
+    }
+  </style>
+{%- endif -%}
+{%- assign sale_rule_sizes_raw = '' -%}
+{%- assign sale_rule_size_map = '' -%}
+{%- assign selected_sale_color = '' -%}
+{%- if enable_clearance_override -%}
+  {%- for opt in product.options_with_values -%}
+    {%- capture _is_color_opt -%}{%- render 'color-option-match', option_name: opt.name -%}{%- endcapture -%}
+    {%- if _is_color_opt contains 'true' -%}
+      {%- assign selected_sale_color = opt.selected_value | downcase | strip -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- capture sale_rule_sizes_raw -%}
+    {%- render 'clearance-ivory-comforter-check', section: section, mode: 'sizes', match_color: selected_sale_color -%}
+  {%- endcapture -%}
+  {%- capture sale_rule_size_map -%}
+    {%- render 'clearance-ivory-comforter-check', section: section, mode: 'size_map' -%}
+  {%- endcapture -%}
+{%- endif -%}
+{%- capture oos_rule_size_map -%}{%- render 'oos-clock-rules', section: section, mode: 'size_map' -%}{%- endcapture -%}
+<variant-picker id="VariantPicker-{{ section_id }}-{{ product_id }}{% if context == 'bundle' %}-swatch{% endif %}" class="variant-picker grid gap-5{% if context == 'bundle' %} overflow-hidden{% endif %} no-js-hidden"{% if enable_dynamic_variants %} data-dynamic-variants{% endif %}{% if enable_clearance_override and sale_rule_size_map != blank %} data-sale-size-map="{{ sale_rule_size_map | strip | escape }}"{% endif %}{% if section.settings.show_oos_clock %} data-oos-clock data-oos-size-map="{{ oos_rule_size_map | strip | escape }}" data-oos-template="{{ section.settings.oos_ship_message | default: '[size] Size Estimated to ship by [date]' | escape }}" data-oos-date="{{ section.settings.oos_ship_date | escape }}"{% endif %} {{ shopify_attributes }}>
+  {%- assign mid_swatch_inserted = false -%}
+  {%- for option in product.options_with_values -%}
+    {%- liquid
+      assign is_color = false
+      assign downcased_option = option.name | downcase
+      capture _is_color_opt
+        render 'color-option-match', option_name: option.name
+      endcapture
+      if _is_color_opt contains 'true'
+        assign is_color = true
+      endif
+
+      assign is_size = false
+      assign is_size_option = false
+      assign size_name = option.name | downcase
+      if size_name contains 'size' or size_name contains '尺码' or size_name contains '尺寸'
+        assign is_size_option = true
+      endif
+      if size_chart != blank or size_liquid != blank or product.metafields.custom.size_guide != blank
+        assign has_size_guide = true
+        assign size_trigger = 'products.general.size_trigger' | t | downcase
+        assign downcased_option = option.name | downcase
+        if downcased_option contains size_trigger
+          assign is_size = true
+          assign is_size_option = true
+        endif
+      endif
+    -%}
+    {%- if block != blank and block.settings.show_mid_swatch and mid_swatch_inserted == false and is_size_option -%}
+      {%- render 'product-variant-mid-swatch', block: block -%}
+      {%- assign mid_swatch_inserted = true -%}
+    {%- endif -%}
+    <fieldset class="js product-form__input variant-input-wrapper relative"
+      data-option-index="option{{ forloop.index }}"
+      data-option-slug="{{ option.name | handleize }}"
+      {% if is_color %}data-sale-color-option{% endif %}
+      {% if is_size_option %}data-sale-size-option{% endif %}
+    >
+      <legend class="sr-only">{{ option.name }}</legend>
+      <div class="form__label flex items-center justify-between gap-2 w-full">
+        {%- if show_variant_labels -%}
+          <div class="flex gap-2">
+            <span style="{% if vp_label_weight and vp_label_weight != 'default' %}font-weight: {{ vp_label_weight }} !important;{% endif %}">{{- option.name -}}:</span>
+            <span class="font-medium" id="{{ section_id }}-{{ product_id }}-option{{ option.position }}" style="{% if vp_value_weight and vp_value_weight != 'default' %}font-weight: {{ vp_value_weight }} !important;{% endif %}">{{ option.selected_value }}</span>
+
+            {%- if option.name == 'Size' -%}
+              {%- if product.id == 7528441315406 or product.id == 7629546061902 -%}
+                {%- if option.selected_value == 'Twin' -%}
+                  <span> - 72" W × 96" L</span>
+                {%- elsif option.selected_value == 'Throw' -%}
+                  <span> - 52" W × 72" L</span>
+                {%- elsif option.selected_value == 'Queen' -%}
+                  <span> - 96" W × 96" L</span>
+                {%- elsif option.selected_value == 'King' -%}
+                  <span> - 106" W × 96" L</span>
+                {%- endif -%}
+
+              {%- elsif product.id == 7578334593102 -%}
+                {%- if option.selected_value == 'Queen' -%}
+                  <span> - 20" W × 30" L</span>
+                {%- elsif option.selected_value == 'King' -%}
+                  <span> - 20" W × 36" L</span>
+                {%- endif -%}
+
+              {%- elsif product.id == 7853641465934 -%}
+                {%- if option.selected_value == 'Twin' -%}
+                  <span> - 68" W × 90" L</span>
+                {%- elsif option.selected_value == 'Queen' -%}
+                  <span> - 90" W × 90" L</span>
+                {%- elsif option.selected_value == 'King' -%}
+                  <span> - 106" W × 90" L</span>
+                {%- endif -%}
+
+              {%- elsif product.id == 7853654016078 -%}
+                {%- if option.selected_value == 'Queen' -%}
+                  <span> - 59" W × 77" L</span>
+                {%- elsif option.selected_value == 'King' -%}
+                  <span> - 77" W × 77" L</span>
+                {%- endif -%}
+
+              {%- elsif product.id == 7853028769870 -%}
+                {%- if option.selected_value == 'Full' -%}
+                  <span> - 54" W × 75" L</span>
+                {%- elsif option.selected_value == 'Queen' -%}
+                  <span> - 60" W × 80" L</span>
+                {%- elsif option.selected_value == 'King' -%}
+                  <span> - 76" W × 80" L</span>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
+
+
+          </div>
+        {%- endif -%}
+        {%- if is_size -%}
+          <div class="flex items-center gap-2">
+            <button type="button" class="link leading-tight cursor-pointer font-bold" aria-controls="SizeChart-{{ section_id }}-{{ product_id }}" aria-expanded="false" style="{% if vp_size_guide_size and vp_size_guide_size > 0 %}font-size: {{ vp_size_guide_size }}px;{% else %}font-size: 14px;{% endif %}">
+              {{- 'products.general.size_chart' | t -}}
+            </button>
+            <x-modal id="SizeChart-{{ section_id }}-{{ product_id }}" class="x-modal drawer z-50 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Size Guide"
+              hidden
+            >
+              <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="SizeChart-{{ section_id }}-{{ product_id }}" aria-expanded="false"></overlay-element>
+              <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative" tabindex="0">
+                  <span class="drawer__title heading title-md">Size Guide</span>
+                  <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="SizeChart-{{ section_id }}-{{ product_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">
+                      {%- render 'icon', icon: 'close', size: 'sm' -%}
+                    </span>
+                  </button>
+                </gesture-element>
+                <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                  <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                    <div class="rte text-base md:text-lg">{{ size_chart.content }} {{ size_liquid }}</div>
+                  </div>
+                </div>
+              </div>
+            </x-modal>
+          </div>
+        {%- endif -%}
+      </div>
+      {%- capture swatchs_content -%}
+        {%- for value in option.values -%}
+          <li>
+            <magnet-element class="block">
+              <input
+                type="radio"
+                class="sr-only{% unless value.available %} disabled{% endunless %}"
+                id="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
+                name="{{ option.name }}-{{ section_id }}-{{ product_id }}"
+                value="{{ value | escape }}"
+                {% if option.selected_value == value %}checked{% endif %}
+                {% if value.product_url != blank and value.product_url != product.url %}data-product-url="{{ value.variant.url | default: value.product_url }}"{% endif %}
+                data-option-value="{{ value | escape }}"
+                data-option-value-id="{{ value.id }}"
+                data-option-index="{{ option.position }}"
+                align-selected=".scroll-area"
+              />
+              {%- comment -%} 促销规则角标：颜色或尺码命中任一规则即显示 {%- endcomment -%}
+              {%- assign show_ivory_clearance_flash = false -%}
+              {%- if enable_clearance_override and is_color -%}
+                {%- assign value_lower = value | downcase | strip -%}
+                {%- capture sale_rule_colors -%}
+                  {%- render 'clearance-ivory-comforter-check', section: section, mode: 'colors' -%}
+                {%- endcapture -%}
+                {%- assign sale_color_list = sale_rule_colors | strip | split: ',' -%}
+                {%- for sc in sale_color_list -%}
+                  {%- assign sc_s = sc | strip -%}
+                  {%- if sc_s != blank and sc_s == value_lower -%}
+                    {%- assign show_ivory_clearance_flash = true -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- elsif enable_clearance_override and is_size_option -%}
+                {%- assign value_lower = value | downcase | strip -%}
+                {%- assign sale_size_list = sale_rule_sizes_raw | strip | split: ',' -%}
+                {%- for ss in sale_size_list -%}
+                  {%- assign ss_s = ss | strip -%}
+                  {%- if ss_s != blank and ss_s == value_lower -%}
+                    {%- assign show_ivory_clearance_flash = true -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+              {%- if is_color or value.swatch != blank -%}
+                {%- liquid
+                  assign file_extension = 'png'
+                  assign file_name = value | handle | append: '.' | append: file_extension
+                  assign swatch_fallback = value | split: ' ' | last | handle
+                  assign swatch_fallback_override = false
+                  assign swatch_image = blank
+                  assign swatch_config_matched = false
+
+                  comment
+                    优先解析主题自定义 swatch_config (Theme Editor → Color swatches).
+                    自定义规则优先于 Shopify 原生 value.swatch, 这样运营在主题设置里配的颜色 (如 "Ashley Stripe:https://cdn...png") 一定生效,
+                    不会被 Shopify 后台空 swatch 对象覆盖.
+                  endcomment
+                  if settings.swatch_config != blank
+                    assign value_downcase = value | downcase
+                    assign swatch_config_arr = settings.swatch_config | newline_to_br | split: '<br />'
+                    for sw_line in swatch_config_arr
+                      assign sw_parts = sw_line | strip | split: ':'
+                      assign sw_name = sw_parts.first | downcase | strip
+                      assign sw_ashley_alias = 'ashley ' | append: value_downcase
+                      if sw_name == value_downcase or sw_name == sw_ashley_alias
+                        comment
+                          配置项右半可能是含 https:// 的 URL (多个 ':'). 用 remove_first 安全取右半, 避免 split.last 切丢 'https:' 前缀.
+                        endcomment
+                        assign sw_value_raw = sw_line | strip | remove_first: sw_parts.first | remove_first: ':'
+                        assign sw_value = sw_value_raw | strip
+                        if sw_value contains '#'
+                          assign swatch_fallback = sw_value
+                          assign swatch_fallback_override = true
+                        else
+                          assign file_name = sw_value
+                        endif
+                        assign swatch_config_matched = true
+                        break
+                      endif
+                    endfor
+                  endif
+
+                  comment
+                    自定义 swatch_config 没命中 - 走 Shopify 原生 value.swatch 对象.
+                  endcomment
+                  if swatch_config_matched == false and value.swatch != blank
+                    if value.swatch.image
+                      assign swatch_image = value.swatch.image | image_url: width: 128
+                    elsif value.swatch.color
+                      assign swatch_fallback = value.swatch.color
+                    endif
+                  endif
+
+                  comment
+                    把 file_name 解析成实际 swatch_image URL.
+                    file_name 来源: 1) Theme Assets 文件名 2) cdn.shopify.com URL 3) 完整 http(s) URL.
+                  endcomment
+                  if swatch_image == blank and swatch_fallback_override == false
+                    if images[file_name] != blank
+                      assign swatch_image = images[file_name] | image_url: width: 128
+                    elsif file_name contains 'cdn.shopify.com/'
+                      assign swatch_image = file_name
+                    elsif file_name contains 'http'
+                      assign swatch_image = file_name
+                    endif
+                  endif
+                -%}
+                <label
+                  for="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
+                  class="color-swatch{% if swatch_image != blank %} with-image{% endif %}{% if show_ivory_clearance_flash %} color-swatch--clearance{% endif %} cursor-pointer block relative"
+                  title="{{ value | escape }}"
+                  style="--swatch-background: {{ swatch_fallback }};{% if swatch_fallback_override == false and swatch_image != blank %}--swatch-background-image: url({{ swatch_image }});{% endif %}"
+                >
+                  <span class="sr-only">{{ value | escape }}</span>
+                  {%- unless context == 'bundle' -%}
+                    <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ value | escape }}</span>
+                  {%- endunless -%}
+                  {%- if show_ivory_clearance_flash -%}
+                    <span class="clearance-flash-badge" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" focusable="false">
+                        <path d="M14.2 1.5 4.5 13.6c-.5.6-.1 1.5.7 1.5H10l-1.5 6.9c-.2.9.9 1.5 1.5.8l9.6-12.1c.5-.6.1-1.5-.7-1.5H14l1.5-6.9c.2-.9-.9-1.5-1.3-.8Z"/>
+                      </svg>
+                    </span>
+                  {%- endif -%}
+                </label>
+              {%- else -%}
+                <label
+                  for="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
+                  class="label-swatch text-sm font-medium leading-none cursor-pointer block relative{% if show_ivory_clearance_flash %} label-swatch--clearance{% endif %}"
+                  title="{{ value | escape }}"
+                  data-sale-size-value="{{ value | escape | downcase }}"
+                  style="{% if vp_swatch_radius and vp_swatch_radius > 0 %}border-radius: {{ vp_swatch_radius }}px !important;{% endif %}"
+                >
+                  {{- value -}}
+                  {%- if is_size_option and enable_clearance_override -%}
+                    <span class="clearance-flash-badge" aria-hidden="true"{% unless show_ivory_clearance_flash %} hidden{% endunless %}>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" focusable="false">
+                        <path d="M14.2 1.5 4.5 13.6c-.5.6-.1 1.5.7 1.5H10l-1.5 6.9c-.2.9.9 1.5 1.5.8l9.6-12.1c.5-.6.1-1.5-.7-1.5H14l1.5-6.9c.2-.9-.9-1.5-1.3-.8Z"/>
+                      </svg>
+                    </span>
+                  {%- endif -%}
+                  {%- if is_size_option and section.settings.show_oos_clock -%}
+                    {%- render 'size-oos-clock', product: product, option: option, value: value -%}
+                  {%- endif -%}
+                </label>
+              {%- endif -%}
+            </magnet-element>
+          </li>
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if context == 'bundle' -%}
+        <scroll-shadow class="product-card__bottom grid overflow-hidden">
+          <ul class="scroll-area swatches swatches--{{ settings.rounded_swatch }} grid justify-start gap-4">
+            {{- swatchs_content -}}
+          </ul>
+          <template>
+            <slot></slot>
+            <s dir="{% render 'direction' %}" style="--t: 0;--b: 0;--l: 0;--r: 0;">
+              <span class="l"></span>
+              <span class="r"></span>
+            </s>
+            <style>
+              :host{display:inline-block;position:relative}:host([hidden]){display:none}
+              s{position:absolute;inset:0;pointer-events:none;{% if settings.card_style == 'card' %}--color-background:var(--color-placeholder){% endif %}}
+              s span{position:absolute;inset-block:0;width:var(--sp-12);opacity:0;transition:opacity var(--animation-short);}
+              s .l{inset-inline-start:0;opacity:var(--l);background:linear-gradient(90deg,rgb(var(--color-background)) 0%,transparent 100%);}
+              s .r{inset-inline-end:0;opacity:var(--r);background:linear-gradient(270deg,rgb(var(--color-background)) 0%,transparent 100%);}
+              s[dir=rtl] :is(.icon-chevron-left,.icon-chevron-right){transform:scaleX(-1);}
+            </style>
+          </template>
+        </scroll-shadow>
+      {%- else -%}
+        <ul class="swatches swatches--{{ settings.rounded_swatch }} flex items-start flex-wrap gap-4">
+          {{- swatchs_content -}}
+        </ul>
+      {%- endif -%}
+      {%- if is_size_option and section.settings.show_oos_clock -%}
+        {%- render 'size-oos-note', product: product, option: option, block: block -%}
+      {%- endif -%}
+    </fieldset>
+    {%- if block != blank and block.settings.show_mid_swatch and mid_swatch_inserted == false and is_color -%}
+      {%- render 'product-variant-mid-swatch', block: block -%}
+      {%- assign mid_swatch_inserted = true -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if block != blank and block.settings.show_mid_swatch and mid_swatch_inserted == false -%}
+    {%- render 'product-variant-mid-swatch', block: block -%}
+  {%- endif -%}
+
+  <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
+  {%- if product.variants_count <= 250 -%}
+    <script type="application/json" data-variants>{{ product.variants | json }}</script>
+  {%- endif -%}
+  {%- render 'size-oos-stock', product: product, block: block -%}
+</variant-picker>

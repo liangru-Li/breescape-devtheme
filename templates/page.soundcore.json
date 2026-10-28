@@ -1,0 +1,992 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-sm",
+        "heading_alignment": "text-center",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 32,
+        "padding_bottom": 48,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
+    "image_with_text_overlay_Rf4Nhp": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_X9RVxK": {
+          "type": "heading",
+          "settings": {
+            "heading": "Finally, Sleep Without Interruptions. ",
+            "heading_size": "title-md",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_FadVfJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Your all-in-one solution for a calm and restful night.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_WBLGjY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Spend <em>$150</em> → receive <em>$30 off</em> at soundcore Sleep A30.</p><p>Offer Valid Sep 1- 30</p>",
+            "text_font": "body",
+            "text_size": "subtext-sm",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "scribble",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_X9RVxK",
+        "text_FadVfJ",
+        "text_WBLGjY"
+      ],
+      "custom_css": [
+        "h1 {font-family: \"GillSans\" !important; letter-spacing: -1px !important;}",
+        ".subtext-sm p {margin-top: 4px; margin-bottom: 4px !important;}"
+      ],
+      "name": "t:sections.image-with-text-overlay.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/soundcorepage_banner_background_image_lg_202508_v1.webp",
+        "image_height": "adapt",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_mobile": "shopify://shop_images/soundcorepage_banner_background_image_md_202508_v1.webp",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-center justify-start",
+        "text_alignment_mobile": "center",
+        "color_text": "#0f374b",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "multicolumn_4DQ4zQ": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_LdqGcQ": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/soundcorepage_struggling_noise_image_lg_202508_v1.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_Y9c9VN": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/soundcorepage_struggling_overheating_image_lg_202508_v1.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_8JLwRa": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/soundcorepage_struggling_waking_image_lg_202508_v1.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_cDrRWM": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/soundcorepage_struggling_racing_image_lg_202508_v1.webp",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_LdqGcQ",
+        "column_Y9c9VN",
+        "column_8JLwRa",
+        "column_cDrRWM"
+      ],
+      "custom_css": [
+        "@media screen and (min-width: 1024px) {.multicolumn.with-4.card-grid--4 {--card-grid-per-row: 4 !important; }}"
+      ],
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "gap": "small",
+        "columns": 4,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Struggling to Sleep Through the Night?",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "custom_section_CVd86N": {
+      "type": "custom-section",
+      "blocks": {
+        "group_jn7MdK": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "content_direction": "col",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": false,
+            "color_text": "",
+            "color_background": "",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 30,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "heading_WJdFFD": {
+              "type": "heading",
+              "name": "t:blocks.heading.name",
+              "settings": {
+                "heading": "Your 3-Step Formula for Uninterrupted Cool Sleep",
+                "heading_size": "title-md",
+                "heading_tag": "h2",
+                "width": "custom",
+                "custom_width": 100,
+                "alignment": "center",
+                "width_mobile": "custom",
+                "custom_width_mobile": 100,
+                "alignment_mobile": "center",
+                "effects": "none",
+                "highlighted_text": "text",
+                "highlighted_scribble": "circle"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading_WJdFFD"
+          ]
+        },
+        "group_aftaaE": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "content_direction": "col",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": false,
+            "color_text": "",
+            "color_background": "",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "image_Cmy9at": {
+              "type": "image",
+              "name": "t:blocks.image.name",
+              "settings": {
+                "image": "shopify://shop_images/soundcorepage_formula_step1_image_lg_202508_v2.webp",
+                "aspect_ratio": "adapt",
+                "link": "https://www.soundcore.com/products/d1301-sleep-a30-smart-anc-earbuds-for-sleeping?variant=45247485280446",
+                "accessibility_info": "Breescape X Anker Soundcore",
+                "external": false,
+                "image_mobile": "shopify://shop_images/soundcorepage_formula_step1_image_md_202508_v3.webp",
+                "aspect_ratio_mobile": "adapt",
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100,
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_Cmy9at"
+          ]
+        },
+        "group_NjcUrW": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "content_direction": "col",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": false,
+            "color_text": "",
+            "color_background": "",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "image_niTxa6": {
+              "type": "image",
+              "name": "t:blocks.image.name",
+              "settings": {
+                "image": "shopify://shop_images/soundcorepage_formula_step2_image_lg_202508_v2.webp",
+                "aspect_ratio": "adapt",
+                "link": "shopify://products/cooling-eye-mask",
+                "accessibility_info": "Breescape Cooling Eye Mask",
+                "external": false,
+                "image_mobile": "shopify://shop_images/soundcorepage_formula_step2_image_md_202508_v3.webp",
+                "aspect_ratio_mobile": "adapt",
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_niTxa6"
+          ]
+        },
+        "group_rdJxVM": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "content_direction": "col",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": false,
+            "color_text": "",
+            "color_background": "",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "image_RiDXQn": {
+              "type": "image",
+              "name": "t:blocks.image.name",
+              "settings": {
+                "image": "shopify://shop_images/soundcorepage_formula_step3_image_lg_202508_v1.webp",
+                "aspect_ratio": "adapt",
+                "link": "shopify://products/cooling-comforter",
+                "accessibility_info": "Breescape Cooling Comforter Blanket",
+                "external": false,
+                "image_mobile": "shopify://shop_images/soundcorepage_formula_step3_image_md_202508_v3.webp",
+                "aspect_ratio_mobile": "adapt",
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_RiDXQn"
+          ]
+        }
+      },
+      "block_order": [
+        "group_jn7MdK",
+        "group_aftaaE",
+        "group_NjcUrW",
+        "group_rdJxVM"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 767px) {.mobile\\:aspect-adapt {aspect-ratio: 0.65 / 1; }}"
+      ],
+      "name": "t:sections.custom-section.name",
+      "settings": {
+        "content_direction": "col",
+        "vertical_on_mobile": true,
+        "content_wrap": false,
+        "horizontal_alignment": "start",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "page",
+        "section_height": "auto",
+        "section_height_custom": 50,
+        "section_height_mobile": "auto",
+        "section_height_custom_mobile": 50,
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "color_text": "",
+        "color_background": "#f2f6fa",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_zYaGNQ": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.name",
+      "settings": {
+        "liquid": "<style>\n@media screen and (max-width: 767px) {\n #shopify-section-template--18437360025678__custom_section_CVd86N .section{\n    background: linear-gradient(270deg, rgba(129, 201, 253, 1) 1%, rgba(215, 234, 249, 1) 95%);\n  }\n\n#shopify-section-template--18437360025678__custom_section_CVd86N  .section:before {\nbackground: linear-gradient(90deg, rgba(224, 237, 245, 1) 1%, rgba(182, 221, 247, 1) 95%);}\n\n\n#shopify-section-template--18437360025678__custom_section_CVd86N .page-width{\npadding-left:0;padding-right:0;\n}\n}\n\n</style>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "custom_section_cXf8yJ": {
+      "type": "custom-section",
+      "blocks": {
+        "group_FGNzyj": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "content_direction": "col",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 60,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": false,
+            "color_text": "",
+            "color_background": "",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 20,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "heading_WfXPNi": {
+              "type": "heading",
+              "name": "t:blocks.heading.name",
+              "settings": {
+                "heading": "Sleep better through every stage – from winding down to waking up.",
+                "heading_size": "title-md",
+                "heading_tag": "h2",
+                "width": "fill",
+                "custom_width": 100,
+                "alignment": "center",
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "alignment_mobile": "center",
+                "effects": "none",
+                "highlighted_text": "text",
+                "highlighted_scribble": "circle"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading_WfXPNi"
+          ]
+        },
+        "group_NyNM8i": {
+          "type": "group",
+          "name": "t:blocks.group.name",
+          "settings": {
+            "link": "",
+            "accessibility_info": "",
+            "open_in_new_tab": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "content_wrap": false,
+            "horizontal_alignment": "start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "custom_colors": false,
+            "color_text": "",
+            "color_background": "",
+            "gradient_background": "",
+            "color_button_text": "",
+            "color_button_background": "",
+            "color_button_gradient": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "ai_gen_block_41eeeff_EYxCaX": {
+              "type": "ai_gen_block_41eeeff",
+              "settings": {
+                "column_ratio": "33%",
+                "image_height": 400,
+                "mobile_card_height": 600,
+                "image_border_radius": 12,
+                "content_border_radius": 12,
+                "content_padding": 20,
+                "tab_active_color": "#ffffff",
+                "tab_inactive_color": "#f6f6f6",
+                "tab_border_color": "#e5e5e5",
+                "content_bg_color": "#ffffff",
+                "content_text_color": "#0f374b",
+                "tab_1_enabled": true,
+                "tab_1_title": "Ease In with Cooling Calm",
+                "tab_1_image": "shopify://shop_images/soundcorepage_waking-up_cooling-calm_bg-image_lg_202508_v1.png",
+                "tab_1_content": "",
+                "tab_1_liquid": "<div class=\"w-full h-full\">\n  <p class=\"text-center text-base margin-auto\" style=\"max-width:80%;margin:0 auto;\">\n    Breathable, cooling fabric lowers body temperature, while smart earbuds block out noise for a faster, calmer drift\n    to sleep.\n  </p>\n\n  <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/soundcorepage_waking-up_cooling-calm_content-image_lg_202508_v2.webp?v=1755660340\">\n</div>",
+                "tab_2_enabled": true,
+                "tab_2_title": "Stay In Deep Sleep",
+                "tab_2_image": "shopify://shop_images/soundcorepage_waking-up_deep-sleep_bg-image_lg_202508_v1.png",
+                "tab_2_content": "",
+                "tab_2_liquid": "<div class=\"w-full h-full\">\n  <p class=\"text-center text-base margin-auto\" style=\"max-width:80%;margin:0 auto;\">\n    Smart active noise cancelling keeps your world quiet, while Breescape fabric breathes to keep your body at a steady temperature for deeper, longer rest.\n  </p>\n\n  <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/soundcorepage_waking-up_deep-sleep_content-image_lg_202508_v1.png?v=1755505853\" style=\"margin-left:auto;margin-right:auto;width:70%;\">\n</div>",
+                "tab_3_enabled": true,
+                "tab_3_title": "Wake Up Rejuvenated",
+                "tab_3_image": "shopify://shop_images/soundcorepage_waking-up_rejuvenated_bg-image_lg_202508_v1.png",
+                "tab_3_content": "",
+                "tab_3_liquid": "<div class=\"w-full h-full\">\n  <p class=\"text-center text-base margin-auto\" style=\"max-width:80%;margin:0 auto;\">\n    Silky-soft fabric and ergonomic earbuds work together to keep you comfortable all night, so you rise refreshed.\n  </p>\n\n  <img src=\"https://cdn.shopify.com/s/files/1/0640/6779/7070/files/soundcorepage_waking-up_rejuvenated_content-image_lg_202508_v3.webp?v=1755569778\" style=\"margin-left: auto;\n    margin-right: auto;width:70%;\">\n</div>",
+                "tab_4_enabled": false,
+                "tab_4_title": "",
+                "tab_4_content": "",
+                "tab_4_liquid": "",
+                "tab_5_enabled": false,
+                "tab_5_title": "",
+                "tab_5_content": "",
+                "tab_5_liquid": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "ai_gen_block_41eeeff_EYxCaX"
+          ]
+        }
+      },
+      "block_order": [
+        "group_FGNzyj",
+        "group_NyNM8i"
+      ],
+      "name": "t:sections.custom-section.name",
+      "settings": {
+        "content_direction": "col",
+        "vertical_on_mobile": true,
+        "content_wrap": false,
+        "horizontal_alignment": "start",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "narrow",
+        "section_height": "auto",
+        "section_height_custom": 50,
+        "section_height_mobile": "auto",
+        "section_height_custom_mobile": 50,
+        "background_media": "image",
+        "video_position": "cover",
+        "background_image": "shopify://shop_images/soundcore_waking-up_background_image_lg_202508_v1.webp",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "color_text": "#fafafa",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "multicolumn_nRP7Hh": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_pcidhd": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/soundcorepage_tailored_item_1_image_lg_202508_v1.png",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_hThCMq": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/soundcorepage_tailored_item_2_image_lg_202508_v1.png",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_8MpVfc": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/soundcorepage_tailored_item_3_image_lg_202508_v1.png",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_hmNVAi": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/soundcorepage_tailored_item_4_image_lg_202508_v1.png",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_CyWkir": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "image": "shopify://shop_images/soundcorepage_tailored_item_5_image_lg_202508_v1.png",
+            "image_ratio": "adapt",
+            "heading": "",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_pcidhd",
+        "column_hThCMq",
+        "column_8MpVfc",
+        "column_hmNVAi",
+        "column_CyWkir"
+      ],
+      "custom_css": [
+        "@media screen and (min-width: 1024px) {.multicolumn.with-5.card-grid--4 {--card-grid-per-row: 5 !important; }}"
+      ],
+      "name": "t:sections.multicolumn.name",
+      "settings": {
+        "gap": "small",
+        "columns": 4,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "heading": "Tailored for Every Sleeper, Perfect for Every Space",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "featured_collection_1_mdimXw": {
+      "type": "featured-collection-1",
+      "custom_css": [
+        ".badge--onsale {display: none;}",
+        "h1 {font-family: \"GillSans\" !important; font-size: 44px !important;}",
+        "@media screen and (max-width: 767px) {h1 {font-size: 30px !important; }}"
+      ],
+      "settings": {
+        "collection": "",
+        "products": [
+          "cooling-comforter",
+          "cooling-sheet-set",
+          "cooling-comforter-set",
+          "cooling-pillowcases",
+          "cooling-eye-mask"
+        ],
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Beat the Heat with These Cool Picks",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h1",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 48,
+        "padding_bottom": 24,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "image_with_text_overlay_Rf4Nhp",
+    "multicolumn_4DQ4zQ",
+    "custom_section_CVd86N",
+    "custom_liquid_zYaGNQ",
+    "custom_section_cXf8yJ",
+    "multicolumn_nRP7Hh",
+    "featured_collection_1_mdimXw"
+  ]
+}

@@ -1,0 +1,737 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-tab-switcher-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ai-tab-switcher__tabs-{{ ai_gen_id }} {
+    border-bottom: 1px solid {{ block.settings.tab_border_color }};
+    margin-bottom: 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ai-tab-switcher__tabs-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-tab-switcher__tab-{{ ai_gen_id }} {
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: {{ block.settings.tab_inactive_color }};
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .ai-tab-switcher__tab-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.tab_active_color }};
+  }
+
+  .ai-tab-switcher__tab-{{ ai_gen_id }}.active {
+    color: {{ block.settings.tab_active_color }};
+    border-bottom-color: {{ block.settings.tab_active_color }};
+  }
+
+  .ai-tab-switcher__content-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ai-tab-switcher__card-{{ ai_gen_id }} {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    width: 100%;
+  }
+
+  .ai-tab-switcher__card-{{ ai_gen_id }}.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .ai-tab-switcher__card-desktop-{{ ai_gen_id }} {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ai-tab-switcher__image-column-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 768px) {
+    .ai-tab-switcher__image-column-{{ ai_gen_id }} {
+      flex: 0 0 {{ block.settings.column_ratio }};
+    }
+  }
+
+  .ai-tab-switcher__image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-tab-switcher__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-tab-switcher__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-tab-switcher__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-tab-switcher__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-tab-switcher__content-column-{{ ai_gen_id }} {
+    flex: 1;
+    background: radial-gradient(circle, rgba(245,248,249,1) 0%, rgba(221,234,245,1) 100%);
+    border-radius: {{ block.settings.content_border_radius }}px;
+    padding: {{ block.settings.content_padding }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .ai-tab-switcher__card-mobile-{{ ai_gen_id }} {
+    display: none;
+    position: relative;
+    height: {{ block.settings.mobile_card_height }}px;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ai-tab-switcher__mobile-bg-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-tab-switcher__mobile-bg-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-tab-switcher__mobile-bg-placeholder-{{ ai_gen_id }} svg {
+    width: 40%;
+    height: 40%;
+    opacity: 0.3;
+  }
+
+  .ai-tab-switcher__mobile-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background-color: {{ block.settings.content_bg_color }};
+    border-radius: {{ block.settings.content_border_radius }}px;
+    padding: {{ block.settings.content_padding }}px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    max-width: calc(100% - 40px);
+    overflow-x: auto;
+  }
+
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} {
+    color: {{ block.settings.content_text_color }};
+    line-height: 1.6;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} h1,
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} h2,
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} h3,
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} h4,
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} h5,
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} h6 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: {{ block.settings.content_text_color }};
+    max-width: 100%;
+  }
+
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} p {
+    margin-bottom: 16px;
+    max-width: 100%;
+  }
+
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} img,
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+
+  .ai-tab-switcher__content-text-{{ ai_gen_id }} * {
+    max-width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-tab-switcher__card-desktop-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-tab-switcher__card-mobile-{{ ai_gen_id }} {
+      display: block;
+    }
+
+    .ai-tab-switcher__tabs-{{ ai_gen_id }} {
+      margin-bottom: 16px;
+    }
+
+    .ai-tab-switcher__tab-{{ ai_gen_id }} {
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .ai-tab-switcher__mobile-overlay-{{ ai_gen_id }} {
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      padding: {{ block.settings.content_padding | times: 0.8 }}px;
+      max-width: calc(100% - 32px);
+    }
+  }
+{% endstyle %}
+
+<tab-switcher-{{ ai_gen_id }} class="ai-tab-switcher-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="block">
+    <div class="w-full">
+      <div class="ai-tab-switcher__tabs-{{ ai_gen_id }} flex items-center justify-center overflow-auto flex-wrap">
+        {% for i in (1..5) %}
+          {% liquid
+            assign tab_title_key = 'tab_' | append: i | append: '_title'
+            assign tab_enabled_key = 'tab_' | append: i | append: '_enabled'
+            assign tab_title = block.settings[tab_title_key]
+            assign tab_enabled = block.settings[tab_enabled_key]
+          %}
+
+          {% if tab_enabled and tab_title != blank %}
+            <button
+              class="ai-tab-switcher__tab-{{ ai_gen_id }}{% if forloop.first %} active{% endif %}"
+              data-tab="{{ i }}"
+              type="button"
+            >
+              {{ tab_title }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="ai-tab-switcher__content-{{ ai_gen_id }}">
+      {% for i in (1..5) %}
+        {% liquid
+          assign tab_enabled_key = 'tab_' | append: i | append: '_enabled'
+          assign tab_image_key = 'tab_' | append: i | append: '_image'
+          assign tab_content_key = 'tab_' | append: i | append: '_content'
+          assign tab_liquid_key = 'tab_' | append: i | append: '_liquid'
+          assign tab_enabled = block.settings[tab_enabled_key]
+          assign tab_image = block.settings[tab_image_key]
+          assign tab_content = block.settings[tab_content_key]
+          assign tab_liquid = block.settings[tab_liquid_key]
+        %}
+
+        {% if tab_enabled %}
+          <div
+            class="ai-tab-switcher__card-{{ ai_gen_id }}{% if forloop.first %} active{% endif %}"
+            data-card="{{ i }}"
+          >
+            <div class="ai-tab-switcher__card-desktop-{{ ai_gen_id }}">
+              <div class="ai-tab-switcher__image-column-{{ ai_gen_id }}">
+                <div class="ai-tab-switcher__image-wrapper-{{ ai_gen_id }}">
+                  {% if tab_image %}
+                    <img
+                      src="{{ tab_image | image_url: width: 800 }}"
+                      alt="{{ tab_image.alt | escape }}"
+                      class="ai-tab-switcher__image-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="{{ tab_image.width }}"
+                      height="{{ tab_image.height }}"
+                    >
+                  {% else %}
+                    <div class="ai-tab-switcher__image-placeholder-{{ ai_gen_id }}">
+                      {{ 'image' | placeholder_svg_tag }}
+                      <div class="ai-tab-switcher__empty-state-{{ ai_gen_id }}">Add an image for tab {{ i }}</div>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="ai-tab-switcher__content-column-{{ ai_gen_id }}">
+                {% if tab_content != blank or tab_liquid != blank %}
+                  <div class="ai-tab-switcher__content-text-{{ ai_gen_id }}">
+                    {{ tab_content }}
+                    {{ tab_liquid }}
+                  </div>
+                {% else %}
+                  <div class="ai-tab-switcher__content-text-{{ ai_gen_id }}">
+                    <p style="color: #999; font-style: italic;">Add content for tab {{ i }}</p>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="ai-tab-switcher__card-mobile-{{ ai_gen_id }}">
+              {% if tab_image %}
+                <img
+                  src="{{ tab_image | image_url: width: 800 }}"
+                  alt="{{ tab_image.alt | escape }}"
+                  class="ai-tab-switcher__mobile-bg-{{ ai_gen_id }}"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="ai-tab-switcher__mobile-bg-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+
+              <div class="ai-tab-switcher__mobile-overlay-{{ ai_gen_id }}">
+                {% if tab_content != blank or tab_liquid != blank %}
+                  <div class="ai-tab-switcher__content-text-{{ ai_gen_id }}">
+                    {{ tab_content }}
+                    {{ tab_liquid }}
+                  </div>
+                {% else %}
+                  <div class="ai-tab-switcher__content-text-{{ ai_gen_id }}">
+                    <p style="color: #999; font-style: italic;">Add content for tab {{ i }}</p>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</tab-switcher-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TabSwitcher{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentTab = 1;
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+      }
+
+      connectedCallback() {
+        this.tabs = this.querySelectorAll('.ai-tab-switcher__tab-{{ ai_gen_id }}');
+        this.cards = this.querySelectorAll('.ai-tab-switcher__card-{{ ai_gen_id }}');
+        this.tabsContainer = this.querySelector('.ai-tab-switcher__tabs-{{ ai_gen_id }}');
+        this.setupEventListeners();
+        this.initializeFirstTab();
+      }
+
+      setupEventListeners() {
+        this.tabs.forEach(tab => {
+          tab.addEventListener('click', (e) => {
+            const tabNumber = parseInt(e.target.dataset.tab);
+            this.switchToTab(tabNumber);
+          });
+        });
+
+        this.addEventListener('touchstart', (e) => {
+          if (window.innerWidth <= 768) {
+            this.touchStartX = e.changedTouches[0].screenX;
+          }
+        });
+
+        this.addEventListener('touchend', (e) => {
+          if (window.innerWidth <= 768) {
+            this.touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipe();
+          }
+        });
+      }
+
+      initializeFirstTab() {
+        const firstActiveTab = this.querySelector('.ai-tab-switcher__tab-{{ ai_gen_id }}.active');
+        if (firstActiveTab) {
+          this.currentTab = parseInt(firstActiveTab.dataset.tab);
+        }
+      }
+
+      handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = this.touchStartX - this.touchEndX;
+        if (Math.abs(diff) > swipeThreshold) {
+          const activeTabs = Array.from(this.tabs).map(tab => parseInt(tab.dataset.tab));
+          const currentIndex = activeTabs.indexOf(this.currentTab);
+          if (diff > 0 && currentIndex < activeTabs.length - 1) {
+            this.switchToTab(activeTabs[currentIndex + 1]);
+          } else if (diff < 0 && currentIndex > 0) {
+            this.switchToTab(activeTabs[currentIndex - 1]);
+          }
+        }
+      }
+
+      switchToTab(tabNumber) {
+        this.tabs.forEach(tab => {
+          tab.classList.toggle('active', parseInt(tab.dataset.tab) === tabNumber);
+        });
+        this.cards.forEach(card => {
+          card.classList.toggle('active', parseInt(card.dataset.card) === tabNumber);
+        });
+        this.currentTab = tabNumber;
+      }
+    }
+    customElements.define('tab-switcher-{{ ai_gen_id }}', TabSwitcher{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Tab switcher",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "column_ratio",
+      "label": "Image column width",
+      "options": [
+        {
+          "value": "25%",
+          "label": "25%"
+        },
+        {
+          "value": "33%",
+          "label": "33%"
+        },
+        {
+          "value": "50%",
+          "label": "50%"
+        },
+        {
+          "value": "66%",
+          "label": "66%"
+        },
+        {
+          "value": "75%",
+          "label": "75%"
+        }
+      ],
+      "default": "50%"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "label": "Image height",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_height",
+      "min": 300,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "label": "Mobile card height",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "content_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Content border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Content padding",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_color",
+      "label": "Active tab color",
+      "default": "#0f374b"
+    },
+    {
+      "type": "color",
+      "id": "tab_inactive_color",
+      "label": "Inactive tab color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "tab_border_color",
+      "label": "Tab border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "content_bg_color",
+      "label": "Content background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "content_text_color",
+      "label": "Content text color",
+      "default": "#0f374b"
+    },
+    {
+      "type": "header",
+      "content": "Tab 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_1_enabled",
+      "label": "Enable tab 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_1_title",
+      "label": "Tab title",
+      "default": "Features"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_content",
+      "label": "Content",
+      "default": "<h3>Amazing Features</h3><p>Discover the incredible features that make our product stand out from the competition.</p>"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_1_liquid",
+      "label": "Custom Liquid",
+      "default": "{% comment %}Add your custom Liquid code for tab 1 here{% endcomment %}"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_2_enabled",
+      "label": "Enable tab 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_2_title",
+      "label": "Tab title",
+      "default": "Benefits"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_content",
+      "label": "Content",
+      "default": "<h3>Key Benefits</h3><p>Experience the transformative benefits that will enhance your daily routine.</p>"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_2_liquid",
+      "label": "Custom Liquid",
+      "default": "{% comment %}Add your custom Liquid code for tab 2 here{% endcomment %}"
+    },
+    {
+      "type": "header",
+      "content": "Tab 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_3_enabled",
+      "label": "Enable tab 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_3_title",
+      "label": "Tab title",
+      "default": "Reviews"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_content",
+      "label": "Content",
+      "default": "<h3>Customer Reviews</h3><p>See what our satisfied customers are saying about their experience.</p>"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_3_liquid",
+      "label": "Custom Liquid",
+      "default": "{% comment %}Add your custom Liquid code for tab 3 here{% endcomment %}"
+    },
+    {
+      "type": "header",
+      "content": "Tab 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_4_enabled",
+      "label": "Enable tab 4",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_4_title",
+      "label": "Tab title"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_content",
+      "label": "Content"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_4_liquid",
+      "label": "Custom Liquid",
+      "default": "{% comment %}Add your custom Liquid code for tab 4 here{% endcomment %}"
+    },
+    {
+      "type": "header",
+      "content": "Tab 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_5_enabled",
+      "label": "Enable tab 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_5_title",
+      "label": "Tab title"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_5_content",
+      "label": "Content"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_5_liquid",
+      "label": "Custom Liquid",
+      "default": "{% comment %}Add your custom Liquid code for tab 5 here{% endcomment %}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tab switcher"
+    }
+  ],
+  "tag": null
+}
+{% endschema %}

@@ -1,0 +1,198 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product-modal",
+      "blocks": {
+        "yotpo_rating_promo_DQTXgy": {
+          "type": "yotpo_rating_promo",
+          "settings": {
+            "visibility": "all",
+            "instance_id": "989160",
+            "margin_bottom": 8,
+            "show_left_badge": true,
+            "left_text": "Halloween Sale",
+            "separator_text": "I",
+            "separator_weight": "400",
+            "badge_bg": "#b3e9ef",
+            "badge_text_color": "#10374b",
+            "badge_font_size": 14,
+            "badge_font_size_mobile": 12,
+            "badge_weight": "700",
+            "badge_letter_spacing": 0,
+            "badge_padding_x": 10,
+            "badge_padding_x_mobile": 6,
+            "badge_padding_y": 6,
+            "badge_padding_y_mobile": 6,
+            "badge_radius": 8,
+            "star_color": "#67d2e0",
+            "rating_text_color": "#10374b",
+            "rating_font_size": 14,
+            "rating_font_size_mobile": 12
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "product-title-sm",
+            "title_size_mobile": "product-title-md",
+            "title_tag": "h1",
+            "title_weight": "600",
+            "show_price": false,
+            "show_rating": false
+          }
+        },
+        "product_intro_features_BkHJ9C": {
+          "type": "product_intro_features",
+          "settings": {
+            "visibility": "all",
+            "show_intro": true,
+            "intro_color": "#10374b",
+            "intro_size": 14,
+            "intro_line_height": 1.2,
+            "intro_weight": "400",
+            "show_tooltip": true,
+            "tooltip_text": "If any product that bears our limited warranty Seal proves to be deffective within two years from the date it was first sold to a consumer by an authorized retailer, we, Good Houseekeeping, will refund the purchase price or $2,000, whichever is less or, at Good Housekeeping's sole discretion, repair or replace the product.",
+            "tooltip_color": "#10374b",
+            "tooltip_bg": "#ffffff",
+            "tooltip_radius": 12,
+            "tooltip_max_width": 360,
+            "tooltip_text_size": 13,
+            "tooltip_icon_size": 16,
+            "show_features": true,
+            "features_margin_top": 7,
+            "feature_gap": 8,
+            "feature_bg": "#ffffff",
+            "feature_text_color": "#10374b",
+            "feature_radius": 4,
+            "feature_padding_x": 0,
+            "feature_padding_y": 0,
+            "feature_inner_gap": 4,
+            "feature_icon_size": 16,
+            "feature_text_size": 13,
+            "show_divider": true,
+            "divider_color": "#ffffff",
+            "divider_width": 1,
+            "divider_margin_top": 13,
+            "divider_margin_bottom": 0
+          }
+        },
+        "price_4UmVjm": {
+          "type": "price",
+          "settings": {
+            "use_custom_layout": true,
+            "price_gap": 6,
+            "regular_price_use_color": false,
+            "regular_price_color": "#9ca3af",
+            "regular_price_size": 18,
+            "regular_price_weight": "400",
+            "sale_price_color": "#10374b",
+            "sale_price_size": 26,
+            "sale_price_weight": "700",
+            "save_format": "percent",
+            "save_bg": "#b3e9ef",
+            "save_text_color": "#10374b",
+            "save_font_size": 14,
+            "save_font_size_mobile": 12,
+            "save_weight": "700",
+            "save_letter_spacing": 1.3,
+            "save_padding_x": 10,
+            "save_padding_y": 6,
+            "save_radius": 8,
+            "show_discount_tip": false,
+            "discount_tip_color": "#71717a",
+            "show_info_bar": true,
+            "info_bar_icon_size": 20,
+            "info_bar_text": "Earn {points} points on this purchase.",
+            "info_bar_text_color": "#10374b",
+            "info_bar_font_size": 13,
+            "info_bar_font_weight": "300",
+            "info_bar_bg": "#ededed",
+            "info_bar_border": "rgba(0,0,0,0)",
+            "info_bar_border_width": 1,
+            "info_bar_radius": 18,
+            "info_bar_padding_x": 12,
+            "info_bar_padding_y": 2,
+            "info_bar_gap": 8,
+            "info_bar_margin_top": 0,
+            "show_taxes_notice": false
+          }
+        },
+        "liquid_DwgLEz": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<hr style=\"border-bottom: 1px solid #f0eeea;margin:30px 0\">"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "enable_dynamic_variants": true,
+            "show_variant_labels": true,
+            "picker_type": "button",
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "show_mid_swatch": false,
+            "mid_swatch_text": "Ashley's Collection: Ashley Stripe",
+            "mid_swatch_color": "#d6c4a8",
+            "mid_swatch_link": "",
+            "mid_swatch_space_top": 0,
+            "mid_swatch_space_bottom": 0,
+            "size_chart": "",
+            "size_liquid": "{{product.metafields.custom.size_guide}}",
+            "label_weight": "700",
+            "value_weight": "400",
+            "swatch_radius": 60,
+            "size_guide_font_size": 14
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_price": true,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false,
+            "enable_back_in_stock": false,
+            "show_back_in_stock_name": false,
+            "show_back_in_stock_phone": false
+          }
+        },
+        "read_more": {
+          "type": "read_more",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "yotpo_rating_promo_DQTXgy",
+        "title",
+        "product_intro_features_BkHJ9C",
+        "price_4UmVjm",
+        "liquid_DwgLEz",
+        "variant_picker",
+        "buy_buttons",
+        "read_more"
+      ],
+      "custom_css": [],
+      "settings": {
+        "image_zoom": "none",
+        "image_fill": false,
+        "hide_variants": false,
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "mobile_layout": "partial"
+      }
+    }
+  },
+  "order": [
+    "main-product"
+  ]
+}

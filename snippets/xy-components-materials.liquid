@@ -1,0 +1,857 @@
+{% case position %}
+{% when 'comforter-set' %}
+<div class="items-center justify-center flex-col hidden md:flex">
+  <div class="w-full text-center mb-4">
+    <h2 class="text-4xl md:text-5xl mb-2 leading-none">It’s Not Just Materials—
+      It’s Science</h2>
+    <p class="leading-normal body subtext-md">
+      The multi-layered moisture-wicking system creates a continuous loop to move heat and moisture away.
+    </p>
+  </div>
+  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+    <!-- (Center) -->
+    <div class="md:w-1/2 flex justify-center relative s--materials-img-content">
+      <img class="w-full h-auto max-w-md px-4"
+        src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=900"
+        srcset="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=600 600w, https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=900 900w, https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=1200 1200w"
+        sizes="(max-width: 767px) calc(100vw - 32px), 448px"
+        width="1200"
+        height="765"
+        loading="lazy"
+        alt="Dual-Sided Fabric Illustration" />
+      <div 
+        class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+        style="top: 22%; left: 20%;width:28px;height:28px;font-weight: bold;    background: rgb(var(--color-foreground));color: #fff;" onclick="showContent('a')"
+        aria-label="Show Ultra-Breathable Side">a</div>
+      <div 
+        class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+        style="top:50%; right: 20%;width:28px;height:28px;font-weight: bold;    background: rgb(var(--color-foreground));color: #fff;" onclick="showContent('b')"
+        aria-label="Show Naia™ Acetate Blend Fill">b</div>
+      <div 
+        class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+        style="bottom: 18%; right: 40%;width:28px;height:28px;font-weight: bold;    background: rgb(var(--color-foreground));color: #fff;" onclick="showContent('c')"
+        aria-label="Show Instant-Cool Side">c</div>
+    </div>
+
+    <!-- (Right) -->
+    <div class="md:w-1/2 flex flex-col">
+      <div id="contentSlider" class="content-slider flex flex-col md:flex-col overflow-x-auto gap-4">
+        <div class="content-item flex items-center transition-opacity duration-300 overflow-hidden">
+          <div class="block media media--adapt media--transparent relative">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Ellipse_10_68b88e21-74e5-4eb3-b5f7-077fc5467720.png?v=1746693920"
+              alt="Ultra-Breathable Side" loading="lazy" class="inline-block" width="72px" height="72px"  />
+          </div>
+          <div class="w-full p-6 flex items-center justify-start py-4 px-4">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">a. Breathable Side</h3>
+              <p class="text-sm">The Eco-Cosy® rayon blend disperses trapped heat, keeping you cool and refreshed. </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-item flex items-center transition-opacity duration-300 overflow-hidden">
+          <div class="block media media--adapt media--transparent relative">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Ellipse_10.png?v=1746693887"
+              alt="Ultra-Breathable Side" loading="lazy" class="inline-block" width="72px" height="72px" />
+          </div>
+          <div class="w-full p-6 flex items-center justify-start py-4 px-4">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">b. Naia™ Acetate Blend Fill</h3>
+              <p class="text-sm">Absorbs and releases excess heat and moisture, helping you stay dry through the night.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-item flex items-center transition-opacity duration-300 overflow-hidden">
+          <div class="block media media--adapt media--transparent relative">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Ellipse_11.png?v=1746693904"
+              alt="Ultra-Breathable Side" loading="lazy" class="inline-block" width="72px" height="72px"  />
+          </div>
+          <div class="w-full p-6 flex items-center justify-start py-4 px-4">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">c. Cool Side</h3>
+              <p class="text-sm">Helps regulate your body temperature by drawing heat away from the skin, making it
+                easier to fall asleep.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="flex items-center justify-center md:hidden">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+          <!--  (Left) -->
+        <div class="md:w-1/4 text-center">
+            <h2 class="text-4xl md:text-5xl mb-2 leading-none">It’s Not Just Materials—
+              It’s Science</h2>
+            <p class="leading-normal body subtext-md">
+              The multi-layered moisture-wicking system creates a continuous loop to move heat and moisture away.
+            </p>
+        </div>
+      <!-- (Center) -->
+      <div class="md:w-1/2 flex justify-center relative s--materials-img-content">
+        <img class="w-full h-auto max-w-md px-4"
+          src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=900"
+        srcset="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=600 600w, https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=900 900w, https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=1200 1200w"
+        sizes="(max-width: 767px) calc(100vw - 32px), 448px"
+        width="1200"
+        height="765"
+        loading="lazy"
+          alt="Dual-Sided Fabric Illustration" />
+        <button id="buttonA"
+          class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+          style="top: 22%; left: 20%;width:28px;height:28px;font-weight: bold;background: rgb(var(--color-foreground));color: #fff;" onclick="showContent('a')"
+          aria-label="Show Ultra-Breathable Side">a</button>
+        <button id="buttonB"
+          class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+          style="top:50%; right: 20%;width:28px;height:28px;font-weight: bold;background: rgb(var(--color-foreground));color: #fff;" onclick="showContent('b')"
+          aria-label="Show Naia™ Acetate Blend Fill">b</button>
+        <button id="buttonC"
+          class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+          style="bottom: 18%; right: 40%;width:28px;height:28px;font-weight: bold;background: rgb(var(--color-foreground));color: #fff;" onclick="showContent('c')"
+          aria-label="Show Instant-Cool Side">c</button>
+      </div>
+  
+      <!-- (Right) -->
+      <div class="md:w-1/4 flex flex-col">
+        <div id="contentSlider" class="content-slider flex flex-col md:flex-col overflow-x-auto">
+          <div id="contentA" class="content-item flex items-center transition-opacity duration-300 overflow-hidden">
+            <div class="block media media--adapt media--transparent relative">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Ellipse_10_68b88e21-74e5-4eb3-b5f7-077fc5467720.png?v=1746693920"
+              alt="Ultra-Breathable Side" loading="lazy" class="inline-block" width="72px" height="72px"  />
+          </div>
+          <div class="w-full p-6 flex items-center justify-start">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">a. Breathable Side</h3>
+              <p class="text-sm">The Eco-Cosy® rayon blend disperses trapped heat, keeping you cool and refreshed. </p>
+            </div>
+          </div>
+          </div>
+  
+          <div id="contentB" class="content-item flex items-center transition-opacity duration-300 overflow-hidden">
+            <div class="block media media--adapt media--transparent relative">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Ellipse_10.png?v=1746693887"
+                alt="Ultra-Breathable Side" loading="lazy" class="inline-block" width="72px" height="72px" />
+            </div>
+            <div class="w-full p-6 flex items-center justify-start">
+              <div class="text-left space-y-2">
+                <h3 class="text-lg font-bold">b. Naia™ Acetate Blend Fill</h3>
+                <p class="text-sm">Absorbs and releases excess heat and moisture, helping you stay dry through the night.
+                </p>
+              </div>
+            </div>
+          </div>
+  
+          <div id="contentC" class="content-item flex items-center transition-opacity duration-300 overflow-hidden">
+            <div class="block media media--adapt media--transparent relative">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/Ellipse_11.png?v=1746693904"
+                alt="Ultra-Breathable Side" loading="lazy" class="inline-block" width="72px" height="72px"  />
+            </div>
+            <div class="w-full p-6 flex items-center justify-start">
+              <div class="text-left space-y-2">
+                <h3 class="text-lg font-bold">c. Cool Side</h3>
+                <p class="text-sm">Helps regulate your body temperature by drawing heat away from the skin, making it
+                easier to fall asleep.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<style>
+  .content-item {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    border-radius: 10px;
+    max-width: 100%;
+    width: 420px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid #fff;
+    padding: 24px 16px;
+    flex-shrink: 0;
+    transition: opacity 0.3s ease, height 0.3s ease;
+  }
+
+
+  .content-item.hidden {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  /* Slider container */
+  .content-slider {
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+  }
+
+  /* Mobile-specific styles */
+  @media (max-width: 768px) {
+    .content-slider {
+      flex-direction: row;
+      gap: 16px;
+      padding: 0 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      margin-left:0;
+    }
+
+    .s--materials-img-content {
+      margin: 30px auto;
+    }
+
+    .content-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .content-item {
+      width: 100%;
+      max-width: 300px;
+      align-items: center;
+    }
+
+    .content-item.hidden {
+      display: flex;
+      opacity: 1;
+      height: auto;
+      padding: 16px;
+      margin: 0;
+    }
+
+    .md\:w-1\/4,
+    .md\:w-1\/2 {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .md\:w-1\/4 {
+      width: 25%;
+    }
+
+    .md\:w-1\/2 {
+      width: 50%;
+    }
+  }
+
+  .text-black {
+    color: #333;
+  }
+
+  button.transition-colors {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .section::before {
+    background-color: transparent !important;
+  }
+</style>
+
+{% when 'comforter' %}
+  <div class="items-center justify-center flex-col hidden md:flex">
+  <div class="w-full text-center mb-4">
+    <h2 class="text-4xl md:text-5xl mb-2 leading-none">Two Sides, Two Functions</h2>
+    <p class="leading-normal body subtext-md">
+      Perfect for every type of sleeper and any season. Flip to the side that suits your needs.
+    </p>
+  </div>
+  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+    <!-- (Center) -->
+    <div class="md:w-1/2 flex justify-center relative s--materials-img-content">
+      <img
+        class="w-full h-auto max-w-md px-4"
+        src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=900"
+        srcset="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=600 600w, https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=900 900w, https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=1200 1200w"
+        sizes="(max-width: 767px) calc(100vw - 32px), 448px"
+        width="1200"
+        height="765"
+        loading="lazy"
+        alt="Dual-Sided Fabric Illustration"
+      >
+      <div
+        class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+        style="top: 22%; left: 20%;width:28px;height:28px;font-weight: bold;"
+        onclick="showContent('a')"
+        aria-label="Show Ultra-Breathable Side"
+      >
+        a
+      </div>
+      <div
+        class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+        style="top:50%; right: 20%;width:28px;height:28px;font-weight: bold;"
+        onclick="showContent('b')"
+        aria-label="Show Naia™ Acetate Blend Fill"
+      >
+        b
+      </div>
+      <div
+        class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+        style="bottom: 18%; right: 40%;width:28px;height:28px;font-weight: bold;"
+        onclick="showContent('c')"
+        aria-label="Show Instant-Cool Side"
+      >
+        c
+      </div>
+    </div>
+
+    <!-- (Right) -->
+    <div class="md:w-1/2 flex flex-col">
+      <div id="contentSlider" class="content-slider flex flex-col md:flex-col overflow-x-auto gap-4">
+        <div class="content-item flex items-start transition-opacity duration-300 overflow-hidden">
+          <div class="block media media--adapt media--transparent relative w-full">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/productpage-instant-cool-image-202503.png?v=1743410091"
+              alt="Instant-Cool Side"
+              loading="lazy"
+              class="inline-block hidden md:block"
+            >
+
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-materials-cool-m-image-202504-v2.png?v=1745734746"
+              alt="Ultra-Breathable Side"
+              loading="lazy"
+              class="inline-block block md:hidden"
+            >
+          </div>
+          <div class="w-full p-6 flex items-center justify-start py-4 px-4">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">a. Cool Side</h3>
+              <p class="text-sm">
+                Draws heat away to regulate your temperature and help you fall asleep faster.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-item flex items-start transition-opacity duration-300 overflow-hidden">
+          <div class="block media media--adapt media--transparent relative w-full">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/productpage-acetate-blend-image-202503.png?v=1743410091"
+              alt="Naia™ Acetate Blend Fill"
+              loading="lazy"
+              class="inline-block hidden md:block"
+            >
+
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-materials-naia-m-image-202504-v2.png?v=1745734746"
+              alt="Ultra-Breathable Side"
+              loading="lazy"
+              class="inline-block block md:hidden"
+            >
+          </div>
+          <div class="w-full p-6 flex items-center justify-start py-4 px-4">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">b. Naia™ Acetate Blend Fill</h3>
+              <p class="text-sm">
+                Absorbs and releases excess heat and moisture, helping you stay dry through the night.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-item flex items-start transition-opacity duration-300 overflow-hidden">
+          <div class="block media media--adapt media--transparent relative w-full">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/productpage-ultra-breathable-image-202503.png?v=1743410091"
+              alt="Ultra-Breathable Side"
+              loading="lazy"
+              class="inline-block hidden md:block"
+            >
+
+            <img
+              src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-materials-breathahble-m-image-202504-v2.png?v=1745734746"
+              alt="Ultra-Breathable Side"
+              loading="lazy"
+              class="inline-block block md:hidden"
+            >
+          </div>
+          <div class="w-full p-6 flex items-center justify-start py-4 px-4">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">c. Breathable Side</h3>
+              <p class="text-sm">The Eco-Cosy® rayon blend disperses trapped heat, keeping you cool and refreshed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex items-center justify-center md:hidden">
+  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+    <!-- (Left) -->
+    <div class="md:w-1/4 text-left">
+      <h2 class="text-4xl md:text-5xl mb-2 leading-none">Two Sides, Two Functions</h2>
+      <p class="leading-normal body subtext-md">
+        Perfect for every type of sleeper and any season. Flip to the side that suits your needs.
+      </p>
+    </div>
+    <!-- (Center) -->
+    <div class="md:w-1/2 flex justify-center relative s--materials-img-content">
+      <img
+        class="w-full h-auto max-w-md px-4"
+        src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=900"
+        srcset="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=600 600w, https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=900 900w, https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-multi-layered-image-lg-202504.png?v=1745731117&width=1200 1200w"
+        sizes="(max-width: 767px) calc(100vw - 32px), 448px"
+        width="1200"
+        height="765"
+        loading="lazy"
+        alt="Dual-Sided Fabric Illustration"
+      >
+      <button
+        id="buttonA"
+        class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+        style="top: 22%; left: 20%;width:28px;height:28px;font-weight: bold;"
+        onclick="showContent('a')"
+        aria-label="Show Ultra-Breathable Side"
+      >
+        a
+      </button>
+      <button
+        id="buttonB"
+        class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+        style="top:50%; right: 20%;width:28px;height:28px;font-weight: bold;"
+        onclick="showContent('b')"
+        aria-label="Show Naia™ Acetate Blend Fill"
+      >
+        b
+      </button>
+      <button
+        id="buttonC"
+        class="absolute w-8 h-8 bg-white text-black rounded-full flex items-center justify-center transition-colors"
+        style="bottom: 18%; right: 40%;width:28px;height:28px;font-weight: bold;"
+        onclick="showContent('c')"
+        aria-label="Show Instant-Cool Side"
+      >
+        c
+      </button>
+    </div>
+
+    <!-- (Right) -->
+    <div class="md:w-1/4 flex flex-col">
+      <div id="contentSlider" class="content-slider flex flex-col md:flex-col overflow-x-auto">
+      
+
+        <div id="contentA" class="content-item flex items-start transition-opacity duration-300 overflow-hidden">
+          <div class="block media media--adapt media--transparent relative w-full">
+            <picture class="inline-block">
+              <source
+                media="(max-width: 767px)"
+                srcset="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-materials-cool-m-image-202504-v2.png?v=1745734746"
+                class="max-h-5 object-contain"
+                alt="{{ product.title |  escape }} Instant-Cool Side"
+                width="556"
+                height="280"
+                loading="lazy"
+              >
+              <img
+                src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/productpage-instant-cool-image-202503.png?v=1743410091"
+                class="max-h-5 object-contain"
+                alt="{{ product.title | escape }} Instant-Cool Side"
+                width="417"
+                height="182"
+                loading="lazy"
+              >
+            </picture>
+          </div>
+          <div class="w-full p-6 flex items-center justify-start py-4 px-4">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">Cool Side</h3>
+              <p class="text-sm">
+                Draws heat away to regulate your temperature and help you fall asleep faster.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="contentB" class="content-item flex items-start transition-opacity duration-300 overflow-hidden">
+          <div class="block media media--adapt media--transparent relative w-full">
+            <picture class="inline-block">
+              <source
+                media="(max-width: 767px)"
+                srcset="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-materials-naia-m-image-202504-v2.png?v=1745734746"
+                class="max-h-5 object-contain"
+                alt="{{ product.title |  escape }} Naia™ Acetate Blend Fill"
+                width="556"
+                height="280"
+                loading="lazy"
+              >
+              <img
+                src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/productpage-acetate-blend-image-202503.png?v=1743410091"
+                class="max-h-5 object-contain"
+                alt="{{ product.title | escape }} Naia™ Acetate Blend Fill"
+                width="417"
+                height="182"
+                loading="lazy"
+              >
+            </picture>
+          </div>
+          <div class="w-full p-6 flex items-center justify-start py-4 px-4">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">Naia™ Acetate Blend Fill</h3>
+              <p class="text-sm">
+                Absorbs and releases excess heat and moisture, helping you stay dry through the night.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="contentC" class="content-item flex items-start transition-opacity duration-300 overflow-hidden">
+          <div class="block media media--adapt media--transparent relative w-full">
+            <picture class="inline-block">
+              <source
+                media="(max-width: 767px)"
+                srcset="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/product-comforter-materials-breathahble-m-image-202504-v2.png?v=1745734746"
+                class="max-h-5 object-contain"
+                alt="{{ product.title |  escape }} Ultra-Breathable Side"
+                width="556"
+                height="280"
+                loading="lazy"
+              >
+              <img
+                src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/productpage-ultra-breathable-image-202503.png?v=1743410091"
+                class="max-h-5 object-contain"
+                alt="{{ product.title | escape }} Ultra-Breathable Side"
+                width="417"
+                height="182"
+                loading="lazy"
+              >
+            </picture>
+          </div>
+          <div class="w-full p-6 flex items-center justify-start py-4 px-4">
+            <div class="text-left space-y-2">
+              <h3 class="text-lg font-bold">Breathable Side</h3>
+              <p class="text-sm">The Eco-Cosy® rayon blend disperses trapped heat, keeping you cool and refreshed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .content-item {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    border-radius: 10px;
+    max-width: 100%;
+    width: 480px;
+    background: rgba(246, 246, 246, 0.25);
+    border: 1px solid #fff;
+    flex-shrink: 0;
+    transition: opacity 0.3s ease, height 0.3s ease;
+  }
+
+
+  .content-item.hidden {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  /* Slider container */
+  .content-slider {
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+  }
+
+  /* Mobile-specific styles */
+  @media (max-width: 768px) {
+    .content-slider {
+      flex-direction: row;
+      gap: 16px;
+      padding: 0 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      margin-left:0;
+    }
+
+    .s--materials-img-content {
+      margin: 30px auto;
+    }
+
+    .content-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .content-item {
+      width: 80%;
+      max-width: 300px;
+      flex-direction: column;
+    }
+
+    .content-item.hidden {
+      display: flex;
+      opacity: 1;
+      height: auto;
+      padding: 16px;
+      margin: 0;
+    }
+
+    .md\:w-1\/4,
+    .md\:w-1\/2 {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .md\:w-1\/4 {
+      width: 25%;
+    }
+
+    .md\:w-1\/2 {
+      width: 50%;
+    }
+  }
+
+  .text-black {
+    color: #333;
+  }
+
+  button.transition-colors {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .section {
+    background-image: url('https://breescape.com/cdn/shop/files/productpage-real-reviews-image-bg-lg-202504.png?v=1745566562');
+    background-size: cover;
+    background-position: center;
+  }
+
+  #shopify-section-{{ section.id }} .section::before {
+    background-color: transparent !important;
+  }
+</style>
+
+
+{% when 'pillow' %}
+    <style>
+  .pillow-structure {
+    background-color: transparent;
+    color: inherit;
+  }
+
+  .pillow-structure__media {
+    position: relative;
+    width: 100%;
+    max-width: 50rem;
+    border-radius: var(--border-radius-medium);
+    overflow: hidden;
+  }
+
+  .pillow-structure__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .pillow-structure__pins {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .pillow-structure__pin {
+    pointer-events: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    background: rgba(11, 27, 43, 0.55);
+    color: #fff;
+    font-weight: var(--font-medium);
+    font-size: 1.05rem;
+    text-transform: lowercase;
+    display: grid;
+    place-items: center;
+    transition: transform var(--animation-primary), background var(--animation-primary), border-color var(--animation-primary), box-shadow var(--animation-primary);
+  }
+
+  .pillow-structure__pin:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    border-color: rgba(179, 244, 240, 0.8);
+  }
+
+  .pillow-structure__pin.is-active {
+    background: #b3f4f0;
+    color: #0b1b2b;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(10, 120, 120, 0.35);
+  }
+
+  .pillow-structure__pin[data-target="a"] {
+    top: 46%;
+    left: 24%;
+  }
+
+  .pillow-structure__pin[data-target="b"] {
+    top: 46%;
+    left: 60%;
+  }
+
+  .pillow-structure__pin[data-target="c"] {
+    top: 46%;
+    left: 75%;
+  }
+
+  .pillow-structure__info {
+    width: 100%;
+    overflow-x: auto;
+    scroll-padding: 0 1.5rem;
+  }
+
+  .pillow-structure__card {
+    background: rgba(250, 250, 250, 0.05);
+    border-radius: var(--border-radius-medium);
+    padding: var(--sp-6) var(--sp-6d5);
+    min-width: clamp(18.75rem, 70vw, 22rem);
+    transition: background var(--animation-primary), transform var(--animation-primary), box-shadow var(--animation-primary);
+    cursor: pointer;
+    scroll-snap-align: center;
+    width: 33.333%;
+  }
+
+  .pillow-structure__card:hover {
+    background: rgba(250, 250, 250, 0.05);
+  }
+
+  .pillow-structure__card.is-active {
+    background: rgba(250, 250, 250, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .pillow-structure__icon {
+    width: var(--sp-10);
+    height: var(--sp-10);
+    border-radius: 999px;
+    flex-shrink: 0;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    margin-block: 0!important;
+  }
+
+  .pillow-structure__icon--a {
+    background: radial-gradient(circle at 30% 30%, #dffdf7 0%, #5cd3c3 40%, #1d7069 100%);
+  }
+
+  .pillow-structure__icon--b {
+    background: radial-gradient(circle at 30% 30%, #f0f1f5 0%, #bfc5d3 65%, #898fa3 100%);
+  }
+
+  .pillow-structure__icon--c {
+    background: radial-gradient(circle at 30% 30%, #edf7f5 0%, #b8d3ca 55%, #7ea69a 100%);
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .pillow-structure__pin {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 0.95rem;
+    }
+
+    .pillow-structure__pin[data-target="a"] {
+      top: 48%;
+      left: 28%;
+    }
+
+    .pillow-structure__pin[data-target="b"] {
+      top: 48%;
+      left: 55%;
+    }
+
+    .pillow-structure__pin[data-target="c"] {
+      top: 48%;
+      left: 80%;
+    }
+
+    .pillow-structure__card {
+      min-width: 90%;
+      padding: var(--sp-5d5) var(--sp-6);
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .pillow-structure__info {
+      overflow: visible;
+      scroll-snap-type: none;
+    }
+
+    .pillow-structure__card {
+      min-width: 0;
+    }
+  }
+</style>
+<div class="pillow-structure">
+  <div class="flex flex-col items-center gap-7d5 pillow-structure__inner">
+    <div class="pillow-structure__media"> <img
+        src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/pillowpage_inside_pillow-img_image_lg_202510_v2.png?v=1761903279"
+        alt="Pillow layers">
+      <div class="pillow-structure__pins"> <button type="button" class="pillow-structure__pin is-active"
+          data-target="a">a</button> <button type="button" class="pillow-structure__pin" data-target="b">b</button>
+        <button type="button" class="pillow-structure__pin" data-target="c">c</button>
+      </div>
+    </div>
+    <div class="pillow-structure__info flex gap-5d5 md:gap-6 scroll-area">
+      <card class="pillow-structure__card flex items-start gap-3 is-active" data-target="a"> 
+          <img class="pillow-structure__icon pillow-structure__icon--a"
+            src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/pillowpage_inside_airweave_image_lg_202510_v1.png?v=1761907501"
+            alt="Pillow layers">
+        <div class="text-left">
+          <div class="text-lg font-bold">a. AiryWeave Structured Supportive Core</div>
+          <span>Ultra-breathable core that contours to your neck for lasting comfort.</span>
+        </div>
+      </card>
+      <card class="pillow-structure__card flex items-start gap-3" data-target="b"><img class="pillow-structure__icon pillow-structure__icon--b"
+            src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/pillowpage_inside_air-layer_image_lg_202510_v1.png?v=1761907503"
+            alt="Pillow layers"></span>
+        <div class="text-left">
+          <div class="text-lg font-bold">b. Air Layer</div>
+          <span>Soft, springy layer that promotes airflow and gently cushions.</span>
+        </div>
+      </card>
+      <card class="pillow-structure__card flex items-start gap-3" data-target="c"> 
+        <img class="pillow-structure__icon pillow-structure__icon--c"
+            src="https://cdn.shopify.com/s/files/1/0640/6779/7070/files/pillowpage_inside_pillowcase_image_lg_202510_v1.png?v=1761907503"
+            alt="Pillow layers"></span>
+        <div class="text-left">
+          <div class="text-lg font-bold">c. Pillowcase</div>
+          <span>Cool to the touch, silky soft, and breathable.</span>
+        </div>
+      </card>
+    </div>
+  </div>
+</div>
+<script> const pins = document.querySelectorAll(".pillow-structure__pin"); const cards = document.querySelectorAll(".pillow-structure__card"); const setActive = target => { let activeCard = null; pins.forEach(pin => { const isActive = pin.dataset.target === target; pin.classList.toggle("is-active", isActive); }); cards.forEach(card => { const isActive = card.dataset.target === target; card.classList.toggle("is-active", isActive); if (isActive) activeCard = card; }); if (activeCard && window.matchMedia("(max-width: 1024px)").matches) { activeCard.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" }); } }; pins.forEach(pin => { pin.addEventListener("click", () => setActive(pin.dataset.target)); }); cards.forEach(card => { card.addEventListener("click", () => setActive(card.dataset.target)); }); if (!document.querySelector(".pillow-structure__pin.is-active") && pins.length) { setActive(pins[0].dataset.target); } </script>
+
+{% endcase %}

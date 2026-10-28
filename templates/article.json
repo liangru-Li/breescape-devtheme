@@ -1,0 +1,168 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-article-banner": {
+      "type": "main-article-banner",
+      "blocks": {
+        "spacing": {
+          "type": "spacing",
+          "settings": {
+            "height": 68,
+            "height_mobile": 0
+          }
+        },
+        "title": {
+          "type": "title",
+          "disabled": true,
+          "settings": {
+            "title_size": "title-md",
+            "show_tags": true,
+            "show_date": true,
+            "show_comments": false,
+            "show_author": false
+          }
+        }
+      },
+      "block_order": [
+        "spacing",
+        "title"
+      ],
+      "disabled": true,
+      "settings": {
+        "transparent_header": false,
+        "show_image": true,
+        "image": "{{ article.metafields.custom.article_banner.value }}",
+        "image_height": "700px",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "left",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-end justify-center",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_overlay": "#000000",
+        "overlay_opacity": 24,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "main-article": {
+      "type": "main-article-overlay",
+      "blocks": {
+        "liquid_8irjHk": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<div id='collection-component-1745916123098'></div>\n<script type=\"text/javascript\">\n/*<![CDATA[*/\n(function () {\n  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';\n  if (window.ShopifyBuy) {\n    if (window.ShopifyBuy.UI) {\n      ShopifyBuyInit();\n    } else {\n      loadScript();\n    }\n  } else {\n    loadScript();\n  }\n  function loadScript() {\n    var script = document.createElement('script');\n    script.async = true;\n    script.src = scriptURL;\n    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);\n    script.onload = ShopifyBuyInit;\n  }\n  function ShopifyBuyInit() {\n    var client = ShopifyBuy.buildClient({\n      domain: 'demq96-rq.myshopify.com',\n      storefrontAccessToken: 'd660c12b63d9290acb1c52638a338085',\n    });\n    ShopifyBuy.UI.onReady(client).then(function (ui) {\n      ui.createComponent('collection', {\n        id: '287528779854',\n        node: document.getElementById('collection-component-1745916123098'),\n        moneyFormat: '%24%7B%7Bamount%7D%7D',\n        options: {\n  \"product\": {\n    \"styles\": {\n      \"product\": {\n        \"@media (min-width: 601px)\": {\n          \"max-width\": \"calc(25% - 20px)\",\n          \"margin-left\": \"20px\",\n          \"margin-bottom\": \"50px\",\n          \"width\": \"calc(25% - 20px)\",\n        },\n        \"@media (max-width: 600px)\": {\n          \"min-width\": \"100%\",\n          \"margin-top\":\"0px !important\"\n        }\n      },\n      \"title\": {\n        \"font-size\": \"16px\"\n      },\n      \"button\": {\n        \"font-size\": \"14px\",\n        \"padding-top\": \"15px\",\n        \"padding-bottom\": \"15px\",\n        \":hover\": {\n          \"background-color\": \"#1a5e80\"\n        },\n        \"background-color\": \"#0f374b\",\n        \":focus\": {\n          \"background-color\": \"#1a5e80\"\n        },\n        \"border-radius\": \"40px\",\n        \"padding-left\": \"16px\",\n        \"padding-right\": \"16px\"\n      },\n      \"quantityInput\": {\n        \"font-size\": \"14px\",\n        \"padding-top\": \"15px\",\n        \"padding-bottom\": \"15px\"\n      }\n    },\n    \"buttonDestination\": \"modal\",\n    \"contents\": {\n      \"options\": false\n    },\n    \"text\": {\n      \"button\": \"View product\"\n    }\n  },\n  \"productSet\": {\n    \"styles\": {\n      \"products\": {\n        \"@media (min-width: 601px)\": {\n          \"margin-left\": \"-30px\"\n        },\n        \"@media (max-width: 600px)\": {\n          \"display\": \"grid\",\n          \"--card-grid-per-row\": \"2\",\n            \"--card-grid-template\": \"auto-flow dense / repeat(var(--card-grid-per-row), minmax(0, 1fr))\",\n            \"--card-grid-gap\": \"var(--sp-3)\",\n            \"grid\": \"var(--card-grid-template)\",\n            \"gap\": \"10px\",\n        }\n      }\n    }\n  },\n  \"modalProduct\": {\n    \"contents\": {\n      \"img\": false,\n      \"imgWithCarousel\": true,\n      \"button\": false,\n      \"buttonWithQuantity\": true\n    },\n    \"styles\": {\n      \"product\": {\n        \"@media (min-width: 601px)\": {\n          \"max-width\": \"100%\",\n          \"margin-left\": \"0px\",\n          \"margin-bottom\": \"0px\"\n        }\n      },\n      \"button\": {\n        \"font-size\": \"14px\",\n        \"padding-top\": \"15px\",\n        \"padding-bottom\": \"15px\",\n        \":hover\": {\n          \"background-color\": \"#1a5e80\"\n        },\n        \"background-color\": \"#0f374b\",\n        \":focus\": {\n          \"background-color\": \"#1a5e80\"\n        },\n        \"border-radius\": \"40px\",\n        \"padding-left\": \"16px\",\n        \"padding-right\": \"16px\"\n      },\n      \"quantityInput\": {\n        \"font-size\": \"14px\",\n        \"padding-top\": \"15px\",\n        \"padding-bottom\": \"15px\"\n      },\n      \"title\": {\n        \"font-family\": \"Helvetica Neue, sans-serif\",\n        \"font-weight\": \"bold\",\n        \"font-size\": \"26px\",\n        \"color\": \"#4c4c4c\"\n      }\n    },\n    \"text\": {\n      \"button\": \"Add to cart\"\n    }\n  },\n  \"option\": {},\n  \"cart\": {\n    \"styles\": {\n      \"button\": {\n        \"font-size\": \"14px\",\n        \"padding-top\": \"15px\",\n        \"padding-bottom\": \"15px\",\n        \":hover\": {\n          \"background-color\": \"#1a5e80\"\n        },\n        \"background-color\": \"#0f374b\",\n        \":focus\": {\n          \"background-color\": \"#1a5e80\"\n        },\n        \"border-radius\": \"40px\"\n      }\n    },\n    \"text\": {\n      \"total\": \"Subtotal\",\n      \"button\": \"Checkout\"\n    },\n    \"popup\": false\n  },\n  \"toggle\": {\n    \"styles\": {\n      \"toggle\": {\n        \"background-color\": \"#0f374b\",\n        \":hover\": {\n          \"background-color\": \"#1a5e80\"\n        },\n        \":focus\": {\n          \"background-color\": \"#1a5e80\"\n        }\n      },\n      \"count\": {\n        \"font-size\": \"14px\"\n      }\n    }\n  }\n},\n      });\n    });\n  }\n})();\n/*]]>*/\n</script>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share",
+            "show_comments": false
+          }
+        },
+        "next_previous_posts": {
+          "type": "next_previous_posts",
+          "settings": {
+            "show_date": true,
+            "show_comments": false,
+            "show_author": false
+          }
+        }
+      },
+      "block_order": [
+        "liquid_8irjHk",
+        "share",
+        "next_previous_posts"
+      ],
+      "disabled": true,
+      "settings": {
+        "padding_top": 72,
+        "padding_bottom": 20,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
+    "seo_article_template_RJVFRk": {
+      "type": "seo-article-template",
+      "name": "SEO Article Template",
+      "settings": {
+        "toc_title": "In this article",
+        "recommended_products_title": "Recommended Products",
+        "featured_products": "{{ article.metafields.custom.related_products.value }}",
+        "more_to_read_title": "More to Read",
+        "padding_top": 40,
+        "padding_bottom": 72
+      }
+    },
+    "featured_collection_FcTNYH": {
+      "type": "featured-collection",
+      "custom_css": [
+        "h2 {font-family: \"GillSans\" !important; letter-spacing: -1px !important;}"
+      ],
+      "name": "Featured collection",
+      "settings": {
+        "collection": "",
+        "products": [
+          "cooling-sheet-set",
+          "cooling-comforter",
+          "cooling-pillow",
+          "cooling-pillowcases",
+          "cooling-comforter-set",
+          "cooling-eye-mask"
+        ],
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "heading": "Game-Changer for Hot Sleepers",
+        "heading_size": "title-sm",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-article-banner",
+    "main-article",
+    "seo_article_template_RJVFRk",
+    "featured_collection_FcTNYH"
+  ]
+}

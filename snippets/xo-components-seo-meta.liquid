@@ -1,0 +1,82 @@
+{% if template == 'index' %}
+  <meta
+    name="keywords"
+    content="Breescape,Bedsure,bedsure home, bedsure breescape,Ashley Graham,Cooling Bedding,Cooling Comforter,Cooling Pillow,Cooling Sheets,Cooling Pillowcases,Cooling Blanket,Cooling Bundle,Summer Bedding,Luxury Cooling Bedding,Hot Sleeper Bedding,edredones para camas,colchas"
+  >
+{% elsif template contains 'product' %}
+  <meta
+    name="keywords"
+    content="Breescape Cooling Comforter,Cooling Sheets,Cooling Pillowcases,Cooling Eye Mask,Pillow,Breathable Bedding,Moisture Wicking Bedding,Night Sweats Relief Bedding,Cooling Blanket,Summer Cooling Bedding,ropa de cama fresca,sábanas frescas"
+  >
+{% elsif template contains 'collection' %}
+  <meta
+    name="keywords"
+    content="Breescape Bedding Collection,Cooling Bedding Sets,Cooling Comforter Collection,Pillow,Cooling Sheets Collection,Cooling Bundle,Bedroom Cooling Solutions,Luxury Bedding Sets,edredones,colchas,ropa de cama"
+  >
+{% else %}
+  <meta
+    name="keywords"
+    content="Breescape,Cooling Bedding,Comforter,Sheets,Pillow,Pillowcases,Cooling Eye Mask,Cooling Comforter,Cooling Sheets,Breathable Bedding,Luxury Cooling Bedding,Hot Sleeper Bedding,edredones para camas,sábanas frescas"
+  >
+{% endif %}
+
+{% if product %}
+  {%- assign variant = product.selected_or_first_available_variant -%}
+  {%- assign price_amount = variant.price | divided_by: 100.0 -%}
+  {%- assign currency = localization.country.currency.iso_code | default: shop.currency -%}
+  <meta property="product:price:amount" content="{{ price_amount }}">
+  <meta property="product:price:currency" content="{{ currency }}">
+{% endif %}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | append: page.url | json }},
+    "logo": {{ settings.favicon | json }},
+    "image": {{ settings.favicon | json }},
+
+
+    "legalName": "Bedshe International",
+    "description": {{ shop.description | json }},
+    "sameAs": [
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_linkedin_link | json }},
+      {{ settings.social_vimeo_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_feed_link | json }}
+    ],
+    "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "411 5th Avenue, 5th Floor",
+          "addressLocality": "New York",
+          "addressRegion": "New York",
+          "postalCode": "10016",
+          "addressCountry": "United States"
+      }
+  }
+</script>
+
+{%- if template.name == 'index' -%}
+  {%- assign potential_action_target = shop.url | append: '/search?q={search_term_string}' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}

@@ -1,0 +1,73 @@
+{%- comment -%}
+  Render one expert photo card.
+  Param: block (the expert block from breescape-experts-grid section)
+
+  Block 提供的可调样式（PC + 移动端独立）：
+    - 图片 4 角圆角
+    - 图片下方区域 (meta) 背景色 / 上下内边距 / 左右内边距
+    - 名字 / 简介 / 引文 字号
+{%- endcomment -%}
+{%- assign img = block.settings.image -%}
+{%- assign bs  = block.settings -%}
+{%- capture card_style -%}
+  --be-eg-i-img-tl-pc:{{ bs.img_tl_pc }}px;
+  --be-eg-i-img-tr-pc:{{ bs.img_tr_pc }}px;
+  --be-eg-i-img-br-pc:{{ bs.img_br_pc }}px;
+  --be-eg-i-img-bl-pc:{{ bs.img_bl_pc }}px;
+  --be-eg-i-img-tl-m:{{ bs.img_tl_m }}px;
+  --be-eg-i-img-tr-m:{{ bs.img_tr_m }}px;
+  --be-eg-i-img-br-m:{{ bs.img_br_m }}px;
+  --be-eg-i-img-bl-m:{{ bs.img_bl_m }}px;
+  {%- if bs.img_aspect_pc != blank -%}--be-eg-i-img-aspect-pc:{{ bs.img_aspect_pc }};{%- endif -%}
+  {%- if bs.img_aspect_m  != blank -%}--be-eg-i-img-aspect-m:{{ bs.img_aspect_m }};{%- endif -%}
+  {%- if bs.img_w_pc > 0 -%}--be-eg-i-img-w-pc:{{ bs.img_w_pc }}%;{%- endif -%}
+  {%- if bs.img_w_m  > 0 -%}--be-eg-i-img-w-m:{{ bs.img_w_m }}%;{%- endif -%}
+  {%- if bs.meta_bg != blank -%}--be-eg-i-meta-bg:{{ bs.meta_bg }};{%- endif -%}
+  --be-eg-i-meta-pt-pc:{{ bs.meta_pt_pc }}px;
+  --be-eg-i-meta-pb-pc:{{ bs.meta_pb_pc }}px;
+  --be-eg-i-meta-px-pc:{{ bs.meta_px_pc }}px;
+  --be-eg-i-meta-pt-m:{{ bs.meta_pt_m }}px;
+  --be-eg-i-meta-pb-m:{{ bs.meta_pb_m }}px;
+  --be-eg-i-meta-px-m:{{ bs.meta_px_m }}px;
+  --be-eg-i-meta-tl-pc:{{ bs.meta_tl_pc }}px;
+  --be-eg-i-meta-tr-pc:{{ bs.meta_tr_pc }}px;
+  --be-eg-i-meta-br-pc:{{ bs.meta_br_pc }}px;
+  --be-eg-i-meta-bl-pc:{{ bs.meta_bl_pc }}px;
+  --be-eg-i-meta-tl-m:{{ bs.meta_tl_m }}px;
+  --be-eg-i-meta-tr-m:{{ bs.meta_tr_m }}px;
+  --be-eg-i-meta-br-m:{{ bs.meta_br_m }}px;
+  --be-eg-i-meta-bl-m:{{ bs.meta_bl_m }}px;
+  {%- if bs.name_fz_pc > 0 -%}--be-eg-i-name-fz-pc:{{ bs.name_fz_pc }}px;{%- endif -%}
+  {%- if bs.role_fz_pc > 0 -%}--be-eg-i-role-fz-pc:{{ bs.role_fz_pc }}px;{%- endif -%}
+  {%- if bs.quote_fz_pc > 0 -%}--be-eg-i-quote-fz-pc:{{ bs.quote_fz_pc }}px;{%- endif -%}
+  {%- if bs.name_fz_m > 0 -%}--be-eg-i-name-fz-m:{{ bs.name_fz_m }}px;{%- endif -%}
+  {%- if bs.role_fz_m > 0 -%}--be-eg-i-role-fz-m:{{ bs.role_fz_m }}px;{%- endif -%}
+  {%- if bs.quote_fz_m > 0 -%}--be-eg-i-quote-fz-m:{{ bs.quote_fz_m }}px;{%- endif -%}
+{%- endcapture -%}
+<article class="be-eg__card" style="{{ card_style | strip_newlines | replace: '  ', '' }}">
+  <div class="be-eg__photo">
+    {%- if img != blank -%}
+      <img
+        src="{{ img | image_url: width: 800 }}"
+        srcset="{{ img | image_url: width: 400 }} 400w, {{ img | image_url: width: 600 }} 600w, {{ img | image_url: width: 800 }} 800w, {{ img | image_url: width: 1200 }} 1200w"
+        sizes="(max-width: 768px) 50vw, 25vw"
+        width="{{ img.width }}"
+        height="{{ img.height }}"
+        alt="{{ img.alt | default: bs.name | escape }}"
+        loading="lazy">
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'be-eg__photo-placeholder' }}
+    {%- endif -%}
+  </div>
+  <div class="be-eg__meta">
+    {%- if bs.name != blank -%}
+      <h3 class="be-eg__name">{{ bs.name | escape }}</h3>
+    {%- endif -%}
+    {%- if bs.role != blank -%}
+      <p class="be-eg__role">{{ bs.role | escape }}</p>
+    {%- endif -%}
+    {%- if bs.quote != blank -%}
+      <p class="be-eg__quote">{{ bs.quote | escape }}</p>
+    {%- endif -%}
+  </div>
+</article>

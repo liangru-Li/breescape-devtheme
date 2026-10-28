@@ -1,0 +1,213 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-sm",
+        "heading_alignment": "text-center",
+        "heading_tag": "h1",
+        "text_size": "text-sm",
+        "padding_top": 72,
+        "padding_bottom": 60,
+        "divider": false,
+        "narrow": false,
+        "rounded": true
+      }
+    },
+    "rich_text_8exQah": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_kfPnXw": {
+          "type": "heading",
+          "settings": {
+            "heading": "Track Your Order",
+            "heading_size": "title-md",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_B46A33": {
+          "type": "text",
+          "settings": {
+            "text": "<p>In most cases, the package will be delivered within the estimated time of arrival. However, the actual delivery date may be affected by flight arrangements, weather conditions and other external factors. Please refer to the tracking information for the most accurate delivery date.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_kfPnXw",
+        "text_B46A33"
+      ],
+      "custom_css": [
+        "h1 {font-family: \"GillSans\" !important; letter-spacing: -1px !important;}"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "rgba(0,0,0,0)",
+        "color_background": "#fafafa",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "17355416168b3e908e": {
+      "type": "apps",
+      "blocks": {
+        "track123_search2_fCjLRi": {
+          "type": "shopify://apps/track123/blocks/search2/60c49c11-a7c0-49a0-861e-2f84d2f294e6",
+          "settings": {
+            "search_form_background_color": "",
+            "preview_state": "search",
+            "search_by": "by_order_number_and_email_or_by_tracking_number",
+            "time_format": "hh:mm a",
+            "map_coordinates": "current_package_location",
+            "show_estimated_delivery_time": true,
+            "show_carrier_info": true,
+            "only_show_last_mile_carrier": true,
+            "show_tracking_number": true,
+            "link_to_carrier_website": true,
+            "show_package_info": true,
+            "show_reorder_button": true,
+            "custom_css": ".track123-form-title {display:none!important;}\n\n.track123-input-content .track123-input-label {font-size:12px!important;}\n\n.track123_block2_wrapper{margin-top:0!important;}\n\n\n.track123_form2_content .track123-input-content{\n    width: 70%!important;\n}\n@media screen and (max-width: 767px) {\n.track123_form2_content .track123-input-content{\n    width: 100%!important;\n}\n}\n\n.track123_form2_content .track123_button,.track123_form2_input{    border-radius: 32px;}\n\n.track123-input{border-radius: 12px!important; }\n\n@media screen and (pointer: fine) {\n    .js [data-button-hover=standard] .button--primary:hover:not([disabled],.self-button) {\n        color: #67D2DF;\n    }"
+          }
+        }
+      },
+      "block_order": [
+        "track123_search2_fCjLRi"
+      ],
+      "settings": {
+        "color_text": "",
+        "color_background": "#fafafa",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "faq_BdGhAE": {
+      "type": "faq",
+      "blocks": {
+        "question_ahypTN": {
+          "type": "question",
+          "disabled": true,
+          "settings": {
+            "title": "What if the tracking shows delivered but there is no package received?",
+            "text": "<p>You are suggested to first look in the mailbox, entrance area, lawn, neighbors, and other locations where packages are often delivered. Sometimes the courier will also deliver to these places. Or you can contact your local post office to see if they can find it. If you still could not find it after that, please <a href=\"/pages/contact\" target=\"_blank\" title=\"Contact\">contact us </a>ASAP.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_gMCncm": {
+          "type": "question",
+          "settings": {
+            "title": "What if the tracking is delayed or returned back to sender?",
+            "text": "<p>Click here <a href=\"/pages/contact\" target=\"_blank\" title=\"Contact\">contact us </a>to contact our Customer Service Department.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_Qkm3Ec": {
+          "type": "question",
+          "settings": {
+            "title": "Can I make special logistics requests, such as scheduled delivery, designated delivery time, etc.?",
+            "text": "<p>Sorry to tell you that we currently do not support special logistics requests such as scheduled delivery or designated delivery time. You are suggested to contact your local post office or courier to make an appointment for these services.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "question_ahypTN",
+        "question_gMCncm",
+        "question_Qkm3Ec"
+      ],
+      "settings": {
+        "style": "with-border",
+        "heading": "FAQs",
+        "heading_size": "title-sm",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#f6f6f8",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#ffffff",
+        "overlay_opacity": 0,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "rich_text_8exQah",
+    "17355416168b3e908e",
+    "faq_BdGhAE"
+  ]
+}

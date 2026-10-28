@@ -1,0 +1,76 @@
+{%- liquid
+  assign source_html = content | default: article.content
+  assign heading_chunks = source_html | split: '<h'
+  assign has_headings = false
+  assign has_h2 = false
+
+  for heading_chunk in heading_chunks
+    if heading_chunk contains 'data-blog-title'
+      assign has_headings = true
+      assign heading_level = heading_chunk | slice: 0, 1
+      if heading_level == '2'
+        assign has_h2 = true
+      endif
+    endif
+  endfor
+-%}
+
+{%- if has_headings -%}
+  <div class="seo-article-toc">
+    <ul class="seo-article-toc__list" role="list">
+      {%- liquid
+        assign open_h2 = false
+        assign open_sublist = false
+        assign toc_index = 0
+      -%}
+      {%- for heading_chunk in heading_chunks -%}
+        {%- if heading_chunk contains 'data-blog-title' -%}
+          {%- liquid
+            assign heading_level = heading_chunk | slice: 0, 1
+            assign heading_parts = heading_chunk | split: '>'
+            assign heading_title = heading_parts[1] | default: '' | split: '</h' | first | strip_html | strip
+            assign toc_index = toc_index | plus: 1
+          -%}
+          {%- if heading_title != blank -%}
+            {%- if has_h2 and heading_level == '2' -%}
+              {%- if open_sublist -%}
+                </ul>
+                {%- assign open_sublist = false -%}
+              {%- endif -%}
+              {%- if open_h2 -%}
+                </li>
+              {%- endif -%}
+              <li class="seo-article-toc__item seo-article-toc__item--parent">
+                <a href="#" class="seo-article-toc__link" data-toc-index="{{ toc_index }}">{{ heading_title }}</a>
+              {%- assign open_h2 = true -%}
+            {%- elsif has_h2 and heading_level == '3' -%}
+              {%- if open_h2 == false -%}
+                <li class="seo-article-toc__item">
+                  <a href="#" class="seo-article-toc__link" data-toc-index="{{ toc_index }}">{{ heading_title }}</a>
+                </li>
+              {%- else -%}
+                {%- unless open_sublist -%}
+                  <ul class="seo-article-toc__sublist" role="list">
+                  {%- assign open_sublist = true -%}
+                {%- endunless -%}
+                <li class="seo-article-toc__subitem">
+                  <a href="#" class="seo-article-toc__link seo-article-toc__link--subitem" data-toc-index="{{ toc_index }}">{{ heading_title }}</a>
+                </li>
+              {%- endif -%}
+            {%- else -%}
+              <li class="seo-article-toc__item">
+                <a href="#" class="seo-article-toc__link" data-toc-index="{{ toc_index }}">{{ heading_title }}</a>
+              </li>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if open_sublist -%}
+        </ul>
+      {%- endif -%}
+      {%- if open_h2 -%}
+        </li>
+      {%- endif -%}
+    </ul>
+  </div>
+{%- endif -%}
